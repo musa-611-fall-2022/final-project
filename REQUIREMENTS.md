@@ -21,3 +21,9 @@ This project aims to take a small data set of a 17+ building development and vis
 ### Stretch Goal
 
 8. A third button loads an interactive leaflet map with outlines of each building, complete with the same mouseover functionality.
+
+## Precedent Examples and Progress
+538 Hexagon map predicting the results of the 2020 House of Reps races: https://projects.fivethirtyeight.com/2020-election-forecast/house/
+Initial wireframes and research: https://docs.google.com/presentation/d/1wISzn5c0wkmMuAzy33cGH2iEMHOwxMo4OUqO07r8hKc/edit?usp=sharing
+Current prototype: https://observablehq.com/d/23f92d48a5153018
+Current click-through prototype: https://www.figma.com/proto/HSfDyTbSYeRMNIki9Zpgdp/AYPP-Interactive?node-id=118%3A173&starting-point-node-id=118%3A173
