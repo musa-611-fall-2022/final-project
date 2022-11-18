@@ -14,7 +14,8 @@ I'm thinking of creating an app that displays the points where there was once a 
   * Type of business
   * Owner
   * Start year
-  * Add year
+  * End year
+  * Address
 * People can add information such as...
   * The previous aforementioned data
   * Memories
