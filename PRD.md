@@ -1,5 +1,7 @@
 # Mathare Slum Facilities App Product Requirements Document
 
+Author: Yuhao Jia, Yifei Sun
+
 ## Purpose
 There are tons of NGOs doing projects in Mathare slum (Nairobi, Kenya). Voluntters usually work for educational and medical project, they also have other requirements like using restroom, buying water and so on. However, the location and infromation of these facilities are not in the google/apple map. Also due to the high density of buildings in slum, it's really hard for volunteers to find the right location of their purpose. 
 This app is developed for volunteers working in the slum to find their destinations and the shortest way to get there.
