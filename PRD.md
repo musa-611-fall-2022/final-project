@@ -26,5 +26,5 @@ To better discover relationship between features like tectonic plates and terrai
 
 Live feed earthquake Geojson data from United States Geological Survey (https://earthquake.usgs.gov/). 
 
-Also the tectonic plate data.
+Also the tectonic plate data is needed.
 
