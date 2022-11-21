@@ -83,13 +83,11 @@ const slides = [
   },
 
   {
-    title: 'International Conference on Appropriate Technology',
+    title: 'Affirmative Action ',
     content: `
-      Mjumbe has been involved with the planning of the International Conference
-      on Appropriate Technology since 2012. This conference has taken him to
-      locations around Africa.
+      Supreme court heard arguements
     `,
-    era: 'inat',
+    era: "Research AA",
     showpopups: true,
   },
 
@@ -108,6 +106,7 @@ const slides = [
     content: `
       Mjumbe currently lives in **East Passyunk**. Thanks for taking this journey!
     `,
-    era: 'present day',
+    era: null,
+    bounds: [[-75, -180], [75, 180]],
   },
 ];
