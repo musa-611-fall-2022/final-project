@@ -11,9 +11,7 @@ const slides = [
   {
     title: 'K-12 Experience',
     content: `
-      Mjumbe was born in San Jose, California. He lived with his family first in
-      **San Jose**, then **Santa Cruz**, briefly in **Oceanside**, and finally
-      in **Riverside**.
+      I lived here. I did things.
     `,
     era: 'K-12',
     showpopups: true,
@@ -22,34 +20,25 @@ const slides = [
   {
     title: 'Undergraduate',
     content: `
-      When Mjumbe was 11, his family moved across the country to Philadelphia.
-      They lived in what would later be knows as the **Cedar Park**
-      neighborhood, and Mjumbe attended **J.R. Masterman** for middle and high
-      school.
+      I went to school here and did my training here.
     `,
     era: 'Masters',
     showpopups: true,
   },
 
   {
-    title: 'College',
+    title: 'Graduate',
     content: `
-      Mjumbe went back to California for college. He graduated with a computer
-      science degree from **Harvey Mudd College** in **Claremont, California**.
-      After college, Mjumbe moved back to the Cedar Park neighborhood and worked
-      for a few years at the University of Pennsylvania, making tools for
-      modeling and simulation in the social sciences.
+      Education Leadership and policy analysis
     `,
     era: 'Working',
     showpopups: true,
   },
 
   {
-    title: 'Code for America',
+    title: 'Working',
     content: `
-      Mjumbe was a Code for America fellow in 2011, living and working primarily
-      from **Oakland, CA**. He worked on projects with the cities of Philadelphia
-      and Seattle.
+      I worked at Rider University
     `,
     era: 'PhD',
     showpopups: true,
