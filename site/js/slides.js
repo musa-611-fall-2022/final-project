@@ -22,7 +22,7 @@ const slides = [
     content: `
       I went to school here and did my training here.
     `,
-    era: 'Masters',
+    era: "Undergraduate",
     showpopups: true,
   },
 
@@ -31,7 +31,7 @@ const slides = [
     content: `
       Education Leadership and policy analysis
     `,
-    era: 'Working',
+    era: 'Masters',
     showpopups: true,
   },
 
@@ -40,7 +40,7 @@ const slides = [
     content: `
       I worked at Rider University
     `,
-    era: 'PhD',
+    era: 'Working',
     showpopups: true,
   },
 
@@ -53,7 +53,7 @@ const slides = [
       making occasional trips to the NYC office from his home in **Yorktown** via
       the **Temple University train station**.
     `,
-    era: 'Research SEA',
+    era: 'PhD',
     showpopups: true,
   },
 
@@ -64,7 +64,7 @@ const slides = [
       Open Data and Digital Transformation. During this period he lived near
       Temple University in the **Hartranft** neighborhood.
     `,
-    era: 'Research EA',
+    era: 'Research SEA',
     showpopups: true,
   },
 
@@ -78,7 +78,7 @@ const slides = [
       **Woodland Terrace** neighborhood, and later in an apartment overlooking
       **Malcolm X Park**.
     `,
-    era: 'stepwise',
+    era: 'Research EA',
     showpopups: true,
   },
 
