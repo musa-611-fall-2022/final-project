@@ -26,3 +26,5 @@ Another component is a comment bar and a save button, which allow users to uploa
 
 ## The shortest way to my destination
 There should be also a large button at the bottom of the panel named "direction", after hit this button, there should be a line shown on the map which is the shortest way from the user's position and the destination.
+
+https://github.com/GacheriNturibi/Number-of-Facilities-Serving-Populations-and-Villages-within-Nairobi-Slums
