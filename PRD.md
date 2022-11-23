@@ -8,8 +8,8 @@ This app is developed for volunteers working in the slum to find their destinati
 
 
 ## Map and My position
-There should be a map with whole page size, centered at Mathare Slum.
-The position of the user(volunteer) should be shown when open this app.
+There should be a map with whole page size, centered at Mathare Slum. There will be a default position shown as a marker when open this app.
+There shuold be a button, when clicked, the map will be centered at the user's position which will be shown as a marker.
 
 
 ## Loading desitination for volunteer works/ other purpose
@@ -19,7 +19,7 @@ After input the name, there should be a button to hit, and the destination(s) wi
 
 ## Facility details and comments
 When clicked on a map marker, it should be highlighted.
-When clicked on a map marker, a panel should pop up floating above the map. In this panel, there should be several components.
+When click on a map marker, a panel should pop up floating above the map. In this panel, there should be several components.
 One component is the detail information of the clicked facility, including name, managing organization or any information available, and also comments and a picture of this facility.
 Another component is a comment bar and a save button, which allow users to upload comments. After hit the save button, these comments will be shown public to other users in the panel.
 
