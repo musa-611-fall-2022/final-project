@@ -18,8 +18,8 @@ After input the name, there should be a button to hit, and the destination(s) wi
 
 
 ## Facility details and comments
-When clicked on a map marker, it should be highlighted.
-When click on a map marker, a panel should pop up floating above the map. In this panel, there should be several components.
+When a map marker is clicked on, it should be highlighted.
+When a map marker is clicked on, a panel should pop up floating above the map. In this panel, there should be several components.
 One component is the detail information of the clicked facility, including name, managing organization or any information available, and also comments and a picture of this facility.
 Another component is a comment bar and a save button, which allow users to upload comments. After hit the save button, these comments will be shown public to other users in the panel.
 
