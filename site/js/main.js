@@ -1,63 +1,37 @@
 import filipinotown from '../data/filipinotown.js';
-// import { initializeSchoolMap, showSchoolsOnMap } from './school-map.js';
-// import { showSchoolsInList }  from './school-list.js';
+import { initializeSeattleMap, showPlacesOnMap } from './map.js';
+import { showPlacesInList }  from './list.js';
 
-window.filipinotown = filipinotown;
+let seattleMap = initializeSeattleMap();
+showPlacesOnMap(filipinotown, seattleMap);
 
-// let seattleMap = initializeSeattleMap();
-// showPlacesOnMap(filipinotown, seattleMap);
+let seattleList = document.querySelector('#school-list');
+showPlacesInList(filipinotown, seattleList);
+
+let schoolGradeFilters = document.querySelectorAll('.school-checkbox');
+let schoolNameFilter = document.querySelector('#school-name-filter');
+
+function shouldShowPlace () {
+    let filteredPlaces = filipinotown;
+
+    const text = schoolNameFilter.value;
+    filteredPlaces = filteredPlaces.filter(function(school) {
+        const name = place['Name'].toLowerCase();
+        const hasText = name.includes(text);
+        return hasText;
+    });
+
+    return filteredSchools;
+}
+
+schoolNameFilter.addEventListener('input', () => {
+    const filteredSchools = shouldShowSchool();
+    showPlacesOnMap(filteredPlaces, seattleMap);
+    showPlacesInList(filteredPlaces, placesList);
+});
 
 console.log(filipinotown)
 
-// let schoolList = document.querySelector('#school-list');
-// showSchoolsInList(schools, schoolList);
-
-// let schoolGradeFilters = document.querySelectorAll('.school-checkbox');
-// let schoolNameFilter = document.querySelector('#school-name-filter');
-
-// function shouldShowSchool () {
-//     let filteredSchools = schools;
-
-//     const text = schoolNameFilter.value;
-//     filteredSchools = filteredSchools.filter(function(school) {
-//         const name = school['name'].toLowerCase();
-//         const hasText = name.includes(text);
-//         return hasText;
-//     });
-
-//     for (const checkbox of schoolGradeFilters) {
-//         if (checkbox.checked) {
-//             filteredSchools = filteredSchools.filter(function (school) {
-//                 const schoolType = checkbox.value;
-//                 if (school[schoolType] === "1") {
-//                     return true;
-//                 } else {
-//                     return false;
-//                 }
-
-//             });
-//         }
-//     }
-
-//     return filteredSchools;
-// }
-
-// for (const cb of schoolGradeFilters) {
-//     cb.addEventListener('change', () => {
-//         const filteredSchools = shouldShowSchool();
-//         showSchoolsOnMap(filteredSchools, schoolMap);
-//         showSchoolsInList(filteredSchools, schoolList);
-//     });
-// }
-
-// schoolNameFilter.addEventListener('input', () => {
-//     const filteredSchools = shouldShowSchool();
-//     showSchoolsOnMap(filteredSchools, schoolMap);
-//     showSchoolsInList(filteredSchools, schoolList);
-// });
-
-// window.filipinotown = filipinotown;
-// window.schoolMap = schoolMap;
-// window.schoolList = schoolList;
-// window.schoolNameFilter = schoolNameFilter;
-// window.schoolGradeFilters = schoolGradeFilters;
+window.filipinotown = filipinotown;
+window.seattleMap = seattleMap;
+window.seattleList = seattleList;
