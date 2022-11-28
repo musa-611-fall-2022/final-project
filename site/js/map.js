@@ -11,51 +11,43 @@ function initializeSeattleMap() {
     return seattleMap;
 }
 
-function makePlaceFeature(filipinotown) {
-    const placeInfo = {
-        "type":"Feature",
-        "id": filipinotown['OBJECTID'],
-        "properties": {
-            "name": filipinotown['Name'],
-            "type": filipinotown['Type'],
-            "address": filipinotown['Location'],
-            "firstDate": filipinotown['First Date'],
-            "lastDate": filipinotown['Last Date'],
-            "years": filipinotown['Years'],
-            "owner": filipinotown['Owner'],
-            "id": filipinotown['OBJECTID'],
-        },
-        "geometry": {
-            "lat": filipinotown['Lat'],
-            "long": filipinotown['Long'],
-        },
-    };
-    return placeInfo;
-}
+// function makePlaceFeature(filipinotown) {
+//     const placeInfo = {
+//         "type":"Feature",
+//         "id": filipinotown['OBJECTID'],
+//         "properties": {
+//             "name": filipinotown['Name'],
+//             "type": filipinotown['Type'],
+//             "address": filipinotown['Location'],
+//             "firstDate": filipinotown['First Date'],
+//             "lastDate": filipinotown['Last Date'],
+//             "years": filipinotown['Years'],
+//             "owner": filipinotown['Owner'],
+//             "id": filipinotown['OBJECTID'],
+//         },
+//         "geometry": {
+//             "lat": filipinotown['Lat'],
+//             "long": filipinotown['Long'],
+//         },
+//     };
+//     return placeInfo;
+// }
 
-function showPlacesOnMap(placesToShow, seattleMap){
-    if (seattleMap.placesLayers !== undefined) {
-        seattleMap.removeLayer(seattleMap.placesLayers);
-    }
-const placeFeatureCollection = {
-    "type": "FeatureCollection",
-    "features": placesToShow.map(makePlaceFeature),
-};
-seattleMap.placesLayers = L.geoJSON(placeFeatureCollection, {
-    pointToLayer: (geoJsonPoint, latlng) =>  L.circleMarker(latlng),
-    style: {
-        stroke: null,
-        color: "#023047",
-        fillOpacity: 0.7, radius: 5,
-    },
-})
-.bindPopup(layer => layer.feature.properties['Name']).openPopup()
-.addTo(schoolMap);
-}
+// function showPlacesOnMap(placesToShow, seattleMap){
+//     if (seattleMap.placesLayers !== undefined) {
+//         seattleMap.removeLayer(seattleMap.placesLayers);
+//     }
+// const placeFeatureCollection = {
+//     "type": "FeatureCollection",
+//     "features": placesToShow.map(makePlaceFeature),
+// };
+
+// }
+
 
 export {
     initializeSeattleMap,
-    showPlacesOnMap,
+    // showPlacesOnMap,
 };
 
-window.makePlaceFeature=makePlaceFeature;
+// window.makePlaceFeature=makePlaceFeature;

@@ -20,7 +20,7 @@ html {
     height: 100vh;
   }
   
-  #school-map { height: 100%; }
+  #seattle-map { height: 100%; }
   
   .content-container {
     display: flex;
