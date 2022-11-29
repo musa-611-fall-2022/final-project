@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <style>
+            .tooltip-header{
+
+                width: 100%;
+            }
+
+            .h3 {
+                font-family: 'Open Sans';
+                font-style: normal;
+                font-weight: 600;
+                font-size: 16px;
+                line-height: 22px;
+                margin:0px;
+            }
+
+            .tooltip-title{
+                float: left;
+                margin: 0px;
+            }
+
+            .tooltip-container{
+                width: 200px;
+                background-color: white;
+                filter: drop-shadow(0 0 10px #666666);
+                padding: 10px;
+            }
+
+            .details{
+                color: #666666;
+            }
+            
+            #year{
+                font-family: 'Open Sans';
+                font-style: normal;
+                font-weight: 600;
+                font-size: 12px;
+                line-height: 22px;
+                text-align: right;
+                float: right;
+                margin-top: 2px;
+            }
+
+            .bar-label {
+                font-size: 8px;
+                font-family: 'Open Sans';
+                font-style: normal;
+                font-weight: 600;
+                font-size: 8px;
+                line-height: 11px;
+                color: #666666;
+            }
+
+            .left {text-align: left;}
+            .right {text-align: right;}
+
+            .clearfix::after {
+                content: "";
+                clear: both;
+                display: table;
+            }
+
+        </style>
+    </head>
+    <body>
+        <div class = "tooltip-container">
+            <div class="tooltip-header clearfix">
+                <h3 class = "h3 tooltip-title">B13 595 Dean St.</h2>
+                <p id="year">2023</p>             
+            </div>
+            <div class = "tooltip-content">
+                <table id="unitTable">
+                </table>
+                <table id="otherTable">
+                </table>
+            </div>
+        </div>
+    </body>
+</html>

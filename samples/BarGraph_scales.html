@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <style>
+            body {
+                font-family: Helvetica;
+            }
+            svg{
+                width: 500px;
+                height: 500px;
+            }
+            .top-label {
+                font-size:13px;
+                font-style: italic;
+                text-transform: uppercase;
+                float: left;
+            }
+            .age-label {
+                text-align: right;
+                font-weight: bold;
+                width: 90px;
+                padding-right: 10px;
+            }
+            .clearfix {
+                clear: both;
+            }
+            .bar {
+                fill: DarkSlateBlue;
+            }
+            .bar-label {
+                text-anchor: end;
+            }
+            .axis-label {
+                text-anchor: middle;
+                font-size: 13px;
+            }
+        </style>
+    </head>
+    <body>
+        <script src="https://d3js.org/d3.v7.min.js"></script>
+        <script>
+            var margin = {top: 30, right: 0, bottom: 0, left:100},
+                width = 500 - margin.left - margin.right,
+                height = 500 - margin.top - margin.bottom;
+
+            var body = d3.select("body");
+
+            var popData = [
+                {age: "80 and up", value: 1.6, position: 0},
+                {age: "75-79", value: 1.5, position: 1},
+                {age: "70-74", value: 2.1, position: 2},
+                {age: "65-69", value: 2.6, position: 3},
+                {age: "60-64", value: 3.4, position: 4},
+                {age: "55-59", value: 4.5, position: 5},
+                {age: "50-54", value: 5.1, position: 6},
+                {age: "45-49", value: 6.0, position: 7},
+                {age: "40-44", value: 6.6, position: 8},
+                {age: "35-39", value: 7.1, position: 9},
+                {age: "30-34", value: 7.3, position: 10},
+                {age: "25-29", value: 8.1, position: 11},
+                {age: "20-24", value: 8.9, position: 12},
+                {age: "15-19", value: 8.8, position: 13},
+                {age: "10-14", value: 8.6, position: 14},
+                {age: "5-9", value: 8.8, position: 15},
+                {age: "0-4", value: 9.3, position: 16}
+                ];
+
+            var axisData = [0, 2.5, 5, 7.5];
+ 
+            var x = d3.scaleLinear()
+                .domain([0, d3.max(popData, element=> element.value)])
+                .range([0, width]);
+            
+            var y = d3.scaleOrdinal()
+                .domain(popData.map(element => element.age))
+                .scaleBand([0, height], .2, 0);
+
+            var y = d3.scaleOrdinal()
+            .domain(popData.map(element => element.age))
+            .scaleBand([0, height], .2, 0);
+
+
+            var xAxis = d3.svg.axis()
+                .scale(x)
+                .orient("top")
+                .ticks(5, "%");
+
+            var yAxis = d3.svg.axis()
+                .scale(y)
+                .orient("left");
+
+            var width = 400, 
+                leftMargin = 100,
+                topMargin = 30,
+                barHeight = 20,
+                barGap = 5,
+                tickGap = 5,
+                tickHeight = 10,
+                barSpacing = barHeight + barGap,
+                translateText = "translate(" + leftMargin + " , " + topMargin + ")";  
+
+            body.append("h2")
+                .text("Age distribution of the world, 2010");
+
+            body.append("div")
+                    .attr("class", "top-label age-label")
+                    .style("width", leftMargin+"px")
+                .append("p")
+                    .text("age group");
+
+            body.append("div")
+                    .attr("class", "top-label")
+                .append("p")
+                    .text("portion of the population");
+
+            body.append("div")
+                    .attr("class", "clearfix");
+
+            var chartDiv = body.append("svg");
+
+            var svg = chartDiv.append("svg")
+                    .attr("wdith", width + margin.left + margin.right)
+                    .attr("height", height + margin.top + margin.bottom)
+                .append("g")
+                    .attr("transform", "translate(" + leftMargin + " , " + topMargin + ")");
+
+            var barGroup = svg.append("g")
+                .attr("class", "bar");
+
+            barGroup.selectAll("rect")
+                    .data(popData)
+                .enter().append("rect")
+                    .attr("x", 0)
+                    .attr("y", d => d.position * barSpacing)
+                    .attr("height", barHeight)
+                    .attr("width", d => x(d.value));
+
+            var barLabelGroup = svg.append("g")
+                .attr("class", "bar-label");
+
+            barLabelGroup.selectAll("text")
+                    .data(popData)
+                .enter().append("text")
+                    .text(d => d.age)
+                    .attr("x", -10)
+                    .attr("y", d =>d.position*barSpacing + barHeight*(2/3));
+
+            var axisTickGroup = svg.append("g")
+                .attr("stroke", "black");        
+
+            var axisLabelGroup = svg.append("g")
+                .attr("class", "axis-label");
+
+            axisTickGroup.selectAll("line")
+                    .data(axisData)
+                .enter().append("line")
+                    .attr("x1", d=> x(d))
+                    .attr("x2", d=> x(d))
+                    .attr("y1", 0)
+                    .attr("y2", -tickHeight);
+
+            axisLabelGroup.selectAll("text")
+                    .data(axisData)            
+                .enter().append("text")
+                    .attr("x", d => x(d))
+                    .attr("y", (-tickHeight - tickGap))
+                    .text(d=>(d+"%"));
+                
+        </script>
+    </body>
+</html>
