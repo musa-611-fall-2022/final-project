@@ -1,9 +1,8 @@
 import filipinotown from '../data/filipinotown.js';
-import { initializeSeattleMap } from './map.js';
-// import { showPlacesInList }  from './list.js';
+import { initializeSeattleMap, showFtOnMap } from './map.js';
 
 let seattleMap = initializeSeattleMap();
-showPlacesOnMap(filipinotown, seattleMap);
+showFtOnMap(filipinotown, seattleMap);
 
 // let seattleList = document.querySelector('#school-list');
 // showPlacesInList(filipinotown, seattleList);
