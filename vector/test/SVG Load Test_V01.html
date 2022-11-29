@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <style>
+            .clearfix {
+                clear: both;
+            }
+            .aypp-building{
+                stroke-width: 3px;
+                stroke: #000000;
+            }
+            #svg{
+                background-image: url("Blank Map.png")
+            }
+        </style>
+    </head>
+    <body>
+        <script src="https://d3js.org/d3.v7.min.js"></script>
+        <script>
+            
+            var margin = {top: 0, right: 0, bottom: 0, left: 0}
+            width = 800 - margin.left - margin.right,
+            height = 600 - margin.top - margin.bottom;      
+            
+            var b2Stroke = "M73,74.6V62.8l-1.2-0.7v-21l-1.6-1c0,0,0-14.6,0-17.6L57,15.2l-5.3,3l-11.5-5.7l-3.5,1.6V7.8L21.8,0L5,9.4   v13.4l-5,3.4v30.5l27.7,16l3.7-1.1l-0.1,6.8l18.5,9.2L73,74.6z";
+            var b2 = {id: "b2", points: "B2_Stroke.svg", top: 211, bottom: 233};
+
+            body = d3.select("body");
+
+            var svg = body.append("svg")
+                    .attr ("width", width + margin.left + margin.right)
+                    .attr("height", height + margin.top + margin.bottom)
+                    .attr("id", "svg")
+                    
+                  .append("g")
+                    .attr("transform", "translate(" + margin.left + ',' + margin.top + ")")
+
+                
+                    /*.append("image")
+                    .attr("xlink:href", d => "Blank Map.png")
+                    .attr("class", "backMap");*/
+                
+
+
+            
+            var aypp = svg.append("g")
+                    .attr("class", "building-svg")
+                    
+                    .append("path")
+                    .attr("d", b2Stroke)
+                    .attr("fill", "#DC4230")
+                    .attr("stroke", "#000000");
+
+
+
+            /*var building = aypp.selectAll("svg")
+                    .data(b2)
+                    .enter().append("svg")
+                        .attr("xlink:href", "B2_Stroke.svg");*/
+            
+        </script>
+    </body>
+</html>
