@@ -1,5 +1,8 @@
-import filipinotown from '../data/filipinotown.js';
+// import filipinotown from '../data/filipinotown.js';
+import filipinotown from '../data/seattle.js';
 import { initializeSeattleMap, showFtOnMap } from './map.js';
+
+console.log(filipinotown)
 
 let seattleMap = initializeSeattleMap();
 showFtOnMap(filipinotown, seattleMap);

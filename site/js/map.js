@@ -46,7 +46,9 @@ seattleMap.seattleLayers = L.geoJSON(ftFeatureCollection, {
         color: "#023047",
         fillOpacity: 0.7, radius: 5,
     },
-})}
+})
+.addTo(seattleMap);
+}
 
 export {
     initializeSeattleMap,
