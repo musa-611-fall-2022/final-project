@@ -49,6 +49,7 @@ seattleNameFilter.addEventListener('input', () => {
     showFtInList(filteredFt, seattleList);
 });
 
+
 window.filipinotown = filipinotown;
 window.seattleMap = seattleMap;
 window.seattleList = seattleList;

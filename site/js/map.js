@@ -6,6 +6,16 @@ function initializeSeattleMap() {
         attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors',
     }).addTo(seattleMap);
 
+    
+    function onMapClick(seattle) {
+        let popup = L.popup();
+        popup
+        .setLatLng(seattle.latlng)
+        .setContent("You clicked the map at " + seattle.latlng.toString())
+        .openOn(seattleMap);
+    }
+    seattleMap.on('click', onMapClick);
+
     return seattleMap;
 }
 
@@ -41,7 +51,7 @@ seattleMap.seattleLayers = L.geoJSON(ftFeatureCollection, {
     pointToLayer: (geoJsonPoint, latlng) =>  L.circleMarker(latlng),
     style: {
         stroke: null,
-        color: "#7f5539",
+        color: "#e09f3e",
         fillOpacity: 0.7, radius: 5,
     },
 })
