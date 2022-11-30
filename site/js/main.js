@@ -27,7 +27,7 @@ function shouldShowSeattle () {
         if (checkbox.checked) {
             filteredFt = filteredFt.filter(function(seattle) {
                 const type = checkbox.value;
-                const hasType = seattle.properties.Type.includes(type);
+                const hasType = seattle.properties.Type === type;
                 return hasType
             });
         }

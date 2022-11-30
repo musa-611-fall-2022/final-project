@@ -41,7 +41,7 @@ seattleMap.seattleLayers = L.geoJSON(ftFeatureCollection, {
     pointToLayer: (geoJsonPoint, latlng) =>  L.circleMarker(latlng),
     style: {
         stroke: null,
-        color: "#023047",
+        color: "#7f5539",
         fillOpacity: 0.7, radius: 5,
     },
 })
