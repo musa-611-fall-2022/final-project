@@ -1,3 +1,5 @@
+import { filipinotown } from './main.js';
+
 function initializeSeattleMap() {
     let seattleMap = L.map("seattle-map").setView([47.59754536219717, -122.32273462371629], 15);
 
@@ -12,23 +14,22 @@ function initializeSeattleMap() {
 function makeFtFeature(filipinotown) {
     const ftInfo = {
         "type":"Feature",
-        "id": filipinotown['OBJECTID'],
+        "id": filipinotown.properties['OBJECTID'],
         "properties": {
-            "name": filipinotown['Name'],
-            "type": filipinotown['Type'],
-            "owner": filipinotown['Owner'],
-            "startYear": filipinotown['First_Date'],
-            "endYear": filipinotown['Last_Date'],
-            "totalYears": filipinotown['Years'],
-            "address": filipinotown['Location'],
-            "id": filipinotown['OBJECTID'],
+            "name": filipinotown.properties['Name'],
+            "type": filipinotown.properties['Type'],
+            "owner": filipinotown.properties['Owner'],
+            "startYear": filipinotown.properties['First_Date'],
+            "endYear": filipinotown.properties['Last_Date'],
+            "totalYears": filipinotown.properties['Years'],
+            "address": filipinotown.properties['Location'],
+            "id": filipinotown.properties['OBJECTID'],
         },
     "geometry": filipinotown['geometry'],
     };
     console.log(ftInfo)
     return ftInfo;
 }
-
 
 function showFtOnMap(ftToShow, seattleMap){
     if (seattleMap.seattleLayers !== undefined) {
@@ -47,6 +48,7 @@ seattleMap.seattleLayers = L.geoJSON(ftFeatureCollection, {
         fillOpacity: 0.7, radius: 5,
     },
 })
+.bindPopup(layer => layer.feature.properties['name']).openPopup()
 .addTo(seattleMap);
 }
 
@@ -54,3 +56,5 @@ export {
     initializeSeattleMap,
     showFtOnMap
 };
+
+window.makeFtFeature = makeFtFeature;
