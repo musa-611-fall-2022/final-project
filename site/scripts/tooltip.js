@@ -18,12 +18,27 @@ function handleMouseleave() {
 }
 
 function setContents(selection) {
-    // customize this function to set the tooltip's contents however you see fit
-    d3.select("#tooltipContainer")
-      .selectAll("p")
+ 
+    console.log(selection);
+
+    d3.selectAll(".tooltip-header") //Address or B#
       .data(selection)
       .join("p")
-        .text(d => d.id);
+        .text(d => d.address) 
+    .selectAll("#year") //Year of Completion
+        .data(selection)
+        .join("p")
+        .text(d => d.date);
+    
+    const miniBar = d3.select("#tooltipContents");
+
+    const unitTable = d3.select("#unitTable");
+    const otherTable = d3.select("#otherTable");
+    
+
+    //date of completion
+
+
       /*.filter(=> value !== null && value !== undefined)
       .html(d =>
           `<strong>${d.id}</strong>`

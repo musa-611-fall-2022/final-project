@@ -15,8 +15,8 @@
 
         <div class="title-container">
           <h1 id="title" class="title">Atlantic Yards/Pacific Park Plans</h1>
-          <button id="approved" class="control">Approved Plans</button>
-          <button id="current" class="control">Current Progress</button>
+          <button id="approved" class="control selected">Approved Plans</button>
+          <button id="current" class="control deselected">Current Progress</button>
         </div>
         
         <div class="key">
@@ -36,7 +36,16 @@
       </div>
 
       <div id="tooltipContainer" class = "tooltip-container">
-        <div class="tooltip-contents"></div>
+          <div class="tooltip-header clearfix">
+                <h3 class = "tooltip-title">Sample</h3>
+                <p class="year">20??</p>             
+            </div>
+            <div class = "tooltip-content">
+                <table id="unitTable">
+                </table>
+                <table id="otherTable">
+                </table>
+            </div>
       </div>
 
     <script src="https://d3js.org/d3.v7.min.js"></script>

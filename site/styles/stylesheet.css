@@ -28,6 +28,8 @@ body {
     align-items: center;
     text-align: center;
     pointer-events: all;
+    padding: 8px;
+    height: 8%;
 }
 
 .selected {
