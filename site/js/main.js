@@ -10,33 +10,47 @@ showFtOnMap(filipinotown, seattleMap);
 let seattleList = document.querySelector('#seattle-list');
 showFtInList(filipinotown, seattleList);
 
+let seattleTypeFilter = document.querySelectorAll('.seattle-checkbox');
+let seattleNameFilter = document.querySelector('#seattle-name-filter');
 
-// let schoolGradeFilters = document.querySelectorAll('.seattle-checkbox');
-// let schoolNameFilter = document.querySelector('#seattle-name-filter');
+function shouldShowSeattle () {
+    let filteredFt = filipinotown;
 
-// function shouldShowPlace () {
-//     let filteredPlaces = filipinotown;
+    const text = seattleNameFilter.value;
+    filteredFt = filteredFt.filter(function(seattle) {
+        const name = seattle.properties.Name.toLowerCase(); 
+        const hasText = name.includes(text);
+        return hasText;
+    });
+ 
+    for (const checkbox of seattleTypeFilter) {
+        if (checkbox.checked) {
+            filteredFt = filteredFt.filter(function(seattle) {
+                const type = checkbox.value;
+                const hasType = seattle.properties.Type.includes(type);
+                return hasType
+            });
+        }
+    }
+    return filteredFt;
+}
 
-//     const text = schoolNameFilter.value;
-//     filteredPlaces = filteredPlaces.filter(function(place) {
-//         const name = place['Name'].toLowerCase();
-//         const hasText = name.includes(text);
-//         return hasText;
-//     });
+for (const cb of seattleTypeFilter) {
+    cb.addEventListener('change', () => {
+        const filteredFt = shouldShowSeattle();
+        showFtOnMap(filteredFt, seattleMap);
+        showFtInList(filteredFt, seattleList);
+    });
+}
 
-//     return filteredPlaces;
-// }
-
-// schoolNameFilter.addEventListener('input', () => {
-//     const filteredSchools = shouldShowPlace();
-//     showFtOnMap(filteredPlaces, seattleMap);
-//     showFtInList(filteredPlaces, placesList);
-// });
+seattleNameFilter.addEventListener('input', () => {
+    const filteredFt = shouldShowSeattle();
+    showFtOnMap(filteredFt, seattleMap);
+    showFtInList(filteredFt, seattleList);
+});
 
 window.filipinotown = filipinotown;
 window.seattleMap = seattleMap;
-// window.seattleList = seattleList;
-
-export {
-    filipinotown
-}
+window.seattleList = seattleList;
+window.seattleNameFilter = seattleNameFilter;
+window.seattleTypeFilter = seattleTypeFilter;

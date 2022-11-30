@@ -5,7 +5,7 @@ function showFtInList(ftToShow, seattleList) {
 
     for (const seattle of ftToShow) {
         const html = `
-            <li class="school-list-item">${seattle.properties['name']}</li>
+            <li class="seattle-list-item">${seattle.properties.Name}</li>
         `;
         const li = htmlToElement(html);
         // li.addEventListener('click', () => { // ATTEMPT AT STRETCH 1 TASK

@@ -1,5 +1,3 @@
-import { filipinotown } from './main.js';
-
 function initializeSeattleMap() {
     let seattleMap = L.map("seattle-map").setView([47.59754536219717, -122.32273462371629], 15);
 
@@ -17,7 +15,7 @@ function makeFtFeature(filipinotown) {
         "id": filipinotown.properties['OBJECTID'],
         "properties": {
             "name": filipinotown.properties['Name'],
-            "type": filipinotown.properties['Type'],
+            "bizType": filipinotown.properties['Type'],
             "owner": filipinotown.properties['Owner'],
             "startYear": filipinotown.properties['First_Date'],
             "endYear": filipinotown.properties['Last_Date'],
@@ -27,7 +25,6 @@ function makeFtFeature(filipinotown) {
         },
     "geometry": filipinotown['geometry'],
     };
-    console.log(ftInfo)
     return ftInfo;
 }
 
