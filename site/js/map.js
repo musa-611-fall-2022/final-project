@@ -11,10 +11,31 @@ function initializeSeattleMap() {
         let popup = L.popup();
         popup
         .setLatLng(seattle.latlng)
-        .setContent("You clicked the map at " + seattle.latlng.toString())
+        .setContent(`
+            <h2 class = 'new-business'> New place </h2>
+            <h3>Business Name:</h3>
+            <input type="text" id="new-entry" placeholder="Enter business name">
+            <h3>Business Type</h3>
+            <input type="text" id="new-entry" placeholder="Enter business name">
+            <h3>Owner</h3>
+            <input type="text" id="new-entry" placeholder="Enter business name">
+            <h3>Opening Year</h3>
+            <input type="text" id="new-entry" placeholder="Enter business name">
+            <h3>End Year</h3>
+            <input type="text" id="new-entry" placeholder="Enter business name">
+            <h3>Address</h3>
+            <input type="text" id="new-entry" placeholder="Enter business name">
+            <button type="submit" value="Submit">Submit</button>
+        `) 
+        // this is just html ^
         .openOn(seattleMap);
     }
     seattleMap.on('click', onMapClick);
+
+    function onPopupOpen() {
+        document.querySelector('.new-business').addEventListener('click', () => { alert('I clicked here.') });
+    }
+    seattleMap.on('popupopen', onPopupOpen);
 
     return seattleMap;
 }
@@ -51,11 +72,17 @@ seattleMap.seattleLayers = L.geoJSON(ftFeatureCollection, {
     pointToLayer: (geoJsonPoint, latlng) =>  L.circleMarker(latlng),
     style: {
         stroke: null,
-        color: "#ddb892",
+        color: "#7ca982",
         fillOpacity: 0.7, radius: 5,
     },
 })
-.bindPopup(layer => layer.feature.properties['name']).openPopup()
+.bindPopup(layer => `
+    <h3>Name: ${layer.feature.properties['name']}</h3>
+    <h3>Business Type: ${layer.feature.properties['bizType']}</h3>
+    <h3>Address: ${layer.feature.properties['address']}</h3>
+    <h3>Opening Year: ${layer.feature.properties['startYear']}</h3>
+`).openPopup()
+
 .addTo(seattleMap);
 }
 
