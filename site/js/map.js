@@ -22,7 +22,7 @@ function createObsPointFeatures(data) {
             type: "Feature",
             geometry: {
                 type: "Point",
-                coordinates: [obs.lat, obs.lng],
+                coordinates: [obs.lng, obs.lat],
             },
             properties: { // more as needed
                 comName: obs.conName,
@@ -32,7 +32,7 @@ function createObsPointFeatures(data) {
                 obsDt: obs.obsDt,
             },
         };
-        obsCollection.push(obsElement);
+        obsCollection.features.push(obsElement);
     }
     return obsCollection;
 }

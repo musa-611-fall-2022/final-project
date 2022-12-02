@@ -4,13 +4,11 @@ function dataPullFailure() {
     console.log("Data pull failure");
 }
 
-function dataPullSuccess(data, map, requestType) {
-    if (requestType === "recentObs") {
-        addPointsToMap(createObsPointFeatures(data), map);
-    }
+function dataPullSuccess(data, map) {
+    addPointsToMap(createObsPointFeatures(data), map);
 }
 
-async function getData(url, requestType, onSuccess, onFailure, map) {
+async function getData(url, onSuccess, onFailure, map) {
     let myHeaders = new Headers();
     myHeaders.append("X-eBirdApiToken", "ol5p0ugs0k6o");
 
@@ -24,8 +22,10 @@ async function getData(url, requestType, onSuccess, onFailure, map) {
     console.log(resp);
     if (resp.status == 200) {
         const data = await resp.json();
-        if (onSuccess) { onSuccess(data, map, requestType) }
+        console.log("calling onSuccess");
+        if (onSuccess) { onSuccess(data, map) }
     } else {
+        console.log("calling onFailure");
         if (onFailure) { onFailure() }
     }
 }
