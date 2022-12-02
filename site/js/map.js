@@ -51,13 +51,24 @@ function initializeSeattleMap() {
             <h3>Preserve history:</h3>
             <input type="text" placeholder="Please share any memories you have with this space" height=10>
             <br></br>
-            <button type="submit" value="Submit">Submit</button>
+            <button class = 'add-point' type="submit" value="Submit">Submit</button>
         </div>
         `) 
-        // this is just html ^
         .openOn(seattleMap);
     }
     seattleMap.on('click', onMapClick);
+
+    function newBusiness() {
+        document.querySelector('.add-point').addEventListener('click', () => {
+            let newPoint = L.circleMarker([51.508, -0.11], {
+                color: 'red',
+                fillColor: '#f03',
+                fillOpacity: 0.5,
+                radius: 500
+            }).addTo(seattleMap);
+            })
+        }
+    seattleMap.on('click', newBusiness);
 
     function onPopupOpen() {
         document.querySelector('.newbiz').addEventListener('click', () => { alert('I clicked here.') });
