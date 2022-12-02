@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Test</title>
+        
+        <head>
+            <!--Leaflet Default style -->
+            <!--Please go through the Leaflet tutorial https://leafletjs.com/examples/quick-start/--> 
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.1/dist/leaflet.css" integrity="sha256-sA+zWATbFveLLNqWO2gtiw3HL/lh1giY/Inf1BJ0z14=" crossorigin=""/>
+
+        <!-- My css files-->
+        <link rel="stylesheet" href="css/styles.css">    
+    </head>
+    <body>
+        <div>
+            <h1> Json Tester</h1>
+        </div>
+
+        <div class = "content-container">
+            <div class="map-container">
+                <div id="school-map"></div>
+            </div>
+            <div class="list-container">
+                <label><input type="checkbox" class="grade-checkbox" value="High"> High School </label>
+                <label><input type="checkbox" class="grade-checkbox" value="Middle"> Middle School </label>
+                <label><input type="checkbox" class="grade-checkbox" value="Elementary"> Elementary School </label>
+                <label><input type="checkbox" class="grade-checkbox" value="Transition/Overage School"> Transition/Over Age School </label>
+                <input type="text" id = "school-name-input" placeholder="Enter stop name...">
+
+                <ul id="school-list"></ul>
+            </div>
+        </div>
+ 
+
+        <!--Make sure you put this AFTER Leaflet's CSS-->
+        <!-- MAKE SURE THE CSS GOES AT THE END OF THE BODY-->
+        <script src="https://unpkg.com/leaflet@1.9.1/dist/leaflet.js" integrity="sha256-NDI0K41gVbWqfkkaHj15IzU7PtMoelkzyKp8TOaFQ3s=" crossorigin=""></script>
+
+        <!-- My Project JS modules-->
+        <!--Javascript goes in after the CSS-->
+        <script type="module" src="js/main.js"></script>
+    </body> 
+</html>

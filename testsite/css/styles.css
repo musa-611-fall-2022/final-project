@@ -1,0 +1,32 @@
+body {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+#school-map {
+  height: 100%;
+}
+
+.content-container {
+  display: flex;
+  flex-direction: row-reverse;
+  overflow: hidden;
+  height: 100%;
+}
+
+.map-container {
+  width: 60%;
+}
+
+.list-container {
+  width: 40%;
+  overflow-y: scroll;
+}
+
+.school-list-item {
+  background-color: lightblue;
+  border-radius: 25px;
+}
