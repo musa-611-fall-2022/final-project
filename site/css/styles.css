@@ -75,7 +75,7 @@ html {
     grid-row: 1; */
     width: 100%;
     height: 42%;
-    overflow-y: hidden;
+    overflow-y: visible;
   }
   
   .seattle-list-container {
@@ -132,3 +132,5 @@ html {
   
     margin-right: 30px
   } */
+
+

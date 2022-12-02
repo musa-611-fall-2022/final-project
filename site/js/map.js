@@ -12,20 +12,47 @@ function initializeSeattleMap() {
         popup
         .setLatLng(seattle.latlng)
         .setContent(`
-            <h2 class = 'new-business'> New place </h2>
+        <style>
+        .new-biz-container {
+            width: 115%;
+            height: 80%;
+            overflow-y: scroll;
+            max-height: 25vh;
+            overflow: auto;
+            transition: max-height 0.75s;
+          } 
+        </style>
+
+        <div class="new-biz-container">
+            <h2 class = 'newbiz'> Add Business </h2>
             <h3>Business Name:</h3>
             <input type="text" id="new-entry" placeholder="Enter business name">
-            <h3>Business Type</h3>
+            <h3>Business Type:</h3>
+                <select id="cars" name="cars">
+                    <option value="Beauty">Beauty</option>
+                    <option value="Cafe">Cafe</option>
+                    <option value="Food">Food</option>
+                    <option value="Furniture">Furniture</option>
+                    <option value="Grocery">Grocery</option>
+                    <option value="Hotel">Hotel</option>
+                    <option value="News">News</option>
+                    <option value="Recreation">Recreation</option>
+                    <option value="Service">Service</option>
+                    <option value="Social">Social</option>
+                </select>
+            <h3>Owner:</h3>
             <input type="text" id="new-entry" placeholder="Enter business name">
-            <h3>Owner</h3>
+            <h3>Opening Year:</h3>
             <input type="text" id="new-entry" placeholder="Enter business name">
-            <h3>Opening Year</h3>
+            <h3>End Year:</h3>
             <input type="text" id="new-entry" placeholder="Enter business name">
-            <h3>End Year</h3>
+            <h3>Address:</h3>
             <input type="text" id="new-entry" placeholder="Enter business name">
-            <h3>Address</h3>
-            <input type="text" id="new-entry" placeholder="Enter business name">
+            <h3>Preserve history:</h3>
+            <input type="text" placeholder="Please share any memories you have with this space" height=10>
+            <br></br>
             <button type="submit" value="Submit">Submit</button>
+        </div>
         `) 
         // this is just html ^
         .openOn(seattleMap);
@@ -33,7 +60,7 @@ function initializeSeattleMap() {
     seattleMap.on('click', onMapClick);
 
     function onPopupOpen() {
-        document.querySelector('.new-business').addEventListener('click', () => { alert('I clicked here.') });
+        document.querySelector('.newbiz').addEventListener('click', () => { alert('I clicked here.') });
     }
     seattleMap.on('popupopen', onPopupOpen);
 
@@ -77,7 +104,7 @@ seattleMap.seattleLayers = L.geoJSON(ftFeatureCollection, {
     },
 })
 .bindPopup(layer => `
-    <h3>Name: ${layer.feature.properties['name']}</h3>
+    <h2>${layer.feature.properties['name']}</h2>
     <h3>Business Type: ${layer.feature.properties['bizType']}</h3>
     <h3>Address: ${layer.feature.properties['address']}</h3>
     <h3>Opening Year: ${layer.feature.properties['startYear']}</h3>
