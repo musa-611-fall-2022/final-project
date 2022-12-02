@@ -25,7 +25,7 @@ function createObsPointFeatures(data) {
                 coordinates: [obs.lng, obs.lat],
             },
             properties: { // more as needed
-                comName: obs.conName,
+                comName: obs.comName,
                 sciName: obs.sciName,
                 speciesCode: obs.speciesCode,
                 howMany: obs.howMany,
@@ -37,9 +37,28 @@ function createObsPointFeatures(data) {
     return obsCollection;
 }
 
+function onEachFeature(feature, layer) {
+    // event handler for clicks on map points
+    layer.on('click', function () {
+        console.log(feature.properties.comName);
+    });
+}
+
 function addPointsToMap(points, map) {
     // TODO: check if layer already exists and clear it if so
-    map.obsLayer = L.geoJSON(points).addTo(map);
+    if (map.obsLayer) {
+        map.removeLayer(map.obsLayer);
+    }
+    map.obsLayer = L.geoJSON(points, {
+        pointToLayer: (geoJsonPoint, latlng) => L.circleMarker(latlng),
+        onEachFeature: onEachFeature,
+        style: {
+            fillColor: "orange",
+            stroke: null,
+            fillOpacity: 0.9,
+            radius: 7,
+        },
+    }).addTo(map);
 }
 
 export {
