@@ -39,13 +39,12 @@ function createObsPointFeatures(data) {
 
 function onEachFeature(feature, layer) {
     // event handler for clicks on map points
-    layer.on('click', function () {
+    layer.on('click', () => {
         console.log(feature.properties.comName);
     });
 }
 
 function addPointsToMap(points, map) {
-    // TODO: check if layer already exists and clear it if so
     if (map.obsLayer) {
         map.removeLayer(map.obsLayer);
     }

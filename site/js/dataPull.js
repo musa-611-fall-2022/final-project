@@ -33,12 +33,17 @@ async function getData(url, onSuccess, onFailure, map) {
 function buildURL(urlType) {
     // list possible request URLs
     let recentObs = "https://api.ebird.org/v2/data/obs/US-PA/recent";
+    let notableObs = "https://api.ebird.org/v2/data/obs/US-PA/recent/notable";
     let hotspot = "https://api.ebird.org/v2/ref/hotspot/US-PA";
     // return correct URL to put into getData
     if (urlType === "recentObs") {
         return recentObs;
     } else if (urlType === "hotspot") {
         return hotspot;
+    } else if (urlType === "notableObs") {
+        return notableObs;
+    } else {
+        return recentObs;
     }
 }
 
