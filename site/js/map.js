@@ -1,3 +1,5 @@
+import { buildPopup } from './popups.js';
+
 function initializeMap() {
     let map = L.map('map').setView([39.95244193418098, -75.16433792450688], 11);
 
@@ -25,6 +27,7 @@ function createObsPointFeatures(data) {
                 coordinates: [obs.lng, obs.lat],
             },
             properties: { // more as needed
+                pointType: 'obs',
                 comName: obs.comName,
                 sciName: obs.sciName,
                 speciesCode: obs.speciesCode,
@@ -37,10 +40,34 @@ function createObsPointFeatures(data) {
     return obsCollection;
 }
 
+function createHotspotPointFeatures(data) {
+    let hotspotCollection = {
+        type: "FeatureCollection",
+        features: [],
+    };
+    for (let hotspot of data) {
+        let hotspotElement = {
+            type: "Feature",
+            geometry: {
+                type: "Point",
+                coordinates: [hotspot.lng, hotspot.lat],
+            },
+            properties: { // more as needed
+                pointType: 'hotspot',
+                locName: hotspot.locName,
+                numSpeciesAllTime: hotspot.numSpeciesAllTime,
+                latestObsDt: hotspot.latestObsDt,
+            },
+        };
+        hotspotCollection.features.push(hotspotElement);
+    }
+    return hotspotCollection;
+}
+
 function onEachFeature(feature, layer) {
     // event handler for clicks on map points
     layer.on('click', () => {
-        console.log(feature.properties.comName);
+        buildPopup(feature);
     });
 }
 
@@ -63,5 +90,6 @@ function addPointsToMap(points, map) {
 export {
     initializeMap,
     createObsPointFeatures,
+    createHotspotPointFeatures,
     addPointsToMap,
 };

@@ -8,14 +8,14 @@ There are countless birding resources available to aspiring and seasoned birdwat
 
 The application will be based around [eBird's API](https://documenter.getpostman.com/view/664302/S1ENwy59), which provides real-time information on user-generated bird observations based on location, as well as more general information from the Cornell Lab of Ornithology's databases. At a high level, the application will present a map of recent observations with options to view most common species, a search function for specific species, and the opportunity for the user to record their own observations. The application's features are outlined below:
 
-* Mobile and desktop friendly
-* Map of Philadelphia which, upon startup, will display most recent observations in region
-* Each observation will be clickable, bringing up the bird, time, and location of the observation, as well as the distance from the user's location. Popup will link to the eBird website page for that species for more detailed information. 
-* Button to filter to only "notable" observations (a classification provided by the API for particularly rare or interesting species)
-* Button to display "hotspots" on map (another data type provided by the API based on frequency of recent observations)
-* Search bar to look for specific species. When a species is selected from the search results, recent observations of that species will appear on the map, and recent observation counts/bird information will be displayed elsewhere on the page. 
-* Button for user to enter their own observation. When clicked, a popup will appear with fields to enter the species, location, and any notes. 
-* User observations will be saved in local storage and can be recalled with a button, which will display a list of observations.
+- [x] Mobile and desktop friendly
+- [x] Map of Philadelphia which, upon startup, will display most recent observations in region
+- [ ] Each observation will be clickable, bringing up the bird, time, and location of the observation, as well as the distance from the user's location. Popup will link to the eBird website page for that species for more detailed information. 
+- [x] Button to filter to only "notable" observations (a classification provided by the API for particularly rare or interesting species)
+- [x] Button to display "hotspots" on map (another data type provided by the API based on frequency of recent observations)
+- [ ] Search bar to look for specific species. When a species is selected from the search results, recent observations of that species will appear on the map, and recent observation counts/bird information will be displayed elsewhere on the page. 
+- [ ] Button for user to enter their own observation. When clicked, a popup will appear with fields to enter the species, location, and any notes. 
+- [ ] User observations will be saved in local storage and can be recalled with a button, which will display a list of observations.
 
 ## Milestones
 
