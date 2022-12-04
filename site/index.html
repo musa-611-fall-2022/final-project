@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en" >
+  <head>
+
+      <meta charset="UTF-8">
+      <title>Urban Solar Roof</title>
+      <link rel="stylesheet" href="./css/style.css">
+      <link rel="stylesheet" href="./css/style.css">
+      <link rel="stylesheet" type="text/css" href="./css/M_select.css">
+      <script src="https://unpkg.com/deck.gl@^6.2.0/deckgl.min.js"></script>
+      <link href="https://api.mapbox.com/mapbox-gl-js/v2.11.0/mapbox-gl.css" rel="stylesheet">
+      <script src="https://api.mapbox.com/mapbox-gl-js/v2.11.0/mapbox-gl.js"></script>
+      <!-- Leaflet's Default Styles-->
+      <link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css"
+      integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ=="
+      crossorigin=""/>
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+      <!-- Load the `mapbox-gl-geocoder` plugin. -->
+      <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.min.js"></script>
+      <link rel="stylesheet" href="./css/mapbox-gl-geocoder.css" type="text/css">
+  </head>
+  <body style="overflow-x: hidden">
+      <section class="et-hero-tabs" style="padding: 0" id="homepage">
+          <div class="mycontainer">
+              <h1 style="position: relative; top: 40%; color: greenyellow; font-family: Times New Roman; font-weight: bold" class="text-uppercase-white">Urban Solar Roof</h1>
+              <a style="position:relative; top: 50%; left: -2%" href="#tab-city" type="button" class="et-hero-tab btn btn-primary btn-lg" >My City Potential</a>
+              <a style="position:relative; top: 50%; left: 2%" href="#tab-roof" type="button" class="btn btn-primary btn-lg">My Roof Potential</a>
+      </div>
+
+      <div class="et-hero-tabs-container">
+          <div class="title" href="#homepage">
+              <a style="color: orange" href="#homepage">Urban Solar Roof</a>
+          </div>
+          <a class="et-hero-tab city" href="#tab-city" onclick="loadSolar()">City</a>
+          <a class="et-hero-tab" href="#tab-roof">Roof</a>
+          <a class="et-hero-tab" href="#tab-flexbox">Flexbox</a>
+          <a class="et-hero-tab" href="#tab-react">React</a>
+          <a class="et-hero-tab" href="#tab-angular">Angular</a>
+          <a class="et-hero-tab" href="#tab-other">Other</a>
+          <span class="et-hero-tab-slider"></span>
+      </div>
+    </section>
+
+    <!-- Main -->
+    <main class="et-main">
+        <section class="et-slide" id="tab-city">
+            <div class="left">
+                <div id="geocoder" class="geocoder"></div>
+
+                <div style="position: absolute; left: 25%; width: 300px; top:25%;">
+                    <select class="select04" id="select-city">
+                        <option value="01">Philadelphia</option>
+                    </select>
+                </div>
+                <div style="position: absolute; left: 25%;width: 300px; top:35%;">
+                    <select class="select04" id="select-neighbor">
+                        <option value="01">Philadelphia</option>
+                    </select>
+                </div>
+
+            </div>
+            <div class="right">
+                <div id="map">
+
+                </div>
+                <div id="state-legend" class="legend">
+                    <h4>Population</h4>
+                    <div><span style="background-color: #723122"></span>25,000,000</div>
+                    <div><span style="background-color: #8b4225"></span>10,000,000</div>
+                    <div><span style="background-color: #a25626"></span>7,500,000</div>
+                    <div><span style="background-color: #b86b25"></span>5,000,000</div>
+                    <div><span style="background-color: #ca8323"></span>2,500,000</div>
+                    <div><span style="background-color: #da9c20"></span>1,000,000</div>
+                    <div><span style="background-color: #e6b71e"></span>750,000</div>
+                    <div><span style="background-color: #eed322"></span>500,000</div>
+                    <div><span style="background-color: #f2f12d"></span>0</div>
+                </div>
+            </div>
+        </section>
+        <section class="et-slide" id="tab-roof">
+            <div class="left">
+
+            </div>
+            <div class="right">
+<!--          <div id="map">-->
+
+<!--          </div>-->
+            </div>
+        </section>
+        <section class="et-slide" id="tab-flexbox">
+            <h1>Flexbox</h1>
+            <h3>something about flexbox</h3>
+        </section>
+        <section class="et-slide" id="tab-react">
+            <h1>React</h1>
+            <h3>something about react</h3>
+        </section>
+        <section class="et-slide" id="tab-angular">
+            <h1>Angular</h1>
+            <h3>something about angular</h3>
+        </section>
+        <section class="et-slide" id="tab-other">
+            <h1>Other</h1>
+            <h3>something about other</h3>
+        </section>
+    </main>
+    <script src="https://www.jq22.com/jquery/jquery-1.10.2.js"></script>
+    <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js"
+        integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ=="
+        crossorigin=""></script>
+    <script src="./js/main.js" type="module"></script>
+    <script src="./js/script.js"></script>
+    <script src="./js/map.js"></script>
+    <script src="./js/M_select.js"></script>
+    <script type="text/javascript">
+	$(function(){
+		$("#select-city").M_select({
+			"Img":"./js/M_select/up4.png",
+			"Img2":"./js/M_select/down1.png",
+			"radius":"10px",
+			"Title":"City",
+			"inputName":"selected_value",
+			// 默认选中的值（参数值写需要选中的select的value值）
+			"selected":"03",
+			// Succee:function(){
+			// 	alert("选择下拉之后的弹窗");
+			// }
+		});
+		$("#select-neighbor").M_select({
+			"Img":"./js/M_select/up4.png",
+			"Img2":"./js/M_select/down1.png",
+			"radius":"10px",
+			"Title":"Neighborhood",
+			"inputName":"selected_value",
+			// 默认选中的值（参数值写需要选中的select的value值）
+			"selected":"03",
+			// Succee:function(){
+			// 	alert("选择下拉之后的弹窗");
+			// }
+		});
+	});
+    </script>
+
+  </body>
+</html>
