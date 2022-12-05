@@ -13,6 +13,7 @@ L.tileLayer('https://stamen-tiles.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.jpg', 
 let currentSlideIndex = 0;
 
 const slidesDiv = document.querySelector('.slides');
+const researchDiv = document.querySelector('.research-note');
 
 function updateMap(collection) {
   layerGroup.clearLayers();

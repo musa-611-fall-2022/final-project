@@ -77,3 +77,19 @@ body {
 .slide-nav-select {
   min-width: 0;
 }
+
+.research-note {
+  margin-top: 90vh;
+  margin-bottom: 90vh;
+  margin-left: 2rem;
+  margin-right: auto;
+  padding: 1rem;
+  box-shadow: -0.5rem 0 1rem rgba(0, 0, 0, 0.5);
+  border: 1px solid gray;
+  border-radius: 0.5rem;
+
+  width: 25rem;
+
+  background-color: white;
+  color: black;
+}
