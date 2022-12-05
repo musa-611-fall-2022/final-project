@@ -1,9 +1,12 @@
 /* globals showdown */
 
+import eastasiancluster from 'data/EastAsianCluster.geojson.js';
+import southasiancluster from 'data/SouthAsianCluster.geojson.js';
+import southeastasiancluster from 'data/SoutheastAsianCluster.geojson.js';
+
 let map = L.map('map').setView([0, 0], 0);
 let layerGroup = L.layerGroup().addTo(map);
 let lifeCollection = { features: [] };
-let dataCollection = { features: [] };
 
 L.tileLayer('https://stamen-tiles.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.jpg', {
   attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, under <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by <a href="http://openstreetmap.org">OpenStreetMap</a>, under <a href="http://creativecommons.org/licenses/by-sa/3.0">CC BY SA</a>.',
@@ -84,18 +87,19 @@ function loadLifeData() {
 
 function loadResearchData() {
   if(currentSlideIndex == 3) {
-    fetch('data/Research.json')
-    .then(resp => resp.json())
-    .then(researchData => {
-      researchCollection = researchData;
-    });
-  }
-  else if(currentSlideIndex == 9) {
-    fetch('data/Research2.json')
-    .then(resp => resp.json)
-    .then(reserachData => {
-      researchCollection = researchData;
-    });
+    L.geoJSON(eastasiancluster, {
+      style: {fill: null, color: 'black'},
+    }).addTo(map);
+    };
+  else if(currentSlideIndex == 4) {
+    L.geoJSON(southasiancluster, {
+      style: {fill: null, color: 'black'},
+    }).addTo(map);
+    };
+  else if(currentSlideIndex == 5) {
+    L.geoJSON(southeastasiancluster, {
+      style: {fill: null, color: 'black'},
+    }).addTo(map);
   }
 }
 

@@ -2,7 +2,7 @@ const slides = [
   {
     title: "Jonathon GeoSpatial Journey",
     content: `
-      hi
+      THis is my blahealgs
     `,
     era: null,
     bounds: [[-75, -180], [75, 180]],
