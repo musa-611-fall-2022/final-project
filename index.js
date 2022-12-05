@@ -14,7 +14,7 @@ const pool = new Pool({
 app.get('/', (req, res) => {
   res.send('Hello from your server');
 })
-.get('/db', async(req, res) => {
+.get('/test-query', async(req, res) => {
   try {
     const client = await pool.connect();
     const result = await client.query('SELECT * FROM trips LIMIT 5');
