@@ -6,7 +6,9 @@ const port = process.env.PORT || 5000;
 
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
-  ssl: true,
+  ssl: {
+    rejectUnauthorized: false,
+  },
 });
 
 app.get('/', (req, res) => {
