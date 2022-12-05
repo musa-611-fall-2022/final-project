@@ -16,12 +16,46 @@ function progressBarScroll() {
         scrolled = (winScroll / height) * 100;
     document.getElementById("progressBar").style.width = scrolled + "%";
     console.log(winScroll);
+    let counter = Math.round(winScroll)
+    fetchData(counter);
+  }
+
+  function make311Feature(data){
+    return{
+      'type': 'Feature',
+      'properties': {
+      "parsed-interval": Date.parse(data["interval15"]), 
+      data
+    },
+      'geometry': {
+        "type": "Point",
+        "coordinates": [data["lon"], data["lat"]]
+      },
+    };
+  }
+
+  function fetchData(counter) {
+    fetch(`./data/311data.csv`)
+      .then(resp => resp.text())
+      .then(data => {
+        const dataset = Papa.parse(data, { header: true });
+        window.data = data;
+          //if tigerline != empty, then run the following (to protect against empty attributes)
+          if (dataset.data[counter]['lat'] !== "NA" && dataset.data[counter]['lat'] !== undefined && dataset.data[counter]['lat'] !== ''){
+          const dataFeature = make311Feature(dataset.data[counter]);
+          //console.log(dataFeature.properties["parsed-interval"]);
+          console.log(dataFeature);
+          map.dataLayer.addData(dataFeature);
+          }
+      });
   }
   
   window.onscroll = function () {
     progressBarScroll();
+  
   };
 
+  
   var options = {
     series: [
     {
