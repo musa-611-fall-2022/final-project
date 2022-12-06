@@ -4,12 +4,26 @@ const { Pool } = require('pg');
 const app = express();
 const port = process.env.PORT || 5000;
 
-const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
-  ssl: {
-    rejectUnauthorized: false,
-  },
-});
+let pool;
+
+if(process.env.DATABASE_URL) {
+  // If on Heroku
+  pool = new Pool({
+    connectionString: process.env.DATABASE_URL,
+    ssl: {
+      rejectUnauthorized: false,
+    },
+  });
+} else {
+  // If on local
+  pool = new Pool({
+    user: process.env.D_user,
+    password: process.env.D_password,
+    port: process.env.D_pport,
+    host: process.env.D_host,
+    database: process.env.D_database,
+  });
+}
 
 app.get('/', (req, res) => {
   res.send('Hello from your server');
