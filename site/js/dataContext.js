@@ -1,18 +1,17 @@
-
-function loadResearchData() {
-    if(currentSlideIndex == 3) {
-      fetch('data/Research.json')
-      .then(resp => resp.json())
-      .then(researchData => {
-        researchCollection = researchData;
-      })
-      else if(currentSlideIndex == 9) {
-        fetch('data/Research2.json')
-        .then(resp => resp.json)
-        .then(reserachData => {
-          researchCollection = researchData;
-        })
-      }
-    }
-    
+function loadResearchData(currentSlideIndex) {
+  if(currentSlideIndex == 3) {
+    L.geoJSON(eastasiancluster, {
+      style: {fill: null, color: 'black'},
+    }).addTo(map);
+    };
+  else if(currentSlideIndex == 4) {
+    L.geoJSON(southasiancluster, {
+      style: {fill: null, color: 'black'},
+    }).addTo(map);
+    };
+  else if(currentSlideIndex == 5) {
+    L.geoJSON(southeastasiancluster, {
+      style: {fill: null, color: 'black'},
+    }).addTo(map);
   }
+}

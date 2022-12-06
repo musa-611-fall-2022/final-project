@@ -11,7 +11,7 @@ const slides = [
   {
     title: 'K-12 Experience',
     content: `
-    https://github.com/Jonathonsun03/final-project/blob/b618ff1b7a2f6c7dacc9fc894fe14609e5897f1a/site/data/Photos/ChinatownDemolition.jpg
+    TEst contetn
     `,
     era: 'K-12',
     showpopups: true,
