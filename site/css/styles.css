@@ -1,5 +1,23 @@
+body {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
+.content-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.map-container {
+    height: 100%;
+}
+
 #map {
-    height: 500px;
+    height: 100%;
 }
 
 .input-container {
@@ -9,4 +27,14 @@
 
 .label {
     margin: 1rem;
+}
+
+.popup-container {
+    height: 10rem;
+    background-color: lightblue;
+}
+
+.popup {
+    display: flex;
+    flex-direction: column;
 }

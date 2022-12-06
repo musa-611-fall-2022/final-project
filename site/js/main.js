@@ -36,10 +36,6 @@ function onHotspotClick() {
     }
 }
 
-// slider objects
-let notableSlider = document.getElementById("notable-slider");
-let hotspotSlider = document.getElementById("hotspot-slider");
-
 // event listener for notable observations
 let notableObsButton = document.querySelector("#notable-obs");
 notableObsButton.addEventListener('click', onNotableObsClick);
