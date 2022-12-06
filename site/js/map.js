@@ -12,49 +12,51 @@ function initializeMap () {
     maxZoom: 19,
     attribution: '© <a href="https://www.mapbox.com/about/maps/">Mapbox</a> © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> <strong><a href="https://www.mapbox.com/map-feedback/" target="_blank">Improve this map</a></strong>',
 }).addTo(Map);
-
-function parcelColors(p) {
-    if(p === "CITY_OF_PHILA") return "blue";
-    if(p === "COMMERCIAL_PROPERTY") return "orange";
-    return "grey";
-}
-
-function polystyle(feature) {
-    return {
-        fillColor: parcelColors(feature.properties.OWNER_CATE),
-        weight: 2,
-        opacity: 1,
-        color: 'NA',  //Outline color
-        fillOpacity: 0.7,
-    };
+return Map;
 }
 
 
+function parcelLayerFun (Map) {
+    function parcelColors(p) {
+        if(p === "Building") return "tan";
+        if(p === "Park") return "green";
+        if(p === "Parking") return "grey";
+        if(p === "Cemetery") return "darkgreen";
+        if(p === "Playground") return "green";
+        return "grey";
+    }
 
+    function initstyle(feature) {
+        return {
+            fillColor: parcelColors(feature.properties.BC_LANDUSE),
+            weight: 2,
+            opacity: 1,
+            color: 'NA',  //Outline color
+            fillOpacity: 1,
+        };
+    }
 
+    function highlightFeature(e) {
+        e.target.setStyle({ weight: 5, color: "yellow" });
+        e.target.bringToFront();
+    }
 
-Map.parcelLayer = L.geoJSON(null, {
-    style: polystyle, 
-    onEachFeature: function(feature, layer) {
-        layer.addEventListener("mouseover", highlight_feature);
-        layer.addEventListener("mouseout", reset_highlight);
-    },
-}).addTo(Map);
+    function resetHighlight(e) {
+        e.target.setStyle({ color: "NA" });
+    }
 
-function highlight_feature(e) {
-    e.target.setStyle({weight: 5, color: "yellow", fillOpacity: 0.5});
-    e.target.bringToFront();
-}
-
-function reset_highlight(e) {
-    geojson.resetStyle(e.target);
-}
-
-    return Map;
+    Map.parcelLayer = L.geoJSON(null, {
+        style: initstyle,
+        onEachFeature: function(feature, layer) {
+            layer.addEventListener("mouseover", highlightFeature);
+            layer.addEventListener("mouseout", resetHighlight);
+        },
+    }).addTo(Map);
 }
 
 
 
 export {
     initializeMap,
+    parcelLayerFun,
  };
