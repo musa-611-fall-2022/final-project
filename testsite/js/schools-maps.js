@@ -1,6 +1,5 @@
-//import catchments from '../data/catchments.js';
-import clusters from '../data/EastAsianCluster.geojson.js';
-window.clusters = clusters
+import catchments from '../data/catchments.js';
+import clusters from '../data/EastAsianCluster.geojson';
 
 function initializeSchoolMap(){
     let schoolMap = L.map('school-map').setView([40.0, -75.11], 13);
