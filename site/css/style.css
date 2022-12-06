@@ -1,0 +1,15 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;
+}
+
+.map {
+    height: 600px;
+}
+
+.f_name {
+    padding: 1rem;
+    background-color: white;
+}
