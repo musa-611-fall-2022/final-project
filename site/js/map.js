@@ -41,13 +41,13 @@ function initializeSeattleMap() {
                     <option value="Social">Social</option>
                 </select>
             <h3>Owner:</h3>
-            <input type="text" id="new-entry" placeholder="Enter business name">
+            <input type="text" id="new-entry" placeholder="Enter owner name">
             <h3>Opening Year:</h3>
-            <input type="text" id="new-entry" placeholder="Enter business name">
+            <input type="text" id="new-entry" placeholder="Enter opening year">
             <h3>End Year:</h3>
-            <input type="text" id="new-entry" placeholder="Enter business name">
+            <input type="text" id="new-entry" placeholder="Enter ending year">
             <h3>Address:</h3>
-            <input type="text" id="new-entry" placeholder="Enter business name">
+            <input type="text" id="new-entry" placeholder="Enter address">
             <h3>Preserve history:</h3>
             <input type="text" placeholder="Please share any memories you have with this space" height=10>
             <br></br>
@@ -60,7 +60,7 @@ function initializeSeattleMap() {
 
     function newBusiness() {
         document.querySelector('.add-point').addEventListener('click', () => {
-            let newPoint = L.circleMarker([51.508, -0.11], {
+            let newPoint = L.circleMarker(getLatLng(), {
                 color: 'red',
                 fillColor: '#f03',
                 fillOpacity: 0.5,
