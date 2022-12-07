@@ -25,12 +25,13 @@ function dataPullFailure() {
 
 function dataPullSuccess(data, map, urlType) {
     let points;
-    if (urlType === 'recentObs' | urlType === 'notableObs') {
+    if (urlType === 'recentObs' | urlType === 'notableObs' | urlType === 'birdObs') {
         points = createObsPointFeatures(data);
     } else if (urlType === 'hotspot') {
         points = createHotspotPointFeatures(data);
     }
     addPointsToMap(points, map);
+    return points;
 }
 
 async function getData(url, onSuccess, onFailure, map, urlType) {
@@ -48,7 +49,7 @@ async function getData(url, onSuccess, onFailure, map, urlType) {
     if (resp.status === 200) {
         const data = await resp.json();
         console.log("calling onSuccess");
-        if (onSuccess) { onSuccess(data, map, urlType) }
+        if (onSuccess) { return onSuccess(data, map, urlType) }
     } else {
         console.log("calling onFailure");
         if (onFailure) { onFailure() }
@@ -57,9 +58,9 @@ async function getData(url, onSuccess, onFailure, map, urlType) {
 
 function buildURL(urlType) {
     // list possible request URLs
-    let recentObs = "https://api.ebird.org/v2/data/obs/US-PA/recent";
-    let notableObs = "https://api.ebird.org/v2/data/obs/US-PA/recent/notable";
-    let hotspot = "https://api.ebird.org/v2/ref/hotspot/US-PA?fmt=json";
+    let recentObs = "https://api.ebird.org/v2/data/obs/geo/recent?lat=39.952&lng=-75.164&back=30&dist=50";
+    let notableObs = "https://api.ebird.org/v2/data/obs/geo/recent/notable?lat=39.952&lng=-75.164&back=30&dist=50";
+    let hotspot = "https://api.ebird.org/v2/ref/hotspot/geo?lat=39.952&lng=-75.164&fmt=json&back=30&dist=50";
     // return correct URL to put into getData
     if (urlType === "recentObs") {
         return recentObs;

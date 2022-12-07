@@ -42,3 +42,11 @@ body {
     display: flex;
     flex-direction: column;
 }
+
+.pressed {
+    background-color: blueviolet;
+}
+
+.unpressed {
+    background-color: white;
+}

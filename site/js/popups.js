@@ -23,7 +23,6 @@ function buildPopup(feature) {
             </div>
         `;
     }
-    console.log(popupContainer.classList.value);
     if (popupContainer.classList.contains("popup-container")) {
         popupContainer.classList.remove("popup-container");
         popupContainer.classList.add("popup-container-up");

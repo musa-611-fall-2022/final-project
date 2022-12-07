@@ -68,7 +68,6 @@ function createHotspotPointFeatures(data) {
 function onEachFeature(feature, layer) {
     // event handler for clicks on map points
     layer.on('click', () => {
-        console.log(layer);
         if (map.highlightLayer) {
             map.removeLayer(map.highlightLayer);
         }
