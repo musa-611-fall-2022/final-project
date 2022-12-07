@@ -1,8 +1,8 @@
 /* globals showdown */
 
-//import eastasiancluster from '../data/EastAsianCluster.geojson.js';
-//import southasiancluster from '../data/SouthAsianCluster.geojson.js';
-//import southeastasiancluster from '../data/SoutheastAsianCluster.geojson.js';
+import eastasiancluster from '../data/EastAsianCluster.geojson.js';
+import southasiancluster from '../data/SouthAsianCluster.geojson.js';
+import southeastasiancluster from '../data/SoutheastAsianCluster.geojson.js';
 
 let map = L.map('map').setView([0, 0], 0);
 let layerGroup = L.layerGroup().addTo(map);
