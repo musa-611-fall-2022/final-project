@@ -11,6 +11,7 @@ const path = require('path');
 
 // Use express as server side app
 const express = require('express');
+const app = express();
 const port = process.env.PORT || 5000;
 
 // Initiate client to connect with online psql db
@@ -22,7 +23,7 @@ let pool = new Pool({
   },
 });
 
-express()
+app
   // Render main HTML
   .use(express.static(path.join(__dirname, 'site')))
   .set('views', path.join(__dirname, 'site'))
@@ -30,7 +31,7 @@ express()
   .get('/', (req, res) => {
     res.render('index');
   })
-  // Query data
+  // Query
   .get('/test-query', async(req, res) => {
     try {
       const client = await pool.connect();
