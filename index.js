@@ -14,8 +14,10 @@ let pool = new Pool({
 
 app
   .use(express.static(path.join(__dirname, 'site')))
+  .set('views', path.join(__dirname, 'site'))
+  .set('view engine', 'ejs')
   .get('/', (req, res) => {
-    res.sendFile('index.html');
+    res.render('index');
   })
   .get('/test-query', async(req, res) => {
     try {
