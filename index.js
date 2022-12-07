@@ -33,9 +33,9 @@ app
     try {
       const client = await pool.connect();
       const result = await client.query(
-        `SELECT trip_start_time, COUNT (trip_start_time) FROM trips WHERE primary_mode = 3 GROUP BY trip_start_time`
+        `SELECT trip_start_time, COUNT (trip_start_time) FROM trips WHERE primary_mode = ${req.params.mode} GROUP BY trip_start_time`
       );
-      const results = { 'results': (result) ? result.rows : null, "test": mode};
+      const results = { 'results': (result) ? result.rows : null};
       res.send(results);
     } catch(err) {
       console.error(err);
