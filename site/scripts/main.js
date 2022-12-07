@@ -4,9 +4,11 @@ import { tooltipEvents } from "./tooltip.js";
 const container = document.getElementById("container");
 
 const margin = {top: 0, right: 0, bottom: 0, left: 0};
+const tooltipMargin = {top: 12, right: 12, bottom: 12, left: 12};
 
 const width = 720 - margin.left - margin.right;
 const height = 540 - margin.top - margin.bottom;
+const tooltipWidth = 220 - tooltipMargin.left - tooltipMargin.right;
 
 let selectedMap = "Approved Plans";
 
@@ -15,6 +17,8 @@ const controlAppr = document.getElementById('approved');
 const controlCurrent = document.getElementById("current");
 
 let AYPP = {};
+const unitTypes = ["low-income", "moderate-income",	"middle-income", "market", "condo"];
+const colors = ["#5CB867", "#159524", "#065F11", "#DC4230", "#99221A"];
 
 //Adding SVG to play with
 
@@ -24,6 +28,7 @@ let svg = body.append("svg")
         .attr ("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
         .attr("id", "svg")
+        .attr("class", "background")
       .append("g")
         .attr("transform", "translate(" + margin.left + ',' + margin.top + ")");
 
@@ -82,6 +87,9 @@ window.width = width;
 window.height = height;
 window.margin = margin;
 window.tooltip = tooltip;
+window.tooltipWidth = tooltipWidth;
+window.unitTypes = unitTypes;
+window.colors = colors;
 
 
 
