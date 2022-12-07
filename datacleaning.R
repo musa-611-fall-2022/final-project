@@ -88,8 +88,67 @@ ft_vacant <- ft_parcels %>% filter(BC_TYPE == 'Vacant')
 levels(factor(ft_vacant$OWNER_CATE))
 
  
-ft_parcels_out <- ft_parcels %>% 
-  select(ADDRESS, OWNER1, BC_TYPE, OWNER_CATE, geometry)
 
+## Zoning
+zoning  <- read_sf("C:/Users/cchue/Documents/GIS/PhillyData/zoningbd.shp")
+
+ft_zoning <- zoning[fishtown,]
+
+ggplot(ft_zoning)+
+  geom_sf(color=NA, aes(fill = LONG_CODE))+
+  geom_sf(data = ft_parcels, fill = NA)
+
+ft_parcels <- st_join(ft_parcels,  ft_zoning)
+
+
+## Land Use
+landuse <- read_sf("C:/Users/cchue/Documents/GIS/PhillyData/Land_Use.shp")
+
+ft_lu <- landuse[fishtown,]
+
+otherfields <- ft_lu %>% filter(C_DIG2 %in% c(72, 62))
+
+vacant <- ft_lu %>% filter(C_DIG2 == 91)
+
+ggplot(vacant)+
+  geom_sf()
+
+ft_parcels$vacant <- st_intersects(ft_parcels,  vacant, sparse = F)[,1]
+
+
+#parks
+parks <- read_sf("C:/Users/cchue/Documents/GIS/PhillyData/parks.shp") %>% st_transform(crs = 4326)
+
+ft_parks <- parks[fishtown,] %>% st_join(otherfields)
+
+ft_parcels$park <- st_intersects(ft_parcels,  ft_parks, sparse = F)[,1]
+
+
+ggplot()+
+  geom_sf(data = ft_parcels, aes(fill = park), color = NA)
+  
+
+### schools
+schools<- read_sf("C:/Users/cchue/Documents/GIS/PhillyData/Schools.shp")
+
+ft_schools <- schools[fishtown,]
+
+ft_parcels$school <- st_touches(ft_parcels,  ft_schools, sparse = F)[,1]
+
+ggplot()+
+  geom_sf(data = ft_parcels, aes(fill = school), color =NA)+
+  geom_sf(data = ft_schools)
+
+
+
+#export data
+
+
+
+ft_parcels_out <- ft_parcels %>% 
+  select(ADDRESS, OWNER1, BC_TYPE, BC_LANDUSE, OWNER_CATE, LONG_CODE, PENDING, geometry)
 
 geojson_write(ft_parcels_out, geometry = "MULTIPOLYGON", file = "C:/Users/cchue/Documents/Penn MUSA/Javascript Programming/final-project/parcels.geojson")
+
+
+
