@@ -23,6 +23,18 @@ body {
 .input-container {
     display: flex;
     align-items: flex-start;
+    height: 30vh;
+    overflow: hidden;
+}
+
+.filter-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.bird-list-container {
+    overflow-y: scroll;
 }
 
 .label {
@@ -45,8 +57,33 @@ body {
 
 .pressed {
     background-color: blueviolet;
+    color: white;
+    border-color: gray;
 }
 
 .unpressed {
     background-color: white;
+    color: black;
+    border-color: black;
+}
+
+.filter-button {
+    margin: 0.5rem;
+    padding: 0.2rem;
+    border-radius: 5px;
+}
+
+.bird-search {
+    box-sizing: border-box;
+    border-color: purple;
+    border-width: 2px;
+    border-radius: 5px;
+    padding: 0.2rem;
+    margin: 0.5rem;
+    resize: none;
+    overflow-wrap: normal;
+}
+
+.bird-search-button {
+    width: 50%;
 }

@@ -100,9 +100,29 @@ function addPointsToMap(points, map) {
     }).addTo(map);
 }
 
+function locateMe(map){
+    const successCallback = (pos) => {
+        if (map.positionLayer) {
+            map.removeLayer(map.positionLayer);
+        }
+        let myLocation = {
+            'type': 'Point',
+            'coordinates': [pos.coords.longitude, pos.coords.latitude],
+        };
+        map.positionLayer = L.geoJSON(myLocation).addTo(map);
+        // un-comment following line if we want the map to zoom to user location on startup:
+        //map.setView([pos.coords.latitude, pos.coords.longitude], 19);
+        return myLocation;
+    };
+    const errorCallback = (e) => console.log(e);
+    const options = { enableHighAccuracy: true, timeout: 10000 };
+    navigator.geolocation.getCurrentPosition(successCallback, errorCallback, options);
+}
+
 export {
     initializeMap,
     createObsPointFeatures,
     createHotspotPointFeatures,
     addPointsToMap,
+    locateMe,
 };

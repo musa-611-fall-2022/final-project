@@ -4,7 +4,7 @@
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-        <title>Philadelphia Birding Guide</title>
+        <title>Philadelphia Area Birding Guide</title>
 
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.2/leaflet.min.css" integrity="sha512-ekzf1ud/EngtmWo8xbIkhtBQsSgkOhTyyD6AA6b/J4/YXTInuNgeKVQDCH/pysNYnrGgsZazWSuWsNtFKzHbmg==" crossorigin="anonymous" referrerpolicy="no-referrer">
         <link rel="stylesheet" href="css/styles.css">
@@ -18,11 +18,21 @@
             </div>
 
             <div class="input-container">
-                <button id="recent-obs" class="pressed">Show Recent Observations</button>
-                <button id="notable-obs" class="unpressed">Show Recent Notable Observations</button>
-                <button id="hotspots" class="unpressed">Show Regional Hotspots</button>
-                <textarea id="bird-search" class="bird-search" placeholder="Search for a bird..."></textarea>
-                <button id="bird-search-button" class="bird-search-button">Search</button>
+                <div class="filter-container">
+                    <span class="label">Select Data to Show:</span>
+                    <button id="recent-obs" class="filter-button pressed">Show Recent Observations</button>
+                    <button id="notable-obs" class="filter-button unpressed">Show Recent Notable Observations</button>
+                    <button id="hotspots" class="filter-button unpressed">Show Regional Hotspots</button>
+                </div>
+                <div class="filter-container">
+                    <span class="label">Search for a Bird:</span>
+                    <textarea id="bird-search" class="bird-search" placeholder="Enter species name..." rows="1"></textarea>
+                    <button id="bird-search-button" class="bird-search-button filter-button">Search</button>
+                </div>
+                <div class="filter-container">
+                    <span class="label">Recent Observations:</span>
+                    <div class="bird-list-container" id="bird-list-container"></div>
+                </div>
             </div>
 
             <div class="popup-container" id="popup-container"></div>
