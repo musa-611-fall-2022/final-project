@@ -148,7 +148,7 @@ ggplot()+
 ft_parcels_out <- ft_parcels %>% 
   select(ADDRESS, OWNER1, BC_TYPE, BC_LANDUSE, OWNER_CATE, LONG_CODE, PENDING, geometry)
 
-geojson_write(ft_parcels_out, geometry = "MULTIPOLYGON", file = "C:/Users/cchue/Documents/Penn MUSA/Javascript Programming/final-project/parcels.geojson")
+geojson_write(ft_parcels_out, geometry = "MULTIPOLYGON", file = "C:/Users/cchue/Documents/Penn MUSA/Javascript Programming/final-project/site/data/parcels.geojson")
 
 
 
