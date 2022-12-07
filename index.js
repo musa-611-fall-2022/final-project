@@ -29,10 +29,12 @@ app
   .get('/', (req, res) => {
     res.render('index');
   })
-  .get('/test-query', async(req, res) => { // Query from psql db
+  .get('/test-query/:mode', async(req, res) => { // Query from psql db
     try {
       const client = await pool.connect();
-      const result = await client.query('SELECT trip_start_time, COUNT (trip_start_time) FROM trips WHERE primary_mode = 3 GROUP BY trip_start_time');
+      const result = await client.query(
+        `SELECT trip_start_time, COUNT (trip_start_time) FROM trips WHERE primary_mode = ${mode} GROUP BY trip_start_time`
+      );
       const results = { 'results': (result) ? result.rows : null };
       res.send(results);
     } catch(err) {
