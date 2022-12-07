@@ -30,6 +30,10 @@ body {
 }
 
 .popup-container {
+    height: 0rem;
+}
+
+.popup-container-up {
     height: 10rem;
     background-color: lightblue;
 }

@@ -1,4 +1,5 @@
 import { buildPopup } from './popups.js';
+import { map } from './main.js';
 
 function initializeMap() {
     let map = L.map('map').setView([39.95244193418098, -75.16433792450688], 11);
@@ -67,6 +68,19 @@ function createHotspotPointFeatures(data) {
 function onEachFeature(feature, layer) {
     // event handler for clicks on map points
     layer.on('click', () => {
+        console.log(layer);
+        if (map.highlightLayer) {
+            map.removeLayer(map.highlightLayer);
+        }
+        map.highlightLayer = L.geoJSON(feature, {
+            pointToLayer: (geoJsonPoint, latlng) => L.circleMarker(latlng),
+            style: {
+                fillColor: "red",
+                stroke: null,
+                fillOpacity: 1,
+                radius: 9,
+            },
+        }).addTo(map);
         buildPopup(feature);
     });
 }

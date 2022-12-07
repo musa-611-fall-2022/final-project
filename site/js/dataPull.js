@@ -1,5 +1,24 @@
 import { createObsPointFeatures, createHotspotPointFeatures, addPointsToMap } from "./map.js";
 
+async function getSpeciesList() {
+    let myHeaders = new Headers();
+    myHeaders.append("X-eBirdApiToken", "ol5p0ugs0k6o");
+
+    let requestOptions = {
+        method: 'GET',
+        redirect: 'follow',
+        headers: myHeaders,
+    };
+
+    const resp = await fetch("https://api.ebird.org/v2/ref/taxonomy/ebird?fmt=json", requestOptions);
+    if (resp.status === 200) {
+        const data = await resp.json();
+        return data;
+    } else {
+        console.log("Failed to pull species list");
+    }
+}
+
 function dataPullFailure() {
     console.log("Data pull failure");
 }
@@ -26,7 +45,7 @@ async function getData(url, onSuccess, onFailure, map, urlType) {
 
     const resp = await fetch(url, requestOptions);
     console.log(resp);
-    if (resp.status == 200) {
+    if (resp.status === 200) {
         const data = await resp.json();
         console.log("calling onSuccess");
         if (onSuccess) { onSuccess(data, map, urlType) }
@@ -58,4 +77,5 @@ export {
     dataPullFailure,
     dataPullSuccess,
     buildURL,
+    getSpeciesList,
 };

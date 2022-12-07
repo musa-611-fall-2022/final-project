@@ -10,7 +10,7 @@ The application will be based around [eBird's API](https://documenter.getpostman
 
 - [x] Mobile and desktop friendly
 - [x] Map of Philadelphia which, upon startup, will display most recent observations in region
-- [ ] Each observation will be clickable, bringing up the bird, time, and location of the observation, as well as the distance from the user's location. Popup will link to the eBird website page for that species for more detailed information. 
+- [x] Each observation will be clickable, bringing up the bird, time, and location of the observation, as well as the distance from the user's location. Popup will link to the eBird website page for that species for more detailed information. 
 - [x] Button to filter to only "notable" observations (a classification provided by the API for particularly rare or interesting species)
 - [x] Button to display "hotspots" on map (another data type provided by the API based on frequency of recent observations)
 - [ ] Search bar to look for specific species. When a species is selected from the search results, recent observations of that species will appear on the map, and recent observation counts/bird information will be displayed elsewhere on the page. 
