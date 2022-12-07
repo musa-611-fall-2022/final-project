@@ -23,13 +23,13 @@ let pool = new Pool({
 });
 
 app
-  .use(express.static(path.join(__dirname, 'site')))
+  .use(express.static(path.join(__dirname, 'site'))) // Render HTML
   .set('views', path.join(__dirname, 'site'))
   .set('view engine', 'ejs')
   .get('/', (req, res) => {
     res.render('index');
   })
-  .get('/test-query', async(req, res) => {
+  .get('/test-query', async(req, res) => { // Query from psql db
     try {
       const client = await pool.connect();
       const result = await client.query('SELECT trip_start_time, COUNT (trip_start_time) FROM trips WHERE primary_mode = 3 GROUP BY trip_start_time');
