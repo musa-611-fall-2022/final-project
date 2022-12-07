@@ -2,8 +2,6 @@ import filipinotown from '../data/seattle.js';
 import { initializeSeattleMap, showFtOnMap } from './map.js';
 import { showFtInList }  from './list.js';
 
-console.log(filipinotown)
-
 let seattleMap = initializeSeattleMap();
 showFtOnMap(filipinotown, seattleMap);
 
@@ -18,17 +16,16 @@ function shouldShowSeattle () {
 
     const text = seattleNameFilter.value;
     filteredFt = filteredFt.filter(function(seattle) {
-        const name = seattle.properties.Name.toLowerCase(); 
+        const name = seattle.properties.Name.toLowerCase();
         const hasText = name.includes(text);
         return hasText;
     });
- 
     for (const checkbox of seattleTypeFilter) {
         if (checkbox.checked) {
             filteredFt = filteredFt.filter(function(seattle) {
                 const type = checkbox.value;
                 const hasType = seattle.properties.Type === type;
-                return hasType
+                return hasType;
             });
         }
     }
@@ -49,6 +46,11 @@ seattleNameFilter.addEventListener('input', () => {
     showFtInList(filteredFt, seattleList);
 });
 
+// function onSaveClicked() {
+//     const content = getFormContent();
+//     const treeId = app.currentTree.properties['OBJECTID'];
+//     saveNote(treeId, content, app, onNotesSaveSuccess);
+//   }
 window.filipinotown = filipinotown;
 window.seattleMap = seattleMap;
 window.seattleList = seattleList;

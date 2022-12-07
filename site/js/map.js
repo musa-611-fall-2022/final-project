@@ -6,7 +6,8 @@ function initializeSeattleMap() {
         attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors',
     }).addTo(seattleMap);
 
-    
+    let mapClickPoint = null;
+
     function onMapClick(seattle) {
         let popup = L.popup();
         popup
@@ -26,9 +27,9 @@ function initializeSeattleMap() {
         <div class="new-biz-container">
             <h2 class = 'newbiz'> Add Business </h2>
             <h3>Business Name:</h3>
-            <input type="text" id="new-entry" placeholder="Enter business name">
+            <input type="text" id="business-name" placeholder="Enter business name">
             <h3>Business Type:</h3>
-                <select id="cars" name="cars">
+                <select id="business-type" name="business-type">
                     <option value="Beauty">Beauty</option>
                     <option value="Cafe">Cafe</option>
                     <option value="Food">Food</option>
@@ -41,32 +42,62 @@ function initializeSeattleMap() {
                     <option value="Social">Social</option>
                 </select>
             <h3>Owner:</h3>
-            <input type="text" id="new-entry" placeholder="Enter owner name">
+            <input type="text" id="owner" placeholder="Enter owner name">
             <h3>Opening Year:</h3>
-            <input type="text" id="new-entry" placeholder="Enter opening year">
+            <input type="text" id="start" placeholder="Enter opening year">
             <h3>End Year:</h3>
-            <input type="text" id="new-entry" placeholder="Enter ending year">
+            <input type="text" id="end" placeholder="Enter ending year">
             <h3>Address:</h3>
-            <input type="text" id="new-entry" placeholder="Enter address">
+            <input type="text" id="address" placeholder="Enter address">
             <h3>Preserve history:</h3>
-            <input type="text" placeholder="Please share any memories you have with this space" height=10>
+            <input type="text" id="history" placeholder="Please share any memories you have with this space" height=10>
             <br></br>
             <button class = 'add-point' type="submit" value="Submit">Submit</button>
         </div>
-        `) 
+        `)
         .openOn(seattleMap);
+        mapClickPoint = seattle.latlng;
     }
     seattleMap.on('click', onMapClick);
 
-    function newBusiness() {
+    // This is just a feature collection
+    let newBusinesses = {
+        type: 'FeatureCollection',
+        features: [],
+    };
+
+    function newBusiness(business) {
         document.querySelector('.add-point').addEventListener('click', () => {
-            let newPoint = L.circleMarker(getLatLng(), {
-                color: 'red',
-                fillColor: '#f03',
-                fillOpacity: 0.5,
-                radius: 500
+            const newFeature = {            // Create a feature... what goes in here would be like the type and properties shit
+                "type":"Feature",
+                "properties": {
+                    "name": business['business-name'],
+                    "bizType": business['business-type'],
+                    "owner": business['owner'],
+                    "startYear": business['start'],
+                    "endYear": business['end'],
+                    "address": business['address'],
+                    "history": business['history'],
+                    },
+                // "geometry": business['geometry'],
+            };
+            // console.log(newFeature) How to fix newFeature?
+            seattleMap.newBusinessesLayer.addData(newFeature);   // Add newFeature to newBusinesees layer
+            newBusinesses.features.push(newFeature);           // Add newFewature to the newBusinessesFeatureCollection
+            saveNewBusinesses();
+            // {
+            //     const content = getFormContent();
+            //     const treeId = app.currentTree.properties['id'];
+            //     saveNote(treeId, content, app, onNotesSaveSuccess);
+            // };
+
+            let newPoint = L.circleMarker(mapClickPoint, {
+                stroke: null,
+                color: "blue",
+                fillOpacity: 0.7,
+                radius: 5,
             }).addTo(seattleMap);
-            })
+            });
         }
     seattleMap.on('click', newBusiness);
 
@@ -97,6 +128,7 @@ function makeFtFeature(filipinotown) {
     return ftInfo;
 }
 
+
 function showFtOnMap(ftToShow, seattleMap){
     if (seattleMap.seattleLayers !== undefined) {
         seattleMap.removeLayer(seattleMap.seattleLayers);
@@ -126,7 +158,7 @@ seattleMap.seattleLayers = L.geoJSON(ftFeatureCollection, {
 
 export {
     initializeSeattleMap,
-    showFtOnMap
+    showFtOnMap,
 };
 
 window.makeFtFeature = makeFtFeature;

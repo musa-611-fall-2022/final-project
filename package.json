@@ -15,5 +15,8 @@
     "jest-puppeteer": "^6.1.1",
     "stylelint": "^14.14.1",
     "stylelint-config-standard": "^29.0.0"
+  },
+  "dependencies": {
+    "firebase": "^9.14.0"
   }
 }

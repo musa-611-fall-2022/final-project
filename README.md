@@ -1,0 +1,4 @@
+- name
+- how to run the app
+- presentation is 7 minutes
+- include summary of what is in the PRD
