@@ -6,7 +6,6 @@ Main server-side script in Node.js
 @date: 12/07/2022
 
 ======================================================= */
-
 const path = require('path');
 
 // Use express as server side app
@@ -24,14 +23,12 @@ let pool = new Pool({
 });
 
 app
-  // Render main HTML
   .use(express.static(path.join(__dirname, 'site')))
   .set('views', path.join(__dirname, 'site'))
   .set('view engine', 'ejs')
   .get('/', (req, res) => {
     res.render('index');
   })
-  // Query
   .get('/test-query', async(req, res) => {
     try {
       const client = await pool.connect();
