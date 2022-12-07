@@ -12,9 +12,9 @@ function fetchData() {
       //for loop that cleans the dataset
       for (const element of dataset.data){
         if (element['lat'] !== "NA" && element['lat'] !== undefined && element['lat'] !== ''){
-          element.parsedInterval = Date.parse(element["interval15"]);
-          //make new column called simpleInterval from 0-960 for each interval
-         //element.parsedInterval960 = element['simpleInterval']
+          //old, uses that neat date parse
+          //element.parsedInterval = Date.parse(element["interval15"]);
+          element.interval = element['interval']
           cleandata.push(element);
         }
       }
@@ -24,10 +24,10 @@ function fetchData() {
       const dataDic = {};
       for (let i = 0; i < cleandata.length; i++){
         const cleanElement = cleandata[i];
-        if (!dataDic[cleanElement.parsedInterval]){
-          dataDic[cleanElement.parsedInterval] = [i];
+        if (!dataDic[cleanElement.interval]){
+          dataDic[cleanElement.interval] = [i];
         } else {
-          dataDic[cleanElement.parsedInterval].push(i);
+          dataDic[cleanElement.interval].push(i);
         }
       }
       window.dataDic = dataDic;
@@ -46,16 +46,16 @@ let minScroll = 0;
 let maxScroll = 100;
 let minInt = 0;
 let maxInt = 960;
-let minMs = 1666843200000;
-let maxMs = 1667707200000;
+//let minMs = 1666843200000;
+//let maxMs = 1667707200000;
 let proportion = (maxMs - minMs)/(maxScroll-minScroll);
 let proportion2 = (maxInt - minInt)/(maxScroll-minScroll);
 
-function scrollToDate(scrolled){
+/*function scrollToDate(scrolled){
   return Math.floor(minMs + (proportion * (scrolled - minScroll)));
-}
+}*/
 
-function scrollToDate2(scrolled){
+function scrollToInt(scrolled){
   return Math.floor(minInt + (proportion2 * (scrolled - minScroll)));
 }
 
@@ -64,12 +64,12 @@ function progressBarScroll() {
         height = document.documentElement.scrollHeight - document.documentElement.clientHeight,
         scrolled = (winScroll / height) * 100;
     document.getElementById("progressBar").style.width = scrolled + "%";
-    let scrollMs = scrollToDate(scrolled);
+    let scrollInt = scrollToInt(scrolled);
     console.log("you have scrolled " + scrolled + '%');
-    console.log("The ms you are on is " + scrollMs);
+    console.log("The interal you are on is " + scrollInt);
     //if (window.dataDic[scrollSimple]){
-    if (window.dataDic[scrollMs]){
-      let indicesToAdd = window.dataDic[scrollMs];
+    if (window.dataDic[scrollInt]){
+      let indicesToAdd = window.dataDic[scrollInt];
       for (const index of indicesToAdd){
         addToMap(window.dataset[index]);
       }
