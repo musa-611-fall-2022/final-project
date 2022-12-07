@@ -1,6 +1,6 @@
 {
   "extends": ["eslint:recommended"],
-  "ignorePatterns": ["site/data/*.js"],
+  "ignorePatterns": ["site/data/*.js", "index.js"],
   "parserOptions": {
     "ecmaVersion": "latest"
   },

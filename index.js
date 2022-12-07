@@ -1,10 +1,20 @@
-const express = require('express');
-const { Pool } = require('pg');
+/* =====================================================
+
+Main server-side script in Node.js
+
+@author: Jie Li
+@date: 12/07/2022
+
+======================================================= */
+
 const path = require('path');
 
-const app = express();
+// Use express as server side app
+const express = require('express');
 const port = process.env.PORT || 5000;
 
+// Initiate client to connect with online psql db
+const { Pool } = require('pg');
 let pool = new Pool({
   connectionString: process.env.DATABASE_URL,
   ssl: {
@@ -12,13 +22,15 @@ let pool = new Pool({
   },
 });
 
-app
+express()
+  // Render main HTML
   .use(express.static(path.join(__dirname, 'site')))
   .set('views', path.join(__dirname, 'site'))
   .set('view engine', 'ejs')
   .get('/', (req, res) => {
     res.render('index');
   })
+  // Query data
   .get('/test-query', async(req, res) => {
     try {
       const client = await pool.connect();
