@@ -38,7 +38,7 @@ const slides = [
   {
     title: 'Working',
     content: `
-      <img src="../data/Photos/FieldnotesHuongVuong.jpg" />
+      <img class="image" src="data/Photos/FieldnotesHuongVuong.jpg" />
     `,
     era: 'Working',
     showpopups: true,

@@ -109,3 +109,4 @@ document.addEventListener('scroll', calcCurrentSlideIndex);
 initSlides();
 syncMapToCurrentSlide();
 loadLifeData();
+window.eastasiancluster = eastasiancluster

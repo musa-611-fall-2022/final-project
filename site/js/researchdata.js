@@ -10,26 +10,32 @@ function filterResearchData(data) {
   const cat4 = []
   // iterate over data
   if(data.col.field == cat1) {
+    return{
+      'type':
+    }
     cat1.append();
   } else if(data.col.field == cat2){
     cat2.append();
   } else if(data.col.field == cat3){
     cat3.append()
   } else if(data.col.field == cat4){
-    
+
   }
-  return cate
 }
 
-function filterResearchData() {
-  return{}
+const clusterTypeColors = {
+  "Low Frequency": "blue",
 }
 
 function loadResearchData(currentSlideIndex) {
   layerGroup.clearLayers(); 
   if(currentSlideIndex == 3) {
     L.geoJSON(eastasiancluster, {
-      style: {fill: null, color: 'black'},
+      style: (feature) => {
+        const ct = '...'; //<-- cluster type
+        const color = clusterTypeColors[ct];
+        return {fill: null, color: 'black'}
+      },
     }).addTo(layerGroup);
     };
   else if(currentSlideIndex == 4) {
@@ -44,3 +50,6 @@ function loadResearchData(currentSlideIndex) {
   }
 }
 
+export{
+
+}
