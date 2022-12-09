@@ -16,6 +16,20 @@ CSS for complex modules, see other files
   --primary-reg: #ef8872;
   --primary-faded: #fec7ba;
   --highlight-reg: #fdd310;
+  --light-gray: #cccccc;
+  --nav-height: 6vh;
+  --phone-ht-reduction: 10vh; /* On phones height of main body should be reduced */
+  --main-padding: 2rem; /* padding outside of the entire page */
+}
+
+@media only screen and (max-width: 500px) {
+  :root {
+    --main-padding: 1rem;
+  }
+}
+
+* {
+  box-sizing: border-box;
 }
 
 body {
@@ -28,12 +42,12 @@ body {
 
 nav {
   background-color: var(--hero-reg);
-  width: calc(100% - 4rem); /* If width is 100%, padding will add width */
-  height: 6vh;
-  padding: 0.5rem 2rem;
+  width: 100%; /* If width is 100%, padding will add width */
+  height: var(--nav-height);
+  padding: 0.5rem var(--main-padding);
   display: flex;
   justify-content: space-between;
-  align-items: baseline;
+  align-items: center;
   z-index: 2;
   color: white;
 }
@@ -45,8 +59,8 @@ nav * {
 .nav-left {
   display: flex;
   justify-content: flex-start;
-  align-items: baseline;
-  gap: 0.5rem;
+  align-items: center;
+  gap: 1rem;
 }
 
 .nav-title {
@@ -54,7 +68,7 @@ nav * {
 }
 
 .nav-phila-icon {
-  height: 5vh;
+  height: 4vh;
 }
 
 .nav-right {
@@ -72,12 +86,53 @@ nav * {
 
 @media only screen and (max-width: 768px) {
   .nav-subtitle {
-    font-size: 0.8rem;
+    display: none;
   }
 }
+
+/* -------- Main section -------- */
+
+/* -----
+Main section is 100% width and the height is 100vh minus navbar
+Main section is a flexbox containing two columns of panels
+On larger screens the columns should be spread out left and right
+On smaller screens the columns should be stacked vertically
+------ */
 
 .main-section {
   background-color: var(--primary-faded);
   width: 100%;
-  height: 80vh;
+  height: calc(100vh - var(--nav-height));
+  display: flex;
+  justify-content: space-between;
+  padding: var(--main-padding);
+  gap: 1rem;
+}
+
+@media only screen and (max-width: 1200px) {
+  .main-section {
+    height: calc(100vh - var(--phone-ht-reduction) - var(--nav-height));
+    justify-content: flex-start;
+    flex-direction: column;
+  }
+}
+
+/* Column is at least 25% of screen, preferrably 20rem,
+and when screen is smaller than 20rem, go for 100% */
+
+.column {
+  width: clamp(25%, 20rem, 100%);
+  display: flex;
+  gap: 1rem;
+  flex-direction: column;
+}
+
+/* Main panels */
+
+.panel {
+  height: 2rem;
+  width: 100%;
+  background-color: white;
+  border: 1px solid var(--light-gray);
+  border-radius: 0.25rem;
 }
