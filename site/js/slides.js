@@ -2,12 +2,12 @@
 
 const slides = [
   {
-    title: "Mjumbe's Personal Journey",
+    title: "Bike to Hike",
     content: `
       Here we present a snapshot of Mjumbe Poe's life told geospatially.
     `,
-    era: null,
-    bounds: [[-75, -180], [75, 180]],
+    era: 'intro',
+    bounds: [[39.999, -75.409], [40.007, -74.94]],
   },
 
   {
@@ -17,7 +17,7 @@ const slides = [
       **San Jose**, then **Santa Cruz**, briefly in **Oceanside**, and finally
       in **Riverside**.
     `,
-    era: 'early life',
+    era: 'br1-1',
     showpopups: true,
   },
 
@@ -29,7 +29,7 @@ const slides = [
       neighborhood, and Mjumbe attended **J.R. Masterman** for middle and high
       school.
     `,
-    era: 'formative',
+    era: 'br1-3',
     showpopups: true,
   },
 
@@ -42,56 +42,7 @@ const slides = [
       for a few years at the University of Pennsylvania, making tools for
       modeling and simulation in the social sciences.
     `,
-    era: 'college',
-    showpopups: true,
-  },
-
-  {
-    title: 'Code for America',
-    content: `
-      Mjumbe was a Code for America fellow in 2011, living and working primarily
-      from **Oakland, CA**. He worked on projects with the cities of Philadelphia
-      and Seattle.
-    `,
-    era: 'cfa',
-    showpopups: true,
-  },
-
-  {
-    title: 'OpenPlans',
-    content: `
-      After Code for America, Mjumbe went to work for OpenPlans, a NYC-based
-      non-profit making tools to help citizens get involved in the urban
-      planning process. He would usually work remotely from **Independents Hall**,
-      making occasional trips to the NYC office from his home in **Yorktown** via
-      the **Temple University train station**.
-    `,
-    era: 'openplans',
-    showpopups: true,
-  },
-
-  {
-    title: 'City of Philadelphia',
-    content: `
-      Mjumbe then went to work for the **City of Philadelphia** in the Office of
-      Open Data and Digital Transformation. During this period he lived near
-      Temple University in the **Hartranft** neighborhood.
-    `,
-    era: 'city of phila',
-    showpopups: true,
-  },
-
-  {
-    title: 'Stepwise',
-    content: `
-      Mjumbe left the city of Philadelphia to work on a startup called Stepwise
-      with a former coworker and friend. They made tools to help investors get
-      a fuller picture of potential investment properties. They would often work
-      out of the **First Round Capital** offices. For a time Mjumbe lived in the
-      **Woodland Terrace** neighborhood, and later in an apartment overlooking
-      **Malcolm X Park**.
-    `,
-    era: 'stepwise',
+    era: 'br1-4',
     showpopups: true,
   },
 
@@ -105,6 +56,56 @@ const slides = [
     era: 'inat',
     showpopups: true,
   },
+
+  {
+    title: 'Code for America',
+    content: `
+      Mjumbe was a Code for America fellow in 2011, living and working primarily
+      from **Oakland, CA**. He worked on projects with the cities of Philadelphia
+      and Seattle.
+    `,
+    era: 'br2-1',
+    showpopups: true,
+  },
+
+  {
+    title: 'OpenPlans',
+    content: `
+      After Code for America, Mjumbe went to work for OpenPlans, a NYC-based
+      non-profit making tools to help citizens get involved in the urban
+      planning process. He would usually work remotely from **Independents Hall**,
+      making occasional trips to the NYC office from his home in **Yorktown** via
+      the **Temple University train station**.
+    `,
+    era: 'br2-3',
+    showpopups: true,
+  },
+
+  {
+    title: 'City of Philadelphia',
+    content: `
+      Mjumbe then went to work for the **City of Philadelphia** in the Office of
+      Open Data and Digital Transformation. During this period he lived near
+      Temple University in the **Hartranft** neighborhood.
+    `,
+    era: 'br2-4',
+    showpopups: true,
+  },
+
+  {
+    title: 'Stepwise',
+    content: `
+      Mjumbe left the city of Philadelphia to work on a startup called Stepwise
+      with a former coworker and friend. They made tools to help investors get
+      a fuller picture of potential investment properties. They would often work
+      out of the **First Round Capital** offices. For a time Mjumbe lived in the
+      **Woodland Terrace** neighborhood, and later in an apartment overlooking
+      **Malcolm X Park**.
+    `,
+    era: 'br2-5',
+    showpopups: true,
+  },
+
 
   {
     title: 'Travels',
