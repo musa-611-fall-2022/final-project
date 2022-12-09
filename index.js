@@ -33,8 +33,9 @@ app
       const result = await client.query(
         `SELECT trip_start_time, COUNT (trip_start_time) FROM trips WHERE primary_mode = ${req.params.mode} GROUP BY trip_start_time`
       );
-      const results = { 'results': (result) ? result.rows : null};
+      const results = { 'results': (result) ? result.rows : null };
       res.send(results);
+      client.release();
     } catch(err) {
       console.error(err);
       res.send('Error ' + err);
