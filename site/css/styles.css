@@ -42,6 +42,17 @@ body {
   padding: 0;
 }
 
+button {
+  border: var(--light-border);
+  cursor: pointer;
+  background-color: var(--fade-gray);
+  border-radius: 0.2rem;
+}
+
+button:hover {
+  background-color: var(--light-gray);
+}
+
 /* ====== Navigation bar ====== */
 
 nav {
@@ -169,42 +180,6 @@ and when screen is smaller than 20rem, go for 100% */
   font-size: 1.1rem;
   line-height: 0.9;
   margin: 0;
-}
-
-.dropdown-button {
-  width: 100%;
-  border: var(--light-border);
-  cursor: pointer;
-  background-color: var(--fade-gray);
-  height: 1.5rem;
-  border-radius: 0.2rem;
-}
-
-.dropdown-button:hover {
-  background-color: var(--light-gray);
-}
-
-.dropdown-content {
-  position: relative;
-  z-index: 10000;
-  background-color: white;
-  padding: 0 0.5rem;
-  border: var(--light-border);
-  top: 0.3rem;
-  box-sizing: border-box;
-  overflow: hidden;
-  display: none;
-  transition: all 0.3s ease-in-out;
-  max-height: 0;
-  box-shadow: var(--shadow-layer-2);
-}
-
-@media only screen and (min-width: 37rem) {
-  .dropdown-content {
-    left: 20rem;
-    top: -1.5rem;
-    width: 15rem;
-  }
 }
 
 .toggle-display-panel {

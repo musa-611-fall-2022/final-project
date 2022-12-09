@@ -22,6 +22,7 @@
 
     <!-- Custom style sheets -->
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/widgets.css">
   </head>
 
   <body>
@@ -45,17 +46,35 @@
     <!-- Main section -->
     <section class="main-section">
 
+      <!-- Left (top) column -->
       <section class="column">
+
+        <!-- Toggle display panel -->
         <div class="panel toggle-display-panel">
-          <h2 class="panel-title">Display on the Map</h2>
+          <h2 class="panel-title">Toggle display</h2>
+          <div class="cb-group">
+            <label>
+              <input type="checkbox" class="cb-invisible" value="departure">
+              <button class="cb-option">Option 1</button>
+            </label>
+            <label>
+              <input type="checkbox" class="cb-invisible" value="departure">
+              <button class="cb-option">Option 1</button>
+            </label>
+          </div>
           <div class="dropdown">
             <button class="dropdown-button">Select a variable</button>
             <div class="dropdown-content">some content</div>
           </div>
         </div>
-        <div class="panel"></div>
+
+        <!-- Filters panel -->
+        <div class="panel">
+          <h2 class="panel-title">Filter</h2>
+        </div>
       </section>
 
+      <!-- Right (bottom) column -->
       <section class="column">
         <div class="panel"></div>
         <div class="panel"></div>

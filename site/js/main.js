@@ -22,6 +22,7 @@ and is a coordinator of all different modules
 
 import { initMap, addBlockGroups } from "./display-map.js";
 
+// Create map
 const map = initMap();
 
 addBlockGroups(map);

@@ -2,7 +2,7 @@
 This script contains functions dealing with the map
 =============================================================== */
 
-// Function to color code the block group the polygons
+// Sets block group layer styles
 function colorCoding(feature) {
   return {
     fillColor: "#c8b7d9",
@@ -13,6 +13,7 @@ function colorCoding(feature) {
   }
 }
 
+// Initializes map with empty block group layer on screen, and returns map obj
 function initMap() {
   const map = L.map('map', { maxZoom: 22, preferCanvas: true, zoomControl: false }).setView([39.98, -75.16], 11.5);
 
@@ -43,6 +44,7 @@ function initMap() {
   return map;
 }
 
+// Fetches info to display and adds data to block group layer
 async function addBlockGroups(map) {
   try {
     const resp = await fetch('./data/census-block-groups.geojson');
