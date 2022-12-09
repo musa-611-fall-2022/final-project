@@ -1,10 +1,3 @@
-const testEl = document.querySelector("#test");
-console.log(testEl);
-
-testEl.addEventListener("click", ( ) => {
-  alert("Test");
-});
-
 fetch(`https://mobiladelphia.herokuapp.com/test-query/3`)
 .then(resp => {
   if(resp.status === 200) {

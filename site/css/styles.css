@@ -1,3 +1,83 @@
+/* ===========================================
+Overall CSS settings and
+light CSS settings for simple modules
+
+CSS for complex modules, see other files
+
+@auther: Jie Li
+@Date: 12/07/2022
+============================================== */
+
+/* --- Overall settings ---- */
+
+:root {
+  --hero-reg: #353795;
+  --hero-faded: #c8b7d9;
+  --primary-reg: #ef8872;
+  --primary-faded: #fec7ba;
+  --highlight-reg: #fdd310;
+}
+
 body {
-  font-size: 2rem;
+  font-family: "JetBrains Mono", Hack, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* ====== Navigation bar ====== */
+
+nav {
+  background-color: var(--hero-reg);
+  width: calc(100% - 4rem); /* If width is 100%, padding will add width */
+  height: 6vh;
+  padding: 0.5rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  z-index: 2;
+  color: white;
+}
+
+nav * {
+  cursor: pointer;
+}
+
+.nav-left {
+  display: flex;
+  justify-content: flex-start;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+
+.nav-title {
+  line-height: 0.7;
+}
+
+.nav-phila-icon {
+  height: 5vh;
+}
+
+.nav-right {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.nav-subtitle {
+  font-size: 1rem;
+}
+
+/* ------ Nav bar settings on smaller screens ------ */
+
+@media only screen and (max-width: 768px) {
+  .nav-subtitle {
+    font-size: 0.8rem;
+  }
+}
+
+.main-section {
+  background-color: var(--primary-faded);
+  width: 100%;
+  height: 80vh;
 }
