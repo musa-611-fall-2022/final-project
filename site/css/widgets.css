@@ -37,7 +37,46 @@
   gap: 0.5rem;
 }
 
+.cb-group > * {
+  flex: 1;
+}
+
 .cb-invisible {
   pointer-events: none;
   display: none;
+  float: left;
+}
+
+.cb-option {
+  width: 100%;
+  font-size: 0.8rem;
+}
+
+.cb-option > button {
+  pointer-events: none;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.cb-option .material-symbols-outlined {
+  font-size: 1.1rem;
+  color: var(--this-color);
+}
+
+.toggle-display-panel {
+  z-index: 3;
+  height: 6.8rem;
+}
+
+.cb-invisible:checked + .cb-option > button {
+  background-color: var(--hero-reg);
+  border-color: var(--hero-reg);
+  color: white;
+}
+
+.cb-invisible:checked + .cb-option .material-symbols-outlined {
+  --hero-reg: white; /* Make all colors white */
+  --primary-reg: white;
 }

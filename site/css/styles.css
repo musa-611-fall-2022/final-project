@@ -181,8 +181,3 @@ and when screen is smaller than 20rem, go for 100% */
   line-height: 0.9;
   margin: 0;
 }
-
-.toggle-display-panel {
-  z-index: 3;
-  height: 5rem;
-}

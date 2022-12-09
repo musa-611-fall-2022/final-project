@@ -52,16 +52,30 @@
         <!-- Toggle display panel -->
         <div class="panel toggle-display-panel">
           <h2 class="panel-title">Toggle display</h2>
+
+          <!-- Select by departure or arrival-->
           <div class="cb-group">
             <label>
-              <input type="checkbox" class="cb-invisible" value="departure">
-              <button class="cb-option">Option 1</button>
+              <input type="checkbox" class="cb-invisible" value="origin_geoid">
+              <div class="cb-option">
+                <button>
+                  <span class="material-symbols-outlined" style="--this-color: var(--hero-reg)">logout</span>
+                  <span>Departures</span>
+                </button>
+              </div>
             </label>
             <label>
-              <input type="checkbox" class="cb-invisible" value="departure">
-              <button class="cb-option">Option 1</button>
+              <input type="checkbox" class="cb-invisible" value="destination_geoid">
+              <div class="cb-option">
+                <button>
+                  <span class="material-symbols-outlined" style="--this-color: var(--primary-reg)">login</span> 
+                  <span>Arrivals</span>
+                </button>
+              </div>
             </label>
           </div>
+
+          <!-- Dropdown select variable to display -->
           <div class="dropdown">
             <button class="dropdown-button">Select a variable</button>
             <div class="dropdown-content">some content</div>
