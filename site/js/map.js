@@ -60,7 +60,6 @@ function initializeSeattleMap() {
     }
     seattleMap.on('click', onMapClick);
 
-    // This is just a feature collection
     let newBusinesses = {
         type: 'FeatureCollection',
         features: [],
@@ -71,13 +70,13 @@ function initializeSeattleMap() {
     function newBusiness() {
         document.querySelector('.add-point').addEventListener('click', () => {
             let businessName = document.getElementById('business-name').value;
-            let businessType = document.getElementById('business-type').innerHTML;
-            let businessOwner = document.getElementById('owner').innerHTML;
-            let businessStart = document.getElementById('start').innerHTML;
-            let businessEnd = document.getElementById('end').innerHTML;
-            let businessAddress = document.getElementById('address').innerHTML;
-            let businessHistory = document.getElementById('history').innerHTML;
-            const newFeature = {    // Create a feature... what goes in here would be like the type and properties
+            let businessType = document.getElementById('business-type').value;
+            let businessOwner = document.getElementById('owner').value;
+            let businessStart = document.getElementById('start').value;
+            let businessEnd = document.getElementById('end').value;
+            let businessAddress = document.getElementById('address').value;
+            let businessHistory = document.getElementById('history').value;
+            const newFeature = {
                 "type":"Feature",
                 "properties": {
                     "name": businessName,
@@ -92,28 +91,35 @@ function initializeSeattleMap() {
             };
             console.log(newFeature);
             // seattleMap.newBusinessesLayer.addData(newFeature);   // Add newFeature to newBusinesees layer
-            // newBusinesses.features.push(newFeature);           // Add newFewature to the newBusinessesFeatureCollection
+            newBusinesses.features.push(newFeature);           // Add newFewature to the newBusinessesFeatureCollection
+            console.log(newBusinesses);
             // saveNewBusinesses();
             // // {
             // //     const content = getFormContent();
             // //     const treeId = app.currentTree.properties['id'];
             // //     saveNote(treeId, content, app, onNotesSaveSuccess);
             // // };
-
             let newPoint = L.circleMarker(mapClickPoint, {
                 stroke: null,
                 color: "blue",
                 fillOpacity: 0.7,
                 radius: 5,
-            }).addTo(seattleMap);
-            });
+            })
+            .bindPopup(() => `
+            <h2>${newFeature.properties['name']}</h2>
+            <h3>Business Type: ${newFeature.properties['bizType']}</h3>
+            <h3>Address: ${newFeature.properties['address']}</h3>
+            <h3>Opening Year: ${newFeature.properties['startYear']}</h3>
+            `).openPopup()
+            .addTo(seattleMap);
+        });
         }
     seattleMap.on('click', newBusiness);
 
-    function onPopupOpen() {
-        document.querySelector('.newbiz').addEventListener('click', () => { alert('I clicked here.') });
-    }
-    seattleMap.on('popupopen', onPopupOpen);
+    // function onPopupOpen() {
+    //     document.querySelector('.newbiz').addEventListener('click', () => { alert('I clicked here.') });
+    // }
+    // seattleMap.on('popupopen', onPopupOpen);
 
     return seattleMap;
 }
