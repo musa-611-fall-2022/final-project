@@ -1,6 +1,7 @@
 import { map } from './main.js';
 
 function onPopupCloseClick(popupContainer) {
+    popupContainer.innerHTML = '';
     popupContainer.classList.remove("popup-container-up");
     popupContainer.classList.add("popup-container");
     map.removeLayer(map.highlightLayer);
@@ -13,11 +14,13 @@ function buildPopup(feature) {
     if (feature.properties.pointType === 'obs') {
         html = `
             <div class="popup">
-                <span class="common-name">${feature.properties.comName}</span>
-                <span class="scientific-name">${feature.properties.sciName}</span>
-                <span class="num-observed">Number Observed: ${feature.properties.howMany}</span>
-                <span class="obs-date">Observation Date & Time: ${feature.properties.obsDt}</span>
-                <a href="https://ebird.org/species/${feature.properties.speciesCode}" target="_blank" class="ebird-link">Learn More at eBird</a>
+                <div class="popup-info">
+                    <span class="common-name">${feature.properties.comName}</span>
+                    <span class="scientific-name">${feature.properties.sciName}</span>
+                    <span class="num-observed">Number Observed: ${feature.properties.howMany}</span>
+                    <span class="obs-date">Observation Date & Time: ${feature.properties.obsDt}</span>
+                    <a href="https://ebird.org/species/${feature.properties.speciesCode}" target="_blank" class="ebird-link">Learn More at eBird</a>
+                </div>
                 <button type="button" class="popup-button">Close</button>
             </div>
         `;

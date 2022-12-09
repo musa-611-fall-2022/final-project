@@ -2,18 +2,22 @@ html {
     font-family: Raleway, sans-serif;
 }
 
+
 body {
     display: flex;
     flex-direction: column;
-    height: 100vh;
     margin: 0;
     padding: 0;
+    height: 100%;
+    box-sizing: border-box;
 }
+
 
 .content-container {
     display: flex;
     flex-direction: column;
-    height: 100%;
+    height: 100vh;
+    box-sizing: border-box;
 }
 
 .map-container {
@@ -27,19 +31,23 @@ body {
 .input-container {
     display: flex;
     align-items: flex-start;
-    height: 30vh;
-    overflow: hidden;
+    height: 20%;
+    box-sizing: border-box;
 }
 
 .filter-container {
     display: flex;
     flex-direction: column;
     height: 100%;
+    overflow: hidden;
 }
 
 .bird-list-container {
     overflow-y: scroll;
-    margin: 0.5rem;
+    margin-top: 0.5rem;
+    margin-left: 0.5rem;
+    margin-bottom: 0;
+    padding-bottom: 0;
 }
 
 .label {
@@ -52,15 +60,22 @@ body {
 }
 
 .popup-container {
-    height: 0rem;
+    height: 0;
+    width: 0;
 }
 
 .popup-container-up {
-    height: 10rem;
     background-color: lightblue;
+    display: flex;
+    flex-direction: column;
 }
 
 .popup {
+    display: flex;
+    flex-direction: row;
+}
+
+.popup-info {
     display: flex;
     flex-direction: column;
 }
@@ -99,8 +114,10 @@ body {
 }
 
 .title-container {
-    padding: 0.5rem;
-    padding-top: 0.2;
+    padding-left: 0.5rem;
+    padding-top: 0.2rem;
+    padding-right: 4rem;
+    padding-bottom: 1rem;
     color: white;
     background-color: blueviolet;
     height: 100%;
@@ -110,4 +127,10 @@ body {
 
 h1 {
     margin-block-start: 0;
+    margin-block-end: 0;
+}
+
+.img-size {
+    max-width: 50px;
+    margin-top: 0.5rem;
 }
