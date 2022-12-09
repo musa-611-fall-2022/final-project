@@ -66,30 +66,39 @@ function initializeSeattleMap() {
         features: [],
     };
 
-    function newBusiness(business) {
+// get element by ID and put it down in here using innerHTML
+// update geojson from later with existing data, clear the old one and show the new one
+    function newBusiness() {
         document.querySelector('.add-point').addEventListener('click', () => {
-            const newFeature = {            // Create a feature... what goes in here would be like the type and properties shit
+            let businessName = document.getElementById('business-name').value;
+            let businessType = document.getElementById('business-type').innerHTML;
+            let businessOwner = document.getElementById('owner').innerHTML;
+            let businessStart = document.getElementById('start').innerHTML;
+            let businessEnd = document.getElementById('end').innerHTML;
+            let businessAddress = document.getElementById('address').innerHTML;
+            let businessHistory = document.getElementById('history').innerHTML;
+            const newFeature = {    // Create a feature... what goes in here would be like the type and properties
                 "type":"Feature",
                 "properties": {
-                    "name": business['business-name'],
-                    "bizType": business['business-type'],
-                    "owner": business['owner'],
-                    "startYear": business['start'],
-                    "endYear": business['end'],
-                    "address": business['address'],
-                    "history": business['history'],
+                    "name": businessName,
+                    "bizType": businessType,
+                    "owner": businessOwner,
+                    "startYear": businessStart,
+                    "endYear": businessEnd,
+                    "address": businessAddress,
+                    "history": businessHistory,
                     },
                 // "geometry": business['geometry'],
             };
-            // console.log(newFeature) How to fix newFeature?
-            seattleMap.newBusinessesLayer.addData(newFeature);   // Add newFeature to newBusinesees layer
-            newBusinesses.features.push(newFeature);           // Add newFewature to the newBusinessesFeatureCollection
-            saveNewBusinesses();
-            // {
-            //     const content = getFormContent();
-            //     const treeId = app.currentTree.properties['id'];
-            //     saveNote(treeId, content, app, onNotesSaveSuccess);
-            // };
+            console.log(newFeature);
+            // seattleMap.newBusinessesLayer.addData(newFeature);   // Add newFeature to newBusinesees layer
+            // newBusinesses.features.push(newFeature);           // Add newFewature to the newBusinessesFeatureCollection
+            // saveNewBusinesses();
+            // // {
+            // //     const content = getFormContent();
+            // //     const treeId = app.currentTree.properties['id'];
+            // //     saveNote(treeId, content, app, onNotesSaveSuccess);
+            // // };
 
             let newPoint = L.circleMarker(mapClickPoint, {
                 stroke: null,
@@ -127,7 +136,6 @@ function makeFtFeature(filipinotown) {
     };
     return ftInfo;
 }
-
 
 function showFtOnMap(ftToShow, seattleMap){
     if (seattleMap.seattleLayers !== undefined) {
