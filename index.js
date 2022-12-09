@@ -31,7 +31,7 @@ app
     try {
       const client = await pool.connect();
       const result = await client.query(
-        `${query}`
+        `${req.params.query}`
       );
       const results = { 'results': (result) ? result.rows : null };
       res.send(results);
