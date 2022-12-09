@@ -27,11 +27,11 @@ app
   .get('/', (req, res) => {
     res.sendFile('index.html');
   })
-  .get('/test-query/:mode', async(req, res) => {
+  .get('/test-query/:query', async(req, res) => {
     try {
       const client = await pool.connect();
       const result = await client.query(
-        `SELECT trip_start_time, COUNT (trip_start_time) FROM trips WHERE primary_mode = ${req.params.mode} GROUP BY trip_start_time`
+        `${query}`
       );
       const results = { 'results': (result) ? result.rows : null };
       res.send(results);
