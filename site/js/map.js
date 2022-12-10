@@ -1,24 +1,14 @@
-/*
- * @Author: miaomiao612 dddoctorr612@gmail.com
- * @Date: 2022-11-11 03:00:55
- * @LastEditors: miaomiao612 dddoctorr612@gmail.com
- * @LastEditTime: 2022-12-07 05:58:33
- * @FilePath: \voter-canvassing\site\js\map.js
- * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
- */
-import{ csvtojson } from './managedata.js';
-import{ ShowVotersList } from './list.js';
-
-function onvoterClicked(evt) {
+//click on a facility on a map, and then sends the data to other parts of the code to be used as needed.
+function onFClicked(evt) {
     console.log(evt);
-    const voter = evt.layer.feature;
+    const Facility = evt.layer.feature;
 
-    const voterSelectedEvent = new CustomEvent('voter-selected', { detail: { voter } });
-    window.dispatchEvent(voterSelectedEvent);
+    const F_SelectedEvent = new CustomEvent('facilityselected', { detail: { Facility } });
+    window.dispatchEvent(F_SelectedEvent);
 }
 
 function initMap() {
-    const map = L.map('voterMap', { maxZoom: 22, preferCanvas: true }).setView([39.95, -75.16], 13);
+    const map = L.map('map', { maxZoom: 22, preferCanvas: true }).setView([39.95, -75.16], 13);
 
     const mapboxAccount = 'mapbox';
     const mapboxStyle = 'light-v10';
@@ -27,95 +17,51 @@ function initMap() {
         maxZoom: 19,
         attribution: '© <a href="https://www.mapbox.com/about/maps/">Mapbox</a> © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> <strong><a href="https://www.mapbox.com/map-feedback/" target="_blank">Improve this map</a></strong>',
     }).addTo(map);
-    map.treeLayer = L.geoJSON(null, {
-        pointToLayer: (feature, latlng) => L.circleMarker(latlng),
-        style: {
-        fillColor: '#83bf15',
-        fillOpacity: 0.3,
+
+    map.FLayer = L.geoJSON(null, {
+    pointToLayer: (feature, latlng) => L.circleMarker(latlng),
+    style: {
+        fillColor: '#EB0000',
+        fillOpacity: 0.9,
         stroke: false,
-        },
+    },
     }).addTo(map);
 
-    map.treeLayer.addEventListener('click', onvoterClicked);
+    map.FLayer.addEventListener('click', onFClicked);
 
     map.positionLayer = L.geoJSON(null).addTo(map);
 
     return map;
 }
 
-//convert a json to a geojson-like feature
-function makevoterFeature(voter)
+
+function showFonMap(map, name)
 {
-    return {
-        "type": "Feature",
-        "id": voter['ID Number'],
-        "properties": {
-            "Last Name":voter['Last Name'],
-            "First Name": voter['First Name'],
-            "Registration Date": voter['Registration Date'],
-            "Voter Status": voter['Voter Status'],
-            "Party Code": voter['Party Code'],
+    fetch('data/Mathare.geojson')
+.then(response => {
+    // Parse the response into a JavaScript object
+    return response.json();
+})
+.then(geojson => {
+    // Save the resulting object as a variable
+    const myGeojson = geojson;
 
-        },
-        "geometry":
-        {   "type": "Point",
-            "coordinates":[voter['28'].substr(0, 18), voter['28'].substr(19, voter.length)],
-
-        },
-        };
-}
-
-//Use the function to display the voters' location on the map.
-function showVotersOnMap(votersToShow_json, voterMap) {
-    if (voterMap.voterLayer !== undefined){
-        voterMap.removeLayer(voterMap.voterLayer);
-    }
-
-    const voterFeatureCollection = {
-        "type": "FeatureCollection",
-        "features": votersToShow_json.map(makevoterFeature),//excuate one by one, convert json like data to geojson like feature
-
+    const filteredGeojson = {
+        type: 'FeatureCollection',
+        features: myGeojson.features.filter(f => f.properties.FacilityTy === name),
     };
 
-
-    voterMap.voterLayer = L.geoJSON(voterFeatureCollection, {
-        pointToLayer: (feature, latlng) => L.circleMarker(latlng),
-        style:  {
-            fillColor: '#53C131',
-            fillOpacity: 0.5,
-            radius:6,
-            stroke: true,
-            weight:0.5,
-            color:'#000000',
-        },
-        }).addTo(voterMap);
-    }
+      // Add the filtered GeoJSON points to the map as markers
+    L.geoJSON(filteredGeojson, {
+        pointToLayer: (feature, latlng) => L.marker(latlng),
+    }).addTo(map);
+})}
 
 
-//designed for the "search" buttom, use this function to search the voters by listNo. both on map and lists
-function Search (map, search, votersToShow) {
-    search.addEventListener('click', () => {
-        let votersToShow1 = votersToShow.value;
-        csvtojson(map, votersToShow1);
-        ShowVotersList(votersToShow1);
-
-    });
-
-}
-
-function updateUserPositionOn(map, pos) {
-    map.positionLayer.addData({
-      'type': 'Point',
-      'coordinates': [pos.coords.longitude, pos.coords.latitude],
-    });
-    map.setView([pos.coords.latitude, pos.coords.longitude], 18);
-  }
 
 
-export{
-        initMap,
-        showVotersOnMap,
-        Search,
-        updateUserPositionOn,
+export {
+    initMap,
+    showFonMap,
 
 };
