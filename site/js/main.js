@@ -50,9 +50,24 @@ function setupGeolocationEvent() {
 }
 
 
+  
+  function fakePosition(map) {
+    const pos={
+        "type": "Feature",
+        "geometry":
+              {   "type": "Point",
+                  "coordinates":[-1.263591, 36.858131],},
+      };
+    map.positionLayer.addData(pos);
+    map.setView([ -1.263591, 36.858131], 16);
+    const marker = new L.Marker([-1.263591, 36.858131]);
+    marker.addTo(map);
+  }
+
 
 //Execute functions
-setupGeolocationEvent();
+//setupGeolocationEvent();
+fakePosition(map);
 Search(map, search, facilities);
 
 

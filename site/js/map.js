@@ -51,32 +51,42 @@ function showFonMap(map, name)
     return response.json();
 })
 .then(geojson => {
+    if (map.geoJSONLayer !== undefined){
+        map.removeLayer(map.geoJSONLayer);
+        }
     // Save the resulting object as a variable
     const filteredGeojson = {
         type: 'FeatureCollection',
-        features: geojson.features.filter(f => f.properties.FacilityTy === name),
+        features: geojson.features.filter(f =>{
+            let fname = f.properties['Name'].toLowerCase();
+            let ftype = f.properties['FacilityTy'].toLowerCase();
+            let input = name.toLowerCase();
+            let hastext = fname.includes(input) || ftype.includes(input);
+            return hastext;
+        }),
     };
 
       // Add the filtered GeoJSON points to the map as markers
-    const geoJSONLayer=L.geoJSON(filteredGeojson, {
-        pointToLayer: (feature, latlng) => L.marker(latlng),
-        style: feature => {
-        return {
+    map.geoJSONLayer=L.geoJSON(filteredGeojson, {
+        pointToLayer: (feature, latlng) => L.circleMarker(latlng),
+        style: {
             color: '#ff0000', // Red
             fillColor: '#ff0000', // Red
             fillOpacity: 0.5,
-            radius: 10,
-        };
+            radius: 3,
         },
-    });
-    geoJSONLayer.addTo(map);
+    }).bindTooltip(layer => {
+        if(layer.feature.properties['Name'] === ''){
+            return layer.feature.properties['FacilityTy']
+        }else{
+            return layer.feature.properties['Name']
+        }})
+    .addTo(map);
     // Calculate the bounds of the added geoJSON layer
-    const bounds = geoJSONLayer.getBounds();
+    const bounds = map.geoJSONLayer.getBounds();
 
     // Set the map's center and zoom level based on the bounds of the added layer
     map.fitBounds(bounds);
-
-
 })}
 
 
