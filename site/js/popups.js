@@ -53,8 +53,8 @@ function buildRecentObsList(currentPoints) {
         let html = `
             <div class="listed-obs">
                 <span class="list-com-name">${obs.properties.comName}</span>
-                <span class="list-date">${obs.properties.obsDt}</span>
-                <span class="list-how-many">${obs.properties.howMany}</span>
+                <span class="list-date">Date & Time Seen: ${obs.properties.obsDt}</span>
+                <span class="list-how-many">Number Seen: ${obs.properties.howMany}</span>
             </div>
         `;
         birdListContainer.innerHTML += html;
