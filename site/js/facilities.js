@@ -8,3 +8,16 @@
  */
 
 
+
+let popup = document.getElementById("popUp");
+
+function onFClicked(evt) {
+    console.log(evt);
+    popup.classList.add("open-popUp");
+}
+
+
+
+export {
+    onFClicked,
+};

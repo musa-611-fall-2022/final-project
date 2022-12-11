@@ -17,7 +17,7 @@
     integrity="sha256-sA+zWATbFveLLNqWO2gtiw3HL/lh1giY/Inf1BJ0z14="
     crossorigin=""/>
     <!--my css-->
-    <link rel="stylesheet" type="text/css" href="css\style.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
 
 </head>
 
@@ -29,6 +29,14 @@
     <input type="search" id="name" placeholder="Enter a name" />
     <button id="showlocation">Search</button>
 
+    <!--popup detail info-->
+    <div class="popUp" id="popUp">
+        <img src="waterPoint.png" alt="">
+        <h2>Thank You!</h2>
+        <p>Detail Information</p>
+        <button type="button" onclick="closePopUp()">OK</button>
+    </div>
+
     <!--leaflet's js-->
     <script src="https://unpkg.com/leaflet@1.9.2/dist/leaflet.js"
     integrity="sha256-o9N1jGDZrf5tS+Ft4gbIK7mYMipq9lqpVJ91xHSyKhg="
@@ -36,7 +44,14 @@
 
     <!--my js-->
     <script type="module" src="js\main.js"></script>
+    <script>
+        let popup = document.getElementById("popUp");
 
+        function closePopUp(){
+            let popup = document.getElementById("popUp");
+            popup.classList.remove("open-popUp"); 
+        }
+    </script>
 
     </body>
 

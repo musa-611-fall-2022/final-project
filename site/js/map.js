@@ -7,13 +7,7 @@
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
 //click on a facility on a map, and then sends the data to other parts of the code to be used as needed.
-function onFClicked(evt) {
-    console.log(evt);
-    const Facility = evt.layer.feature;
-
-    const F_SelectedEvent = new CustomEvent('facilityselected', { detail: { Facility } });
-    window.dispatchEvent(F_SelectedEvent);
-}
+import { onFClicked } from './facilities.js';
 
 function initMap() {
     const map = L.map('map', { maxZoom: 22, preferCanvas: true }).setView([39.95, -75.16], 13);
@@ -35,8 +29,6 @@ function initMap() {
     },
     }).addTo(map);
 
-    map.FLayer.addEventListener('click', onFClicked);
-
     map.positionLayer = L.geoJSON(null).addTo(map);
 
     return map;
@@ -51,8 +43,8 @@ function showFonMap(map, name)
     return response.json();
 })
 .then(geojson => {
-    if (map.geoJSONLayer !== undefined){
-        map.removeLayer(map.geoJSONLayer);
+    if (map.FLayer !== undefined){
+        map.removeLayer(map.FLayer);
         }
     // Save the resulting object as a variable
     const filteredGeojson = {
@@ -67,7 +59,7 @@ function showFonMap(map, name)
     };
 
       // Add the filtered GeoJSON points to the map as markers
-    map.geoJSONLayer=L.geoJSON(filteredGeojson, {
+    map.FLayer=L.geoJSON(filteredGeojson, {
         pointToLayer: (feature, latlng) => L.circleMarker(latlng),
         style: {
             color: '#ff0000', // Red
@@ -83,10 +75,11 @@ function showFonMap(map, name)
         }})
     .addTo(map);
     // Calculate the bounds of the added geoJSON layer
-    const bounds = map.geoJSONLayer.getBounds();
+    const bounds = map.FLayer.getBounds();
 
     // Set the map's center and zoom level based on the bounds of the added layer
     map.fitBounds(bounds);
+    map.FLayer.addEventListener('click', onFClicked);
 })}
 
 

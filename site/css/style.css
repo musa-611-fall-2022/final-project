@@ -6,6 +6,46 @@ body {
     padding: 0;
 }
 
+
+.popUp{
+    width: 100%;
+    height: 0;
+    background: #fff;
+    border-radius: 6px;
+    text-align: center;
+    padding: 0 30px 30px;
+    color: #333;
+    visibility: hidden;
+    transition: transform 0.4s, bottom 0.4s;
+}
+
+.open-popUp{
+    visibility: visible;
+    height: 25%;
+}
+
+.popUp img{
+    width: 80px;
+    margin-top: 20px;
+    border-radius: 50%;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    left: 430px;
+    position: fixed;
+}
+
+
+.popUp button{
+    width: 100%;
+    margin-top: 50px;
+    padding: 10px 0;
+    background: #7388ad;
+    color: #fff;
+    border: 0;
+    font-size: 18px;
+    border-radius: 4px;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
 .map {
     height: 100%;
 }
