@@ -64,18 +64,13 @@ function showFonMap(map, name)
     map.FLayer=L.geoJSON(filteredGeojson, {
         pointToLayer: (feature, latlng) => L.circleMarker(latlng),
         style: {
-            color: '#ff0000', // Red
-            fillColor: '#ff0000', // Red
-            fillOpacity: 0.5,
-            radius: 3,
+            color: '#ad4b5a', // Red
+            Opacity: 0.8,
+            fillColor: '#ad4b5a', // Red
+            fillOpacity: 0.8,
+            radius: 5,
         },
-    }).bindTooltip(layer => {
-        if(layer.feature.properties['Name'] === ''){
-            return layer.feature.properties['FacilityTy']
-        }else{
-            return layer.feature.properties['Name']
-        }})
-    .addTo(map);
+    }).addTo(map);
     // Calculate the bounds of the added geoJSON layer
     const bounds = map.FLayer.getBounds();
 
@@ -84,13 +79,15 @@ function showFonMap(map, name)
     map.FLayer.addEventListener('click', (evt) =>{
         
         // leave only cliked point
+        if (map.pLayer !== undefined){
+            map.removeLayer(map.pLayer);
+            };
         map.pLayer = L.circleMarker(evt.latlng).addTo(map);
-        map.removeLayer(map.FLayer);
         map.FLayer.addLayer(map.pLayer);
-        map.FLayer.setStyle({
+        map.pLayer.setStyle({
             icon: "https://maps.gstatic.com/mapfiles/markers2/marker.png",
-            color: '#0000FF', 
-            fillColor: '#ff0000', // Red
+            color: '#6195ed', 
+            fillColor: '#ad4b5a', // Red
             fillOpacity: 0.5,
             radius: 5,
         });
@@ -98,7 +95,7 @@ function showFonMap(map, name)
         //popup bar
         let popup = document.getElementById("popUp");
         const facTyElement = document.getElementById('tp');
-        const facNameElement = document.getElementById('name');
+        const facNameElement = document.getElementById('nam');
         const facVillyElement = document.getElementById('villy');
         const facType = `Facility Type: ${evt.layer.feature.properties['FacilityTy']}`;
         const facName = `Facility Name: ${evt.layer.feature.properties['Name']}`;
