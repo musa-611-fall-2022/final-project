@@ -34,7 +34,7 @@ body {
 .input-container {
     display: flex;
     align-items: flex-start;
-    height: 20%;
+    height: 21%;
     box-sizing: border-box;
 }
 
@@ -69,19 +69,49 @@ body {
 }
 
 .popup-container-up {
-    background-color: lightblue;
-    display: flex;
-    flex-direction: column;
+    background-color: rgb(232, 232, 232);
 }
 
 .popup {
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
+    padding-bottom: 0.3rem;
+}
+
+.popup-button {
+    height: 100%;
 }
 
 .popup-info {
     display: flex;
     flex-direction: column;
+    padding-left: 0.3rem;
+    padding-right: 0.3rem;
+}
+
+.popup-info-box {
+    border: 2px solid black;
+    border-radius: 5px;
+    background: white;
+    display: flex;
+    flex-direction: column;
+    padding: 0.3rem;
+}
+
+.common-name {
+    font-weight: 600;
+    font-size: 2rem;
+    border-bottom: 2px solid blueviolet;
+    padding-bottom: 0;
+}
+
+.scientific-name {
+    font-weight: 300;
+    font-style: italic;
+    font-size: small;
+    margin-top: 2px; 
+    margin-bottom: 0.3rem;
 }
 
 .pressed {
@@ -119,14 +149,13 @@ body {
 
 .title-container {
     padding-left: 0.5rem;
-    padding-top: 0.2rem;
     padding-right: 4rem;
-    padding-bottom: 1rem;
     color: white;
     background-color: blueviolet;
     height: 100%;
     display: flex;
     flex-direction: column;
+    justify-content: center;
 }
 
 h1 {
@@ -137,6 +166,7 @@ h1 {
 .img-size {
     max-width: 50px;
     margin-top: 0.5rem;
+    margin-bottom: 0;
 }
 
 .listed-obs {
@@ -145,6 +175,7 @@ h1 {
     background-color: rgb(232, 232, 232);
     border-radius: 5px;
     margin-bottom: 0.5rem;
+    margin-right: 0.15rem;
     padding: 0.3rem;
 }
 

@@ -17,19 +17,23 @@ function buildPopup(feature) {
                 <div class="popup-info">
                     <span class="common-name">${feature.properties.comName}</span>
                     <span class="scientific-name">${feature.properties.sciName}</span>
-                    <span class="num-observed">Number Observed: ${feature.properties.howMany}</span>
-                    <span class="obs-date">Observation Date & Time: ${feature.properties.obsDt}</span>
-                    <a href="https://ebird.org/species/${feature.properties.speciesCode}" target="_blank" class="ebird-link">Learn More at eBird</a>
+                    <div class="popup-info-box">
+                        <span class="num-observed">Number Observed: ${feature.properties.howMany}</span>
+                        <span class="obs-date">Observation Date & Time: ${feature.properties.obsDt}</span>
+                        <a href="https://ebird.org/species/${feature.properties.speciesCode}" target="_blank" class="ebird-link">Explore This Bird's eBird Profile</a>
+                    </div>
                 </div>
-                <button type="button" class="popup-button">Close</button>
+                <button type="button" class="popup-button filter-button">Close</button>
             </div>
         `;
     } else {
         html = `
             <div class="popup">
-                <span class="hotspot-name">${feature.properties.locName}</span>
-                <span class="all-time-obs">Number of Observations All-Time: ${feature.properties.numSpeciesAllTime}</span>
-                <span class="latest-obs">Latest Observation Date & Time: ${feature.properties.latestObsDt}</span>
+                <div class="popup-info">
+                    <span class="hotspot-name">${feature.properties.locName}</span>
+                    <span class="all-time-obs">Number of Observations All-Time: ${feature.properties.numSpeciesAllTime}</span>
+                    <span class="latest-obs">Latest Observation Date & Time: ${feature.properties.latestObsDt}</span>
+                </div>
                 <button type="button" class="popup-button">Close</button>
             </div>
         `;
