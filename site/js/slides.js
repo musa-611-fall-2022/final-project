@@ -4,25 +4,28 @@ const slides = [
   {
     title: "Bike to Hike",
     content: `
-      Here we present a snapshot of Mjumbe Poe's life told geospatially.
+      Can I get to a nearby hiking trail by bike? What's the safest way to do so? This project explores two ways to get to Wissahickon Valley Park from near my home.
     `,
     era: 'intro',
-    bounds: [[39.999, -75.409], [40.007, -74.94]],
-  },
-
-  {
-    title: 'Early Days',
-    content: `
-      Mjumbe was born in San Jose, California. He lived with his family first in
-      **San Jose**, then **Santa Cruz**, briefly in **Oceanside**, and finally
-      in **Riverside**.
-    `,
-    era: 'br1-1',
+    style: {fillColor: 'red'},
+    bounds: [[39.94641, -75.29063], [40.042780490350005, -75.12308]],
     showpopups: true,
   },
 
   {
-    title: 'Move to Philadelphia',
+    title: 'Route 1: the Google Way',
+    content: `
+      The first route I look at is how Google Maps recommends that I travel. This route is **6.8 miles** long and supposed to take **42 minutes**, and is the quickest route Google suggests.
+      Since Google always optimizes speed over safety, I want to see whether
+
+    `,
+    era: 'br1-1',
+    showpopups: true,
+    bounds: [[39.94748, -75.29063], [40.02, -75.12308]],
+  },
+
+  {
+    title: 'Route 1: Vehicle Crashes Involving Cyclists',
     content: `
       When Mjumbe was 11, his family moved across the country to Philadelphia.
       They lived in what would later be knows as the **Cedar Park**
@@ -30,11 +33,12 @@ const slides = [
       school.
     `,
     era: 'br1-3',
-    showpopups: true,
+    showpopups: false,
+    bounds: [[39.94748, -75.29063], [40.02, -75.12308]],
   },
 
   {
-    title: 'College',
+    title: 'Route 1: Speed Limits',
     content: `
       Mjumbe went back to California for college. He graduated with a computer
       science degree from **Harvey Mudd College** in **Claremont, California**.
@@ -44,32 +48,37 @@ const slides = [
     `,
     era: 'br1-4',
     showpopups: true,
+    bounds: [[39.94748, -75.29063], [40.02, -75.12308]],
   },
 
   {
-    title: 'International Conference on Appropriate Technology',
+    title: 'Route 1: Bicycle Network',
     content: `
-      Mjumbe has been involved with the planning of the International Conference
-      on Appropriate Technology since 2012. This conference has taken him to
-      locations around Africa.
+      After Code for America, Mjumbe went to work for OpenPlans, a NYC-based
+      non-profit making tools to help citizens get involved in the urban
+      planning process. He would usually work remotely from **Independents Hall**,
+      making occasional trips to the NYC office from his home in **Yorktown** via
+      the **Temple University train station**.
     `,
-    era: 'inat',
+    era: 'br1-5',
     showpopups: true,
+    bounds: [[39.94748, -75.29063], [40.02, -75.12308]],
   },
 
   {
-    title: 'Code for America',
+    title: 'Route 2: Perceived Safety',
     content: `
-      Mjumbe was a Code for America fellow in 2011, living and working primarily
-      from **Oakland, CA**. He worked on projects with the cities of Philadelphia
-      and Seattle.
+      The next route is one that I would instinctively turn towards instead of the Google route.
+      This route includes the bike lane I'm most familiar with on Spruce/South St as well as the Schuylkill River Trail, which is separated from the road.
+      According to Google, this route is **8.9 miles** long and takes **52 minutes** to complete.
     `,
     era: 'br2-1',
     showpopups: true,
+    bounds: [[39.94748, -75.29063], [40.02, -75.12308]],
   },
 
   {
-    title: 'OpenPlans',
+    title: 'Route 2: Vehicle Crashes Involving Cyclists',
     content: `
       After Code for America, Mjumbe went to work for OpenPlans, a NYC-based
       non-profit making tools to help citizens get involved in the urban
@@ -78,11 +87,12 @@ const slides = [
       the **Temple University train station**.
     `,
     era: 'br2-3',
-    showpopups: true,
+    showpopups: false,
+    bounds: [[39.94748, -75.29063], [40.02, -75.12308]],
   },
 
   {
-    title: 'City of Philadelphia',
+    title: 'Route 2: Speed Limits',
     content: `
       Mjumbe then went to work for the **City of Philadelphia** in the Office of
       Open Data and Digital Transformation. During this period he lived near
@@ -90,10 +100,11 @@ const slides = [
     `,
     era: 'br2-4',
     showpopups: true,
+    bounds: [[39.94748, -75.29063], [40.02, -75.12308]],
   },
 
   {
-    title: 'Stepwise',
+    title: 'Route 2: Bicycle Network',
     content: `
       Mjumbe left the city of Philadelphia to work on a startup called Stepwise
       with a former coworker and friend. They made tools to help investors get
@@ -104,24 +115,22 @@ const slides = [
     `,
     era: 'br2-5',
     showpopups: true,
+    bounds: [[39.94748, -75.29063], [40.02, -75.12308]],
   },
 
-
   {
-    title: 'Travels',
+    title: 'Conclusion',
     content: `
-      Additionally, Mjumbe has been lucky to spend time in several places around
-      the world.
+      Mjumbe left the city of Philadelphia to work on a startup called Stepwise
+      with a former coworker and friend. They made tools to help investors get
+      a fuller picture of potential investment properties. They would often work
+      out of the **First Round Capital** offices. For a time Mjumbe lived in the
+      **Woodland Terrace** neighborhood, and later in an apartment overlooking
+      **Malcolm X Park**.
     `,
-    era: 'travels',
+    era: 'br2-5',
     showpopups: true,
-  },
+    bounds: [[39.94748, -75.29063], [40.02, -75.12308]],
+  }
 
-  {
-    title: 'Present Day',
-    content: `
-      Mjumbe currently lives in **East Passyunk**. Thanks for taking this journey!
-    `,
-    era: 'present day',
-  },
 ];
