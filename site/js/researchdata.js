@@ -3,28 +3,32 @@ import southasiancluster from '../data/SouthAsianCluster.geojson.js';
 import southeastasiancluster from '../data/SoutheastAsianCluster.geojson.js';
 
 
-function filterResearchData(data) {
-  const cat1 = [];
-  const cat2 = [];
-  const cat3 = [];
-  const cat4 = []
-  // iterate over data
-  if(data.col.field == cat1) {
-    return{
-      'type':
-    }
-    cat1.append();
-  } else if(data.col.field == cat2){
-    cat2.append();
-  } else if(data.col.field == cat3){
-    cat3.append()
-  } else if(data.col.field == cat4){
-
-  }
-}
+//Jingyi reccomended going through the data this way
+//function filterResearchData(data) {
+//  const cat1 = [];
+//  const cat2 = [];
+//  const cat3 = [];
+//  const cat4 = []
+//  // iterate over data
+//  if(data.col.field == cat1) {
+//    return{
+//      'type':
+//    }
+//    cat1.append();
+//  } else if(data.col.field == cat2){
+//    cat2.append();
+//  } else if(data.col.field == cat3){
+//    cat3.append()
+//  } else if(data.col.field == cat4){
+//
+//  }
+//}
 
 const clusterTypeColors = {
-  "Low Frequency": "blue",
+  "high frequency high clustering":"#00FFDB",
+  "high frequency low clustering":"#00A3FF",
+  "low frequency low clustering":"#5B00FF",
+  "No_Relationship": "#FF00A4",
 }
 
 function loadResearchData(currentSlideIndex) {
@@ -32,9 +36,8 @@ function loadResearchData(currentSlideIndex) {
   if(currentSlideIndex == 3) {
     L.geoJSON(eastasiancluster, {
       style: (feature) => {
-        const ct = '...'; //<-- cluster type
+        const ct = 'high frequency high clustering'; //<-- cluster type
         const color = clusterTypeColors[ct];
-        return {fill: null, color: 'black'}
       },
     }).addTo(layerGroup);
     };
