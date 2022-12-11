@@ -148,9 +148,6 @@ function loadLifeData() {
     });
 }
 
-style:function() {
-  return {color:"red"}
-}
 
 slidePrevButton.addEventListener('click', goPrevSlide);
 slideNextButton.addEventListener('click', goNextSlide);

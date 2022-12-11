@@ -16,12 +16,12 @@ var Stamen_TonerLite = L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{
 }).addTo(map);
 
 
-var dataset = "https://opendata.arcgis.com/datasets/53b8a1c653a74c92b2de23a5d7bf04a0_0.geojson"
+var dataset = "https://raw.githubusercontent.com/zoenyoo/611-final-project/main/Zoe_main/data/data.geojson"
 var datum;
 var featureGroup;
 
 var myStyle = function(feature) {
-    if(feature.properties.HIGH_POVERTY === "Yes"){
+    if(feature.properties.label === "30-35 mph"){
         return {fillColor: 'red',
                 color: 'red'};
     }
@@ -30,11 +30,10 @@ var myStyle = function(feature) {
 var page1 = {
     title: "Supermarket Access",
     content: "These neighborhoods do not have access to high-produce supply stores within a half mile walking distance.High-produce supply stores generally offer a larger amount of healthier foods, particularly fruits and vegetables. They included supermarkets, big box stores, and produce stores.",
-    filter: function(feature) {return feature.properties.SUPERMARKET_ACCESS === "No"},
+    filter: function(feature) {return feature.properties.era === "br1-4"},
     style: myStyle,
     bbox:[[40.11221380317288,-75.02632141113281],[39.8870845777293,-75.22819519042969]],
 }
-
 
 var page2 = {
     title: "Restaurant Access",
