@@ -7,7 +7,6 @@
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
 //click on a facility on a map, and then sends the data to other parts of the code to be used as needed.
-import { onFClicked } from './facilities.js';
 
 function initMap() {
     const map = L.map('map', { maxZoom: 22, preferCanvas: true }).setView([39.95, -75.16], 13);
@@ -45,7 +44,10 @@ function showFonMap(map, name)
 .then(geojson => {
     if (map.FLayer !== undefined){
         map.removeLayer(map.FLayer);
-        }
+        };
+    if (map.pLayer !== undefined){
+        map.removeLayer(map.pLayer);
+        };
     // Save the resulting object as a variable
     const filteredGeojson = {
         type: 'FeatureCollection',
@@ -79,8 +81,34 @@ function showFonMap(map, name)
 
     // Set the map's center and zoom level based on the bounds of the added layer
     map.fitBounds(bounds);
-    map.FLayer.addEventListener('click', onFClicked);
-})}
+    map.FLayer.addEventListener('click', (evt) =>{
+        
+        // leave only cliked point
+        map.pLayer = L.circleMarker(evt.latlng).addTo(map);
+        map.removeLayer(map.FLayer);
+        map.FLayer.addLayer(map.pLayer);
+        map.FLayer.setStyle({
+            icon: "https://maps.gstatic.com/mapfiles/markers2/marker.png",
+            color: '#0000FF', 
+            fillColor: '#ff0000', // Red
+            fillOpacity: 0.5,
+            radius: 5,
+        });
+    
+        //popup bar
+        let popup = document.getElementById("popUp");
+        const facTyElement = document.getElementById('tp');
+        const facNameElement = document.getElementById('name');
+        const facVillyElement = document.getElementById('villy');
+        const facType = `Facility Type: ${evt.layer.feature.properties['FacilityTy']}`;
+        const facName = `Facility Name: ${evt.layer.feature.properties['Name']}`;
+        const facVillage = `Facility Village: ${evt.layer.feature.properties['Village']}`;
+        facTyElement.innerHTML = facType;
+        facNameElement.innerHTML = facName;
+        facVillyElement.innerHTML = facVillage;
+        popup.classList.add("open-popUp");
+    });
+})};
 
 
 
