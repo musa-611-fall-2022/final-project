@@ -56,7 +56,7 @@ body {
 }
 
 .slide-nav-button {
-  transition: all 0.1s;
+  transition: all 0.05s;
 
   padding: 0;
   margin: 1rem;

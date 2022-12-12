@@ -25,7 +25,8 @@ const slides = [
     title: 'K-12 Experience',
     content: `
     I grew up in a subrub of Columbus, Ohio with a fair amount of diversity. <br>
-    [if possible include a bar chart]
+    While I was not the highest achieving student, I 
+    <img class="image" src= "https://scontent.fewr1-5.fna.fbcdn.net/v/t39.30808-6/292099577_374215361487006_4793559578936715906_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=e3f864&_nc_ohc=yLTqYbYhouwAX9GRDKj&_nc_ht=scontent.fewr1-5.fna&oh=00_AfBzC9TJKNf_0KHBhCIiYLgbbr0LcXH8nbqzZX3ec6EwzQ&oe=639D42F3">
     `,
     era: 'K-12',
     showpopups: true,
@@ -70,7 +71,17 @@ const slides = [
   },
   {
     title: 'Introduction to Asian Americans',
-    content: `Asian Americans 
+    content: `Asian Americans, as an aggregate group, seem to be well-educated, and scholars have attempted to frame their success through biological, cultural, and structural lenses. While Asian Americans have educational success, scholars have also cautioned that a singular narrative of Asian American success invisibilizes the educational outcomes of different ethnic groups in Asian America and puts Asian Americans at odds with other minority groups as the model minority.
+    
+    
+    `,
+    era: 'PhD',
+    showpopups: true,
+  },
+  {
+    title: 'Asian American Clustering Methodology',
+    content: `I use data from the 2019 American Community Survey (ACS), primarily relying on data that describes highest form of education attainment, Asian country of origin, and annual income. These variables were selected using Perna’s (2006) conceptual model of higher education particularly focusing on the school and community context. Broad Asian American racial categories were developed from research that addresses Asian American movements (Nadal, 2019; Yi et al., 2020). <br>
+    LISA is defined as having two properties. (1) the LISA for each observation gives an indication of the extent of significant spatial clustering of similar values around that observation and (2) the sum of LISAs for all observations is proportional to a global indicator of spatial association. In our case each census block is calculated individually and then summed to provide the I from Moran's I. The calculated LISA describes each blocks effects of the clustering within the data.
     
     
     `,
@@ -80,7 +91,14 @@ const slides = [
   {
     title: 'East Asian Clustering',
     content: `
-
+    <ul>
+      <li> Chinese </li>       
+      <li> Taiwanese </li> 
+      <li> Japanese </li> 
+      <li> Korean </li>     
+      <li> Mongolian </li> 
+      <li> Thai </li> 
+    </ul>
     
     `,
     era: 'PhD',
@@ -89,6 +107,15 @@ const slides = [
   {
     title: 'Southeast Asian Clustering',
     content: `
+    <ul>
+      <li> Asian Indian </li>       
+      <li> Bangladeshi </li> 
+      <li> Bhutanese </li> 
+      <li> Nepalese </li>     
+      <li> Pakistani </li> 
+      <li> Sri Lankan </li> 
+    </ul>
+    Southeast Asians generally lived in areas with a higher frequency of people who attained a High School diploma or less, in contrast to South Asians and East Asians who generally live in areas where people attain a bachelor’s degree or more. Additionally Southeast Asians have statistically significant differences when comparing frequency of people who make $100k, and median income in the past 12 months. 
     
     `,
     era: 'PhD',
@@ -98,7 +125,14 @@ const slides = [
   {
     title: 'South Asian Clustering',
     content: `
-    
+    <ul>
+      <li> Asian Indian </li>       
+      <li> Bangladeshi </li> 
+      <li> Bhutanese </li> 
+      <li> Nepalese </li>     
+      <li> Pakistani </li> 
+      <li> Sri Lankan </li> 
+   </ul>
     `,
     era: 'PhD',
     showpopups: true,
