@@ -13,16 +13,23 @@ import { initMap, showFonMap } from './map.js';
 const map = initMap();
 let search = document.querySelector('#showlocation');
 let facilities = document.querySelector('#name');
+let directionButton = document.querySelector('#direction');
+
+function hidePopUp() {
+  let popup = document.getElementById("popUp");
+  let mapAfter = document.getElementById("map");
+  popup.classList.remove("open-popUp"); 
+  mapAfter.classList.remove("mapAfter");
+}
 
 function Search(map, search, facilities){
 search.addEventListener('click', () => {
   let f=facilities.value;
   showFonMap(map,f);
-  
-  let popup = document.getElementById("popUp");
-  let mapAfter = document.getElementById("map");
-  popup.classList.remove("open-popUp"); 
-  mapAfter.classList.remove("mapAfter");
+  hidePopUp();
+  if (map.routingControl !== undefined){
+    map.removeControl(map.routingControl);
+    };
 })
 }
 
@@ -55,7 +62,6 @@ function setupGeolocationEvent() {
   );
 }
 
-
   
 function fakePosition(map) {
     const pos={
@@ -70,14 +76,29 @@ function fakePosition(map) {
     marker.addTo(map);
 }
 
+function shortestRoute() {
+  map.removeLayer(map.FLayer);
+  map.routingControl = L.Routing.control({
+    waypoints: [
+      L.latLng(-1.263591, 36.858131),
+      L.latLng(    app.currentFac.geometry.coordinates['1'], app.currentFac.geometry.coordinates['0'])
+    ]
+  }).addTo(map);
+};
 
-
+function getDirection() {
+  directionButton.addEventListener('click', ()=>{
+    shortestRoute();
+    hidePopUp();
+  })
+}
 
 
 //Execute functions
 //setupGeolocationEvent();
 fakePosition(map);
 Search(map, search, facilities);
+getDirection();
 window.map = map;
 
 
