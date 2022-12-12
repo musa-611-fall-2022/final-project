@@ -117,8 +117,8 @@ const clusterTypeColors = {
 }
 
 function loadResearchData(currentSlideIndex) {
-  layerGroup.clearLayers(); 
-  if(currentSlideIndex == 7) {
+  if(currentSlideIndex == 8) {
+    layerGroup.clearLayers(); 
     L.geoJSON(eastasiancluster, {
       style: (feature) => {
         const ct = "high frequency high clustering"; //<-- cluster type
@@ -130,7 +130,8 @@ function loadResearchData(currentSlideIndex) {
         };
       }
     }).addTo(layerGroup);
-  } else if(currentSlideIndex == 8) {
+  } else if(currentSlideIndex == 9) {
+    layerGroup.clearLayers(); 
     L.geoJSON(southeastasiancluster, {
       style: (feature) => {
         const ct = "high frequency high clustering"; //<-- cluster type
@@ -142,7 +143,8 @@ function loadResearchData(currentSlideIndex) {
         };
       }
     }).addTo(layerGroup);
-  } else if(currentSlideIndex == 9) {
+  } else if(currentSlideIndex == 10) {
+    layerGroup.clearLayers(); 
     L.geoJSON(southasiancluster, {
       style: (feature) => {
         const ct = "high frequency high clustering"; //<-- cluster type
