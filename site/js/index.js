@@ -118,7 +118,7 @@ const clusterTypeColors = {
 
 function loadResearchData(currentSlideIndex) {
   layerGroup.clearLayers(); 
-  if(currentSlideIndex == 8) {
+  if(currentSlideIndex == 7) {
     L.geoJSON(eastasiancluster, {
       style: (feature) => {
         const ct = "high frequency high clustering"; //<-- cluster type

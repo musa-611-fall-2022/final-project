@@ -73,7 +73,15 @@ const slides = [
   },
 
   {
-    title: 'University of Pennsylvania: Graduate School of Education',
+    title: 'East Asian Clustering',
+    content: `
+    
+    `,
+    era: 'PhD',
+    showpopups: true,
+  },
+  {
+    title: 'Southeast Asian Clustering',
     content: `
     
     `,
@@ -81,6 +89,15 @@ const slides = [
     showpopups: true,
   },
 
+  {
+    title: 'South Asian Clustering',
+    content: `
+    
+    `,
+    era: 'PhD',
+    showpopups: true,
+  },
+  
   {
     title: 'Locations in Southeast Asian Chinatown',
     content: `
