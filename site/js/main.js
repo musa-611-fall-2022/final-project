@@ -29,6 +29,7 @@ addBlockGroups(map);
 
 /* ==========
 Define some constant objects
+used in later sections
 =========== */
 
 // All variables used in filter
@@ -47,7 +48,7 @@ const categoricalFilterVars = [
 ];
 
 // Dictionary for continuous filter variables (used to form the slider)
-const continuousVarsDict = {
+export const continuousVarsDict = {
   trip_start_time: {
     displayName: 'Departure hour',
     min: 0,
@@ -70,14 +71,36 @@ const continuousVarsDict = {
   },
 }
 // Dictionary for categorical filter variables
-// const categoricalVarsDict = {
-//   trip_purpose: {
-//     displayName: 'Purpose',
-//     factors: {
-
-//     }
-//   }
-// }
+export const categoricalVarsDict = {
+  trip_purpose: {
+    displayName: 'Purpose',
+    factors: {
+      3: 'Work',
+      4: 'Eat',
+      5: 'Shop',
+      7: 'Recreation',
+    }
+  },
+  primary_mode: {
+    displayName: 'Mode',
+    factors: {
+      1: 'Private Auto',
+      3: 'Walking',
+      4: 'Biking', 
+      5: 'TNC',
+      6: 'Public transit',
+    }
+  },
+  trip_taker_available_vehicles: {
+    displayName: 'Trip taker has',
+    factors: {
+      0: 'no car',
+      1: 'one car',
+      2: 'two cars',
+      3: 'three cars or more',
+    }
+  }
+}
 
 // Possible variables for the map display
 // There are three types of display variables, 
@@ -102,7 +125,7 @@ const mapDisplayVars = {
         3: 'Walking',
         4: 'Biking', 
         5: 'TNC',
-        6: 'Transit',
+        6: 'Public transit',
       }
     },
     {
@@ -123,9 +146,9 @@ const mapDisplayVars = {
   ],
 }
 
-/* ==========
+/* =============================
 Objects to store display params
-=========== */
+================================= */
 
 export const toggleDisplayParams = {
   groupBy: "origin_geoid", // default to departures
@@ -135,9 +158,9 @@ export const toggleDisplayParams = {
 }
 
 
-/* ==========
+/* ===========================
 Objects to store filter params
-=========== */
+============================= */
 
 // Storing filter params regarding continuous vars
 let continuousFilterParams = {};
@@ -246,9 +269,9 @@ for(const cbEl of departOrArriveOptionsEl) {
   }
 }
 
-/* ==========
-For continuous filters, add sliders and Recorders
-=========== */
+/* ================================================================
+For continuous filters, add sliders and Recorders, and Resetters
+================================================================== */
 
 import { addSliderFilterEl } from "./add-html.js";
 import { addContinuousFilterRecorder, addResetToSliders } from "./filter.js";
@@ -257,29 +280,46 @@ import { addContinuousFilterRecorder, addResetToSliders } from "./filter.js";
 const filterPanelEl = document.querySelector("#filter-panel");
 
 // Add the slider HTML elements
-for(const filterVar of continuousFilterVars) {
+for(const filterVarName of continuousFilterVars) {
   addSliderFilterEl(
     filterPanelEl,
-    continuousVarsDict[filterVar].displayName,
-    filterVar + '-slider',
-    continuousVarsDict[filterVar].min,
-    continuousVarsDict[filterVar].max,
+    filterVarName,
   )
 }
 
 // Add recorders
-for(const filterVar of continuousFilterVars) {
-  addContinuousFilterRecorder(filterVar);
+for(const filterVarName of continuousFilterVars) {
+  addContinuousFilterRecorder(filterVarName);
 }
 
 // Add resetters
 addResetToSliders();
+
+/* ==============================================
+For categorical filters, add factor selectors, Resetters, and Recorders
+================================================ */
+
+import { addFilterCheckboxGroupEl } from "./add-html.js";
+import { addCategoricalFilterRecorder, addResetToFactorSelectors } from "./filter.js";
+
+for(const varName of ['primary_mode', 'trip_purpose', 'trip_taker_available_vehicles']) {
+  addFilterCheckboxGroupEl(filterPanelEl, varName);
+}
+
+// Add recorders
+for(const varName of ['primary_mode', 'trip_purpose', 'trip_taker_available_vehicles']) {
+  addCategoricalFilterRecorder(varName);
+}
+
+// Add resetters
+addResetToFactorSelectors();
 
 /* ==========
 Construct WHERE clause
 =========== */
 
 // Returns where clause (filters) for SQL query
+// This function should later go to the server side
 function constructWhereClause() {
   let whereClause = ``;
 
@@ -314,7 +354,6 @@ function constructWhereClause() {
     return `WHERE ${whereClause.substring(5)}`;
   }
 }
-
 
 /* ==========
 Call API on confirm button click

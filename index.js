@@ -36,7 +36,7 @@ app
       const results = { 'results': (result) ? result.rows : null };
       client.release();
       res.send(results);
-    } catch(err) {
+    } catch(err) { 'http://.../index.html?a={}' req.query.a
       console.error(err);
       res.send('Error ' + err);
     }

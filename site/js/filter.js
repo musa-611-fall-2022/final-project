@@ -9,8 +9,8 @@ import { filterParams } from "./main.js";
 
 // Adds recorder to continuous filters (sliders)
 // Updates `filterParams` on user input
-function addContinuousFilterRecorder(variable) {
-  const thisSliderKit = document.querySelector(`#${variable}-slider`);
+function addContinuousFilterRecorder(varName) {
+  const thisSliderKit = document.querySelector(`#${varName}-slider`);
 
   const fromSliderEl = thisSliderKit.getElementsByClassName("from-slider")[0];
   const toSliderEl = thisSliderKit.getElementsByClassName("to-slider")[0];
@@ -28,8 +28,8 @@ function addContinuousFilterRecorder(variable) {
     sliderMinValEl.innerHTML = fromSliderEl.value;
     // Record if left slider is greater than min val
     if(fromSliderEl.value > fromSliderEl.min) {
-      filterParams.continuousVars[variable]['isApplied'] = true;
-      filterParams.continuousVars[variable]['lowerBound'] = parseInt(fromSliderEl.value);
+      filterParams.continuousVars[varName]['isApplied'] = true;
+      filterParams.continuousVars[varName]['lowerBound'] = parseInt(fromSliderEl.value);
     }
   });
   // Control the max slider
@@ -40,21 +40,63 @@ function addContinuousFilterRecorder(variable) {
     sliderMaxValEl.innerHTML = toSliderEl.value;
     // Record if right slider is greater then max val
     if(toSliderEl.value < toSliderEl.max) {
-      filterParams.continuousVars[variable]['isApplied'] = true;
-      filterParams.continuousVars[variable]['upperBound'] = parseInt(toSliderEl.value);
+      filterParams.continuousVars[varName]['isApplied'] = true;
+      filterParams.continuousVars[varName]['upperBound'] = parseInt(toSliderEl.value);
     }
   });
 }
 
-export {
-  addContinuousFilterRecorder,
+// Adds el to arr if not already exists
+function pushIfNotExists(arr, el) {
+  if(arr.indexOf(el) === -1) {
+    arr.push(el);
+  }
 }
 
-// Click on `Reset` buttons to reset sliders
+// Removes el from arr
+function removeElFromArr(arr, el) {
+  if(arr.indexOf(el) !== -1) {
+    arr.splice(arr.indexOf(el), 1);
+  }
+}
+
+// Turn filter obj's `isApplied` off if no filters are available
+function turnOffFilterOnEmpty(filterObj) {
+  if(filterObj.selectedCategories.length === 0) {
+    filterObj.isApplied = false;
+  }
+} 
+
+// Adds recorder to categorical filters (factor selectors)
+// Updates `filterParams` on user clicking
+function addCategoricalFilterRecorder(varName) {
+  // Find this kit
+  const kitEl = document.querySelector(`#${varName}-selector`);
+  const factorOptionsEls = kitEl.getElementsByClassName('cb-invisible');
+  
+  // Add recorder to each factor option
+  for(const optionEl of factorOptionsEls) {
+    optionEl.addEventListener('click', ( ) => {
+
+      if(optionEl.checked === true) { // If this option is to be selected
+        // Then add this option into the list, and make sure `isApplied` is true
+        filterParams.categoricalVars[varName].isApplied = true;
+        pushIfNotExists(filterParams.categoricalVars[varName].selectedCategories, optionEl.value);
+      } else { // If this option is to be unselected
+        removeElFromArr(filterParams.categoricalVars[varName].selectedCategories, optionEl.value);
+
+        // Turn off `isApplied` if no filters apply anymore
+        turnOffFilterOnEmpty(filterParams.categoricalVars[varName]);
+      }
+      filterParams.categoricalVars[varName].isApplied;
+    })
+  }
+}
+
+// Adds functionality: click on `Reset` buttons to reset sliders
 function addResetToSliders() {
-  const sliderResetButtonsEls = document.querySelectorAll('.filter-reset-button');
-  console.log(sliderResetButtonsEls);
-  for(const buttonEl of sliderResetButtonsEls) {
+  const resetButtonsEls = document.querySelectorAll('.slider-reset-button');
+  for(const buttonEl of resetButtonsEls) {
     buttonEl.addEventListener('click', ( ) => {
       // Get to the corresponding sliders and change their values
       const sliderEl = buttonEl.parentNode.parentNode.nextElementSibling;
@@ -81,6 +123,37 @@ function addResetToSliders() {
   }
 }
 
+// Turns off all checkbox options inside of a checkbox group
+function turnOffAllCbs(cbGroupEl) {
+  const allCbsEls = cbGroupEl.getElementsByClassName('cb-invisible');
+  for(const cbEl of allCbsEls) {
+    cbEl.checked = false;
+  }
+}
+
+// Adds functionality: click on `Reset` buttons to reset all factor selectors
+function addResetToFactorSelectors() {
+  const resetButtonsEls = document.querySelectorAll('.clear-factors-button');
+  for(const buttonEl of resetButtonsEls) {
+    // Get to the corresponding cb group
+    const cbGroupEl = buttonEl.parentNode.nextElementSibling;
+    
+    buttonEl.addEventListener('click', ( ) => {
+
+      // First turn off all the checkboxes
+      turnOffAllCbs(cbGroupEl);
+
+      // Then update `filterParams`
+      const varName = cbGroupEl.parentNode.id.substring(0, cbGroupEl.parentNode.id.length - 9);
+      filterParams.categoricalVars[varName].isApplied = false;
+      filterParams.categoricalVars[varName].selectedCategories = [];
+    });    
+  }
+}
+
 export {
+  addContinuousFilterRecorder,
+  addCategoricalFilterRecorder,
   addResetToSliders,
+  addResetToFactorSelectors,
 };

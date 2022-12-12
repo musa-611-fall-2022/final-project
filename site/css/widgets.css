@@ -85,7 +85,7 @@
 
 .toggle-display-panel {
   z-index: 3;
-  height: 7rem;
+  height: 7.5rem;
 }
 
 .cb-invisible:checked + .cb-option > button {
@@ -99,39 +99,44 @@
   --primary-reg: white;
 }
 
-/* --- Checkboxes (EXCLUSIVE) in toggle display var ----- */
+/* --- Checkbox groups that have many options ----- */
 
-.dropdown-content .cb-group {
+.cb-group-wrap {
   flex-wrap: wrap;
 }
 
-.dropdown-content .cb-group * {
+.cb-group-wrap * {
   font-size: 0.8rem;
 }
 
-.dropdown-content .cb-group > * {
+.cb-group-wrap > * {
   width: auto;
   flex: auto;
 }
 
-/* ------- Double-range slider --------- */
-
-.slider-kit {
-  display: flex;
-  flex-direction: column;
+.cb-group-wrap .cb-option {
+  width: auto;
 }
 
-.slider-kit-top {
+/* ------- Double-range slider --------- */
+
+.selector-kit {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.selector-kit-top {
   display: flex;
   justify-content: space-between;
 }
 
-.slider-top-right {
+.selector-top-right {
   display: flex;
   gap: 0.4rem;
 }
 
-.slider-kit-title {
+.selector-kit-title {
   color: var(--hero-reg);
   font-size: 0.9rem;
 }
@@ -217,7 +222,7 @@ input[type="range"]:active::-webkit-slider-thumb {
 }
 
 .slider-values {
-  background-color: var(--primary-reg);
+  background-color: var(--hero-reg);
   color: white;
   font-size: 0.85rem;
   width: 5rem;
@@ -239,14 +244,12 @@ input[type="range"]:active::-webkit-slider-thumb {
 
 /* ---- Categorical filters factor selection ----- */
 
-.selector-kit {
-  display: flex;
-  flex-direction: row;
+.factor-selector-kit {
+  gap: 0.4rem;
 }
 
-.selector-kit-title {
-  color: var(--hero-reg);
-  font-size: 0.9rem;
+.cb-group-wrap button.center-content {
+  justify-content: center;
 }
 
 /* ---- Confirm button ------ */

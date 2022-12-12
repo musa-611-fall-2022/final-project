@@ -29,33 +29,82 @@ function addDisplayVarsEl(
 Add the filter sliders
 ================= */
 
-// Adds dual-range slider kit to parentEl titled `title`, with id of `id`, and with min` and `max` values
-// Note: the `id`s should have the name as such: variable name (corresponding to psql db) + `-slider`
-function addSliderFilterEl(parentEl, title, id, min, max) {
+import { continuousVarsDict } from './main.js';
+
+// Adds individual dual-range slider kit to parentEl, regarding variable named `varName`
+function addSliderFilterEl(parentEl, varName) {
+  const varDict = continuousVarsDict[varName];
   const el = htmlToElement(`
-    <div class="slider-kit" id="${id}">
-      <div class="slider-kit-top">
-        <div class="slider-kit-title">${title}</div>
-        <div class="slider-top-right">
+    <div class="selector-kit" id="${varName}-slider">
+      <div class="selector-kit-top">
+        <div class="selector-kit-title">${varDict.displayName}</div>
+        <div class="selector-top-right">
           <button class="filter-reset-button slider-reset-button">Reset</button>
           <div class="slider-values">
-            <span class="slider-min-val">${min} </span>
+            <span class="slider-min-val">${varDict.min} </span>
             <span> &#8212; </span>
-            <span class="slider-max-val"> ${max}</span>
+            <span class="slider-max-val"> ${varDict.max}</span>
           </div>
         </div>
       </div>
       <div class="dual-range-slider">
         <div class="slider-track"></div>
-        <input class="to-slider" type="range" value = "${max}" min="${min}" max="${max}">
-        <input class="from-slider" type="range" value = "${min}" min="${min}" max="${max}">
+        <input class="to-slider" type="range" value = "${varDict.max}" min="${varDict.min}" max="${varDict.max}">
+        <input class="from-slider" type="range" value = "${varDict.min}" min="${varDict.min}" max="${varDict.max}">
       </div>
     </div>
   `);
   parentEl.append(el);
 }
 
+/* ================
+Add the filter selectors on categorical variables
+================= */
+
+// Adds individual checkbox option containing on factor
+// checkboxGroupEl is the parent el
+// factorKey: the corresponding factor used for SQL
+// returns element
+function makeFilterOptionEl(factorKey, displayFactor) {
+  const el = htmlToElement(`
+    <label>
+      <input type="checkbox" class="cb-invisible" value="${factorKey}">
+      <div class="cb-option">
+        <button class="center-content">${displayFactor}</button>
+      </div>
+    </label>
+  `)
+  return el;
+}
+
+import { categoricalVarsDict } from "./main.js";
+
+// Adds individual checkbox group
+function addFilterCheckboxGroupEl(parentEl, varName) {
+  const varDict = categoricalVarsDict[varName];
+  console.log(varDict);
+  const el = htmlToElement(`
+    <div class="selector-kit factor-selector-kit" id="${varName}-selector">
+      <div class="selector-kit-top">
+        <div class="selector-kit-title">${varDict.displayName}</div>
+        <button class="filter-reset-button clear-factors-button">Reset</button>
+      </div>
+      <div class="cb-group cb-group-wrap"></div>
+    </div>
+  `)
+  const cbGroupEl = el.getElementsByClassName('cb-group-wrap')[0];
+
+  // Now append all the option buttons
+  const factorDict = varDict.factors;
+  for(const factorKey of Object.keys(factorDict)) {
+    const optionEl = makeFilterOptionEl(factorKey, factorDict[factorKey]);
+    cbGroupEl.append(optionEl);
+  }
+  parentEl.append(el);
+}
+
 export {
   addDisplayVarsEl,
   addSliderFilterEl,
+  addFilterCheckboxGroupEl,
 };
