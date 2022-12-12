@@ -57,10 +57,12 @@ a {
   font-weight: bold;
 }
 .logo {
-  background-size: 100%;
-  background-attachment: fixed;
   background-image: url("../data/graphics/Logo_Large_wht.png");
-  height: 10%;
+  height: 76px;
+  width: 1197px;
+  position: absolute;
+  top: 40%;
+  left: 30%;
 }
 .mycontainer {
   margin: 0;
@@ -110,7 +112,7 @@ a {
 }
 .panel {
   position: absolute;
-  height: 20%;
+  height: 30%;
   width: 90%;
   top: 10%;
   left: 5%;
@@ -149,22 +151,77 @@ a {
 .icon-area {
   background-image: url("../data/graphics/Icons-02_color.png");
 }
+.icon-money {
+  background-image: url("../data/graphics/Icons-03_color.png");
+}
+.icon-carbon {
+  background-image: url("../data/graphics/Icons-04_color.png");
+}
+.icon-car {
+  background-image: url("../data/graphics/Icons-05_color.png");
+}
+.icon-tree {
+  background-image: url("../data/graphics/Icons-06_color.png");
+}
+.eq-icon {
+  background-size: 60px;
+  height: 60px;
+  left: 20px;
+  position: absolute;
+  top: 16px;
+  width: 60px;
+}
 .roof-calculation {
-  top: 32%;
+  top: 43%;
   position: absolute;
   width: 90%;
   height: 60%;
   margin: 0;
   left: 5%;
 }
-.information {
-  top: 45%;
-  position: absolute;
-  width: 80%;
-  height: 30%;
-  margin: 0;
-  left: 10%;
+.equation {
+  height: 100px;
+  width: 100%;
 }
+.place-eq {
+  position: absolute;
+  left: 33%;
+  top: 50%;
+  font-size: 32px;
+  line-height: 80px;
+}
+.place-car {
+  position: absolute;
+  left: 68%;
+  top: 50%;
+  font-size: 32px;
+  line-height: 80px;
+}
+.carbon {
+  position: absolute;
+  height: 50%;
+  width: 30%;
+}
+.cars {
+  position: absolute;
+  height: 50%;
+  width: 30%;
+  left: 35%;
+}
+.tree {
+  position: absolute;
+  height: 50%;
+  width: 30%;
+  left: 70%;
+}
+/*.information {*/
+/*  top: 45%;*/
+/*  position: absolute;*/
+/*  width: 80%;*/
+/*  height: 30%;*/
+/*  margin: 0;*/
+/*  left: 10%;*/
+/*}*/
 .section {
   display: block;
   position: relative;
@@ -191,17 +248,20 @@ a {
   position: absolute;
   top: 15%;
   width: 100%;
-  height: 30%;
+  height: 27%;
 }
 .section-how {
   position: absolute;
-  top: 45%;
+  top: 40%;
   width: 100%;
-  height: 30%;
+  height: 23%;
 }
-.section-customizing {
+li {
+  margin-bottom: 0.5em;
+}
+.section-technology {
   position: absolute;
-  top: 75%;
+  top: 62%;
   width: 100%;
   height: 50%;
   background: #eee;
@@ -210,7 +270,7 @@ a {
   position: absolute;
   width: 100%;
   height: 8%;
-  top: 125%;
+  top: 112%;
 }
 .footer-links {
   position: absolute;
