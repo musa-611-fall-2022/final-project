@@ -22,6 +22,8 @@
   border-radius: 0.25rem;
 }
 
+/* Show dropdown on the right if on wide screen */
+
 @media only screen and (min-width: 37rem) {
   .dropdown-content {
     left: 20rem;
@@ -30,11 +32,26 @@
   }
 }
 
-/* ------- Checkboxes --------- */
+.dropdown-content ul {
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+
+.dropdown-content li {
+  width: 100%;
+  display: flex;
+  font-size: 0.9rem;
+  padding: 0.2rem 0.5rem;
+  cursor: pointer;
+}
+
+/* ------- Checkboxes (EXCLUSIVE) --------- */
 
 .cb-group {
   display: flex;
   gap: 0.5rem;
+  width: 100%;
 }
 
 .cb-group > * {
@@ -50,6 +67,7 @@
 .cb-option {
   width: 100%;
   font-size: 0.8rem;
+  cursor: pointer;
 }
 
 .cb-option > button {
@@ -67,16 +85,152 @@
 
 .toggle-display-panel {
   z-index: 3;
-  height: 6.8rem;
+  height: 7rem;
 }
 
 .cb-invisible:checked + .cb-option > button {
-  background-color: var(--hero-reg);
-  border-color: var(--hero-reg);
+  background-color: var(--primary-reg);
+  border-color: var(--primary-reg);
   color: white;
 }
 
 .cb-invisible:checked + .cb-option .material-symbols-outlined {
   --hero-reg: white; /* Make all colors white */
   --primary-reg: white;
+}
+
+/* --- Checkboxes (EXCLUSIVE) in toggle display var ----- */
+
+.dropdown-content .cb-group {
+  flex-wrap: wrap;
+}
+
+.dropdown-content .cb-group * {
+  font-size: 0.8rem;
+}
+
+.dropdown-content .cb-group > * {
+  width: auto;
+  flex: auto;
+}
+
+/* ------- Double-range slider --------- */
+
+.slider-kit {
+  display: flex;
+  flex-direction: column;
+}
+
+.slider-kit-top {
+  display: flex;
+  justify-content: space-between;
+}
+
+.slider-kit-title {
+  color: var(--hero-reg);
+  font-size: 0.9rem;
+}
+
+.dual-range-slider {
+  width: 100%;
+  position: relative; /* This is necessary as the children are position: absolute */
+  height: var(--slider-height);
+}
+
+input[type="range"] {
+  appearance: none;
+  width: 100%;
+  outline: none;
+  position: absolute;
+  top: calc(var(--slider-height) / 2 - 0.6rem);
+  pointer-events: none;
+  background-color: transparent;
+}
+
+.slider-track {
+  --this-height: 0.4rem;
+  width: 100%;
+  height: var(--this-height);
+  background-color: white;
+  border: var(--light-border);
+  position: absolute;
+  top: calc((var(--slider-height) - var(--this-height)) / 2);
+  border-radius: 0.2rem;
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+  appearance: none;
+  height: 0.5rem;
+}
+
+input[type="range"]::-moz-range-track {
+  appearance: none;
+  height: 0.5rem;
+}
+
+input[type="range"]::-ms-track {
+  appearance: none;
+  height: 0.5rem;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  appearance: none;
+  height: 1rem;
+  width: 1rem;
+  background-color: white;
+  border: 1.5px solid var(--hero-reg);
+  cursor: pointer;
+  border-radius: 0.5rem;
+  pointer-events: auto;
+}
+
+input[type="range"]::-moz-range-thumb {
+  appearance: none;
+  height: 1rem;
+  width: 1rem;
+  background-color: var(--hero-reg);
+  border: 1.5px solid var(--hero-reg);
+  cursor: pointer;
+  border-radius: 0.5rem;
+  pointer-events: auto;
+}
+
+input[type="range"]::-ms-thumb {
+  appearance: none;
+  height: 1rem;
+  width: 1rem;
+  background-color: var(--hero-reg);
+  border: 1.5px solid var(--hero-reg);
+  cursor: pointer;
+  border-radius: 0.5rem;
+  pointer-events: auto;
+}
+
+input[type="range"]:active::-webkit-slider-thumb {
+  background-color: var(--hero-reg);
+  border: 1.5px solid var(--hero-reg);
+}
+
+.slider-values {
+  background-color: var(--primary-reg);
+  color: white;
+  font-size: 0.85rem;
+  width: 5rem;
+  height: 1.2rem;
+  align-self: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0.25rem;
+}
+
+/* ---- Confirm button ------ */
+
+.confirm-button {
+  height: 2rem;
+  z-index: 3;
+  font-weight: 600;
+  color: var(--hero-reg);
+  box-shadow: var(--shadow-layer-1);
+  font-size: 0.95rem;
 }

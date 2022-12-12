@@ -16,7 +16,7 @@ for(let dropdownButtonEl of allDropdownButtonsEls) {
       dropdownContentEl.style.display = "flex";
       // Transition height
       setTimeout(() => {
-        dropdownContentEl.style.maxHeight = "10rem";
+        dropdownContentEl.style.maxHeight = "30rem";
         dropdownContentEl.style.padding = "0.5rem";
       }, 0);
       // Update state
@@ -35,7 +35,7 @@ for(let dropdownButtonEl of allDropdownButtonsEls) {
   });
 }
 
-/* ======= Checkboxes =========== */
+/* ======= Make checkbox options exclusive =========== */
 
 // Unchecks all options of .cb-invisible type
 // inside of a checkbox group of .cb-group class
@@ -59,7 +59,8 @@ function makeOptionsExclusive(cbGroupEl) {
         uncheckAllOptions(cbsEls);
         cbEl.checked = true;
       } else {
-        cbEl.checked = false;
+        // Make it not able to uncheck
+        cbEl.checked = true;
       }
     });
   }
@@ -67,7 +68,7 @@ function makeOptionsExclusive(cbGroupEl) {
 
 // Make all checkbox groups of .cb-group class
 // have options of .cb-invisible class mutually exclusive
-const allCbGroupsEls = document.querySelectorAll(".cb-group");
+const allCbGroupsEls = document.querySelectorAll(".cb-group-exclusive");
 for(const cbGroupEl of allCbGroupsEls) {
   makeOptionsExclusive(cbGroupEl);
 }

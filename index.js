@@ -34,8 +34,8 @@ app
         `${req.params.query}`
       );
       const results = { 'results': (result) ? result.rows : null };
-      res.send(results);
       client.release();
+      res.send(results);
     } catch(err) {
       console.error(err);
       res.send('Error ' + err);

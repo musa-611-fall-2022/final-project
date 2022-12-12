@@ -54,7 +54,7 @@
           <h2 class="panel-title">Toggle display</h2>
 
           <!-- Select by departure or arrival-->
-          <div class="cb-group">
+          <div class="cb-group cb-group-exclusive" id="toggle-display-tofrom">
             <label>
               <input type="checkbox" class="cb-invisible" value="origin_geoid">
               <div class="cb-option">
@@ -77,15 +77,22 @@
 
           <!-- Dropdown select variable to display -->
           <div class="dropdown">
-            <button class="dropdown-button">Select a variable</button>
-            <div class="dropdown-content">some content</div>
+            <button class="dropdown-button" id="display-var-button">What to display?</button>
+            <div class="dropdown-content">
+              <div class="cb-group cb-group-exclusive" id="toggle-display-vars">
+              </div>
+            </div>
           </div>
         </div>
 
         <!-- Filters panel -->
-        <div class="panel">
-          <h2 class="panel-title">Filter</h2>
+        <div class="panel" id="filter-panel">
+          <h2 class="panel-title">Filter Trips</h2>
         </div>
+
+        <!-- Confirm filter button -->
+        <button class="confirm-button" id="confirm-button">Update map & dashboard</button>
+
       </section>
 
       <!-- Right (bottom) column -->
@@ -99,6 +106,7 @@
     <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
 
     <!-- Custom JS -->
+    <script type="module" src="js/add-html.js"></script>
     <script type="module" src="js/main.js"></script>
     <script type="module" src="js/navigation.js"></script>
   </body>

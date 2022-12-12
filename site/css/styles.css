@@ -24,6 +24,7 @@ CSS for complex modules, see other files
   --light-border: 1px solid var(--light-gray);
   --shadow-layer-1: 0.05rem 0.1rem 0.1rem 0.02rem rgba(0 0 0 / 20%);
   --shadow-layer-2: 0.15rem 0.2rem 0.2rem 0.02rem rgba(0 0 0 / 20%);
+  --slider-height: 1.2rem;
 }
 
 @media only screen and (max-width: 500px) {
@@ -51,6 +52,14 @@ button {
 
 button:hover {
   background-color: var(--light-gray);
+}
+
+.italic {
+  font-style: italic;
+}
+
+.strong {
+  font-weight: 600;
 }
 
 /* ====== Navigation bar ====== */
@@ -180,4 +189,5 @@ and when screen is smaller than 20rem, go for 100% */
   font-size: 1.1rem;
   line-height: 0.9;
   margin: 0;
+  margin-bottom: 0.5rem;
 }
