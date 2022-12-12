@@ -3,6 +3,7 @@
 import eastasiancluster from '../data/EastAsianCluster.geojson.js';
 import southasiancluster from '../data/SouthAsianCluster.geojson.js';
 import southeastasiancluster from '../data/SoutheastAsianCluster.geojson.js';
+import aapicluster from '../data/AAPICluster.geojson.js'
 //import { loadResearchData } from './researchdata.js'   
 
 let map = L.map('map').setView([0, 0], 0);
@@ -117,7 +118,20 @@ const clusterTypeColors = {
 }
 
 function loadResearchData(currentSlideIndex) {
-  if(currentSlideIndex == 9) {
+  if(currentSlideIndex == 7) {
+    layerGroup.clearLayers(); 
+    L.geoJSON(aapicluster, {
+      style: (feature) => {
+        const ct = feature.properties['Cluster type']; //<-- cluster type
+        const color = clusterTypeColors[ct];
+        return {
+          color: '#000000',
+          weight: 1,
+          fillColor: color, 
+        };
+      }
+    }).addTo(layerGroup);
+  } else if(currentSlideIndex == 9) {
     layerGroup.clearLayers(); 
     L.geoJSON(eastasiancluster, {
       style: (feature) => {
