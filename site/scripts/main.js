@@ -1,5 +1,6 @@
 import { readCSV } from "./inventory.js";
 import { tooltipEvents } from "./tooltip.js";
+import { loadBar } from "./bar.js";
 
 const container = document.getElementById("container");
 
@@ -42,15 +43,15 @@ function whichData(filterTerm) {
     };
 }
 
-function onInventoryLoadSuccess(data) {
-        //Function to load the current progress or the future approved plans of the development
+function loadPaths(data){
     d3.selectAll(".building-svg").remove();
 
     //D3 to add paths to the SVG
-    console.log(data);
+    //here's the group
     let pathGroup = svg.append("g")
         .attr("class", "building-svg");
-
+    
+    //here's the append
     let buildPaths = pathGroup.selectAll("path")
         .data(whichData(data))
     .join("path")
@@ -58,8 +59,61 @@ function onInventoryLoadSuccess(data) {
         .attr("stroke", "#000000")
         .attr("stroke-width", "3px")
         .attr("class", "building")
-        .call(tooltipEvents, tooltip);
+        .call(tooltipEvents)
+        
+    // //stacked 
+    // const stackGen = d3.stack()
+    //     .keys(unitTypes);
 
+    // let stackedSeries = stackGen(data)
+    
+    // //scale bar proportion to the width of the tooltip
+    // let xScale = d3.scaleLinear()
+    // .domain([0, d3.max(data, d => d.Units)])
+    // .range([0, 100]);
+
+    // //colors to match the unit affordability designations
+    // let colorScale = d3.scaleOrdinal()
+    //     .domain(["low-income", "moderate-income",	"middle-income", "market", "condo"])
+    //     .range(["#065F11", "#159524", "#5CB867", "#DC4230", "#99221A"]);
+ 
+    // let x = bbox.x;
+    // let y = bbox.y;
+}
+
+function getUnitTotals(data) {
+    let totals = {totalUnits: 0};
+    console.log(data);
+    for (let u of unitTypes) {
+        Object.defineProperty(totals, u, {  
+            value: 0,
+            writable: true});
+    }
+
+    for (let r of data.data) {
+        for (let u of unitTypes) {
+            if (parseInt(r[u]) == 0 || (parseInt(r[u]))) {
+                let y = parseInt(r[u]);        
+                totals[u] += y;
+                totals.totalUnits += y;
+            }
+        }
+    }
+
+    Object.defineProperty(totals, "remaining", {    
+        value: 6430-totals.totalUnits,
+        writable: true});
+
+    console.log(totals);
+    return totals
+}
+
+function onInventoryLoadSuccess(data) {
+    //Function to load the current progress or the future approved plans of the development
+    console.log(data);
+    loadPaths(data);
+    getUnitTotals(data);
+    //loadBar(data);
     controlAppr.addEventListener("click", changeFilter);
     controlCurrent.addEventListener("click", changeFilter);
 }

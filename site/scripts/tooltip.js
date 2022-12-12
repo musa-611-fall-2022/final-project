@@ -1,4 +1,4 @@
-function tooltipEvents(selectionGroup, tooltip) {
+function tooltipEvents(selectionGroup) {
     selectionGroup.each(function () {
         d3.select(this)
           .on("mouseover", handleMouseover)
@@ -99,7 +99,6 @@ function setContents(selection) {
         unitRow.selectAll("td")
           .data(z).join("td")
             .text(`${unitCount} ${unitType}`);
-        
             
         let rowColor = unitRow.append("td")
           .style("background-color", unitColor)
@@ -107,31 +106,7 @@ function setContents(selection) {
           .text("__")
           .classed("row-color");
 
-        // let rowColor = unitRow.append("td");
-
-        // rowColor.selectAll("span")
-        //   .data(z).join("span")
-        //     .style("background-color", unitColor)
-        //     .classed("row-color");
-
-        //rowColor.
-
-
         }
-
-        
-        
-        // d3.selectAll(unitType).append("td")
-        //   .append("span")
-        //     .style("background-color", unitColor)
-        //     .attr("class", "table-icon");
-            
-          // unitTable.selectAll(`${z}`)
-          //   .data(z)
-          // .join("tr")
-          //   .append("tr")
-          //     .text(d => ``)
-          //     .attr("class", "table-header")
       }
 
     }
@@ -159,13 +134,7 @@ function setContents(selection) {
             .text(selection[0].other)
             .classed("box-body");
     }
-    //date of completion
 
-
-      /*.filter(=> value !== null && value !== undefined)
-      .html(d =>
-          `<strong>${d.id}</strong>`
-        );*/
 }
 
 function showTooltip(selection) {
