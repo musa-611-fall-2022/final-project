@@ -143,8 +143,16 @@ function loadResearchData(currentSlideIndex) {
       }
     }).addTo(layerGroup);
   } else if(currentSlideIndex == 9) {
-    L.geoJSON(southeastasiancluster, {
-      style: {fill: null, color: 'black'},
+    L.geoJSON(southasiancluster, {
+      style: (feature) => {
+        const ct = "high frequency high clustering"; //<-- cluster type
+        const color = clusterTypeColors[ct];
+        return {
+          color: '#000000',
+          weight: 1,
+          fillColor: color, 
+        };
+      }
     }).addTo(layerGroup);
   }
 }
