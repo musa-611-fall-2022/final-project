@@ -119,7 +119,7 @@ const clusterTypeColors = {
 
 function loadResearchData(currentSlideIndex) {
   if(currentSlideIndex == 7) {
-    layerGroup.clearLayers(); 
+    //layerGroup.clearLayers(); 
     L.geoJSON(aapicluster, {
       style: (feature) => {
         const ct = feature.properties['Cluster type']; //<-- cluster type
@@ -132,7 +132,7 @@ function loadResearchData(currentSlideIndex) {
       }
     }).addTo(layerGroup);
   } else if(currentSlideIndex == 9) {
-    layerGroup.clearLayers(); 
+    //layerGroup.clearLayers(); 
     L.geoJSON(eastasiancluster, {
       style: (feature) => {
         const ct = feature.properties['Cluster type']; //<-- cluster type
@@ -145,7 +145,7 @@ function loadResearchData(currentSlideIndex) {
       }
     }).addTo(layerGroup);
   } else if(currentSlideIndex == 10) {
-    layerGroup.clearLayers(); 
+    //layerGroup.clearLayers(); 
     L.geoJSON(southeastasiancluster, {
       style: (feature) => {
         const ct = feature.properties['Cluster type']; //<-- cluster type
@@ -158,7 +158,7 @@ function loadResearchData(currentSlideIndex) {
       }
     }).addTo(layerGroup);
   } else if(currentSlideIndex == 11) {
-    layerGroup.clearLayers(); 
+    //layerGroup.clearLayers(); 
     L.geoJSON(southasiancluster, {
       style: (feature) => {
         const ct = feature.properties['Cluster type']; //<-- cluster type
