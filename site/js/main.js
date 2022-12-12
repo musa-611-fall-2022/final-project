@@ -18,6 +18,11 @@ function Search(map, search, facilities){
 search.addEventListener('click', () => {
   let f=facilities.value;
   showFonMap(map,f);
+  
+  let popup = document.getElementById("popUp");
+  let mapAfter = document.getElementById("map");
+  popup.classList.remove("open-popUp"); 
+  mapAfter.classList.remove("mapAfter");
 })
 }
 

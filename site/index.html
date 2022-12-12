@@ -37,11 +37,13 @@
 
     <!--popup detail info-->
     <div class="popUp" id="popUp">
-        <h2>Facility Information</h2>
-        <p id = "tp" class="detail"></p>
-        <p id = "nam" class="detail"></p>
-        <p id = "villy" class="detail"></p>
-        <p id = "saved-comments" class="detail"></p>
+        <h2 id="popUpTitle">Facility Information</h2>
+        <div id="detail">
+            <p id = "tp" class="detail"></p>
+            <p id = "nam" class="detail"></p>
+            <p id = "villy" class="detail"></p>
+            <p id = "saved-comments" class="detail"></p>
+        </div>
         <textarea id="comment" class="comment" placeholder="Update Your Notes..." cols="20" rows="3"></textarea>
         <button type="button" onclick="closeAndSave(app)">Save</button>
     </div>

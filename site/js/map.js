@@ -82,7 +82,7 @@ function showFonMap(map, name)
     const bounds = map.FLayer.getBounds();
 
     // Set the map's center and zoom level based on the bounds of the added layer
-    map.fitBounds(bounds);
+    map.fitBounds(bounds, { padding: [-60, 0] });
     map.FLayer.addEventListener('click', (evt) =>{
         //save current facility 
         app.currentFac = evt.layer.feature;
@@ -106,9 +106,9 @@ function showFonMap(map, name)
         const facTyElement = document.getElementById('tp');
         const facNameElement = document.getElementById('nam');
         const facVillyElement = document.getElementById('villy');
-        const facType = `Facility Type: ${evt.layer.feature.properties['FacilityTy']}`;
-        const facName = `Facility Name: ${evt.layer.feature.properties['Name']}`;
-        const facVillage = `Facility Village: ${evt.layer.feature.properties['Village']}`;
+        const facType = `TYPE: ${evt.layer.feature.properties['FacilityTy']}`;
+        const facName = `NAME: ${evt.layer.feature.properties['Name']}`;
+        const facVillage = `VILLAGE: ${evt.layer.feature.properties['Village']}`;
         facTyElement.innerHTML = facType;
         facNameElement.innerHTML = facName;
         facVillyElement.innerHTML = facVillage;

@@ -18,12 +18,39 @@ body {
     visibility: hidden;
     transition: transform 0.4s, top 1s;
     margin: 15px;
+    font-family: cursive;
 }
 
 .open-popUp{
     visibility: visible;
     transform: scale(1);
     height: 70%;
+}
+
+#popUpTitle {
+    padding: 9px;
+    margin-top: 10px;
+    margin-bottom: 3px;
+    font-weight: bold;
+    text-align: center;
+}
+
+#detail {
+    border-radius: 18px;
+    padding: 10px;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    border: 2px solid rgb(255, 255, 255);
+    text-align: center;
+}
+
+
+#comment {
+    border-radius: 11px;
+    padding: 25px;
+    margin-top: 10px;
+    font-family: cursive;
+    border: 1px solid rgb(255, 255, 255);
 }
 
 .popUp button{
@@ -37,22 +64,9 @@ body {
     border-radius: 4px;
     cursor: pointer;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    font-family: cursive;
+    font-weight: bold;
 }
-
-.detail {
-    border-radius: 5px;
-    padding: 10px;
-    margin: 5px;
-}
-
-
-#comment {
-    border-radius: 11px;
-    padding: 25px;
-    margin-top: 10px
-}
-
-
 
 .map {
     height: 100%;
@@ -77,10 +91,19 @@ body {
 
 #name {
     height: 28px;
-    width: 200px;
+    width: 250px;
     border-radius: 6px;
+    font-family: cursive;
+    border: 1px solid rgb(255, 255, 255);
 }
 #showlocation {
     height: 28px;
     border-radius: 6px;
+    background: rgb(218, 138, 138);
+    color: #fff;
+    font-family: cursive;
+    border: 1px solid rgb(255, 255, 255);
+    width: 100px;
+    font-weight: bold;
 }
+
