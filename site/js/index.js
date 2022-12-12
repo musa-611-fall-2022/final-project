@@ -130,11 +130,19 @@ function loadResearchData(currentSlideIndex) {
         };
       }
     }).addTo(layerGroup);
-  } else if(currentSlideIndex == 9) {
-    L.geoJSON(southasiancluster, {
-      style: {fill: null, color: 'black'},
+  } else if(currentSlideIndex == 8) {
+    L.geoJSON(southeastasiancluster, {
+      style: (feature) => {
+        const ct = "high frequency high clustering"; //<-- cluster type
+        const color = clusterTypeColors[ct];
+        return {
+          color: '#000000',
+          weight: 1,
+          fillColor: color, 
+        };
+      }
     }).addTo(layerGroup);
-  } else if(currentSlideIndex == 10) {
+  } else if(currentSlideIndex == 9) {
     L.geoJSON(southeastasiancluster, {
       style: {fill: null, color: 'black'},
     }).addTo(layerGroup);
