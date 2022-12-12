@@ -3,11 +3,15 @@
 import eastasiancluster from '../data/EastAsianCluster.geojson.js';
 import southasiancluster from '../data/SouthAsianCluster.geojson.js';
 import southeastasiancluster from '../data/SoutheastAsianCluster.geojson.js';
+//import { loadResearchData } from './researchdata.js'   
 
 let map = L.map('map').setView([0, 0], 0);
 let layerGroup = L.layerGroup().addTo(map);
 let lifeCollection = { features: [] };
 
+//These are the pretty tiles
+// https://stamen-tiles.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.jpg
+//'Map tiles by <a href="http://stamen.com">Stamen Design</a>, under <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by <a href="http://openstreetmap.org">OpenStreetMap</a>, under <a href="http://creativecommons.org/licenses/by-sa/3.0">CC BY SA</a>.'
 L.tileLayer('https://stamen-tiles.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.jpg', {
   attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, under <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by <a href="http://openstreetmap.org">OpenStreetMap</a>, under <a href="http://creativecommons.org/licenses/by-sa/3.0">CC BY SA</a>.',
 }).addTo(map);
@@ -57,6 +61,7 @@ function syncMapToSlide(slide) {
 function syncMapToCurrentSlide() {
   const slide = slides[currentSlideIndex];
   syncMapToSlide(slide);
+  loadResearchData(currentSlideIndex);
 }
 
 function initSlides() {
@@ -101,6 +106,38 @@ function calcCurrentSlideIndex() {
   } else if (currentSlideIndex != i - 1) {
     currentSlideIndex = i - 1;
     syncMapToCurrentSlide();
+  }
+}
+
+const clusterTypeColors = {
+  "high frequency high clustering":"#00FFDB",
+  "high frequency low clustering":"#00A3FF",
+  "low frequency low clustering":"#5B00FF",
+  "No_Relationship": "#FF00A4",
+}
+
+function loadResearchData(currentSlideIndex) {
+  layerGroup.clearLayers(); 
+  if(currentSlideIndex == 8) {
+    L.geoJSON(eastasiancluster, {
+      style: (feature) => {
+        const ct = "high frequency high clustering"; //<-- cluster type
+        const color = clusterTypeColors[ct];
+        return {
+          color: '#000000',
+          weight: 1,
+          fillColor: color, 
+        };
+      }
+    }).addTo(layerGroup);
+  } else if(currentSlideIndex == 9) {
+    L.geoJSON(southasiancluster, {
+      style: {fill: null, color: 'black'},
+    }).addTo(layerGroup);
+  } else if(currentSlideIndex == 10) {
+    L.geoJSON(southeastasiancluster, {
+      style: {fill: null, color: 'black'},
+    }).addTo(layerGroup);
   }
 }
 

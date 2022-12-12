@@ -3,26 +3,48 @@ const slides = [
     title: "Jonathon GeoSpatial Journey",
     content: `
       Recently higher education scholars have utilized GIS as a method for understanding college access. <br>
-      While GIS has been beneficial for visualizing and contextualizign quantitative data, there has not been as much work down visualizing qualitative GIS <br>
-      To supplement  
+      While GIS has been beneficial for visualizing and contextualizing quantitative data, there has not been as much work down visualizing qualitative GIS <br>
+      I hope to be able to use these slides to tell the story of my research project through photography and GIS data.
     `,
     era: null,
     bounds: [[-75, -180], [75, 180]],
   },
 
   {
+    title: "Positionality",
+    content: `
+    To begin, this presentation will address my own educational training and background from my undergraduate program to my current position. <br>
+    I will then my research question and field notes.
+    `,
+    era: null,
+    bounds: [[-75, -180], [75, 180]],
+  },
+
+
+  {
     title: 'K-12 Experience',
     content: `
-    TEst contetn
+    I grew up in a subrub of Columbus, Ohio with a fair amount of diversity. <br>
+    [if possible include a bar chart]
     `,
     era: 'K-12',
     showpopups: true,
   },
 
   {
-    title: 'Undergraduate',
+    title: 'Undergraduate: Denison University',
     content: `
-      I went to school here and did my training here.
+    <iframe class="image" src="https://denison.edu/" />
+    </iframe>
+    `,
+    era: "Undergraduate",
+    showpopups: true,
+  },
+
+  {
+    title: 'Undergraduate: The Ohio State University',
+    content: `
+    <img class="image" src="https://sociology.osu.edu/themes/asc_bootstrap/images/logos/asc-logo.svg" />
     `,
     era: "Undergraduate",
     showpopups: true,
@@ -31,7 +53,9 @@ const slides = [
   {
     title: 'Graduate',
     content: `
-      Education Leadership and policy analysis
+
+    <iframe class="image" src="https://education.missouri.edu/educational-leadership-policy-analysis/" />
+    </iframe>
     `,
     era: 'Masters',
     showpopups: true,
@@ -40,7 +64,9 @@ const slides = [
   {
     title: 'Working',
     content: `
-      <img class="image" src="data/Photos/FieldnotesHuongVuong.jpg" />
+      
+      <iframe class="image" src="https://www.rider.edu/student-life/diversity-inclusion/center-diversity-inclusion" />
+      </iframe>
     `,
     era: 'Working',
     showpopups: true,
@@ -58,7 +84,8 @@ const slides = [
   {
     title: 'Locations in Southeast Asian Chinatown',
     content: `
-    <img class="image" src="data/Photos/FieldnotesHuongVuong.jpg" />
+    <iframe class="whyy" src="https://whyy.org/articles/opinion-philly-gentrification-led-to-hoa-binh-plaza-closure/" />
+    </iframe>
     `,
     era: 'Research SEA',
     showpopups: true,
