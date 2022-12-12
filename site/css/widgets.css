@@ -126,6 +126,11 @@
   justify-content: space-between;
 }
 
+.slider-top-right {
+  display: flex;
+  gap: 0.4rem;
+}
+
 .slider-kit-title {
   color: var(--hero-reg);
   font-size: 0.9rem;
@@ -222,6 +227,26 @@ input[type="range"]:active::-webkit-slider-thumb {
   justify-content: center;
   align-items: center;
   border-radius: 0.25rem;
+}
+
+.filter-reset-button {
+  height: 1.2rem;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  background-color: white;
+}
+
+/* ---- Categorical filters factor selection ----- */
+
+.selector-kit {
+  display: flex;
+  flex-direction: row;
+}
+
+.selector-kit-title {
+  color: var(--hero-reg);
+  font-size: 0.9rem;
 }
 
 /* ---- Confirm button ------ */

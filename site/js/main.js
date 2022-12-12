@@ -46,29 +46,38 @@ const categoricalFilterVars = [
   'destination_geoid',
 ];
 
-// Dictionary for continuous filter variables
+// Dictionary for continuous filter variables (used to form the slider)
 const continuousVarsDict = {
   trip_start_time: {
-    displayName: 'Departure Hour',
+    displayName: 'Departure hour',
     min: 0,
     max: 24,
   },
   trip_end_time: {
-    displayName: 'Arrival Hour',
+    displayName: 'Arrival hour',
     min: 0,
     max: 24,
   },
   trip_duration_minutes: {
-    displayName: 'Trip Duration Minutes',
+    displayName: 'Duration (min)',
     min: 0,
     max: 182,
   },
   trip_distance_miles: {
-    displayName: 'Trip Distance Miles',
+    displayName: 'Distance (mi)',
     min: 0,
     max: 31,
   },
 }
+// Dictionary for categorical filter variables
+// const categoricalVarsDict = {
+//   trip_purpose: {
+//     displayName: 'Purpose',
+//     factors: {
+
+//     }
+//   }
+// }
 
 // Possible variables for the map display
 // There are three types of display variables, 
@@ -242,7 +251,7 @@ For continuous filters, add sliders and Recorders
 =========== */
 
 import { addSliderFilterEl } from "./add-html.js";
-import { addContinuousFilterRecorder } from "./filter.js";
+import { addContinuousFilterRecorder, addResetToSliders } from "./filter.js";
 
 // Filter panel element
 const filterPanelEl = document.querySelector("#filter-panel");
@@ -262,6 +271,9 @@ for(const filterVar of continuousFilterVars) {
 for(const filterVar of continuousFilterVars) {
   addContinuousFilterRecorder(filterVar);
 }
+
+// Add resetters
+addResetToSliders();
 
 /* ==========
 Construct WHERE clause

@@ -7,7 +7,7 @@ This script has functions to add recorders to the filter elements
 
 import { filterParams } from "./main.js";
 
-// Adds recorder to continuous filters
+// Adds recorder to continuous filters (sliders)
 // Updates `filterParams` on user input
 function addContinuousFilterRecorder(variable) {
   const thisSliderKit = document.querySelector(`#${variable}-slider`);
@@ -49,3 +49,38 @@ function addContinuousFilterRecorder(variable) {
 export {
   addContinuousFilterRecorder,
 }
+
+// Click on `Reset` buttons to reset sliders
+function addResetToSliders() {
+  const sliderResetButtonsEls = document.querySelectorAll('.filter-reset-button');
+  console.log(sliderResetButtonsEls);
+  for(const buttonEl of sliderResetButtonsEls) {
+    buttonEl.addEventListener('click', ( ) => {
+      // Get to the corresponding sliders and change their values
+      const sliderEl = buttonEl.parentNode.parentNode.nextElementSibling;
+      const fromSliderEl = sliderEl.getElementsByClassName('from-slider')[0];
+      const toSliderEl = sliderEl.getElementsByClassName('to-slider')[0];
+      fromSliderEl.value = parseInt(fromSliderEl.min);
+      toSliderEl.value = parseInt(toSliderEl.max);
+
+      // Get the the values section and change their values
+      const valuesEls = buttonEl.nextElementSibling;
+      const fromValueEl = valuesEls.getElementsByClassName('slider-min-val')[0];
+      const toValueEl = valuesEls.getElementsByClassName('slider-max-val')[0];
+      fromValueEl.innerHTML = parseInt(fromSliderEl.min);
+      toValueEl.innerHTML = parseInt(toSliderEl.max);
+
+      // Change the record
+      const kitEl = sliderEl.parentNode;
+      const varName = kitEl.id.substring(0, kitEl.id.length - 7);
+      
+      filterParams.continuousVars[varName].isApplied = false;
+      filterParams.continuousVars[varName].lowerBound = parseInt(fromSliderEl.min);
+      filterParams.continuousVars[varName].upperBound = parseInt(toSliderEl.max);
+    })
+  }
+}
+
+export {
+  addResetToSliders,
+};

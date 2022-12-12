@@ -50,7 +50,7 @@ async function addBlockGroups(map) {
     const resp = await fetch('./data/census-block-groups.geojson');
     const data = await resp.json();
     map.blockGroupLayer.addData(data);
-    console.log(data);
+    // console.log(data);
   } catch(err) {
     console.log(err);
   }

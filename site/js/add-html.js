@@ -36,10 +36,13 @@ function addSliderFilterEl(parentEl, title, id, min, max) {
     <div class="slider-kit" id="${id}">
       <div class="slider-kit-top">
         <div class="slider-kit-title">${title}</div>
-        <div class="slider-values">
-          <span class="slider-min-val">${min} </span>
-          <span> &#8212; </span>
-          <span class="slider-max-val"> ${max}</span>
+        <div class="slider-top-right">
+          <button class="filter-reset-button slider-reset-button">Reset</button>
+          <div class="slider-values">
+            <span class="slider-min-val">${min} </span>
+            <span> &#8212; </span>
+            <span class="slider-max-val"> ${max}</span>
+          </div>
         </div>
       </div>
       <div class="dual-range-slider">
