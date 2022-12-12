@@ -35,9 +35,18 @@ const geocoder = new MapboxGeocoder({
     language: 'en-EN'
 });
 
+const geocoder_roof = new MapboxGeocoder({
+    accessToken: mapboxgl.accessToken,
+    mapboxgl: mapboxgl,
+    language: 'en-EN',
+    flyTo: {
+        zoom: 18, // If you want your result not to go further than a specific zoom
+        curve:1
+    }
+});
 document.getElementById('geocoder').appendChild(geocoder.onAdd(map));
 
-document.getElementById('geocoder-roof').appendChild(geocoder.onAdd(map_roof));
+document.getElementById('geocoder-roof').appendChild(geocoder_roof.onAdd(map_roof));
 
 // Add geolocate control to the map.
 map.addControl(
@@ -67,7 +76,7 @@ map_roof.addControl(
 
 map.addControl(new mapboxgl.NavigationControl());
 map_roof.addControl(new mapboxgl.NavigationControl());
-//
+
 // $.ajax({
 //     url: "data/Solar_Buildings1.geojson",
 //     type: "GET",
@@ -158,22 +167,22 @@ map_roof.addControl(new mapboxgl.NavigationControl());
 //         console.log(err);
 //     }
 // });
-
-let neighbors = {};
-
-
-$.ajax({
-    url: "data/neighborhoods_results.geojson",
-    type: "GET",
-    dataType: "json",
-    async: false,
-    success: function(data) {
-        neighbors = data;
-    },
-    error: function (err) {
-        console.log(err);
-    }
-});
+//
+// let neighbors = {};
+//
+//
+// $.ajax({
+//     url: "data/neighborhoods_results.geojson",
+//     type: "GET",
+//     dataType: "json",
+//     async: false,
+//     success: function(data) {
+//         neighbors = data;
+//     },
+//     error: function (err) {
+//         console.log(err);
+//     }
+// });
 
 window.neighbors = neighbors;
 
@@ -186,9 +195,6 @@ map.on('load', () => {
         'id': 'roof-layer',
         'type': 'raster',
         'source': 'solar-roof',
-        // 'paint': {
-        //     'raster-fade-duration': 0
-        // }
     });
 
 
@@ -208,15 +214,8 @@ map.on('load', () => {
             'fill-outline-color': 'rgba(0,0,0,0.1)',
             // 'fill-color': '#627BC1',
             'fill-opacity': 0.1,
-            // 'fill-opacity': [
-            //     'case',
-            //     ['boolean', ['feature-state', 'hover'], false],
-            //     1,
-            //     0.5
-            // ]
         }
     });
-    //
     map.addLayer({
         'id': 'outline',
         'type': 'line',
@@ -281,151 +280,356 @@ map.on('load', () => {
     //     }
     //     hoveredCountyId = null;
     // });
-
-    // map.addSource('solar-roof1', {
-    //     'type': 'geojson',
-    //     'data': solar1
-    // });
-    // map.addSource('solar-roof2', {
-    //     'type': 'geojson',
-    //     'data': solar2
-    // });
-    // map.addSource('solar-roof3', {
-    //     'type': 'geojson',
-    //     'data': solar3
-    // });
-    // map.addSource('solar-roof4', {
-    //     'type': 'geojson',
-    //     'data': solar4
-    // });
-    // map.addSource('solar-roof5', {
-    //     'type': 'geojson',
-    //     'data': solar5
-    // });
-    // map.addSource('solar-roof6', {
-    //     'type': 'geojson',
-    //     'data': solar6
-    // });
-    // map.addSource('solar-roof7', {
-    //     'type': 'geojson',
-    //     'data': solar7
-    // });
-    // map.addLayer({
-    //     'id': 'roof1',
-    //     'type': 'fill',
-    //     'source': 'solar-roof1',
-    //     'paint': {
-    //         'fill-color': [
-    //             'interpolate',
-    //             ['linear'],
-    //             ['get', 'Solar_Rad_'],
-    //             0,
-    //             '#F2F12D',
-    //             5,
-    //             '#EED322',
-    //             75,
-    //             '#E6B71E',
-    //             100,
-    //             '#DA9C20',
-    //             250,
-    //             '#CA8323',
-    //             500,
-    //             '#B86B25',
-    //             750,
-    //             '#A25626',
-    //             1000,
-    //             '#8B4225',
-    //             2500,
-    //             '#723122'
-    //             ],
-    //         'fill-opacity': [
-    //             'case',
-    //             ['boolean', ['feature-state', 'hover'], false],
-    //             1,
-    //             0.5
-    //         ]
-    //             // 'fill-opacity': 0.75
-    //         // 'fill-color': '#888888',
-    //         // 'fill-opacity': 0.4
-    //     },
-    //
-    //     'filter': ['==', '$type', 'Polygon']
-    // });
-    //
-    // map.addLayer({
-    //     'id': 'roof2',
-    //     'type': 'fill',
-    //     'source': 'solar-roof2',
-    //     'paint': {
-    //         'fill-color': [
-    //             'interpolate',
-    //             ['linear'],
-    //             ['get', 'Solar_Rad_'],
-    //             0,
-    //             '#F2F12D',
-    //             5,
-    //             '#EED322',
-    //             75,
-    //             '#E6B71E',
-    //             100,
-    //             '#DA9C20',
-    //             250,
-    //             '#CA8323',
-    //             500,
-    //             '#B86B25',
-    //             750,
-    //             '#A25626',
-    //             1000,
-    //             '#8B4225',
-    //             2500,
-    //             '#723122'
-    //             ],
-    //         'fill-opacity': [
-    //             'case',
-    //             ['boolean', ['feature-state', 'hover'], false],
-    //             1,
-    //             0.5
-    //         ]
-    //             // 'fill-opacity': 0.75
-    //         // 'fill-color': '#888888',
-    //         // 'fill-opacity': 0.4
-    //     },
-    //
-    //     'filter': ['==', '$type', 'Polygon']
-    // });
-
-    // Create a popup, but don't add it to the map yet.
-    // const popup = new mapboxgl.Popup({
-    //     closeButton: false,
-    //     closeOnClick: false
-    // });
-    //
-    // map.on('mouseenter', 'roof', (e) => {
-    //     // Change the cursor style as a UI indicator.
-    //     map.getCanvas().style.cursor = 'pointer';
-    //
-    //     // Copy coordinates array.
-    //     const coordinates = e.lngLat;
-    //     const address = e.features[0].properties.ADDRESS;
-    //
-    //     // Ensure that if the map is zoomed out such that multiple
-    //     // copies of the feature are visible, the popup appears
-    //     // over the copy being pointed to.
-    //     while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
-    //         coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
-    //     }
-    //
-    //     // Populate the popup and set its coordinates
-    //     // based on the feature found.
-    //     popup.setLngLat(coordinates).setHTML(address).addTo(map);
-    // });
-    //
-    // map.on('mouseleave', 'roof', () => {
-    //     map.getCanvas().style.cursor = '';
-    //     popup.remove();
-    // });
 });
 
+map_roof.on('load', () => {
+    map_roof.addSource('solar-roof', {
+        'type': 'raster',
+        'url': 'mapbox://yeseniao.34uap4z1',
+    });
+    map_roof.addSource('solar-roof1', {
+        'type': 'geojson',
+        'data': solar1
+    });
+    map_roof.addSource('solar-roof2', {
+        'type': 'geojson',
+        'data': solar2
+    });
+    map_roof.addSource('solar-roof3', {
+        'type': 'geojson',
+        'data': solar3
+    });
+    map_roof.addSource('solar-roof4', {
+        'type': 'geojson',
+        'data': solar4
+    });
+    map_roof.addSource('solar-roof5', {
+        'type': 'geojson',
+        'data': solar5
+    });
+    map_roof.addSource('solar-roof6', {
+        'type': 'geojson',
+        'data': solar6
+    });
+    map_roof.addSource('solar-roof7', {
+        'type': 'geojson',
+        'data': solar7
+    });
+
+    map_roof.addLayer({
+        'id': 'roof-layer',
+        'type': 'raster',
+        'source': 'solar-roof',
+    });
+    map_roof.addLayer({
+        'id': 'roof1',
+        'type': 'fill',
+        'source': 'solar-roof1',
+        'paint': {
+            'fill-color': '#eee',
+            'fill-opacity': 0
+        },
+        'filter': ['==', '$type', 'Polygon']
+    });
+    map_roof.addLayer({
+        'id': 'roof1_line',
+        'type': 'line',
+        'source': 'solar-roof1',
+        'paint': {
+            'line-color': '#ffffff',
+            'line-width': 1
+        },
+    });
+    map_roof.addLayer({
+        'id': 'roof2',
+        'type': 'fill',
+        'source': 'solar-roof2',
+        'paint': {
+            'fill-color': '#eee',
+            'fill-opacity': 0
+        },
+        'filter': ['==', '$type', 'Polygon']
+    });
+    map_roof.addLayer({
+        'id': 'roof2_line',
+        'type': 'line',
+        'source': 'solar-roof2',
+        'paint': {
+            'line-color': '#ffffff',
+            'line-width': 1
+        },
+    });
+    map_roof.addLayer({
+        'id': 'roof3',
+        'type': 'fill',
+        'source': 'solar-roof3',
+        'paint': {
+            'fill-color': '#eee',
+            'fill-opacity': 0
+        },
+        'filter': ['==', '$type', 'Polygon']
+    });
+    map_roof.addLayer({
+        'id': 'roof3_line',
+        'type': 'line',
+        'source': 'solar-roof3',
+        'paint': {
+            'line-color': '#ffffff',
+            'line-width': 1
+        },
+    });
+    map_roof.addLayer({
+        'id': 'roof4',
+        'type': 'fill',
+        'source': 'solar-roof4',
+        'paint': {
+            'fill-color': '#eee',
+            'fill-opacity': 0
+        },
+        'filter': ['==', '$type', 'Polygon']
+    });
+    map_roof.addLayer({
+        'id': 'roof4_line',
+        'type': 'line',
+        'source': 'solar-roof4',
+        'paint': {
+            'line-color': '#ffffff',
+            'line-width': 1
+        },
+    });
+    map_roof.addLayer({
+        'id': 'roof5',
+        'type': 'fill',
+        'source': 'solar-roof5',
+        'paint': {
+            'fill-color': '#eee',
+            'fill-opacity': 0
+        },
+        'filter': ['==', '$type', 'Polygon']
+    });
+    map_roof.addLayer({
+        'id': 'roof5_line',
+        'type': 'line',
+        'source': 'solar-roof5',
+        'paint': {
+            'line-color': '#ffffff',
+            'line-width': 1
+        },
+    });
+    map_roof.addLayer({
+        'id': 'roof6',
+        'type': 'fill',
+        'source': 'solar-roof6',
+        'paint': {
+            'fill-color': '#eee',
+            'fill-opacity': 0
+        },
+        'filter': ['==', '$type', 'Polygon']
+    });
+    map_roof.addLayer({
+        'id': 'roof6_line',
+        'type': 'line',
+        'source': 'solar-roof6',
+        'paint': {
+            'line-color': '#ffffff',
+            'line-width': 1
+        },
+    });
+    map_roof.addLayer({
+        'id': 'roof7',
+        'type': 'fill',
+        'source': 'solar-roof7',
+        'paint': {
+            'fill-color': '#eee',
+            'fill-opacity': 0
+        },
+        'filter': ['==', '$type', 'Polygon']
+    });
+    map_roof.addLayer({
+        'id': 'roof7_line',
+        'type': 'line',
+        'source': 'solar-roof7',
+        'paint': {
+            'line-color': '#ffffff',
+            'line-width': 1
+        },
+    });
+
+    // Create a popup, but don't add it to the map yet.
+    const popup = new mapboxgl.Popup({
+        closeButton: false,
+        closeOnClick: false
+    });
+
+    map_roof.on('mouseenter', 'roof1', (e) => {
+        // Change the cursor style as a UI indicator.
+        map_roof.getCanvas().style.cursor = 'pointer';
+
+        // Copy coordinates array.
+        const coordinates = e.lngLat;
+        const address = e.features[0].properties.ADDRESS;
+
+        // Ensure that if the map is zoomed out such that multiple
+        // copies of the feature are visible, the popup appears
+        // over the copy being pointed to.
+        while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+            coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+        }
+
+        // Populate the popup and set its coordinates
+        // based on the feature found.
+        popup.setLngLat(coordinates).setHTML(address).addTo(map_roof);
+    });
+
+    map_roof.on('mouseleave', 'roof1', () => {
+        map_roof.getCanvas().style.cursor = '';
+        popup.remove();
+    });
+    map_roof.on('mouseenter', 'roof2', (e) => {
+        // Change the cursor style as a UI indicator.
+        map_roof.getCanvas().style.cursor = 'pointer';
+
+        // Copy coordinates array.
+        const coordinates = e.lngLat;
+        const address = e.features[0].properties.ADDRESS;
+
+        // Ensure that if the map is zoomed out such that multiple
+        // copies of the feature are visible, the popup appears
+        // over the copy being pointed to.
+        while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+            coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+        }
+
+        // Populate the popup and set its coordinates
+        // based on the feature found.
+        popup.setLngLat(coordinates).setHTML(address).addTo(map_roof);
+    });
+
+    map_roof.on('mouseleave', 'roof2', () => {
+        map_roof.getCanvas().style.cursor = '';
+        popup.remove();
+    });
+    map_roof.on('mouseenter', 'roof3', (e) => {
+        // Change the cursor style as a UI indicator.
+        map_roof.getCanvas().style.cursor = 'pointer';
+
+        // Copy coordinates array.
+        const coordinates = e.lngLat;
+        const address = e.features[0].properties.ADDRESS;
+
+        // Ensure that if the map is zoomed out such that multiple
+        // copies of the feature are visible, the popup appears
+        // over the copy being pointed to.
+        while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+            coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+        }
+
+        // Populate the popup and set its coordinates
+        // based on the feature found.
+        popup.setLngLat(coordinates).setHTML(address).addTo(map_roof);
+    });
+
+    map_roof.on('mouseleave', 'roof3', () => {
+        map_roof.getCanvas().style.cursor = '';
+        popup.remove();
+    });
+    map_roof.on('mouseenter', 'roof4', (e) => {
+        // Change the cursor style as a UI indicator.
+        map_roof.getCanvas().style.cursor = 'pointer';
+
+        // Copy coordinates array.
+        const coordinates = e.lngLat;
+        const address = e.features[0].properties.ADDRESS;
+
+        // Ensure that if the map is zoomed out such that multiple
+        // copies of the feature are visible, the popup appears
+        // over the copy being pointed to.
+        while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+            coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+        }
+
+        // Populate the popup and set its coordinates
+        // based on the feature found.
+        popup.setLngLat(coordinates).setHTML(address).addTo(map_roof);
+    });
+
+    map_roof.on('mouseleave', 'roof4', () => {
+        map_roof.getCanvas().style.cursor = '';
+        popup.remove();
+    });
+    map_roof.on('mouseenter', 'roof5', (e) => {
+        // Change the cursor style as a UI indicator.
+        map_roof.getCanvas().style.cursor = 'pointer';
+
+        // Copy coordinates array.
+        const coordinates = e.lngLat;
+        const address = e.features[0].properties.ADDRESS;
+
+        // Ensure that if the map is zoomed out such that multiple
+        // copies of the feature are visible, the popup appears
+        // over the copy being pointed to.
+        while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+            coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+        }
+
+        // Populate the popup and set its coordinates
+        // based on the feature found.
+        popup.setLngLat(coordinates).setHTML(address).addTo(map_roof);
+    });
+
+    map_roof.on('mouseleave', 'roof5', () => {
+        map_roof.getCanvas().style.cursor = '';
+        popup.remove();
+    });
+    map_roof.on('mouseenter', 'roof6', (e) => {
+        // Change the cursor style as a UI indicator.
+        map_roof.getCanvas().style.cursor = 'pointer';
+
+        // Copy coordinates array.
+        const coordinates = e.lngLat;
+        const address = e.features[0].properties.ADDRESS;
+
+        // Ensure that if the map is zoomed out such that multiple
+        // copies of the feature are visible, the popup appears
+        // over the copy being pointed to.
+        while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+            coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+        }
+
+        // Populate the popup and set its coordinates
+        // based on the feature found.
+        popup.setLngLat(coordinates).setHTML(address).addTo(map_roof);
+    });
+
+    map_roof.on('mouseleave', 'roof6', () => {
+        map_roof.getCanvas().style.cursor = '';
+        popup.remove();
+    });
+    map_roof.on('mouseenter', 'roof7', (e) => {
+        // Change the cursor style as a UI indicator.
+        map_roof.getCanvas().style.cursor = 'pointer';
+
+        // Copy coordinates array.
+        const coordinates = e.lngLat;
+        const address = e.features[0].properties.ADDRESS;
+
+        // Ensure that if the map is zoomed out such that multiple
+        // copies of the feature are visible, the popup appears
+        // over the copy being pointed to.
+        while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+            coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+        }
+
+        // Populate the popup and set its coordinates
+        // based on the feature found.
+        popup.setLngLat(coordinates).setHTML(address).addTo(map_roof);
+    });
+
+    map_roof.on('mouseleave', 'roof7', () => {
+        map_roof.getCanvas().style.cursor = '';
+        popup.remove();
+    });
+});
 $("#select-neighbor").change(function(){
     var selectVal = $("#select-neighbor option:selected").val();
     let name_arr = selectVal.split('_');
