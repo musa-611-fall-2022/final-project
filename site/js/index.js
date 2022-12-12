@@ -134,7 +134,7 @@ function loadResearchData(currentSlideIndex) {
     layerGroup.clearLayers(); 
     L.geoJSON(southeastasiancluster, {
       style: (feature) => {
-        const ct = "high frequency high clustering"; //<-- cluster type
+        const ct = feature.properties['Cluster type']; //<-- cluster type
         const color = clusterTypeColors[ct];
         return {
           color: '#000000',
@@ -147,7 +147,7 @@ function loadResearchData(currentSlideIndex) {
     layerGroup.clearLayers(); 
     L.geoJSON(southasiancluster, {
       style: (feature) => {
-        const ct = "high frequency high clustering"; //<-- cluster type
+        const ct = feature.properties['Cluster type']; //<-- cluster type
         const color = clusterTypeColors[ct];
         return {
           color: '#000000',
@@ -164,4 +164,5 @@ document.addEventListener('scroll', calcCurrentSlideIndex);
 initSlides();
 syncMapToCurrentSlide();
 loadLifeData();
-window.eastasiancluster = eastasiancluster
+
+window.southasiacluster = southasiancluster

@@ -99,7 +99,14 @@ const slides = [
       <li> Mongolian </li> 
       <li> Thai </li> 
     </ul>
-    
+
+
+
+    <h4> Legend </h4>
+    <i style="background: #00FFDB"></i><span>high frequency high clustering</span><br>
+    <i style="background: #00A3FF"></i><span>high frequency low clustering</span><br>
+    <i style="background: #5B00FF"></i><span>low frequency low clustering</span><br>
+    <i style="background: #FF00A4"></i><span>No Relationship</span><br>
     `,
     era: 'PhD',
     showpopups: true,
