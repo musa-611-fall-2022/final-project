@@ -102,6 +102,7 @@ function showFonMap(map, name)
     
         //popup bar
         let popup = document.getElementById("popUp");
+        let mapAfter = document.getElementById("map");
         const facTyElement = document.getElementById('tp');
         const facNameElement = document.getElementById('nam');
         const facVillyElement = document.getElementById('villy');
@@ -112,6 +113,7 @@ function showFonMap(map, name)
         facNameElement.innerHTML = facName;
         facVillyElement.innerHTML = facVillage;
         popup.classList.add("open-popUp");
+        mapAfter.classList.add("mapAfter");
 
         //show comments
         app.comments = JSON.parse(localStorage.getItem('comments'))

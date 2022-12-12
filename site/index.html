@@ -27,20 +27,22 @@
 
 <body>
 
-
+    <!--map part-->
     <div id="map" class="map"></div>
-    <span class="Facility_Type">Facility Type</span>
-    <input type="search" id="name" placeholder="Enter a name" />
-    <button id="showlocation">Search</button>
+    <div class="searchBar">
+        <input type="search" id="name" placeholder="Enter a name..." />
+        <button id="showlocation">Search</button>
+    </div>
+
 
     <!--popup detail info-->
     <div class="popUp" id="popUp">
         <h2>Facility Information</h2>
-        <p id = "tp"></p>
-        <p id = "nam"></p>
-        <p id = "villy"></p>
-        <p id = "saved-comments"></p>
-        <textarea id="comment" class="comment" placeholder="Update Your Notes..." cols="50" rows="5"></textarea>
+        <p id = "tp" class="detail"></p>
+        <p id = "nam" class="detail"></p>
+        <p id = "villy" class="detail"></p>
+        <p id = "saved-comments" class="detail"></p>
+        <textarea id="comment" class="comment" placeholder="Update Your Notes..." cols="20" rows="3"></textarea>
         <button type="button" onclick="closeAndSave(app)">Save</button>
     </div>
 
@@ -60,7 +62,10 @@
         function closeAndSave(app){
             map.removeLayer(map.pLayer);
             let popup = document.getElementById("popUp");
+            let mapAfter = document.getElementById("map");
             popup.classList.remove("open-popUp"); 
+            mapAfter.classList.remove("mapAfter");
+
 
             const commentInput = comments.value;
             const facID = app.currentFac.properties['FID'];

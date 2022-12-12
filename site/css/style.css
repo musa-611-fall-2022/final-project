@@ -6,37 +6,29 @@ body {
     padding: 0;
 }
 
-
 .popUp{
-    width: 100%;
     height: 0;
-    background: #fff;
-    border-radius: 6px;
-    text-align: center;
-    padding: 0 30px 30px;
-    color: #333;
+    background: rgb(218, 138, 138);
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    padding: 0 35px 50px;
+    transform: scale(0);
+    color: rgb(255, 255, 255);
     visibility: hidden;
-    transition: transform 0.4s, bottom 0.4s;
+    transition: transform 0.4s, top 1s;
+    margin: 15px;
 }
 
 .open-popUp{
     visibility: visible;
-    height: 25%;
+    transform: scale(1);
+    height: 70%;
 }
-
-.popUp img{
-    width: 80px;
-    margin-top: 20px;
-    border-radius: 50%;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    left: 50px;
-    position: fixed;
-}
-
 
 .popUp button{
     width: 100%;
-    margin-top: 50px;
+    margin-top: 20px;
     padding: 10px 0;
     background: #7388ad;
     color: #fff;
@@ -46,7 +38,49 @@ body {
     cursor: pointer;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
+
+.detail {
+    border-radius: 5px;
+    padding: 10px;
+    margin: 5px;
+}
+
+
+#comment {
+    border-radius: 11px;
+    padding: 25px;
+    margin-top: 10px
+}
+
+
+
 .map {
     height: 100%;
-    position: relative;
+    z-index: 1;
+}
+
+.mapAfter {
+    height: 25%;
+}
+
+.searchBar {
+    position: absolute;
+    z-index: 10000;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    align-items: flex-end;
+    margin-top: 12px;
+    margin-left: -10px;
+}
+
+#name {
+    height: 28px;
+    width: 200px;
+    border-radius: 6px;
+}
+#showlocation {
+    height: 28px;
+    border-radius: 6px;
 }

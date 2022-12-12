@@ -17,7 +17,7 @@ let facilities = document.querySelector('#name');
 function Search(map, search, facilities){
 search.addEventListener('click', () => {
   let f=facilities.value;
-  showFonMap(map,f)
+  showFonMap(map,f);
 })
 }
 
