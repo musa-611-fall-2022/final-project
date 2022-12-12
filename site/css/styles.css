@@ -194,3 +194,7 @@ h1 {
     font-weight: 300;
     font-size: small;
 }
+
+#show-hotspot-list {
+    margin-top: 3.4rem;
+}

@@ -1,6 +1,6 @@
-import { initializeMap, locateMe } from "./map.js";
+import { initializeMap, locateMe, addPointsToMap } from "./map.js";
 import { getData, dataPullFailure, dataPullSuccess, buildURL, getSpeciesList } from "./dataPull.js";
-import { buildRecentObsList } from "./popups.js";
+import { buildRecentObsList, buildSavedHotspotList } from "./popups.js";
 
 // setup
 
@@ -10,6 +10,14 @@ locateMe(map);
 
 // initialize species list
 let speciesList = await getSpeciesList();
+
+// initialize hotspot target list
+let hotspotList = JSON.parse(localStorage.getItem('hotspotList') || '{"type": "FeatureCollection", "features": []}');
+if (hotspotList.features.length > 0) {
+    buildSavedHotspotList(hotspotList, true);
+} else {
+    buildSavedHotspotList(hotspotList, false);
+}
 
 // on startup, always load current recent observation data
 let url = buildURL('recentObs');
@@ -24,6 +32,8 @@ async function onRecentObsClick() {
         notableObsButton.classList.add("unpressed");
         hotspotButton.classList.remove("pressed");
         hotspotButton.classList.add("unpressed");
+        savedHotspotButton.classList.remove("pressed");
+        savedHotspotButton.classList.add("unpressed");
         url = buildURL('recentObs');
         currentPoints = await getData(url, dataPullSuccess, dataPullFailure, map, 'recentObs');
     } else {
@@ -41,6 +51,8 @@ async function onNotableObsClick() {
         recentObsButton.classList.add("unpressed");
         hotspotButton.classList.remove("pressed");
         hotspotButton.classList.add("unpressed");
+        savedHotspotButton.classList.remove("pressed");
+        savedHotspotButton.classList.add("unpressed");
         url = buildURL('notableObs');
         currentPoints = await getData(url, dataPullSuccess, dataPullFailure, map, 'notableObs');
     } else {
@@ -58,6 +70,8 @@ async function onHotspotClick() {
         recentObsButton.classList.add("unpressed");
         notableObsButton.classList.remove("pressed");
         notableObsButton.classList.add("unpressed");
+        savedHotspotButton.classList.remove("pressed");
+        savedHotspotButton.classList.add("unpressed");
         url = buildURL('hotspot');
         currentPoints = await getData(url, dataPullSuccess, dataPullFailure, map, 'hotspot');
     } else {
@@ -65,6 +79,32 @@ async function onHotspotClick() {
         hotspotButton.classList.remove("pressed");
         hotspotButton.classList.add("unpressed");
     }
+}
+
+function onSavedHotspotButtonClick() {
+    console.log('jotspot lick');
+    if (savedHotspotButton.classList.contains("unpressed")) {
+        savedHotspotButton.classList.remove("unpressed");
+        savedHotspotButton.classList.add("pressed");
+        recentObsButton.classList.remove("pressed");
+        recentObsButton.classList.add("unpressed");
+        notableObsButton.classList.remove("pressed");
+        notableObsButton.classList.add("unpressed");
+        hotspotButton.classList.remove("pressed");
+        hotspotButton.classList.add("unpressed");
+        addPointsToMap(hotspotList, map);
+        currentPoints = hotspotList;
+    } else {
+        map.removeLayer(map.obsLayer);
+        savedHotspotButton.classList.remove("pressed");
+        savedHotspotButton.classList.add("unpressed");
+    }
+}
+
+function onClearHotspotButtonClick() {
+    hotspotList.features = [];
+    localStorage.setItem('hotspotList', JSON.stringify(hotspotList));
+    buildSavedHotspotList(hotspotList, false);
 }
 
 async function onSearchClick() {
@@ -96,9 +136,16 @@ searchBar.addEventListener('keypress', function(event) {
         searchButton.click();
     }
 });
+// event listener for show saved hotspots button
+let savedHotspotButton = document.querySelector("#show-hotspot-list");
+savedHotspotButton.addEventListener('click', onSavedHotspotButtonClick);
+// event listener for clear saved hotspots button
+let clearHotspotButton = document.querySelector("#clear-hotspot-list");
+clearHotspotButton.addEventListener('click', onClearHotspotButtonClick);
 
 export {
     map,
+    hotspotList,
 };
 
 window.currentPoints = currentPoints;
