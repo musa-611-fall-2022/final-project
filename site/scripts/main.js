@@ -4,7 +4,7 @@ import { loadBar } from "./bar.js";
 
 const container = document.getElementById("container");
 
-const margin = {top: 0, right: 0, bottom: 0, left: 0};
+const margin = {top: 0, right: 30, bottom: 50, left: 30};
 const tooltipMargin = {top: 12, right: 12, bottom: 12, left: 12};
 
 const width = 720 - margin.left - margin.right;
@@ -17,9 +17,8 @@ const tooltip = document.querySelector('#tooltipContainer');
 const controlAppr = document.getElementById('approved');
 const controlCurrent = document.getElementById("current");
 
-let AYPP = {};
-const unitTypes = ["low-income", "moderate-income",	"middle-income", "market", "condo"];
-const colors = ["#5CB867", "#159524", "#065F11", "#DC4230", "#99221A"];
+const unitTypes = ["low_income", "moderate_income", "middle_income", "remaining_affordable", "market", "condo", "remaining_market"];
+const colors = ["#065F11", "#159524", "#5CB867", "#B6DEBC", "#DC4230", "#99221A", "#DC4230"];
 
 //Adding SVG to play with
 
@@ -35,11 +34,11 @@ let svg = body.append("svg")
 
 function whichData(filterTerm) {
     if (selectedMap == "Current Progress") {
-        let data = filterTerm.data.filter(element => element.progress == 1);
-        return data;
+        let d = filterTerm.filter(element => element.progress == 1);
+        return d;
     } else if (selectedMap == "Approved Plans") { 
-        let data = filterTerm.data.filter(element => element);  
-        return data;
+        let d = filterTerm.filter(element => element);  
+        return d;
     };
 }
 
@@ -60,37 +59,19 @@ function loadPaths(data){
         .attr("stroke-width", "3px")
         .attr("class", "building")
         .call(tooltipEvents)
-        
-    // //stacked 
-    // const stackGen = d3.stack()
-    //     .keys(unitTypes);
-
-    // let stackedSeries = stackGen(data)
-    
-    // //scale bar proportion to the width of the tooltip
-    // let xScale = d3.scaleLinear()
-    // .domain([0, d3.max(data, d => d.Units)])
-    // .range([0, 100]);
-
-    // //colors to match the unit affordability designations
-    // let colorScale = d3.scaleOrdinal()
-    //     .domain(["low-income", "moderate-income",	"middle-income", "market", "condo"])
-    //     .range(["#065F11", "#159524", "#5CB867", "#DC4230", "#99221A"]);
- 
-    // let x = bbox.x;
-    // let y = bbox.y;
+    .append("rect")
+        .attr("fill", "black")
 }
 
 function getUnitTotals(data) {
     let totals = {totalUnits: 0};
-    console.log(data);
     for (let u of unitTypes) {
         Object.defineProperty(totals, u, {  
             value: 0,
             writable: true});
     }
 
-    for (let r of data.data) {
+    for (let r of data) {
         for (let u of unitTypes) {
             if (parseInt(r[u]) == 0 || (parseInt(r[u]))) {
                 let y = parseInt(r[u]);        
@@ -100,22 +81,27 @@ function getUnitTotals(data) {
         }
     }
 
-    Object.defineProperty(totals, "remaining", {    
-        value: 6430-totals.totalUnits,
+    if (selectedMap == "Approved Plans"){
+    Object.defineProperty(totals, "remaining_affordable", {    
+        value: 2250 - totals.low_income - totals.middle_income - totals.moderate_income,
         writable: true});
+    Object.defineProperty(totals, "remaining_market", {    
+        value: 4180 - totals.market - totals.condo,
+        writable: true});
+    }
 
-    console.log(totals);
-    return totals
+    return totals;
 }
+
+//getting totals for the bottom bar text labels, which summarize in a broader category than individual units used for each building
 
 function onInventoryLoadSuccess(data) {
     //Function to load the current progress or the future approved plans of the development
     console.log(data);
     loadPaths(data);
-    getUnitTotals(data);
-    //loadBar(data);
     controlAppr.addEventListener("click", changeFilter);
     controlCurrent.addEventListener("click", changeFilter);
+    loadBar(getUnitTotals(whichData(data)), selectedMap);
 }
 
 readCSV(onInventoryLoadSuccess);
@@ -144,6 +130,7 @@ window.tooltip = tooltip;
 window.tooltipWidth = tooltipWidth;
 window.unitTypes = unitTypes;
 window.colors = colors;
+window.selectedMap = selectedMap;
 
 
 

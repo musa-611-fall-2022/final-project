@@ -10,8 +10,7 @@ function readCSV(onSuccess, onFailure) {
     })
     .then(text => {
         const data = Papa.parse(text, { header: true });
-        console.log(data);
-        return data;
+        return data.data;
     })
     .then(onSuccess);
 }

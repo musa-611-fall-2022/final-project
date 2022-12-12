@@ -201,6 +201,14 @@ td {
 
 }
 
+.bar-label {
+    font-family: 'Roboto Condensed';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 16px;
+}
+
 .building {
     fill:#DC4230;
     pointer-events: all;

@@ -20,8 +20,6 @@ function handleMouseleave() {
 
 function setContents(selection) {
  
-    console.log(selection);
-
     d3.selectAll(".tooltip-header") //Address or B#
       .data(selection)
       .join("h3")
@@ -53,8 +51,8 @@ function setContents(selection) {
       
       //colors to match the unit affordability designations
       let colorScale = d3.scaleOrdinal()
-        .domain(["low-income", "moderate-income",	"middle-income", "market", "condo"])
-        .range(["#065F11", "#159524", "#5CB867", "#DC4230", "#99221A"]);
+        .domain(["low-income", "moderate-income",	"middle-income", "market", "condo", "remaining"])
+        .range(["#065F11", "#159524", "#5CB867", "#DC4230", "#99221A", "#CCCCCC"]);
         
       //add the stacked bar
       miniBar.selectAll("rect")
