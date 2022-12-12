@@ -35,12 +35,13 @@
 
     <!--popup detail info-->
     <div class="popUp" id="popUp">
-        <img src="waterPoint.png" alt="">
         <h2>Facility Information</h2>
         <p id = "tp"></p>
         <p id = "nam"></p>
         <p id = "villy"></p>
-        <button type="button" onclick="closePopUp()">OK</button>
+        <p id = "saved-comments"></p>
+        <textarea id="comment" class="comment" placeholder="Update Your Notes..." cols="50" rows="5"></textarea>
+        <button type="button" onclick="closeAndSave(app)">Save</button>
     </div>
 
     <!--leaflet's js-->
@@ -53,10 +54,21 @@
     <script type="module" src="js\main.js"></script>
     <script>
         let popup = document.getElementById("popUp");
-
-        function closePopUp(){
+        const comments = document.getElementById('comment');
+        const savedComments = document.getElementById('saved-comments');
+        
+        function closeAndSave(app){
+            map.removeLayer(map.pLayer);
             let popup = document.getElementById("popUp");
             popup.classList.remove("open-popUp"); 
+
+            const commentInput = comments.value;
+            const facID = app.currentFac.properties['FID'];
+            app.comments[facID] = commentInput;
+
+            localStorage.setItem('comments', JSON.stringify(app.comments));
+
+
         }
     </script>
 

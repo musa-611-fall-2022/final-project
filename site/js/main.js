@@ -73,7 +73,7 @@ function fakePosition(map) {
 //setupGeolocationEvent();
 fakePosition(map);
 Search(map, search, facilities);
-
+window.map = map;
 
 
 

@@ -8,6 +8,13 @@
  */
 //click on a facility on a map, and then sends the data to other parts of the code to be used as needed.
 
+let app = {
+    currentFac: null,
+    comments: {},
+};
+
+
+
 function initMap() {
     const map = L.map('map', { maxZoom: 22, preferCanvas: true }).setView([39.95, -75.16], 13);
 
@@ -77,7 +84,8 @@ function showFonMap(map, name)
     // Set the map's center and zoom level based on the bounds of the added layer
     map.fitBounds(bounds);
     map.FLayer.addEventListener('click', (evt) =>{
-        
+        //save current facility 
+        app.currentFac = evt.layer.feature;
         // leave only cliked point
         if (map.pLayer !== undefined){
             map.removeLayer(map.pLayer);
@@ -104,12 +112,22 @@ function showFonMap(map, name)
         facNameElement.innerHTML = facName;
         facVillyElement.innerHTML = facVillage;
         popup.classList.add("open-popUp");
+
+        //show comments
+        app.comments = JSON.parse(localStorage.getItem('comments'))
+        const facID = app.currentFac.properties['FID'];
+        comments.value = "";
+        let commentsAdded = app.comments[facID];
+        if (commentsAdded == undefined){
+            commentsAdded = "Nothing for now";
+            };
+        savedComments.innerHTML = `Notes: ${commentsAdded}`;
     });
 })};
 
 
 
-
+window.app = app;
 export {
     initMap,
     showFonMap,
