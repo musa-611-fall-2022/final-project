@@ -19,6 +19,7 @@ const map_roof = new mapboxgl.Map({
 window.map = map;
 window.map_roof = map_roof;
 
+let solar = {};
 let solar1 = {};
 let solar2 = {};
 let solar3 = {};
@@ -44,15 +45,16 @@ const geocoder_roof = new MapboxGeocoder({
         curve:1
     }
 });
+
 document.getElementById('geocoder').appendChild(geocoder.onAdd(map));
 
 document.getElementById('geocoder-roof').appendChild(geocoder_roof.onAdd(map_roof));
-
+window.geocoder_roof = geocoder_roof;
 // Add geolocate control to the map.
 map.addControl(
     new mapboxgl.GeolocateControl({
         positionOptions: {
-        enableHighAccuracy: true
+            enableHighAccuracy: true
         },
         // When active the map will receive updates to the device's location as it changes.
         trackUserLocation: true,
@@ -64,7 +66,7 @@ map.addControl(
 map_roof.addControl(
     new mapboxgl.GeolocateControl({
         positionOptions: {
-        enableHighAccuracy: true
+            enableHighAccuracy: true
         },
         // When active the map will receive updates to the device's location as it changes.
         trackUserLocation: true,
@@ -77,114 +79,150 @@ map_roof.addControl(
 map.addControl(new mapboxgl.NavigationControl());
 map_roof.addControl(new mapboxgl.NavigationControl());
 
-// $.ajax({
-//     url: "data/Solar_Buildings1.geojson",
-//     type: "GET",
-//     dataType: "json",
-//     async: false,
-//     success: function(data) {
-//         solar1 = data;
-//     },
-//     error: function (err) {
-//         console.log(err);
-//     }
-// });
-//
-// $.ajax({
-//     url: "data/Solar_Buildings2.geojson",
-//     type: "GET",
-//     dataType: "json",
-//     async: false,
-//     success: function(data) {
-//         solar2 = data;
-//     },
-//     error: function (err) {
-//         console.log(err);
-//     }
-// });
-//
-// $.ajax({
-//     url: "data/Solar_Buildings3.geojson",
-//     type: "GET",
-//     dataType: "json",
-//     async: false,
-//     success: function(data) {
-//         solar3 = data;
-//     },
-//     error: function (err) {
-//         console.log(err);
-//     }
-// });
-//
-// $.ajax({
-//     url: "data/Solar_Buildings4.geojson",
-//     type: "GET",
-//     dataType: "json",
-//     async: false,
-//     success: function(data) {
-//         solar4 = data;
-//     },
-//     error: function (err) {
-//         console.log(err);
-//     }
-// });
-//
-// $.ajax({
-//     url: "data/Solar_Buildings5.geojson",
-//     type: "GET",
-//     dataType: "json",
-//     async: false,
-//     success: function(data) {
-//         solar5 = data;
-//     },
-//     error: function (err) {
-//         console.log(err);
-//     }
-// });
-//
-// $.ajax({
-//     url: "data/Solar_Buildings6.geojson",
-//     type: "GET",
-//     dataType: "json",
-//     async: false,
-//     success: function(data) {
-//         solar6 = data;
-//     },
-//     error: function (err) {
-//         console.log(err);
-//     }
-// });
-//
-// $.ajax({
-//     url: "data/Solar_Buildings7.geojson",
-//     type: "GET",
-//     dataType: "json",
-//     async: false,
-//     success: function(data) {
-//         solar7 = data;
-//     },
-//     error: function (err) {
-//         console.log(err);
-//     }
-// });
-//
-// let neighbors = {};
-//
-//
-// $.ajax({
-//     url: "data/neighborhoods_results.geojson",
-//     type: "GET",
-//     dataType: "json",
-//     async: false,
-//     success: function(data) {
-//         neighbors = data;
-//     },
-//     error: function (err) {
-//         console.log(err);
-//     }
-// });
+$.ajax({
+    url: "data/Solar_Buildings1.geojson",
+    type: "GET",
+    dataType: "json",
+    async: false,
+    success: function(data) {
+        solar = data;
+    },
+    error: function (err) {
+        console.log(err);
+    }
+});
+
+$.ajax({
+    url: "data/Solar_Buildings1.geojson",
+    type: "GET",
+    dataType: "json",
+    async: false,
+    success: function(data) {
+        solar1 = data;
+    },
+    error: function (err) {
+        console.log(err);
+    }
+});
+
+
+
+$.ajax({
+    url: "data/Solar_Buildings2.geojson",
+    type: "GET",
+    dataType: "json",
+    async: false,
+    success: function(data) {
+        solar2 = data;
+        for (let i = 0; i < data['features'].length; i++) {
+            solar['features'].push(data['features'][i])
+        }
+    },
+    error: function (err) {
+        console.log(err);
+    }
+});
+
+// console.log(solar)
+$.ajax({
+    url: "data/Solar_Buildings3.geojson",
+    type: "GET",
+    dataType: "json",
+    async: false,
+    success: function(data) {
+        solar3 = data;
+        for (let i = 0; i < data['features'].length; i++) {
+            solar['features'].push(data['features'][i])
+        }
+    },
+    error: function (err) {
+        console.log(err);
+    }
+});
+
+$.ajax({
+    url: "data/Solar_Buildings4.geojson",
+    type: "GET",
+    dataType: "json",
+    async: false,
+    success: function(data) {
+        solar4 = data;
+        for (let i = 0; i < data['features'].length; i++) {
+            solar['features'].push(data['features'][i])
+        }
+    },
+    error: function (err) {
+        console.log(err);
+    }
+});
+
+$.ajax({
+    url: "data/Solar_Buildings5.geojson",
+    type: "GET",
+    dataType: "json",
+    async: false,
+    success: function(data) {
+        solar5 = data;
+        for (let i = 0; i < data['features'].length; i++) {
+            solar['features'].push(data['features'][i])
+        }
+    },
+    error: function (err) {
+        console.log(err);
+    }
+});
+
+$.ajax({
+    url: "data/Solar_Buildings6.geojson",
+    type: "GET",
+    dataType: "json",
+    async: false,
+    success: function(data) {
+        solar6 = data;
+        for (let i = 0; i < data['features'].length; i++) {
+            solar['features'].push(data['features'][i])
+        }
+    },
+    error: function (err) {
+        console.log(err);
+    }
+});
+
+$.ajax({
+    url: "data/Solar_Buildings7.geojson",
+    type: "GET",
+    dataType: "json",
+    async: false,
+    success: function(data) {
+        solar7 = data;
+        for (let i = 0; i < data['features'].length; i++) {
+            solar['features'].push(data['features'][i])
+        }
+    },
+    error: function (err) {
+        console.log(err);
+    }
+});
+
+let neighbors = {};
+
+$.ajax({
+    url: "data/neighborhoods_results.geojson",
+    type: "GET",
+    dataType: "json",
+    async: false,
+    success: function(data) {
+        neighbors = data;
+    },
+    error: function (err) {
+        console.log(err);
+    }
+});
 
 window.neighbors = neighbors;
+window.solar = solar;
+
+
 
 map.on('load', () => {
     map.addSource('solar-roof', {
@@ -228,20 +266,20 @@ map.on('load', () => {
     });
 
     // When clicked, show the neighborhood information
-    // map.on('click', 'neighborhood', (e) => {
-    //     new mapboxgl.Popup()
-    //         .setLngLat(e.lngLat)
-    //         .setHTML(e.features[0].properties.MAPNAME)
-    //         .addTo(map);
-    // });
-    //
-    // map.on('mouseenter', 'neighborhood', () => {
-    //     map.getCanvas().style.cursor = 'pointer';
-    // });
-    //
-    // map.on('mouseleave', 'neighborhood', () => {
-    //     map.getCanvas().style.cursor = '';
-    // });
+    map.on('click', 'neighborhood', (e) => {
+        new mapboxgl.Popup()
+            .setLngLat(e.lngLat)
+            .setHTML(e.features[0].properties.MAPNAME)
+            .addTo(map);
+    });
+
+    map.on('mouseenter', 'neighborhood', () => {
+        map.getCanvas().style.cursor = 'pointer';
+    });
+
+    map.on('mouseleave', 'neighborhood', () => {
+        map.getCanvas().style.cursor = '';
+    });
 
     // When hovered, show the neighborhood information
     // let hoveredCountyId = null;
@@ -332,7 +370,7 @@ map_roof.on('load', () => {
         'filter': ['==', '$type', 'Polygon']
     });
     map_roof.addLayer({
-        'id': 'roof1_line',
+        'id': 'roof_line1',
         'type': 'line',
         'source': 'solar-roof1',
         'paint': {
@@ -630,6 +668,7 @@ map_roof.on('load', () => {
         popup.remove();
     });
 });
+
 $("#select-neighbor").change(function(){
     var selectVal = $("#select-neighbor option:selected").val();
     let name_arr = selectVal.split('_');
@@ -657,12 +696,10 @@ $("#select-neighbor").change(function(){
             map.fitBounds(bounds, {
                 padding: 20
             });
-            // map.flyTo({
-            //     center: [neighbors['features'][i]['properties']['Lon'], neighbors['features'][i]['properties']['Lat']],
-            //     zoom: 16,
-            //     essential: true // this animation is considered essential with respect to prefers-reduced-motion
-            // });
+
             break
         }
     }
 });
+
+
