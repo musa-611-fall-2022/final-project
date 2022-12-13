@@ -452,7 +452,7 @@ async function onConfirmButtonClick() {
 
   // query map
   try {
-    const mapResp = await fetch(`http://mobiladelphia.herokuapp.com/test-query/${mapQuery}`);
+    const mapResp = await fetch(`https://mobiladelphia.herokuapp.com/test-query/${mapQuery}`);
     const mapData = await mapResp.json();
     const mapUpdateData = mapData.results;
     console.log('map base data ', mapBaseData);
