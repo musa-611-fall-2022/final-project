@@ -2,6 +2,179 @@
 //import data and functions
 import { initializeMap} from './map.js';
 
+
+function fetchComplaintData() {
+  fetch(`./data/complaint.csv`)
+    .then(resp => resp.text())
+    .then(data => {
+      const complaintData = Papa.parse(data, { header: true });
+      console.log(complaintData);
+      window.complaintData = complaintData;
+    });
+    fetch(`./data/information.csv`)
+    .then(resp => resp.text())
+    .then(data => {
+      const infoData = Papa.parse(data, { header: true });
+      console.log(infoData);
+    });
+    fetch(`./data/lifequality.csv`)
+    .then(resp => resp.text())
+    .then(data => {
+      const qolData = Papa.parse(data, { header: true });
+      console.log(qolData);
+    });
+    fetch(`./data/miscellaneous.csv`)
+    .then(resp => resp.text())
+    .then(data => {
+      const miscData = Papa.parse(data, { header: true });
+      console.log(miscData);
+    });
+    fetch(`./data/streets.csv`)
+    .then(resp => resp.text())
+    .then(data => {
+      const streetsData = Papa.parse(data, { header: true });
+      console.log(streetsData);
+    });
+
+    const cleanComplaintData = {}
+    for (const element of window.complaintData.data){
+      cleanComplaintData.push(
+      )
+    }
+      
+
+    var options = {
+      series: [
+      {
+        name: 'South',
+        data: [
+          {
+            x: "02-10-2017 GMT",
+            y: 34
+          },
+          {
+            x: "02-11-2017 GMT",
+            y: 43
+          },
+          {
+            x: "02-12-2017 GMT",
+            y: 31
+          },
+          {
+            x: "02-13-2017 GMT",
+            y: 43
+          },
+          {
+            x: "02-14-2017 GMT",
+            y: 33
+          },
+          {
+            x: "02-15-2017 GMT",
+            y: 52
+          }
+        ]
+      },
+      {
+        name: 'North',
+        data: [
+          {
+            x: "02-10-2017 GMT",
+            y: 34
+          },
+          {
+            x: "02-11-2017 GMT",
+            y: 43
+          },
+          {
+            x: "02-12-2017 GMT",
+            y: 31
+          },
+          {
+            x: "02-13-2017 GMT",
+            y: 43
+          },
+          {
+            x: "02-14-2017 GMT",
+            y: 33
+          },
+          {
+            x: "02-15-2017 GMT",
+            y: 52
+          }
+        ]
+      },
+      {
+        name: 'Central',
+        data: [
+          {
+            x: "02-10-2017 GMT",
+            y: 34
+          },
+          {
+            x: "02-11-2017 GMT",
+            y: 43
+          },
+          {
+            x: "02-12-2017 GMT",
+            y: 31
+          },
+          {
+            x: "02-13-2017 GMT",
+            y: 43
+          },
+          {
+            x: "02-14-2017 GMT",
+            y: 33
+          },
+          {
+            x: "02-15-2017 GMT",
+            y: 52
+          }
+        ]
+      }
+    ],
+      chart: {
+      type: 'area',
+      height: 200,
+      stacked: true,
+      events: {
+        selection: function (chart, e) {
+          console.log(new Date(e.xaxis.min))
+        }
+      },
+    },
+    colors: ['#008FFB', '#00E396', '#CED4DC'],
+    dataLabels: {
+      enabled: false
+    },
+    stroke: {
+      curve: 'smooth'
+    },
+    fill: {
+      type: 'gradient',
+      gradient: {
+        opacityFrom: 0.6,
+        opacityTo: 0.8,
+      }
+    },
+    legend: {
+      position: 'top',
+      horizontalAlign: 'left'
+    },
+    xaxis: {
+      type: 'datetime'
+    },
+    };
+  
+    var chart = new ApexCharts(document.querySelector("#chart"), options);
+    chart.render();
+
+}
+
+fetchComplaintData();
+
+
+
 function fetchData() {
   fetch(`./data/data.csv`)
     .then(resp => resp.text())
@@ -111,131 +284,3 @@ function addToMap(dataToAdd) {
     progressBarScroll();
   };
 
-
-
-  
-  var options = {
-    series: [
-    {
-      name: 'South',
-      data: [
-        {
-          x: "02-10-2017 GMT",
-          y: 34
-        },
-        {
-          x: "02-11-2017 GMT",
-          y: 43
-        },
-        {
-          x: "02-12-2017 GMT",
-          y: 31
-        },
-        {
-          x: "02-13-2017 GMT",
-          y: 43
-        },
-        {
-          x: "02-14-2017 GMT",
-          y: 33
-        },
-        {
-          x: "02-15-2017 GMT",
-          y: 52
-        }
-      ]
-    },
-    {
-      name: 'North',
-      data: [
-        {
-          x: "02-10-2017 GMT",
-          y: 34
-        },
-        {
-          x: "02-11-2017 GMT",
-          y: 43
-        },
-        {
-          x: "02-12-2017 GMT",
-          y: 31
-        },
-        {
-          x: "02-13-2017 GMT",
-          y: 43
-        },
-        {
-          x: "02-14-2017 GMT",
-          y: 33
-        },
-        {
-          x: "02-15-2017 GMT",
-          y: 52
-        }
-      ]
-    },
-    {
-      name: 'Central',
-      data: [
-        {
-          x: "02-10-2017 GMT",
-          y: 34
-        },
-        {
-          x: "02-11-2017 GMT",
-          y: 43
-        },
-        {
-          x: "02-12-2017 GMT",
-          y: 31
-        },
-        {
-          x: "02-13-2017 GMT",
-          y: 43
-        },
-        {
-          x: "02-14-2017 GMT",
-          y: 33
-        },
-        {
-          x: "02-15-2017 GMT",
-          y: 52
-        }
-      ]
-    }
-  ],
-    chart: {
-    type: 'area',
-    height: 200,
-    stacked: true,
-    events: {
-      selection: function (chart, e) {
-        console.log(new Date(e.xaxis.min))
-      }
-    },
-  },
-  colors: ['#008FFB', '#00E396', '#CED4DC'],
-  dataLabels: {
-    enabled: false
-  },
-  stroke: {
-    curve: 'smooth'
-  },
-  fill: {
-    type: 'gradient',
-    gradient: {
-      opacityFrom: 0.6,
-      opacityTo: 0.8,
-    }
-  },
-  legend: {
-    position: 'top',
-    horizontalAlign: 'left'
-  },
-  xaxis: {
-    type: 'datetime'
-  },
-  };
-
-  var chart = new ApexCharts(document.querySelector("#chart"), options);
-  chart.render();
