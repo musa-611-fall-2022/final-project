@@ -1,3 +1,14 @@
+// Tree Inventory Surveying App
+// ============================
+
+// The _main.js_ module defines the primary functionality of the app, and serves
+// as the cross-component coordinator. Additional functionality is found in
+// individual component modules:
+// * [map.js](map.html) for behavior related to the map
+// * [tree-info-form.js](tree-info-form.html) for form behavior
+// * [toast.js](toast.html) for the messages that get shown temporarily
+// * [inventory.js](inventory.html) for functions governing the loading/saving
+//   of tree inventory and notes
 
 import { initMap, updateUserPositionOn } from './map.js';
 import { initHouseInfoForm, showHouseDataInForm } from './house-info-form.js';
@@ -41,9 +52,9 @@ function onHouseSelected(evt) {
   const house = evt.detail.house;
   app.currentHouse = house;
 
-  const houseId = house.properties['OBJECTID'];
-  const notes = app.notes[houseId] || '';
-  showHouseDataInForm(house, notes);
+  //const houseId = house.properties['OBJECTID'];
+  //const notes = app.notes[houseId] || '';
+  showHouseDataInForm(house);
 }
 
 // **Geolocation** -- `onUserPositionSuccess` will be called by the geolocation
@@ -89,10 +100,10 @@ function setupInteractionEvents() {
 initToast();
 initHouseInfoForm();
 setupGeolocationEvent();
+setupInteractionEvents();
 
 loadNotes(notes => {
-  app.notes = notes;
-  setupInteractionEvents();
+  app.notes = notes; 
 });
 downloadInventory(onInventoryLoadSuccess);
 

@@ -1,3 +1,4 @@
+
 function onHouseClicked(evt) {
   console.log(evt);
   const house = evt.layer.feature;
@@ -5,6 +6,8 @@ function onHouseClicked(evt) {
   const houseSelectedEvent = new CustomEvent('house-selected', { detail: { house } });
   window.dispatchEvent(houseSelectedEvent);
 }
+
+
 
 function initMap() {
     const map = L.map('map', { maxZoom: 22, preferCanvas: true }).setView([39.95, -75.16], 13);
@@ -17,21 +20,33 @@ function initMap() {
         attribution: '© <a href="https://www.mapbox.com/about/maps/">Mapbox</a> © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> <strong><a href="https://www.mapbox.com/map-feedback/" target="_blank">Improve this map</a></strong>',
     }).addTo(map);
 
+    
     map.houseLayer = L.geoJSON(null, {
       pointToLayer: (feature, latlng) => L.circleMarker(latlng),
       style: {
-        fillColor: '#83bf15',
-        fillOpacity: 0.3,
+        fillColor: '#942929',
+        fillOpacity: 0.2,
         stroke: false,
       },
-    }).addTo(map);
+          })
+    .addTo(map)
+    function onEachFeature(feature, layer) {
+  
+      layer.bindPopup("Name: " + feature.properties['RESNAME'] + "<br>" + "City: " + feature.properties['City']);
+  }   
 
+   
     map.houseLayer.addEventListener('click', onHouseClicked);
-
+    
     map.positionLayer = L.geoJSON(null).addTo(map);
+
+    map.popupLayer = L.geoJSON(null,{onEachFeature: onEachFeature}).addTo(map);
 
     return map;
   }
+
+  
+
 
   function updateUserPositionOn(map, pos) {
     map.positionLayer.addData({
