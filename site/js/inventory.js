@@ -15,7 +15,7 @@ const firebaseApp = initializeApp(firebaseConfig);
 const firestoreDb = getFirestore(firebaseApp);
 
 function downloadInventory(onSuccess, onFailure) {
-  fetch('data/NPS_-_National_Register_of_Historic_Places_Locations.geojson')
+  fetch('data/NPS_-_National_Register_of_Historic_Places_Locations2.geojson')
   .then(resp => {
     if (resp.status === 200) {
       const data = resp.json();
