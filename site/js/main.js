@@ -49,34 +49,6 @@ seattleNameFilter.addEventListener('input', () => {
     showFtInList(filteredFt, seattleList);
 });
 
-// let app = {
-//     currentBiz: null,
-//     notes: null,
-//   };
-
-// const saveBizEl = document.getElementById('.add-point');
-
-// function onNotesSaveSuccess() {
-//     showToast('Saved!', 'toast-success');
-//   }
-
-// function onSaveClicked() {
-//     const bizId = app.currentBiz.properties['name'];
-//     saveNote(bizId, app, onNotesSaveSuccess);
-//   }
-
-// function setupInteractionEvents() {
-//     // map.treeLayer.addEventListener('click', onTreeSelected);
-//     saveBizEl.addEventListener('click', onSaveClicked);
-//   }
-
-//   setupInteractionEvents();
-
-// loadNotes(notes => {
-//     app.notes = notes;
-//   });
-//   initToast();
-
 window.filipinotown = filipinotown;
 window.seattleMap = seattleMap;
 window.seattleList = seattleList;

@@ -1,6 +1,5 @@
-// import { saveNote } from './storage.js';
-import { saveNote } from './storage.js';
-import { showToast } from './toast.js';
+import { loadNotes, saveNote } from './storage.js';
+import { initToast, showToast } from './toast.js';
 
 
 let newBusinesses = {
@@ -112,7 +111,7 @@ function initializeSeattleMap() {
 
 
             function showBizDataInForm(biz) {
-                const bizName = biz.properties['name'];
+                const bizName = biz.properties['business-name'];
                 bizNameEl.innerHTML = bizName;
             }
 
@@ -128,7 +127,7 @@ function initializeSeattleMap() {
             function onSaveClicked() {
                 const content = getFormContent();
                 const bizId = app.newBusinesses.features['name'];
-                saveNote(bizId, content, onNotesSaveSuccess);
+                saveNote(bizId, content, app,  onNotesSaveSuccess);
             }
 
             function onBizSelected(evt) {
@@ -143,6 +142,12 @@ function initializeSeattleMap() {
             }
 
             setupInteractionEvents();
+
+            loadNotes(notes => {
+                app.notes = notes;
+              });
+              initToast();
+
             window.app = app;
 
             let newPoint = L.circleMarker(mapClickPoint, {
@@ -221,7 +226,6 @@ seattleMap.seattleLayers = L.geoJSON(ftFeatureCollection, {
 export {
     initializeSeattleMap,
     showFtOnMap,
-    // newBusinesses,
 };
 
 window.makeFtFeature = makeFtFeature;
