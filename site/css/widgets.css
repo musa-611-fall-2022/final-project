@@ -85,7 +85,7 @@
 
 .toggle-display-panel {
   z-index: 3;
-  height: 7.5rem;
+  height: 6.8rem;
 }
 
 .cb-invisible:checked + .cb-option > button {
@@ -188,7 +188,7 @@ input[type="range"]::-webkit-slider-thumb {
   height: 1rem;
   width: 1rem;
   background-color: white;
-  border: 1.5px solid var(--hero-reg);
+  border: 1.5px solid var(--primary-reg);
   cursor: pointer;
   border-radius: 0.5rem;
   pointer-events: auto;
@@ -198,8 +198,8 @@ input[type="range"]::-moz-range-thumb {
   appearance: none;
   height: 1rem;
   width: 1rem;
-  background-color: var(--hero-reg);
-  border: 1.5px solid var(--hero-reg);
+  background-color: var(--primary-reg);
+  border: 1.5px solid var(--primary-reg);
   cursor: pointer;
   border-radius: 0.5rem;
   pointer-events: auto;
@@ -209,16 +209,16 @@ input[type="range"]::-ms-thumb {
   appearance: none;
   height: 1rem;
   width: 1rem;
-  background-color: var(--hero-reg);
-  border: 1.5px solid var(--hero-reg);
+  background-color: var(--primary-reg);
+  border: 1.5px solid var(--primary-reg);
   cursor: pointer;
   border-radius: 0.5rem;
   pointer-events: auto;
 }
 
 input[type="range"]:active::-webkit-slider-thumb {
-  background-color: var(--hero-reg);
-  border: 1.5px solid var(--hero-reg);
+  background-color: var(--primary-reg);
+  border: 1.5px solid var(--primary-reg);
 }
 
 .slider-values {
@@ -240,6 +240,7 @@ input[type="range"]:active::-webkit-slider-thumb {
   display: flex;
   align-items: center;
   background-color: white;
+  border-color: var(--hero-reg);
 }
 
 /* ---- Categorical filters factor selection ----- */

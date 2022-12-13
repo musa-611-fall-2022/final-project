@@ -29,7 +29,7 @@ function addDisplayVarsEl(
 Add the filter sliders
 ================= */
 
-import { continuousVarsDict } from './main.js';
+import { continuousVarsDict, categoricalVarsDict } from './main.js';
 
 // Adds individual dual-range slider kit to parentEl, regarding variable named `varName`
 function addSliderFilterEl(parentEl, varName) {
@@ -61,7 +61,7 @@ function addSliderFilterEl(parentEl, varName) {
 Add the filter selectors on categorical variables
 ================= */
 
-// Adds individual checkbox option containing on factor
+// Makes individual checkbox option containing on factor
 // checkboxGroupEl is the parent el
 // factorKey: the corresponding factor used for SQL
 // returns element
@@ -77,12 +77,11 @@ function makeFilterOptionEl(factorKey, displayFactor) {
   return el;
 }
 
-import { categoricalVarsDict } from "./main.js";
+// Makes HTML element of checkbox groups
+// returns element
 
-// Adds individual checkbox group
-function addFilterCheckboxGroupEl(parentEl, varName) {
+function makeFilterCbGroupEl(varName) {
   const varDict = categoricalVarsDict[varName];
-  console.log(varDict);
   const el = htmlToElement(`
     <div class="selector-kit factor-selector-kit" id="${varName}-selector">
       <div class="selector-kit-top">
@@ -92,7 +91,16 @@ function addFilterCheckboxGroupEl(parentEl, varName) {
       <div class="cb-group cb-group-wrap"></div>
     </div>
   `)
-  const cbGroupEl = el.getElementsByClassName('cb-group-wrap')[0];
+  return el;
+}
+
+// Adds individual checkbox group as filters with categorical variables
+function addFilterCbGroupEl(parentEl, varName) {
+  const varDict = categoricalVarsDict[varName];
+  const containerEl = makeFilterCbGroupEl(varName);
+
+  // Find the checkbox group
+  const cbGroupEl = containerEl.getElementsByClassName('cb-group-wrap')[0];
 
   // Now append all the option buttons
   const factorDict = varDict.factors;
@@ -100,11 +108,19 @@ function addFilterCheckboxGroupEl(parentEl, varName) {
     const optionEl = makeFilterOptionEl(factorKey, factorDict[factorKey]);
     cbGroupEl.append(optionEl);
   }
-  parentEl.append(el);
+  parentEl.append(containerEl);
+}
+
+// Adds individual checkbox group home/work variables
+function addHomeWorkCbGroupEl(parentEl) {
+  const containerEl = makeFilterCbGroupEl('home_work');
+  parentEl.append(containerEl);
+
 }
 
 export {
   addDisplayVarsEl,
   addSliderFilterEl,
-  addFilterCheckboxGroupEl,
+  addFilterCbGroupEl,
+  addHomeWorkCbGroupEl,
 };

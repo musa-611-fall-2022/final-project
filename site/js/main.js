@@ -84,20 +84,29 @@ export const categoricalVarsDict = {
   primary_mode: {
     displayName: 'Mode',
     factors: {
-      1: 'Private Auto',
-      3: 'Walking',
-      4: 'Biking', 
+      1: 'Own car',
+      3: 'Walk',
+      4: 'Bike', 
       5: 'TNC',
-      6: 'Public transit',
+      6: 'Transit',
     }
   },
   trip_taker_available_vehicles: {
-    displayName: 'Trip taker has',
+    displayName: 'Trip takers that have',
     factors: {
-      0: 'no car',
-      1: 'one car',
-      2: 'two cars',
-      3: 'three cars or more',
+      0: '0 car',
+      1: '1 car',
+      2: '2 cars',
+      3: '3+ cars',
+    }
+  },
+  home_work: {
+    displayName: 'Trips that',
+    factors: {
+      startFromHome: 'Starts from home',
+      startFromWork: 'Starts from work',
+      endAtHome: 'Ends at home',
+      endAtWork: 'Ends at work',
     }
   }
 }
@@ -121,11 +130,11 @@ const mapDisplayVars = {
       varName: 'primary_mode',
       displayName: 'Mode',
       factors: {
-        1: 'Private Auto',
-        3: 'Walking',
-        4: 'Biking', 
+        1: 'Own car',
+        3: 'Walk',
+        4: 'Bike', 
         5: 'TNC',
-        6: 'Public transit',
+        6: 'Transit',
       }
     },
     {
@@ -157,7 +166,6 @@ export const toggleDisplayParams = {
   displayFactor: null, // only applies to ratios
 }
 
-
 /* ===========================
 Objects to store filter params
 ============================= */
@@ -183,10 +191,10 @@ for(let filterVar of categoricalFilterVars) {
 }
 // Storing filter params regarding relation with home/work locations
 const homeWorkFilterParams = {
-  startFromHome: { filterName: 'startFromHome', filterSQL: 'origin_geoid = home_geoid', isApplied: false },
-  startFromWork: { filterName: 'startFromWork', filterSQL: 'origin_geoid = work_geoid', isApplied: false },
-  endAtHome: { filterName: 'endAtHome', filterSQL: 'destination_geoid = home_geoid', isApplied: false },
-  endAtWork: { filterName: 'endAtWork', filterSQL: 'destination_geoid = work_geoid', isApplied: false },
+  startFromWork: { filterSQL: 'origin_geoid = work_geoid', isApplied: false },
+  startFromHome: { filterSQL: 'origin_geoid = home_geoid', isApplied: false },
+  endAtHome: { filterSQL: 'destination_geoid = home_geoid', isApplied: false },
+  endAtWork: { filterSQL: 'destination_geoid = work_geoid', isApplied: false },
 }
 
 // Final object storing all filter params
@@ -207,6 +215,17 @@ const toggleDisplayVarsGroupEl = document.querySelector('#toggle-display-vars');
 
 // Add 'count'
 addDisplayVarsEl(toggleDisplayVarsGroupEl, 'count', null, null, `<span class="italic strong">Count</span>`);
+
+// 'agg' type
+for(const displayVar of mapDisplayVars.meanType) {
+  addDisplayVarsEl(
+    toggleDisplayVarsGroupEl, 
+    'agg', 
+    displayVar.varName, 
+    null, 
+    `<span class="italic strong">Total</span> ${displayVar.displayName}`,
+  );
+}
 
 // 'mean' type
 for(const displayVar of mapDisplayVars.meanType) {
@@ -297,17 +316,18 @@ addResetToSliders();
 
 /* ==============================================
 For categorical filters, add factor selectors, Resetters, and Recorders
+Note: Includes home/work related
 ================================================ */
 
-import { addFilterCheckboxGroupEl } from "./add-html.js";
+import { addFilterCbGroupEl, addHomeWorkCbGroupEl } from "./add-html.js";
 import { addCategoricalFilterRecorder, addResetToFactorSelectors } from "./filter.js";
 
-for(const varName of ['primary_mode', 'trip_purpose', 'trip_taker_available_vehicles']) {
-  addFilterCheckboxGroupEl(filterPanelEl, varName);
+for(const varName of ['primary_mode', 'trip_purpose', 'trip_taker_available_vehicles', 'home_work']) {
+  addFilterCbGroupEl(filterPanelEl, varName);
 }
 
 // Add recorders
-for(const varName of ['primary_mode', 'trip_purpose', 'trip_taker_available_vehicles']) {
+for(const varName of ['primary_mode', 'trip_purpose', 'trip_taker_available_vehicles', 'home_work']) {
   addCategoricalFilterRecorder(varName);
 }
 
@@ -318,40 +338,106 @@ addResetToFactorSelectors();
 Construct WHERE clause
 =========== */
 
+// Takes in current whereclause and append
 // Returns where clause (filters) for SQL query
-// This function should later go to the server side
-function constructWhereClause() {
-  let whereClause = ``;
-
+// regarding continuous vars; with ` AND  ` in front
+function makeContinuousWhereClause(whereClause, filterParams) {
   // First deal with continuous variables
-  for(const filter of filterParams.continuousVars) {
+  for(const key of Object.keys(filterParams.continuousVars)) {
+    const filter = filterParams.continuousVars[key];
     if(filter.isApplied) {
       const thisWhere = ` AND (${filter.varName} BETWEEN ${filter.lowerBound} AND ${filter.upperBound})`;
-      whereClause += thisWhere;
+      whereClause = whereClause + thisWhere;
     }
   }
+  return whereClause;
+}
 
+// Takes in current whereclause and append
+// Returns where clause (filters) for SQL query
+// regarding categorical vars; with `AND  ` in front
+function makeCategoricalWhereClause(whereClause, filterParams) {
   // Then deal with categorical variables
-  for(const filter of filterParams.categoricalVars) {
+  for(const key of Object.keys(filterParams.categoricalVars)) {
+    const filter = filterParams.categoricalVars[key];
     if(filter.isApplied) {
       const thisWhere = ` AND (${filter.varName} IN (${filter.selectedCategories.join(', ')}))`;
       whereClause += thisWhere;
     }
   }
+  return whereClause;
+}
 
-  // Then deal with home/work filters
-  for(const filter of filterParams.homeWork) {
+// Takes in current whereclause and append
+// Returns where clause (filters) for SQL query
+// regarding home-work related vars; with `AND  ` in front
+function makeHomeWorkWhereClause(whereClause, filterParams) {
+  for(const key of Object.keys(filterParams.homeWork)) {
+    const filter = filterParams.homeWork[key];
     if(filter.isApplied) {
       const thisWhere = ` AND (${filter.filterSQL})`;
       whereClause += thisWhere;
     }
   }
+  return whereClause;
+}
+
+function makeWhereClause(filterParams) {
+  let whereClause = ``;
+  whereClause = makeContinuousWhereClause(whereClause, filterParams);
+  whereClause = makeCategoricalWhereClause(whereClause, filterParams);
+  whereClause = makeHomeWorkWhereClause(whereClause, filterParams);
 
   // Return; remove the first " AND "
   if(whereClause === ``) {
-    return `WHERE 1`;
+    return `WHERE true`;
   } else {
     return `WHERE ${whereClause.substring(5)}`;
+  }
+}
+
+/* ==========
+Construct query to make map
+=========== */
+
+// Makes the query to make the map (count type)
+function buildQueryForMapCount(toggleDisplayParams, filterParams) {
+  const groupByVar = toggleDisplayParams.groupBy;
+  const whereClause = makeWhereClause(filterParams);
+  const query = `SELECT ${groupByVar} AS geoid, COUNT(*) FROM trips ${whereClause} GROUP BY geoid`;
+  return query;
+}
+
+// Makes the query to make the map (mean type or agg)
+// `operation` is either 'AVG' OR 'SUM'
+function buildQueryForMapMeanSum(toggleDisplayParams, filterParams, operation) {
+  const groupByVar = toggleDisplayParams.groupBy;
+  const displayVar = toggleDisplayParams.displayVar;
+  const whereClause = makeWhereClause(filterParams);
+  const query = `SELECT ${groupByVar} AS geoid, ${operation}(${displayVar}) FROM trips ${whereClause} GROUP BY geoid`;
+  return query;
+}
+
+// Makes the query to make the map (ratio type)
+function buildQueryForMapRatio(toggleDisplayParams, filterParams) {
+  const groupByVar = toggleDisplayParams.groupBy;
+  const displayVar = toggleDisplayParams.displayVar;
+  const whereClause = makeWhereClause(filterParams);
+  const displayFactor = toggleDisplayParams.displayFactor;
+  const query = `SELECT ${groupByVar} AS geoid, AVG((${displayVar} = ${displayFactor})::int) * 100 AS ratio FROM trips ${whereClause} GROUP BY geoid`;
+  return query;
+}
+
+// Makes query to make the map (main)
+function buildQueryForMap(toggleDisplayParams, filterParams) {
+  if(toggleDisplayParams.displayType === 'count') {
+    return buildQueryForMapCount(toggleDisplayParams, filterParams);
+  } else if(toggleDisplayParams.displayType === 'mean') {
+    return buildQueryForMapMeanSum(toggleDisplayParams, filterParams, 'AVG');
+  } else if(toggleDisplayParams.displayType === 'agg') {
+    return buildQueryForMapMeanSum(toggleDisplayParams, filterParams, 'SUM');
+  } else if(toggleDisplayParams.displayType === 'ratio') {
+    return buildQueryForMapRatio(toggleDisplayParams, filterParams);
   }
 }
 
@@ -361,6 +447,7 @@ Call API on confirm button click
 
 function onConfirmButtonClick() {
   console.log(filterParams);
+  console.log(buildQueryForMap(toggleDisplayParams, filterParams));
 }
 
 const confirmButtonEl = document.querySelector('#confirm-button');

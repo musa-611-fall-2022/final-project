@@ -73,11 +73,20 @@ function addCategoricalFilterRecorder(varName) {
   // Find this kit
   const kitEl = document.querySelector(`#${varName}-selector`);
   const factorOptionsEls = kitEl.getElementsByClassName('cb-invisible');
-  
-  // Add recorder to each factor option
+
+  // In the case where this group is about home-work related trips:
+  if(varName === 'home_work') {
+    for(const optionEl of factorOptionsEls) {
+      optionEl.addEventListener('click', ( ) => {
+        filterParams.homeWork[optionEl.value].isApplied = optionEl.checked;
+      })
+    }
+    return;
+  }
+
+  // Add recorder to each factor option in other cases
   for(const optionEl of factorOptionsEls) {
     optionEl.addEventListener('click', ( ) => {
-
       if(optionEl.checked === true) { // If this option is to be selected
         // Then add this option into the list, and make sure `isApplied` is true
         filterParams.categoricalVars[varName].isApplied = true;
@@ -145,6 +154,13 @@ function addResetToFactorSelectors() {
 
       // Then update `filterParams`
       const varName = cbGroupEl.parentNode.id.substring(0, cbGroupEl.parentNode.id.length - 9);
+      // In the case regarding home/work related trips:
+      if(varName === 'home_work') {
+        for(const filterKey of Object.keys(filterParams.homeWork)) {
+          filterParams.homeWork[filterKey].isApplied = false;
+        }
+        return;
+      }
       filterParams.categoricalVars[varName].isApplied = false;
       filterParams.categoricalVars[varName].selectedCategories = [];
     });    
