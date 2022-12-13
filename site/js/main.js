@@ -265,6 +265,10 @@ for(const cbEl of displayVarOptionsEl) {
     
     console.log(toggleDisplayParams);
 
+    // Change the text on the button
+    const buttonEl = document.querySelector('#display-var-button');
+    buttonEl.innerHTML = cbEl.nextElementSibling.firstChild.innerHTML;
+
     // Collapse the window by simulating a click (after a short period of time)
     setTimeout(( ) => { document.querySelector('#display-var-button').click() }, 250);
   })

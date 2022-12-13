@@ -46,6 +46,16 @@
   cursor: pointer;
 }
 
+.display-var-button {
+  color: white;
+  background-color: var(--primary-reg);
+  border-color: var(--primary-reg);
+}
+
+.display-var-button:hover {
+  background-color: var(--primary-reg);
+}
+
 /* ------- Checkboxes (EXCLUSIVE) --------- */
 
 .cb-group {
