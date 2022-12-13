@@ -6,7 +6,7 @@ import southeastasiancluster from '../data/SoutheastAsianCluster.geojson.js';
 import aapicluster from '../data/AAPICluster.geojson.js'
 //import { loadResearchData } from './researchdata.js'   
 
-let map = L.map('map').setView([0, 0], 0);
+let map = L.map('map', {scrollWheelZoom: false}).setView([0, 0], 0);
 let layerGroup = L.layerGroup().addTo(map);
 let lifeCollection = { features: [] };
 
@@ -119,7 +119,7 @@ const clusterTypeColors = {
 
 function loadResearchData(currentSlideIndex) {
   if(currentSlideIndex == 7) {
-    //layerGroup.clearLayers(); 
+    layerGroup.clearLayers()
     L.geoJSON(aapicluster, {
       style: (feature) => {
         const ct = feature.properties['Cluster type']; //<-- cluster type
@@ -130,9 +130,9 @@ function loadResearchData(currentSlideIndex) {
           fillColor: color, 
         };
       }
-    }).addTo(layerGroup);
+    }).bindTooltip(l => `${l.feature.properties['GEOID']} ${l.feature.properties['Cluster type']}`).addTo(layerGroup);
   } else if(currentSlideIndex == 9) {
-    //layerGroup.clearLayers(); 
+    layerGroup.clearLayers()
     L.geoJSON(eastasiancluster, {
       style: (feature) => {
         const ct = feature.properties['Cluster type']; //<-- cluster type
@@ -143,9 +143,9 @@ function loadResearchData(currentSlideIndex) {
           fillColor: color, 
         };
       }
-    }).addTo(layerGroup);
+    }).bindTooltip(l => `${l.feature.properties['GEOID']} ${l.feature.properties['Cluster type']}`).addTo(layerGroup);
   } else if(currentSlideIndex == 10) {
-    //layerGroup.clearLayers(); 
+    layerGroup.clearLayers()
     L.geoJSON(southeastasiancluster, {
       style: (feature) => {
         const ct = feature.properties['Cluster type']; //<-- cluster type
@@ -156,9 +156,9 @@ function loadResearchData(currentSlideIndex) {
           fillColor: color, 
         };
       }
-    }).addTo(layerGroup);
+    }).bindTooltip(l => `${l.feature.properties['GEOID']} ${l.feature.properties['Cluster type']}`).addTo(layerGroup);
   } else if(currentSlideIndex == 11) {
-    //layerGroup.clearLayers(); 
+    layerGroup.clearLayers()
     L.geoJSON(southasiancluster, {
       style: (feature) => {
         const ct = feature.properties['Cluster type']; //<-- cluster type
@@ -169,7 +169,7 @@ function loadResearchData(currentSlideIndex) {
           fillColor: color, 
         };
       }
-    }).addTo(layerGroup);
+    }).bindTooltip(l => `${l.feature.properties['GEOID']} ${l.feature.properties['Cluster type']}`).addTo(layerGroup);
   }
 }
 

@@ -11,7 +11,6 @@ body {
   position: sticky;
   top: 0;
   height: 100vh;
-  z-index: -100;
 }
 
 .map {
@@ -20,6 +19,8 @@ body {
 
 .slides {
   margin-top: -30vh;
+  pointer-events: none;
+  position: relative
 }
 
 .slide {
