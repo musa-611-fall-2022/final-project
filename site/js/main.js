@@ -3,7 +3,7 @@
 import { initializeMap} from './map.js';
 
 
-function fetchComplaintData() {
+function fetchChartData() {
   fetch(`./data/complaint.csv`)
     .then(resp => resp.text())
     .then(data => {
@@ -36,12 +36,6 @@ function fetchComplaintData() {
       console.log(streetsData);
     });
 
-    const cleanComplaintData = {}
-    for (const element of window.complaintData.data){
-      cleanComplaintData.push(
-      )
-    }
-      
 
     var options = {
       series: [
@@ -171,7 +165,7 @@ function fetchComplaintData() {
 
 }
 
-fetchComplaintData();
+fetchChartData();
 
 
 
