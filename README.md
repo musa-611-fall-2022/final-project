@@ -8,4 +8,10 @@
 <p> 2. Type "npx http-server" in your console.</p>
 <p> 3. Open the local host link to the application.</p>
 <p> 4. The interface of the web application will appear.</p>
-<img src="./images/1.png" alt="First">
+<img src="site/images/1.png" alt="First">
+<p> 5. Click on any green point to see a historic Filipino business. There are also filter functions on the right to filter by the type of business and business name</p>
+<img src="site/images/2.png" alt="First">
+<p> 6. To add a new business, click on where the business is located within the map and enter the data for the fields, then press "Add."</p>
+<img src="site/images/3.png" alt="First">
+<p> 7. To save the business in the database, click on the "Submit" button next to "Add", and do not forget to close the window on the top right!</p>
+<img src="site/images/4.png" alt="First">
