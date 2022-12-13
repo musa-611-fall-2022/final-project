@@ -61,8 +61,8 @@ function initializeSeattleMap() {
             <h3>Preserve history:</h3>
             <input type="text" id="history" placeholder="Please share any memories you have with this space" height=10>
             <br></br>
-            <button id = 'add-point' class = 'add-point' type="submit" value="Submit">Submit</button>
-            <button id = 'view' class = 'view' type="submit" value="View">View</button>
+            <button id = 'add-point' class = 'add-point' type="submit" value="Add">Add</button>
+            <button id = 'view' class = 'view' type="submit" value="Submit">Submit</button>
         </div>
         `)
         .openOn(seattleMap);
