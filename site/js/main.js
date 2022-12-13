@@ -1,16 +1,3 @@
-// fetch(`https://mobiladelphia.herokuapp.com/test-query/3`)
-// .then(resp => {
-//   if(resp.status === 200) {
-//     const data = resp.json();
-//     return data;
-//   } else {
-//     //
-//   }
-// })
-// .then(data => {
-//   console.log(data);
-// });
-
 /* =================================================
 Main.js deals with the actions that function on global scale,
 defines global objects,
@@ -20,12 +7,20 @@ and is a coordinator of all different modules
 @date: 12/08/2022
 ================================================= */
 
-import { initMap, addBlockGroups } from "./display-map.js";
+import { initMap, fetchMapBaseData, addBlockGroups } from "./display-map.js";
 
 // Create map
-const map = initMap();
+export const map = initMap();
 
-addBlockGroups(map);
+// Init a global object to store map base data
+let mapBaseData;
+
+fetchMapBaseData()
+.then(resp => {
+  mapBaseData = resp;
+})
+
+addBlockGroups(map, mapBaseData);
 
 /* ==========
 Define some constant objects
@@ -449,9 +444,22 @@ function buildQueryForMap(toggleDisplayParams, filterParams) {
 Call API on confirm button click
 ================ */
 
-function onConfirmButtonClick() {
-  console.log(filterParams);
-  console.log(buildQueryForMap(toggleDisplayParams, filterParams));
+import { makeDisplayData } from "./display-map.js";
+
+async function onConfirmButtonClick() {
+  const mapQuery = buildQueryForMap(toggleDisplayParams, filterParams);
+  console.log(mapQuery);
+
+  // query map
+  try {
+    const mapResp = await fetch(`http://mobiladelphia.herokuapp.com/test-query/${mapQuery}`);
+    const mapData = await mapResp.json();
+    const mapUpdateData = mapData.results;
+    console.log('map base data ', mapBaseData);
+    const mapDisplayData = makeDisplayData(mapBaseData, mapUpdateData);
+  } catch(err) {
+    console.log(err);  
+  }
 }
 
 const confirmButtonEl = document.querySelector('#confirm-button');
