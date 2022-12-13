@@ -7,12 +7,14 @@ body {
 }
 
 .popUp{
-    height: 0;
+    position:relative;
+    top: 130px;
+
     background: rgb(218, 138, 138);
     border-radius: 12px;
     display: flex;
     flex-direction: column;
-    padding: 0 35px 50px;
+    padding: 10px 30px 100px;
     transform: scale(0);
     color: rgb(255, 255, 255);
     visibility: hidden;
@@ -22,23 +24,28 @@ body {
 }
 
 .open-popUp{
+
     visibility: visible;
     transform: scale(1);
     height: 70%;
 }
 
 #popUpTitle {
-    padding: 9px;
+    position:relative;
+
+    padding: 10px;
     margin-top: 10px;
-    margin-bottom: 3px;
+    margin-bottom: 30px;
     font-weight: bold;
     text-align: center;
 }
 
 #detail {
+
+
     border-radius: 18px;
-    padding: 10px;
-    margin-top: 10px;
+    padding: 20px;
+    margin-top: 5px;
     margin-bottom: 5px;
     border: 2px solid rgb(255, 255, 255);
     text-align: center;
@@ -70,7 +77,9 @@ body {
 
 .map {
     height: 100%;
-    z-index: 1;
+      width: 100%;
+      position: absolute;
+
 }
 
 .mapAfter {
@@ -90,19 +99,19 @@ body {
 }
 
 #name {
-    height: 28px;
-    width: 250px;
-    border-radius: 6px;
+    height: 40px;
+    width: 240px;
+    border-radius: 9px;
     font-family: cursive;
-    border: 1px solid rgb(255, 255, 255);
+    border: 2px solid rgb(0, 0, 0);
 }
 #showlocation {
-    height: 28px;
-    border-radius: 6px;
-    background: rgb(218, 138, 138);
+    height: 40px;
+    border-radius: 9px;
+    background: rgb(49, 52, 112);
     color: #fff;
     font-family: cursive;
-    border: 1px solid rgb(255, 255, 255);
+    border: 1px solid rgb(0, 0, 0);
     width: 100px;
     font-weight: bold;
 }
