@@ -30,6 +30,8 @@ function initMap() {
       },
           })
     .addTo(map)
+    
+    
     function onEachFeature(feature, layer) {
   
       layer.bindPopup("Name: " + feature.properties['RESNAME'] + "<br>" + "City: " + feature.properties['City']);

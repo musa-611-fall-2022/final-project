@@ -1,13 +1,28 @@
 const houseNameEl = document.getElementById('house-name');
-const cityNameEl = document.getElementById('city-name');
+const cityNameEl = document.getElementById('house-city');
+const urlEl = document.getElementById('house-url');
+const typeEl = document.getElementById('house-type');
 const houseNotesEl = document.getElementById('house-notes');
 const saveHouseNotesEl = document.getElementById('save-house-notes');
 
+function urlToLink (str){
+  var re = /(http:\/\/|https:\/\/)((\w|=|\?|\.|\/|&|-)+)/g;
+
+  str = str.replace(re, function(website){ 
+      return "<a href='" + website +"' target='_blank'>" + website + "</a>"; 
+  }); 
+  return str;
+};
+
 function showHouseDataInForm(house, notes) {
-  const houseName = house.properties['RESNAME'];
-  const cityName = house.properties['City'];
+  const houseName = "Name: "+house.properties['RESNAME'];
+  const cityName = "City: "+house.properties['City'];
+  const url = "Check the catalog: "+urlToLink(house.properties['NARA_URL']);
+  const houseType = "Type: "+house.properties['ResType'];
   houseNameEl.innerHTML = houseName;
   cityNameEl.innerHTML = cityName;
+  urlEl.innerHTML = url;
+  typeEl.innerHTML = houseType;
   houseNotesEl.value = notes;
 }
 
