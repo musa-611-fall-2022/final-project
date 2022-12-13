@@ -8,35 +8,6 @@ import {fetchAllData} from './fetch_chart_data.js';
 fetchAllData()
 .then(() => {
 
-const testObject = [{
-  x: "02-10-2017 GMT",
-  y: 34
-},
-{
-  x: "02-11-2017 GMT",
-  y: 43
-},
-{
-  x: "02-12-2017 GMT",
-  y: 31
-},
-{
-  x: "02-13-2017 GMT",
-  y: 43
-},
-{
-  x: "02-14-2017 GMT",
-  y: 33
-},
-{
-  x: "02-15-2017 GMT",
-  y: 52
-}]
-
-console.log(testObject);
-console.log(typeof testObject);
-console.log(window.complaintData.data);
-console.log(typeof window.complaintData);
 
 function restructureData(data, cleandata){
   for (let i = 0; i < data.length; i++){
@@ -49,9 +20,15 @@ function restructureData(data, cleandata){
 
 const cleanComplaintData = [];
 const cleanQOLData = [];
+const cleanInfoData = [];
+const cleanMiscData = [];
+const cleanStreetsData = [];
 
 restructureData(window.complaintData.data,cleanComplaintData);
 restructureData(window.qolData.data,cleanQOLData);
+restructureData(window.infoData.data,cleanInfoData);
+restructureData(window.miscData.data,cleanMiscData);
+restructureData(window.streetsData.data,cleanStreetsData);
 
 //console.log(cleanComplaintData);
 
@@ -168,45 +145,71 @@ function addToMap(dataToAdd) {
   var options = {
     series: [
     {
-      name: 'South',
+      name: 'Complaints',
       data: cleanComplaintData
     },
     {
-      name: 'North',
+      name: 'Quality of Life',
       data: cleanQOLData
+    },
+    {
+      name: 'Information',
+      data: cleanInfoData
+    },
+    {
+      name: 'Streets',
+      data: cleanStreetsData
+    },
+    {
+      name: 'Miscellaneous',
+      data: cleanMiscData
     }
   ],
     chart: {
     type: 'area',
     height: 200,
     stacked: true,
+    toolbar: {
+      show: false
+    },
     events: {
       selection: function (chart, e) {
         console.log(new Date(e.xaxis.min))
       }
     },
   },
-  colors: ['#008FFB', '#00E396', '#CED4DC'],
+  colors: ['#f94e08', '#11ad7d', '#00c6fc', '#f8f6a7', '#d3a112'],
   dataLabels: {
     enabled: false
   },
   stroke: {
-    curve: 'smooth'
+    curve: 'smooth',
+    show: false
   },
   fill: {
-    type: 'gradient',
-    gradient: {
-      opacityFrom: 0.6,
-      opacityTo: 0.8,
-    }
+    type: 'straight',
   },
   legend: {
     position: 'top',
-    horizontalAlign: 'left'
+    horizontalAlign: 'left',
+    labels: {
+      colors: undefined,
+      useSeriesColors: true
+    },
   },
   xaxis: {
     type: 'datetime'
   },
+  yaxis:{
+    show: false,
+  },
+  grid:{
+    yaxis: {
+      lines: {
+          show: false
+      }
+  }
+  }
   };
 
   var chart = new ApexCharts(document.querySelector("#chart"), options);
