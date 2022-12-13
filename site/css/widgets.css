@@ -269,7 +269,14 @@ input[type="range"]:active::-webkit-slider-thumb {
   height: 2rem;
   z-index: 3;
   font-weight: 600;
-  color: var(--hero-reg);
+  color: white;
+  background-color: var(--hero-reg);
+  border-color: var(--hero-reg);
   box-shadow: var(--shadow-layer-1);
   font-size: 0.95rem;
+}
+
+.confirm-button:hover {
+  background-color: var(--highlight-reg);
+  border-color: var(--highlight-reg);
 }

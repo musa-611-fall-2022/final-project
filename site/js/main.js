@@ -209,7 +209,7 @@ import { addDisplayVarsEl } from "./add-html.js";
 const toggleDisplayVarsGroupEl = document.querySelector('#toggle-display-vars');
 
 // Add 'count'
-addDisplayVarsEl(toggleDisplayVarsGroupEl, 'count', null, null, `<span class="italic strong">Count</span>`);
+addDisplayVarsEl(toggleDisplayVarsGroupEl, 'count', null, null, `<span class="italic strong">Per capita trip count</span>`);
 
 // 'agg' type
 for(const displayVar of mapDisplayVars.meanType) {
@@ -218,7 +218,7 @@ for(const displayVar of mapDisplayVars.meanType) {
     'agg', 
     displayVar.varName, 
     null, 
-    `<span class="italic strong">Total</span> ${displayVar.displayName}`,
+    `<span class="italic strong">Per capita</span> ${displayVar.displayName}`,
   );
 }
 
@@ -229,7 +229,7 @@ for(const displayVar of mapDisplayVars.meanType) {
     'mean', 
     displayVar.varName, 
     null, 
-    `<span class="italic strong">Mean</span> ${displayVar.displayName}`,
+    `<span class="italic strong">Average</span> ${displayVar.displayName}`,
   );
 }
 
@@ -464,3 +464,6 @@ async function onConfirmButtonClick() {
 
 const confirmButtonEl = document.querySelector('#confirm-button');
 confirmButtonEl.addEventListener('click', onConfirmButtonClick);
+
+// Click on page load
+onConfirmButtonClick();

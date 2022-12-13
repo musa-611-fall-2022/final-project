@@ -49,7 +49,7 @@ function initMap() {
   
   // Add tile layer
   L.tileLayer(tileLayerUrl, {
-      maxZoom: 19,
+      maxZoom: 21,
       attribution: attributionHTML,
   }).addTo(map);
 
@@ -61,15 +61,29 @@ function initMap() {
   // Initialize polygon layer for later
   map.blockGroupLayer = L.geoJSON(null, {
     style: monochromeStyle,
-  }).addTo(map);
+  })
+  .addTo(map);
 
   return map;
 }
 
+// Goes through map base data and remove those with pop < 100
+function filterBlockGroups(mapData) {
+  const filteredData = mapData;
+  for(let i = 0; i < mapData.features.length; i++) {
+    if(mapData.features[i].properties.population < 100) {
+      mapData.features.splice(i, 1);
+    }
+  }
+  return filteredData;
+}
+
+// Feteches map data from local directory
 async function fetchMapBaseData() {
-  const resp = await fetch('./data/census-block-groups.geojson');
+  const resp = await fetch('./data/block-group-population.geojson');
   const mapData = await resp.json();
-  return mapData;
+  const filteredMapData = filterBlockGroups(mapData);
+  return filteredMapData;
 }
 
 // Fetches info to display and adds data to block group layer
@@ -93,9 +107,12 @@ function mergeAttributeToMapData(mapBaseData, updateData, key) {
     for(let i = 0; i < updateData.length; i++) {
       const entry = updateData[i];
       if(entry.geoid == feature.properties.GEOID10) {
-        // Update
-        feature.properties.mapDisplayVal = entry[key];
-
+        // Update || If total or count, use per person
+        if(key === 'count' || key === 'sum') {
+          feature.properties.mapDisplayVal = entry[key] / feature.properties.population;
+        } else {
+          feature.properties.mapDisplayVal = entry[key];
+        }
         // get this out of the arr to make later processes faster
         updateData.splice(i, 1);
         break;
@@ -108,10 +125,12 @@ function mergeAttributeToMapData(mapBaseData, updateData, key) {
   return mapBaseData;
 }
 
-function computeQuintiles(dataObject, key, ntiles) {
+
+// Computes quintile breakpoints
+function computeQuintiles(dataArr, ntiles) {
   const quintiles = [];
   // First turn object into array
-  const ascArr = dataObject.map(item => Number(item[key])).sort((a, b) => a - b);
+  const ascArr = dataArr.sort((a, b) => a - b);
   const sectionLength = ascArr.length / ntiles;
   
   // Add the min
@@ -128,6 +147,17 @@ function computeQuintiles(dataObject, key, ntiles) {
   return quintiles;
 }
 
+// Makes tooltip content
+function makeTooltipContent(feature, key) {
+  const GEOID = feature.properties.GEOID10;
+  const population = feature.properties.population;
+  const displayVal = Math.round(feature.properties.mapDisplayVal, 1);
+  const percentSign = key === 'ratio' ? '%' : '';
+  return `<strong class="italic">geoid:</strong>${GEOID}<br />
+          <strong class="italic">population: </strong>${population}<br />
+          <strong class="italic">${key}: </strong>${displayVal}${percentSign}`;
+}
+
 // Creates a data that joins information fetched from API to base map
 function makeDisplayData(mapBaseData, mapUpdateData) {
   // First update mapUpdateData
@@ -140,17 +170,25 @@ function makeDisplayData(mapBaseData, mapUpdateData) {
 
   // Get the key name of updateData (count, avg, or else)
   const key = Object.keys(updateData[0])[1];
-  console.log('map update data hello', updateData);
-
-  // Get quintiles of display data || Update the global arr
-  quintiles = computeQuintiles(mapUpdateData, key, 5);
+  console.log('map update data', updateData);
 
   // Merge info back to map base data
   mapBaseData = mergeAttributeToMapData(mapBaseData, updateData, key);
 
+  // Get quintiles of display data || Update the global arr
+  quintiles = computeQuintiles(
+    mapBaseData.features.map(item => item.properties.mapDisplayVal),
+    5,
+  );
+  console.log(quintiles);
+
   map.blockGroupLayer.clearLayers();
   map.blockGroupLayer.addData(mapBaseData);
   map.blockGroupLayer.setStyle(quintileStyle);
+  map.blockGroupLayer.bindTooltip(layer => {
+    const displayContent = makeTooltipContent(layer.feature, key);
+    return displayContent;
+  });
   console.log('updated: ', mapBaseData);
 }
 
