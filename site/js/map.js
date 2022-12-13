@@ -108,15 +108,16 @@ function initializeSeattleMap() {
 
             const saveBizEl = document.getElementById('view');
 
-            const bizNotesEl = document.getElementById('business-name');
+            const bizNameEl = document.getElementById('business-name');
+
 
             function showBizDataInForm(biz) {
                 const bizName = biz.properties['name'];
-                bizNotesEl.innerHTML = bizName;
+                bizNameEl.innerHTML = bizName;
             }
 
             function getFormContent() {
-                const note = bizNotesEl.value;
+                const note = bizNameEl.value;
                 return note;
               }
 
