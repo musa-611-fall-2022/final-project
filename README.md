@@ -8,4 +8,4 @@
 <p> 2. Type "npx http-server" in your console.</p>
 <p> 3. Open the local host link to the application.</p>
 <p> 4. The interface of the web application will appear.</p>
-<img src="/images/1.png" alt="First">
+<img src="./images/1.png" alt="First">
