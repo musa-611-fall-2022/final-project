@@ -74,7 +74,7 @@ function onEachFeature(feature, layer) {
         map.highlightLayer = L.geoJSON(feature, {
             pointToLayer: (geoJsonPoint, latlng) => L.circleMarker(latlng),
             style: {
-                fillColor: "red",
+                fillColor: "orange",
                 stroke: null,
                 fillOpacity: 1,
                 radius: 9,
@@ -92,9 +92,9 @@ function addPointsToMap(points, map) {
         pointToLayer: (geoJsonPoint, latlng) => L.circleMarker(latlng),
         onEachFeature: onEachFeature,
         style: {
-            fillColor: "orange",
+            fillColor: "#8a2be2",
             stroke: null,
-            fillOpacity: 0.9,
+            fillOpacity: 0.8,
             radius: 7,
         },
     }).addTo(map);
