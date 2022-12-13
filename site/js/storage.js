@@ -11,6 +11,7 @@ const firebaseConfig = {
     appId: "1:446726603100:web:5877b3ac823592bd8f8199",
     measurementId: "G-HYGPS1DCDR",
   };
+
 const firebaseApp = initializeApp(firebaseConfig);
 const firestoreDb = getFirestore(firebaseApp);
 
@@ -18,7 +19,7 @@ const firestoreDb = getFirestore(firebaseApp);
 async function loadNotes(onSuccess, onFailure) {
     try {
       // const notes = JSON.parse(localStorage.getItem('notes'));
-      const notesDoc = doc(firestoreDb, "filipinotown-notes", "notes");
+      const notesDoc = doc(firestoreDb, "businesses", "seattle");
       const result = await getDoc(notesDoc);
       const docData = result.data() || {};
       const notes = docData.content || {};
@@ -30,9 +31,12 @@ async function loadNotes(onSuccess, onFailure) {
     }
   }
 
-  async function saveNote(id, note, app, onSuccess, onFailure) {
+  async function saveNote(bizId, content, app, onSuccess, onFailure) {
+    if (app.notes == null) {
+      app.notes = {};
+    }
     // Save in memory
-    app.notes[id] = note;
+    app.notes[bizId] = content;
     /*
       For example, app.notes might look something like this...
       app.notes = {
@@ -45,7 +49,7 @@ async function loadNotes(onSuccess, onFailure) {
     // localStorage.setItem('notes', JSON.stringify(app.notes));
     // Save in the cloud.
     try {
-      const notesDoc = doc(firestoreDb, "filipinotown-notes", "notes");
+      const notesDoc = doc(firestoreDb, "businesses", "seattle");
       await setDoc(notesDoc, { content: app.notes });
       if (onSuccess) {
         onSuccess(notesDoc);

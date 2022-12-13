@@ -1,3 +1,13 @@
+// import { saveNote } from './storage.js';
+import { saveNote } from './storage.js';
+import { showToast } from './toast.js';
+
+
+let newBusinesses = {
+    type: 'FeatureCollection',
+    features: [],
+};
+
 function initializeSeattleMap() {
     let seattleMap = L.map("seattle-map").setView([47.59754536219717, -122.32273462371629], 15);
 
@@ -52,18 +62,14 @@ function initializeSeattleMap() {
             <h3>Preserve history:</h3>
             <input type="text" id="history" placeholder="Please share any memories you have with this space" height=10>
             <br></br>
-            <button class = 'add-point' type="submit" value="Submit">Submit</button>
+            <button id = 'add-point' class = 'add-point' type="submit" value="Submit">Submit</button>
+            <button id = 'view' class = 'view' type="submit" value="View">View</button>
         </div>
         `)
         .openOn(seattleMap);
         mapClickPoint = seattle.latlng;
     }
     seattleMap.on('click', onMapClick);
-
-    let newBusinesses = {
-        type: 'FeatureCollection',
-        features: [],
-    };
 
 // get element by ID and put it down in here using innerHTML
 // update geojson from later with existing data, clear the old one and show the new one
@@ -76,6 +82,7 @@ function initializeSeattleMap() {
             let businessEnd = document.getElementById('end').value;
             let businessAddress = document.getElementById('address').value;
             let businessHistory = document.getElementById('history').value;
+            let businessGeometry = mapClickPoint;
             const newFeature = {
                 "type":"Feature",
                 "properties": {
@@ -87,18 +94,56 @@ function initializeSeattleMap() {
                     "address": businessAddress,
                     "history": businessHistory,
                     },
-                // "geometry": business['geometry'],
+                "geometry": businessGeometry,
             };
             console.log(newFeature);
-            // seattleMap.newBusinessesLayer.addData(newFeature);   // Add newFeature to newBusinesees layer
-            newBusinesses.features.push(newFeature);           // Add newFewature to the newBusinessesFeatureCollection
+            // seattleMap.newBusinessLayer.addData(newFeature);
+            newBusinesses.features.push(newFeature);
             console.log(newBusinesses);
-            // saveNewBusinesses();
-            // // {
-            // //     const content = getFormContent();
-            // //     const treeId = app.currentTree.properties['id'];
-            // //     saveNote(treeId, content, app, onNotesSaveSuccess);
-            // // };
+
+            let app = {
+                newBusinesses,
+                notes: null,
+            };
+
+            const saveBizEl = document.getElementById('view');
+
+            const bizNotesEl = document.getElementById('business-name');
+
+            function showBizDataInForm(biz) {
+                const bizName = biz.properties['name'];
+                bizNotesEl.innerHTML = bizName;
+            }
+
+            function getFormContent() {
+                const note = bizNotesEl.value;
+                return note;
+              }
+
+            function onNotesSaveSuccess() {
+                showToast('Saved!', 'toast-success');
+            }
+
+            function onSaveClicked() {
+                const content = getFormContent();
+                const bizId = app.newBusinesses.features['name'];
+                saveNote(bizId, content, onNotesSaveSuccess);
+            }
+
+            function onBizSelected(evt) {
+                const biz = evt.layer.feature;
+                app.currentBiz = biz;
+                showBizDataInForm(biz, app);
+            }
+
+            function setupInteractionEvents() {
+             seattleMap.seattleLayers.addEventListener('click', onBizSelected);
+             saveBizEl.addEventListener('click', onSaveClicked);
+            }
+
+            setupInteractionEvents();
+            window.app = app;
+
             let newPoint = L.circleMarker(mapClickPoint, {
                 stroke: null,
                 color: "blue",
@@ -108,21 +153,21 @@ function initializeSeattleMap() {
             .bindPopup(() => `
             <h2>${newFeature.properties['name']}</h2>
             <h3>Business Type: ${newFeature.properties['bizType']}</h3>
-            <h3>Address: ${newFeature.properties['address']}</h3>
+            <h3>Owner: ${newFeature.properties['owner']}</h3>
             <h3>Opening Year: ${newFeature.properties['startYear']}</h3>
+            <h3>Ending Year: ${newFeature.properties['endYear']}</h3>
+            <h3>Address: ${newFeature.properties['address']}</h3>
+            <h3>History: ${newFeature.properties['history']}</h3>
             `).openPopup()
             .addTo(seattleMap);
+            console.log(newPoint);
         });
         }
     seattleMap.on('click', newBusiness);
 
-    // function onPopupOpen() {
-    //     document.querySelector('.newbiz').addEventListener('click', () => { alert('I clicked here.') });
-    // }
-    // seattleMap.on('popupopen', onPopupOpen);
-
     return seattleMap;
 }
+
 
 function makeFtFeature(filipinotown) {
     const ftInfo = {
@@ -163,8 +208,10 @@ seattleMap.seattleLayers = L.geoJSON(ftFeatureCollection, {
 .bindPopup(layer => `
     <h2>${layer.feature.properties['name']}</h2>
     <h3>Business Type: ${layer.feature.properties['bizType']}</h3>
-    <h3>Address: ${layer.feature.properties['address']}</h3>
     <h3>Opening Year: ${layer.feature.properties['startYear']}</h3>
+    <h3>Ending Year: ${layer.feature.properties['endYear']}</h3>
+    <h3>Address: ${layer.feature.properties['address']}</h3>
+
 `).openPopup()
 
 .addTo(seattleMap);
@@ -173,6 +220,7 @@ seattleMap.seattleLayers = L.geoJSON(ftFeatureCollection, {
 export {
     initializeSeattleMap,
     showFtOnMap,
+    // newBusinesses,
 };
 
 window.makeFtFeature = makeFtFeature;
