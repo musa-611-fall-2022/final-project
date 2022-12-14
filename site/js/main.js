@@ -20,7 +20,7 @@ function hidePopUp() {
   let mapAfter = document.getElementById("map");
   popup.classList.remove("open-popUp");
   mapAfter.classList.remove("mapAfter");
-}
+};
 
 function Search(map, search, facilities){
 search.addEventListener('click', () => {
@@ -31,7 +31,7 @@ search.addEventListener('click', () => {
     map.removeControl(map.routingControl);
     };
 })
-}
+};
 
 function updateUserPositionOn(map, pos) {
   map.positionLayer.addData({
@@ -39,19 +39,19 @@ function updateUserPositionOn(map, pos) {
     'coordinates': [pos.coords.longitude, pos.coords.latitude],
   });
   map.setView([pos.coords.latitude, pos.coords.longitude], 18);
-}
+};
 
 // **Geolocation** -- `onUserPositionSuccess` will be called by the geolocation
 // API if and when the user's position is successfully found.
 function onUserPositionSuccess(pos) {
   updateUserPositionOn(map, pos);
-}
+};
 
 // **Geolocation** -- `onUserPositionSuccess` will be called by the geolocation
 // API if and when there is an error in finding the user's position.
 function onUserPositionFailure(err) {
   console.log(err);
-}
+};
 
 
 //setupGeolocationEvent();
@@ -60,7 +60,7 @@ function setupGeolocationEvent() {
     onUserPositionSuccess,
     onUserPositionFailure,
   );
-}
+};
 
 
 function fakePosition(map) {
@@ -74,7 +74,7 @@ function fakePosition(map) {
     map.setView([ -1.263591, 36.858131], 16);
     const marker = new L.Marker([-1.263591, 36.858131]);
     marker.addTo(map);
-}
+};
 
 function shortestRoute() {
   map.removeLayer(map.FLayer);
@@ -91,7 +91,7 @@ function getDirection() {
     shortestRoute();
     hidePopUp();
   })
-}
+};
 
 
 
