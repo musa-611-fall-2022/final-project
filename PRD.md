@@ -2,20 +2,21 @@
 
 ## Purpose
 
-Encourage the wider community to help in preserving the history and story of Seattle's Filipinotown
+To serve as a community engagement and historic preservation tool, the Historic Seattle Filipnotown web application hopes to encourage the community to participate in remembering and contributing to the history and story of Seattle's Filipinotown
 
 ## Features
 
 This web application will include the following features:
-* Map marker for each business
-* Clicking on a map marker will pop up details about...
-  * Business name
-  * Type of business
-  * Owner
-  * Start year
-  * End year
-  * Address
-* An option to filter by business type and business name.
+* Map markers for each business
+  * Clicking on a map marker will pop up details about the following:
+    * Business name
+    * Type of business
+    * Owner
+    * Start year
+    * End year
+    * Address
+* An option to filter by business type .
+* An option to filter by  business name.
 
  This web application will additionally include an opportunity for users to input a new business that is not already part of the existing dataset, where users can add:
 * Business name
@@ -25,3 +26,5 @@ This web application will include the following features:
 * End year
 * Address
 * Memories
+
+The features of this web application serves to provide users an opportunity to engage with history and placemaking by acknowleding the history of space while simultaneously contributing to history by filling in the missing gaps.
