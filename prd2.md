@@ -1,12 +1,12 @@
-Fishtown Neighbors Association Zoning Dashboard
+# Fishtown Neighbors Association Zoning Dashboard
 
-Users: 
+## Users: 
 1. Curious Fishtown Resident
 2. Zoning Board Chair
 
-Data from OpenDataPhilly and organized in R
+## Data from OpenDataPhilly and organized in R
 
-Features:
+## Features:
 Map of Fishtown
   - Toggleable Layer selection
       Current
@@ -14,14 +14,14 @@ Map of Fishtown
      - Building height
    
 
-How is this different from Atlas? 
+## How is this different from Atlas? 
 
-Limitations:
+## Limitations:
   - Data availaibilty
 
-To Add
+##To Add
 
-      Layers for
+Layers for
   - Demolition and Construction History
   - Currenty Demolitions / Construction
   - Commerical Establishments
