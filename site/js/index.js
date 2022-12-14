@@ -130,7 +130,20 @@ function loadResearchData(currentSlideIndex) {
           fillColor: color, 
         };
       }
-    }).bindTooltip(l => `${l.feature.properties['GEOID']} ${l.feature.properties['Cluster type']}`).addTo(layerGroup);
+    }).bindTooltip(l => `${l.feature.properties['Category']} ${l.feature.properties['Cluster type']}`).addTo(layerGroup);
+  } else if(currentSlideIndex == 8) {
+    layerGroup.clearLayers()
+    L.geoJSON(aapicluster, {
+      style: (feature) => {
+        const ct = feature.properties['Cluster type']; //<-- cluster type
+        const color = clusterTypeColors[ct];
+        return {
+          color: '#000000',
+          weight: 1,
+          fillColor: color, 
+        };
+      }
+    }).bindTooltip(l => `${l.feature.properties['Category']} ${l.feature.properties['Cluster type']}`).addTo(layerGroup);  
   } else if(currentSlideIndex == 9) {
     layerGroup.clearLayers()
     L.geoJSON(eastasiancluster, {
@@ -143,7 +156,7 @@ function loadResearchData(currentSlideIndex) {
           fillColor: color, 
         };
       }
-    }).bindTooltip(l => `${l.feature.properties['GEOID']} ${l.feature.properties['Cluster type']}`).addTo(layerGroup);
+    }).bindTooltip(l => `${l.feature.properties['Category']} ${l.feature.properties['Cluster type']}`).addTo(layerGroup);
   } else if(currentSlideIndex == 10) {
     layerGroup.clearLayers()
     L.geoJSON(southeastasiancluster, {
@@ -156,7 +169,7 @@ function loadResearchData(currentSlideIndex) {
           fillColor: color, 
         };
       }
-    }).bindTooltip(l => `${l.feature.properties['GEOID']} ${l.feature.properties['Cluster type']}`).addTo(layerGroup);
+    }).bindTooltip(l => `${l.feature.properties['Category']} ${l.feature.properties['Cluster type']}`).addTo(layerGroup);
   } else if(currentSlideIndex == 11) {
     layerGroup.clearLayers()
     L.geoJSON(southasiancluster, {
@@ -169,7 +182,7 @@ function loadResearchData(currentSlideIndex) {
           fillColor: color, 
         };
       }
-    }).bindTooltip(l => `${l.feature.properties['GEOID']} ${l.feature.properties['Cluster type']}`).addTo(layerGroup);
+    }).bindTooltip(l => `${l.feature.properties['Category']} ${l.feature.properties['Cluster type']}`).addTo(layerGroup);
   }
 }
 

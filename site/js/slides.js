@@ -81,10 +81,17 @@ const slides = [
   {
     title: 'Asian American Clustering Methodology',
     content: `I use data from the 2019 American Community Survey (ACS), primarily relying on data that describes highest form of education attainment, Asian country of origin, and annual income. These variables were selected using Perna’s (2006) conceptual model of higher education particularly focusing on the school and community context. Broad Asian American racial categories were developed from research that addresses Asian American movements (Nadal, 2019; Yi et al., 2020). <br>
-    LISA is defined as having two properties. (1) the LISA for each observation gives an indication of the extent of significant spatial clustering of similar values around that observation and (2) the sum of LISAs for all observations is proportional to a global indicator of spatial association. In our case each census block is calculated individually and then summed to provide the I from Moran's I. The calculated LISA describes each blocks effects of the clustering within the data.
+    LISA is defined as having two properties. <br> 
+    (1) the LISA for each observation gives an indication of the extent of significant spatial clustering of similar values around that observation and <br>
+    (2) the sum of LISAs for all observations is proportional to a global indicator of spatial association. In our case each census block is calculated individually and then summed to provide the I from Moran's I. The calculated LISA describes each blocks effects of the clustering within the data.
     
-    
-    `,
+    <h4> Legend </h4>
+    <div class = "legend">
+    <i style="background: #00FFDB"></i><span>high frequency high clustering</span><br>
+    <i style="background: #00A3FF"></i><span>high frequency low clustering</span><br>
+    <i style="background: #5B00FF"></i><span>low frequency low clustering</span><br>
+    <i style="background: #FF00A4"></i><span>No Relationship</span><br>
+    </div>`,
     era: 'PhD',
     showpopups: true,
   },
@@ -125,6 +132,13 @@ const slides = [
     </ul>
     Southeast Asians generally lived in areas with a higher frequency of people who attained a High School diploma or less, in contrast to South Asians and East Asians who generally live in areas where people attain a bachelor’s degree or more. Additionally Southeast Asians have statistically significant differences when comparing frequency of people who make $100k, and median income in the past 12 months. 
     
+    <h4> Legend </h4>
+    <div class = "legend">
+    <i style="background: #00FFDB"></i><span>high frequency high clustering</span><br>
+    <i style="background: #00A3FF"></i><span>high frequency low clustering</span><br>
+    <i style="background: #5B00FF"></i><span>low frequency low clustering</span><br>
+    <i style="background: #FF00A4"></i><span>No Relationship</span><br>
+    </div>
     `,
     era: 'PhD',
     showpopups: true,
@@ -141,6 +155,15 @@ const slides = [
       <li> Pakistani </li> 
       <li> Sri Lankan </li> 
    </ul>
+
+
+   <h4> Legend </h4>
+   <div class = "legend">
+   <i style="background: #00FFDB"></i><span>high frequency high clustering</span><br>
+   <i style="background: #00A3FF"></i><span>high frequency low clustering</span><br>
+   <i style="background: #5B00FF"></i><span>low frequency low clustering</span><br>
+   <i style="background: #FF00A4"></i><span>No Relationship</span><br>
+   </div>
     `,
     era: 'PhD',
     showpopups: true,
