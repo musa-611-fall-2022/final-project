@@ -2,7 +2,7 @@
 function onHouseClicked(evt) {
   console.log(evt);
   const house = evt.layer.feature;
-
+  
   const houseSelectedEvent = new CustomEvent('house-selected', { detail: { house } });
   window.dispatchEvent(houseSelectedEvent);
 }
@@ -29,7 +29,7 @@ function initMap() {
         stroke: true,
     
       },*/
-            
+                       
       pointToLayer: function (feature, latlng) {
         var geojsonMarkerOptions = {fillColor: '#942929',
         fillOpacity: 0.9,
@@ -39,11 +39,11 @@ function initMap() {
         marker.bindPopup(popup);
         return marker;               
      }
+     
       
           })
     .addTo(map)
-
-    
+ 
     
     /*
     function onEachFeature(feature, layer) {
@@ -51,7 +51,7 @@ function initMap() {
       layer.bindPopup("Name: " + feature.properties['RESNAME'] + "<br>" + "City: " + feature.properties['City']);
   }   */
 
-   
+  
     map.houseLayer.addEventListener('click', onHouseClicked);
     
     map.positionLayer = L.geoJSON(null).addTo(map);
