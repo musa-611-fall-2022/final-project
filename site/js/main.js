@@ -10,11 +10,11 @@
 // * [inventory.js](inventory.html) for functions governing the loading/saving
 //   of tree inventory and notes
 
-import { initMap, updateUserPositionOn } from './map.js';
+import { initMap, showCountyLocation, updateUserPositionOn } from './map.js';
 import { initHouseInfoForm, showHouseDataInForm } from './house-info-form.js';
 import { initToast, showToast } from './toast.js';
 import { downloadInventory,loadNotes,saveNotes} from './inventory.js';
-
+import url from '../data/url.js';
 
 
 let app = {
@@ -88,6 +88,18 @@ function setupInteractionEvents() {
   window.addEventListener('save-clicked', onSaveClicked);
 }
 
+let currentListData;
+
+// When click the "Load List" button, load the address
+$("#voterFileLoadButton").click(function() {
+  let listName = document.querySelector('#stop-name-input').value;
+  if(url.features[0].properties.COUNTY_NAME == listName) {
+  currentListData = getListData(url);
+  showCountyLocation(currentListData);}
+});
+
+window.currentListData = currentListData
+
 // Initialize the app components and events
 // ----------------------------------------
 //
@@ -102,9 +114,11 @@ initHouseInfoForm();
 setupGeolocationEvent();
 setupInteractionEvents();
 
+
 loadNotes(notes => {
   app.notes = notes; 
 });
 downloadInventory(onInventoryLoadSuccess);
 
 window.app = app;
+window.url = url;

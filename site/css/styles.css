@@ -74,6 +74,21 @@ font-family: "Comic Sans MS", cursive, sans-serif;
   font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 }
 
+.house-list {
+  padding: 1rem;
+  width: 500px;
+  line-height: 120%;
+  position:absolute;
+  left:63%;
+  bottom:400px;
+  text-align:center;
+  background:rgb(192 233 249 / 40%);
+	border:5px dashed #fffbda;
+  box-shadow: 2px 2px 6px #999;
+  color:#666;
+  font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+}
+
 textarea {
   width: 100%;
   display: block;

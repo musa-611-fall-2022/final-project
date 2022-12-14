@@ -19,7 +19,7 @@ function initMap() {
         maxZoom: 19,
         attribution: '© <a href="https://www.mapbox.com/about/maps/">Mapbox</a> © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> <strong><a href="https://www.mapbox.com/map-feedback/" target="_blank">Improve this map</a></strong>',
     }).addTo(map);
-
+    
     
     map.houseLayer = L.geoJSON(null, {
       /*pointToLayer: (feature, latlng) => L.circleMarker(latlng),
@@ -69,7 +69,12 @@ function initMap() {
     return map;
   }
 
-  
+  //show county location
+  function showCountyLocation(data) {
+    map.setView([data["features"][0]["geometry"]["coordinates"][1], data["features"][0]["geometry"]["coordinates"][0]], 16)
+    map.voterLayer.addData(data);
+    console.log(data)
+}
 
 
   function updateUserPositionOn(map, pos) {
@@ -83,4 +88,5 @@ function initMap() {
   export {
     initMap,
     updateUserPositionOn,
+    showCountyLocation
   };

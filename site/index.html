@@ -8,6 +8,7 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.2/leaflet.min.css" integrity="sha512-ekzf1ud/EngtmWo8xbIkhtBQsSgkOhTyyD6AA6b/J4/YXTInuNgeKVQDCH/pysNYnrGgsZazWSuWsNtFKzHbmg==" crossorigin="anonymous" referrerpolicy="no-referrer">
     <link rel="stylesheet" href="css/styles.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   </head>
 
   <body>
@@ -23,6 +24,18 @@
       4.Click on the link to view the building's archive.
       </div>
 
+    <!-- section of housr filter based on the county name -->
+    <div id="house-list" class= "house-list">
+      <h1 id="title">✨County Zoom✨</h1>
+      <input type="text" id="stop-name-input"  placeholder="Enter county name...">
+      <span class="input-group-btn">
+        <button class="btn btn-default" id="voterFileLoadButton" type="button">Zoom</button>
+      </span>
+      <ul id="stop-list"></ul>
+      <script src="js/house-list.js" > </script>
+    </div>
+
+    <!-- housing info section -->
     <div id="house-info" class="house-info" >
       <h1 id="title">✨Information✨</h1>
       <h2 id="house-name"></h2>
