@@ -1,153 +1,152 @@
 html {
-    font-family: "Barlow", sans-serif;
-  }
-  
+    font-family: Barlow, sans-serif;
+}
+ 
 header {
-font-family: "Barlow", sans-serif;
-font-style:italic;
-font-size: 300%;
-display: flex;
-align-items: center;
-justify-content: center;
-color: white;
-background-color: #52796f;
-padding:0;
-line-height: 10vh;
-margin: 0;
+    font-family: Barlow, sans-serif;
+    font-style: italic;
+    font-size: 300%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    background-color: #52796f;
+    padding: 0;
+    line-height: 10vh;
+    margin: 0;
 }
 
 h1 {
-font-family: "Barlow", sans-serif;
-font-style:italic;
-font-size: 0%;
-display: flex;
-align-items: center;
-justify-content: center;
-color: white;
-background-color: #52796f;
-padding:0;
-line-height: 0vh;
-margin: 0;
+    font-family: Barlow, sans-serif;
+    font-style: italic;
+    font-size: 0%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    background-color: #52796f;
+    padding: 0;
+    line-height: 0vh;
+    margin: 0;
 }
 
 h2 {
-font-family: "Barlow", sans-serif;
-font-style:italic;
-font-size: 0%;
-display: flex;
-align-items: center;
-justify-content: center;
-color: white;
-background-color: #52796f;
-padding:0;
-line-height: 0vh;
-margin: 0;
+    font-family: Barlow, sans-serif;
+    font-style: italic;
+    font-size: 0%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    background-color: #52796f;
+    padding: 0;
+    line-height: 0vh;
+    margin: 0;
 }
 
 h3 {
-font-family: "Barlow", sans-serif;
-font-style:bold;
-color: black;
+    font-family: Barlow, sans-serif;
+    font-style: bold;
+    color: black;
 }
 
 body {
-font-family: "Barlow", sans-serif;
-margin: 0;
-padding: 0;
-display: flex;
-flex-direction: column;
-height: 100vh;
+    font-family: Barlow, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
 }
 
 #seattle-map { height: 100%; }
 
 .content-container {
-display: flex;
-flex-direction: row-reverse;
-overflow: hidden;
-height: 100%;
+    display: flex;
+    flex-direction: row-reverse;
+    overflow: hidden;
+    height: 100%;
 }
 
-
 .map-container {
-/* position:fixed; */
-width: 100vw;
-height: 100vh;
-z-index: 0;
-position:absolute
-/* margin: 3%;
-width: 60%; */
+    /* position:fixed; */
+    width: 100vw;
+    height: 100vh;
+    z-index: 0;
+    position: absolute
+    /* margin: 3%;
+    width: 60%; */
 }
 
 .seattle-contents {
-/* margin: 1%;
-width: 20%;
-height: 100%;
-position: fixed; */
-/* position: relative; */
-/* background-color: white;
-opacity: .8; */
-height: 100vh;
-width: 300px;
-position: relative;
-top: 0;
-right: 0;
-background-color: #84a98c;
-padding: 1%;
-opacity: 85%;
+    /* margin: 1%;
+    width: 20%;
+    height: 100%;
+    position: fixed; */
+    /* position: relative; */
+    /* background-color: white;
+    opacity: .8; */
+    height: 100vh;
+    width: 300px;
+    position: relative;
+    top: 0;
+    right: 0;
+    background-color: #84a98c;
+    padding: 1%;
+    opacity: 85%;
 }
 
 .list-container {
-/* grid-column: 1;
-grid-row: 1; */
-width: 100%;
-height: 42%;
-overflow-y: visible;
+    /* grid-column: 1;
+    grid-row: 1; */
+    width: 100%;
+    height: 42%;
+    overflow-y: visible;
 }
 
 .seattle-list-container {
-/* grid-column: 1;
-grid-row: 2; */
-width: 100%;
-height: 58%;
-overflow-y: scroll;
+    /* grid-column: 1;
+    grid-row: 2; */
+    width: 100%;
+    height: 58%;
+    overflow-y: scroll;
 } 
 
 .scroll-container {
-max-height: 16vh;
-overflow: auto;
-transition: max-height 0.75s;
+    max-height: 16vh;
+    overflow: auto;
+    transition: max-height 0.75s;
 }
 
 .seattle-checkbox {
-opacity: 0;
-position: absolute;
-pointer-events: none;
+    opacity: 0;
+    position: absolute;
+    pointer-events: none;
 }
 
 .cb-label {
-color: black;
+    color: black;
 }
 
 .seattle-checkbox:checked + .cb-label {
-text-decoration: solid;
-color: white;
-background-color: #84a98c;
+    text-decoration: solid;
+    color: white;
+    background-color: #84a98c;
 }
 
 .seattle-contents a {
-padding: 8px 8px 8px 32px;
-text-decoration: none;
-color: black;
-display: unset;
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    color: black;
+    display: unset;
 }
 
 main .seattle-contents{
-position: absolute;
-top: 0;
-right: 25px;
-font-size: 36px;
-margin-left: 50px;
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
 }
 
 /* .material-icons,
@@ -161,39 +160,39 @@ margin-right: 30px
 } */
 
 .history-contents {
-/* margin: 1%;
-width: 20%;
-height: 100%;
-position: fixed; */
-/* position: relative; */
-/* background-color: white;
-opacity: .8; */
-/* height: 36vh; */
-width: 50vh;
-position: absolute;
-top: 20vh;
-left: 0;
-background-color: #52796f;
-margin: 1%;
-padding: 2%;
-opacity: 85%;
-color: white;
+    /* margin: 1%;
+    width: 20%;
+    height: 100%;
+    position: fixed; */
+    /* position: relative; */
+    /* background-color: white;
+    opacity: .8; */
+    /* height: 36vh; */
+    width: 50vh;
+    position: absolute;
+    top: 20vh;
+    left: 0;
+    background-color: #52796f;
+    margin: 1%;
+    padding: 2%;
+    opacity: 85%;
+    color: white;
 }
 
 .history-container {
-/* grid-column: 1;
-grid-row: 1; */
-width: 100%;
-height: 42%;
-overflow-y: visible;
-font-size: 13pt;
+    /* grid-column: 1;
+    grid-row: 1; */
+    width: 100%;
+    height: 42%;
+    overflow-y: visible;
+    font-size: 13pt;
 }
 
 .leaflet-popup-content-wrapper {
-background-color: #84a98c;
-color: black
+    background-color: #84a98c;
+    color: black
 }
 
 .leaflet-popup-tip {
-background-color: #84a98c;
+  background-color: #84a98c;
 }
