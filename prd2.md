@@ -2,7 +2,7 @@
 
 ## Users: 
 1. Curious Fishtown Resident
-2. Zoning Board Chair
+2. Zoning Board Chair leading a meeting
 
 ## Data from OpenDataPhilly and organized in R
 
