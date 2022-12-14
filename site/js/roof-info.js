@@ -4,18 +4,26 @@ let roof_info = document.querySelector('#roof-info');
 
 let equation = document.querySelector('#roof-equation');
 
-let carbon = document.querySelector('#roof-carbon');
-
-let car = document.querySelector('#roof-car');
-
-let tree = document.querySelector('#roof-tree');
+// let carbon = document.querySelector('#roof-carbon');
+//
+// let car = document.querySelector('#roof-car');
+//
+// let tree = document.querySelector('#roof-tree');
 
 let current_roof = {};
 
 window.current_roof = current_roof;
 
 $("#geocoder-roof").change(function(){
-    let address = JSON.parse(geocoder_roof['lastSelected'])['place_name'];
+    let address;
+    console.log(geocoder_roof['inputString']);
+    if (clicked_address !== '') {
+        address = clicked_address;
+    }
+    else {
+        address = JSON.parse(geocoder_roof['lastSelected'])['place_name'];
+    }
+
     let street = address.split(',')[0].toUpperCase();
     street = street.replaceAll('EAST', 'E');
     street = street.replaceAll('NORTH', 'NORTH');
@@ -35,16 +43,13 @@ $("#geocoder-roof").change(function(){
 
             roof_info.innerHTML = '';
             equation.innerHTML = '';
-            carbon.innerHTML = '';
-            car.innerHTML = '';
-            tree.innerHTML = '';
 
             current_roof = solar['features'][i];
             const li1 = `
                 <li style="list-style: none; padding: 15px 30px 15px 80px; position: relative; height: 33%; width: 100%">
                     <div class="icon-sun panel-icon"></div>
                         <div class="panel-text">
-                             ${parseFloat(solar['features'][i]['properties']['Solar_Rad_']).toFixed(2)} kWh of usable sunlight per year
+                             ${parseFloat(solar['features'][i]['properties']['Solar_Rad_']).toFixed(2)} MWh of usable sunlight per year
                         </div>
                         <div class="panel-caption">
                             Based on day-to-day analysis of weather patterns
@@ -79,12 +84,13 @@ $("#geocoder-roof").change(function(){
 
             const opt1 = htmlToElement(li1);
             const opt2 = htmlToElement(divide);
+            const opt22 = htmlToElement(divide);
             const opt3 = htmlToElement(li2);
             const optli3 = htmlToElement(li3);
             roof_info.append(opt1);
             roof_info.append(opt2);
             roof_info.append(opt3);
-            roof_info.append(opt2);
+            roof_info.append(opt22);
             roof_info.append(optli3);
 
             const carbon_info = `
@@ -133,7 +139,7 @@ $("#geocoder-roof").change(function(){
     }
 
     if (flag === 0) {
-        alert("Sorry, failed to find the address.");
+        alert("Sorry, failed to find the address. Please type another");
     }
 });
 

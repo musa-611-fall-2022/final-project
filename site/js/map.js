@@ -105,8 +105,6 @@ $.ajax({
     }
 });
 
-
-
 $.ajax({
     url: "data/Solar_Buildings2.geojson",
     type: "GET",
@@ -222,8 +220,6 @@ $.ajax({
 window.neighbors = neighbors;
 window.solar = solar;
 
-
-
 map.on('load', () => {
     map.addSource('solar-roof', {
         'type': 'raster',
@@ -260,13 +256,64 @@ map.on('load', () => {
         'source': 'neighborhood-boundary',
         'layout': {},
         'paint': {
-        'line-color': '#ffffff',
-        'line-width': 1
+            'line-color': '#ffffff',
+            'line-width': 1
         }
     });
 
     // When clicked, show the neighborhood information
     map.on('click', 'neighborhood', (e) => {
+        let features = map.queryRenderedFeatures(e.point, { layers: ['neighborhood'] });
+        let clicked_neighbor = features[0].toJSON()['properties']['MAPNAME'];
+        $("#select-neighbor").find("option").each(function(i, item) {
+           if((item.text) === clicked_neighbor) {
+                item.selected = true;
+                return;
+           }
+         });
+        $("#select-neighbor").trigger('change');
+        const coordinates = features[0].toJSON()["geometry"]["coordinates"][0];
+
+        // Create a 'LngLatBounds' with both corners at the first coordinate.
+        const bounds = new mapboxgl.LngLatBounds(
+            coordinates[0],
+            coordinates[0]
+        );
+
+        // Extend the 'LngLatBounds' to include every coordinate in the bounds result.
+        for (const coord of coordinates) {
+            bounds.extend(coord);
+        }
+
+        map.fitBounds(bounds, {
+            padding: 20
+        });
+
+        var feature = features[0].toJSON();
+
+        if (typeof map.getLayer('selectedNeighbor') !== "undefined" ){
+            map.removeLayer('selectedNeighbor')
+            map.removeSource('selectedNeighbor');
+        }
+
+        map.addSource('selectedNeighbor', {
+            "type":"geojson",
+            "data": feature
+        });
+        map.addLayer({
+            "id": "selectedNeighbor",
+            "type": "line",
+            "source": "selectedNeighbor",
+            "layout": {
+                "line-join": "round",
+                "line-cap": "round"
+            },
+            "paint": {
+                "line-color": "white",
+                "line-width": 6
+            },
+        });
+
         new mapboxgl.Popup()
             .setLngLat(e.lngLat)
             .setHTML(e.features[0].properties.MAPNAME)
@@ -319,6 +366,67 @@ map.on('load', () => {
     //     hoveredCountyId = null;
     // });
 });
+
+
+$("#select-neighbor").change(function(){
+    var selectVal = $("#select-neighbor option:selected").val();
+    let name_arr = selectVal.split('_');
+    if (name_arr.length > 1) {
+        selectVal = name_arr[0];
+        for (let j = 1; j < name_arr.length; j++) {
+            selectVal += ' ' + name_arr[j]
+        }
+    }
+    for (let i = 0; i < neighbors['features'].length; i++) {
+        if (neighbors['features'][i]['properties']['MAPNAME'] === selectVal) {
+            const coordinates = neighbors.features[i].geometry.coordinates[0][0];
+
+            // Create a 'LngLatBounds' with both corners at the first coordinate.
+            const bounds = new mapboxgl.LngLatBounds(
+                coordinates[0],
+                coordinates[0]
+            );
+
+            // Extend the 'LngLatBounds' to include every coordinate in the bounds result.
+            for (const coord of coordinates) {
+                bounds.extend(coord);
+            }
+
+            map.fitBounds(bounds, {
+                padding: 20
+            });
+
+            var feature = neighbors['features'][i];
+
+            if (typeof map.getLayer('selectedNeighbor') !== "undefined" ){
+                map.removeLayer('selectedNeighbor')
+                map.removeSource('selectedNeighbor');
+            }
+
+            map.addSource('selectedNeighbor', {
+                "type":"geojson",
+                "data": feature
+            });
+            map.addLayer({
+                "id": "selectedNeighbor",
+                "type": "line",
+                "source": "selectedNeighbor",
+                "layout": {
+                    "line-join": "round",
+                    "line-cap": "round"
+                },
+                "paint": {
+                    "line-color": "white",
+                    "line-width": 6
+                },
+            });
+            break
+        }
+    }
+});
+
+let clicked_address = "";
+window.clicked_address = clicked_address;
 
 map_roof.on('load', () => {
     map_roof.addSource('solar-roof', {
@@ -493,213 +601,633 @@ map_roof.on('load', () => {
         },
     });
 
-    // Create a popup, but don't add it to the map yet.
-    const popup = new mapboxgl.Popup({
-        closeButton: false,
-        closeOnClick: false
-    });
+    // When clicked, show the roof information
+    map_roof.on('click', 'roof1', (e) => {
+        let features = map_roof.queryRenderedFeatures(e.point, { layers: ['roof1'] });
 
-    map_roof.on('mouseenter', 'roof1', (e) => {
-        // Change the cursor style as a UI indicator.
-        map_roof.getCanvas().style.cursor = 'pointer';
+        clicked_address = features[0].toJSON()['properties']['ADDRESS'];
 
-        // Copy coordinates array.
-        const coordinates = e.lngLat;
-        const address = e.features[0].properties.ADDRESS;
+        $("#geocoder-roof").trigger('change');
 
-        // Ensure that if the map is zoomed out such that multiple
-        // copies of the feature are visible, the popup appears
-        // over the copy being pointed to.
-        while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
-            coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+        clicked_address = "";
+
+        // const coordinates = features[0].toJSON()["geometry"]["coordinates"][0];
+        //
+        // // Create a 'LngLatBounds' with both corners at the first coordinate.
+        // const bounds = new mapboxgl.LngLatBounds(
+        //     coordinates[0],
+        //     coordinates[0]
+        // );
+        //
+        // // Extend the 'LngLatBounds' to include every coordinate in the bounds result.
+        // for (const coord of coordinates) {
+        //     bounds.extend(coord);
+        // }
+        //
+        // map_roof.fitBounds(bounds, {
+        //     padding: 20
+        // });
+
+        var feature = features[0].toJSON();
+
+        if (typeof map_roof.getLayer('selectedRoof') !== "undefined" ){
+            map_roof.removeLayer('selectedRoof')
+            map_roof.removeSource('selectedRoof');
         }
 
-        // Populate the popup and set its coordinates
-        // based on the feature found.
-        popup.setLngLat(coordinates).setHTML(address).addTo(map_roof);
+        map_roof.addSource('selectedRoof', {
+            "type":"geojson",
+            "data": feature
+        });
+        map_roof.addLayer({
+            "id": "selectedRoof",
+            "type": "line",
+            "source": "selectedRoof",
+            "layout": {
+                "line-join": "round",
+                "line-cap": "round"
+            },
+            "paint": {
+                "line-color": "white",
+                "line-width": 6
+            },
+        });
+
+        new mapboxgl.Popup()
+            .setLngLat(e.lngLat)
+            .setHTML(e.features[0].properties.ADDRESS)
+            .addTo(map_roof);
+    });
+
+    map_roof.on('mouseenter', 'roof1', () => {
+        map_roof.getCanvas().style.cursor = 'pointer';
     });
 
     map_roof.on('mouseleave', 'roof1', () => {
         map_roof.getCanvas().style.cursor = '';
-        popup.remove();
     });
-    map_roof.on('mouseenter', 'roof2', (e) => {
-        // Change the cursor style as a UI indicator.
-        map_roof.getCanvas().style.cursor = 'pointer';
 
-        // Copy coordinates array.
-        const coordinates = e.lngLat;
-        const address = e.features[0].properties.ADDRESS;
+    map_roof.on('click', 'roof2', (e) => {
+        let features = map_roof.queryRenderedFeatures(e.point, { layers: ['roof2'] });
 
-        // Ensure that if the map is zoomed out such that multiple
-        // copies of the feature are visible, the popup appears
-        // over the copy being pointed to.
-        while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
-            coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+        clicked_address = features[0].toJSON()['properties']['ADDRESS'];
+
+        $("#geocoder-roof").trigger('change');
+
+        clicked_address = "";
+
+        // const coordinates = features[0].toJSON()["geometry"]["coordinates"][0];
+        //
+        // // Create a 'LngLatBounds' with both corners at the first coordinate.
+        // const bounds = new mapboxgl.LngLatBounds(
+        //     coordinates[0],
+        //     coordinates[0]
+        // );
+        //
+        // // Extend the 'LngLatBounds' to include every coordinate in the bounds result.
+        // for (const coord of coordinates) {
+        //     bounds.extend(coord);
+        // }
+        //
+        // map_roof.fitBounds(bounds, {
+        //     padding: 20
+        // });
+
+        var feature = features[0].toJSON();
+
+        if (typeof map_roof.getLayer('selectedRoof') !== "undefined" ){
+            map_roof.removeLayer('selectedRoof')
+            map_roof.removeSource('selectedRoof');
         }
 
-        // Populate the popup and set its coordinates
-        // based on the feature found.
-        popup.setLngLat(coordinates).setHTML(address).addTo(map_roof);
+        map_roof.addSource('selectedRoof', {
+            "type":"geojson",
+            "data": feature
+        });
+        map_roof.addLayer({
+            "id": "selectedRoof",
+            "type": "line",
+            "source": "selectedRoof",
+            "layout": {
+                "line-join": "round",
+                "line-cap": "round"
+            },
+            "paint": {
+                "line-color": "white",
+                "line-width": 6
+            },
+        });
+
+        new mapboxgl.Popup()
+            .setLngLat(e.lngLat)
+            .setHTML(e.features[0].properties.ADDRESS)
+            .addTo(map_roof);
+    });
+
+    map_roof.on('mouseenter', 'roof2', () => {
+        map_roof.getCanvas().style.cursor = 'pointer';
     });
 
     map_roof.on('mouseleave', 'roof2', () => {
         map_roof.getCanvas().style.cursor = '';
-        popup.remove();
     });
-    map_roof.on('mouseenter', 'roof3', (e) => {
-        // Change the cursor style as a UI indicator.
-        map_roof.getCanvas().style.cursor = 'pointer';
 
-        // Copy coordinates array.
-        const coordinates = e.lngLat;
-        const address = e.features[0].properties.ADDRESS;
+    map_roof.on('click', 'roof3', (e) => {
+        let features = map_roof.queryRenderedFeatures(e.point, { layers: ['roof3'] });
 
-        // Ensure that if the map is zoomed out such that multiple
-        // copies of the feature are visible, the popup appears
-        // over the copy being pointed to.
-        while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
-            coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+        clicked_address = features[0].toJSON()['properties']['ADDRESS'];
+
+        $("#geocoder-roof").trigger('change');
+
+        clicked_address = "";
+
+        // const coordinates = features[0].toJSON()["geometry"]["coordinates"][0];
+        //
+        // // Create a 'LngLatBounds' with both corners at the first coordinate.
+        // const bounds = new mapboxgl.LngLatBounds(
+        //     coordinates[0],
+        //     coordinates[0]
+        // );
+        //
+        // // Extend the 'LngLatBounds' to include every coordinate in the bounds result.
+        // for (const coord of coordinates) {
+        //     bounds.extend(coord);
+        // }
+        //
+        // map_roof.fitBounds(bounds, {
+        //     padding: 20
+        // });
+
+        var feature = features[0].toJSON();
+
+        if (typeof map_roof.getLayer('selectedRoof') !== "undefined" ){
+            map_roof.removeLayer('selectedRoof')
+            map_roof.removeSource('selectedRoof');
         }
 
-        // Populate the popup and set its coordinates
-        // based on the feature found.
-        popup.setLngLat(coordinates).setHTML(address).addTo(map_roof);
+        map_roof.addSource('selectedRoof', {
+            "type":"geojson",
+            "data": feature
+        });
+        map_roof.addLayer({
+            "id": "selectedRoof",
+            "type": "line",
+            "source": "selectedRoof",
+            "layout": {
+                "line-join": "round",
+                "line-cap": "round"
+            },
+            "paint": {
+                "line-color": "white",
+                "line-width": 6
+            },
+        });
+
+        new mapboxgl.Popup()
+            .setLngLat(e.lngLat)
+            .setHTML(e.features[0].properties.ADDRESS)
+            .addTo(map_roof);
+    });
+
+    map_roof.on('mouseenter', 'roof3', () => {
+        map_roof.getCanvas().style.cursor = 'pointer';
     });
 
     map_roof.on('mouseleave', 'roof3', () => {
         map_roof.getCanvas().style.cursor = '';
-        popup.remove();
     });
-    map_roof.on('mouseenter', 'roof4', (e) => {
-        // Change the cursor style as a UI indicator.
-        map_roof.getCanvas().style.cursor = 'pointer';
 
-        // Copy coordinates array.
-        const coordinates = e.lngLat;
-        const address = e.features[0].properties.ADDRESS;
+    map_roof.on('click', 'roof4', (e) => {
+        let features = map_roof.queryRenderedFeatures(e.point, { layers: ['roof4'] });
 
-        // Ensure that if the map is zoomed out such that multiple
-        // copies of the feature are visible, the popup appears
-        // over the copy being pointed to.
-        while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
-            coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+        clicked_address = features[0].toJSON()['properties']['ADDRESS'];
+
+        $("#geocoder-roof").trigger('change');
+
+        clicked_address = "";
+
+        // const coordinates = features[0].toJSON()["geometry"]["coordinates"][0];
+        //
+        // // Create a 'LngLatBounds' with both corners at the first coordinate.
+        // const bounds = new mapboxgl.LngLatBounds(
+        //     coordinates[0],
+        //     coordinates[0]
+        // );
+        //
+        // // Extend the 'LngLatBounds' to include every coordinate in the bounds result.
+        // for (const coord of coordinates) {
+        //     bounds.extend(coord);
+        // }
+        //
+        // map_roof.fitBounds(bounds, {
+        //     padding: 20
+        // });
+
+        var feature = features[0].toJSON();
+
+        if (typeof map_roof.getLayer('selectedRoof') !== "undefined" ){
+            map_roof.removeLayer('selectedRoof')
+            map_roof.removeSource('selectedRoof');
         }
 
-        // Populate the popup and set its coordinates
-        // based on the feature found.
-        popup.setLngLat(coordinates).setHTML(address).addTo(map_roof);
+        map_roof.addSource('selectedRoof', {
+            "type":"geojson",
+            "data": feature
+        });
+        map_roof.addLayer({
+            "id": "selectedRoof",
+            "type": "line",
+            "source": "selectedRoof",
+            "layout": {
+                "line-join": "round",
+                "line-cap": "round"
+            },
+            "paint": {
+                "line-color": "white",
+                "line-width": 6
+            },
+        });
+
+        new mapboxgl.Popup()
+            .setLngLat(e.lngLat)
+            .setHTML(e.features[0].properties.ADDRESS)
+            .addTo(map_roof);
+    });
+
+    map_roof.on('mouseenter', 'roof4', () => {
+        map_roof.getCanvas().style.cursor = 'pointer';
     });
 
     map_roof.on('mouseleave', 'roof4', () => {
         map_roof.getCanvas().style.cursor = '';
-        popup.remove();
     });
-    map_roof.on('mouseenter', 'roof5', (e) => {
-        // Change the cursor style as a UI indicator.
-        map_roof.getCanvas().style.cursor = 'pointer';
 
-        // Copy coordinates array.
-        const coordinates = e.lngLat;
-        const address = e.features[0].properties.ADDRESS;
+    map_roof.on('click', 'roof5', (e) => {
+        let features = map_roof.queryRenderedFeatures(e.point, { layers: ['roof5'] });
 
-        // Ensure that if the map is zoomed out such that multiple
-        // copies of the feature are visible, the popup appears
-        // over the copy being pointed to.
-        while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
-            coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+        clicked_address = features[0].toJSON()['properties']['ADDRESS'];
+
+        $("#geocoder-roof").trigger('change');
+
+        clicked_address = "";
+
+        // const coordinates = features[0].toJSON()["geometry"]["coordinates"][0];
+        //
+        // // Create a 'LngLatBounds' with both corners at the first coordinate.
+        // const bounds = new mapboxgl.LngLatBounds(
+        //     coordinates[0],
+        //     coordinates[0]
+        // );
+        //
+        // // Extend the 'LngLatBounds' to include every coordinate in the bounds result.
+        // for (const coord of coordinates) {
+        //     bounds.extend(coord);
+        // }
+        //
+        // map_roof.fitBounds(bounds, {
+        //     padding: 20
+        // });
+
+        var feature = features[0].toJSON();
+
+        if (typeof map_roof.getLayer('selectedRoof') !== "undefined" ){
+            map_roof.removeLayer('selectedRoof')
+            map_roof.removeSource('selectedRoof');
         }
 
-        // Populate the popup and set its coordinates
-        // based on the feature found.
-        popup.setLngLat(coordinates).setHTML(address).addTo(map_roof);
+        map_roof.addSource('selectedRoof', {
+            "type":"geojson",
+            "data": feature
+        });
+        map_roof.addLayer({
+            "id": "selectedRoof",
+            "type": "line",
+            "source": "selectedRoof",
+            "layout": {
+                "line-join": "round",
+                "line-cap": "round"
+            },
+            "paint": {
+                "line-color": "white",
+                "line-width": 6
+            },
+        });
+
+        new mapboxgl.Popup()
+            .setLngLat(e.lngLat)
+            .setHTML(e.features[0].properties.ADDRESS)
+            .addTo(map_roof);
+    });
+
+    map_roof.on('mouseenter', 'roof5', () => {
+        map_roof.getCanvas().style.cursor = 'pointer';
     });
 
     map_roof.on('mouseleave', 'roof5', () => {
         map_roof.getCanvas().style.cursor = '';
-        popup.remove();
     });
-    map_roof.on('mouseenter', 'roof6', (e) => {
-        // Change the cursor style as a UI indicator.
-        map_roof.getCanvas().style.cursor = 'pointer';
 
-        // Copy coordinates array.
-        const coordinates = e.lngLat;
-        const address = e.features[0].properties.ADDRESS;
+    map_roof.on('click', 'roof6', (e) => {
+        let features = map_roof.queryRenderedFeatures(e.point, { layers: ['roof6'] });
 
-        // Ensure that if the map is zoomed out such that multiple
-        // copies of the feature are visible, the popup appears
-        // over the copy being pointed to.
-        while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
-            coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+        clicked_address = features[0].toJSON()['properties']['ADDRESS'];
+
+        $("#geocoder-roof").trigger('change');
+
+        clicked_address = "";
+
+        // const coordinates = features[0].toJSON()["geometry"]["coordinates"][0];
+        //
+        // // Create a 'LngLatBounds' with both corners at the first coordinate.
+        // const bounds = new mapboxgl.LngLatBounds(
+        //     coordinates[0],
+        //     coordinates[0]
+        // );
+        //
+        // // Extend the 'LngLatBounds' to include every coordinate in the bounds result.
+        // for (const coord of coordinates) {
+        //     bounds.extend(coord);
+        // }
+        //
+        // map_roof.fitBounds(bounds, {
+        //     padding: 20
+        // });
+
+        var feature = features[0].toJSON();
+
+        if (typeof map_roof.getLayer('selectedRoof') !== "undefined" ){
+            map_roof.removeLayer('selectedRoof')
+            map_roof.removeSource('selectedRoof');
         }
 
-        // Populate the popup and set its coordinates
-        // based on the feature found.
-        popup.setLngLat(coordinates).setHTML(address).addTo(map_roof);
+        map_roof.addSource('selectedRoof', {
+            "type":"geojson",
+            "data": feature
+        });
+        map_roof.addLayer({
+            "id": "selectedRoof",
+            "type": "line",
+            "source": "selectedRoof",
+            "layout": {
+                "line-join": "round",
+                "line-cap": "round"
+            },
+            "paint": {
+                "line-color": "white",
+                "line-width": 6
+            },
+        });
+
+        new mapboxgl.Popup()
+            .setLngLat(e.lngLat)
+            .setHTML(e.features[0].properties.ADDRESS)
+            .addTo(map_roof);
+    });
+
+    map_roof.on('mouseenter', 'roof6', () => {
+        map_roof.getCanvas().style.cursor = 'pointer';
     });
 
     map_roof.on('mouseleave', 'roof6', () => {
         map_roof.getCanvas().style.cursor = '';
-        popup.remove();
     });
-    map_roof.on('mouseenter', 'roof7', (e) => {
-        // Change the cursor style as a UI indicator.
-        map_roof.getCanvas().style.cursor = 'pointer';
 
-        // Copy coordinates array.
-        const coordinates = e.lngLat;
-        const address = e.features[0].properties.ADDRESS;
+    map_roof.on('click', 'roof7', (e) => {
+        let features = map_roof.queryRenderedFeatures(e.point, { layers: ['roof7'] });
 
-        // Ensure that if the map is zoomed out such that multiple
-        // copies of the feature are visible, the popup appears
-        // over the copy being pointed to.
-        while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
-            coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+        clicked_address = features[0].toJSON()['properties']['ADDRESS'];
+
+        $("#geocoder-roof").trigger('change');
+
+        clicked_address = "";
+
+        // const coordinates = features[0].toJSON()["geometry"]["coordinates"][0];
+        //
+        // // Create a 'LngLatBounds' with both corners at the first coordinate.
+        // const bounds = new mapboxgl.LngLatBounds(
+        //     coordinates[0],
+        //     coordinates[0]
+        // );
+        //
+        // // Extend the 'LngLatBounds' to include every coordinate in the bounds result.
+        // for (const coord of coordinates) {
+        //     bounds.extend(coord);
+        // }
+        //
+        // map_roof.fitBounds(bounds, {
+        //     padding: 20
+        // });
+
+        var feature = features[0].toJSON();
+
+        if (typeof map_roof.getLayer('selectedRoof') !== "undefined" ){
+            map_roof.removeLayer('selectedRoof')
+            map_roof.removeSource('selectedRoof');
         }
 
-        // Populate the popup and set its coordinates
-        // based on the feature found.
-        popup.setLngLat(coordinates).setHTML(address).addTo(map_roof);
+        map_roof.addSource('selectedRoof', {
+            "type":"geojson",
+            "data": feature
+        });
+        map_roof.addLayer({
+            "id": "selectedRoof",
+            "type": "line",
+            "source": "selectedRoof",
+            "layout": {
+                "line-join": "round",
+                "line-cap": "round"
+            },
+            "paint": {
+                "line-color": "white",
+                "line-width": 6
+            },
+        });
+
+        new mapboxgl.Popup()
+            .setLngLat(e.lngLat)
+            .setHTML(e.features[0].properties.ADDRESS)
+            .addTo(map_roof);
+    });
+
+    map_roof.on('mouseenter', 'roof7', () => {
+        map_roof.getCanvas().style.cursor = 'pointer';
     });
 
     map_roof.on('mouseleave', 'roof7', () => {
         map_roof.getCanvas().style.cursor = '';
-        popup.remove();
     });
+    // Create a popup, but don't add it to the map yet.
+    // const popup = new mapboxgl.Popup({
+    //     closeButton: false,
+    //     closeOnClick: false
+    // });
+
+    // map_roof.on('mouseenter', 'roof1', (e) => {
+    //     // Change the cursor style as a UI indicator.
+    //     map_roof.getCanvas().style.cursor = 'pointer';
+    //
+    //     // Copy coordinates array.
+    //     const coordinates = e.lngLat;
+    //     const address = e.features[0].properties.ADDRESS;
+    //
+    //     // Ensure that if the map is zoomed out such that multiple
+    //     // copies of the feature are visible, the popup appears
+    //     // over the copy being pointed to.
+    //     while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+    //         coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+    //     }
+    //
+    //     // Populate the popup and set its coordinates
+    //     // based on the feature found.
+    //     popup.setLngLat(coordinates).setHTML(address).addTo(map_roof);
+    // });
+    //
+    // map_roof.on('mouseleave', 'roof1', () => {
+    //     map_roof.getCanvas().style.cursor = '';
+    //     popup.remove();
+    // });
+    // map_roof.on('mouseenter', 'roof2', (e) => {
+    //     // Change the cursor style as a UI indicator.
+    //     map_roof.getCanvas().style.cursor = 'pointer';
+    //
+    //     // Copy coordinates array.
+    //     const coordinates = e.lngLat;
+    //     const address = e.features[0].properties.ADDRESS;
+    //
+    //     // Ensure that if the map is zoomed out such that multiple
+    //     // copies of the feature are visible, the popup appears
+    //     // over the copy being pointed to.
+    //     while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+    //         coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+    //     }
+    //
+    //     // Populate the popup and set its coordinates
+    //     // based on the feature found.
+    //     popup.setLngLat(coordinates).setHTML(address).addTo(map_roof);
+    // });
+    //
+    // map_roof.on('mouseleave', 'roof2', () => {
+    //     map_roof.getCanvas().style.cursor = '';
+    //     popup.remove();
+    // });
+    // map_roof.on('mouseenter', 'roof3', (e) => {
+    //     // Change the cursor style as a UI indicator.
+    //     map_roof.getCanvas().style.cursor = 'pointer';
+    //
+    //     // Copy coordinates array.
+    //     const coordinates = e.lngLat;
+    //     const address = e.features[0].properties.ADDRESS;
+    //
+    //     // Ensure that if the map is zoomed out such that multiple
+    //     // copies of the feature are visible, the popup appears
+    //     // over the copy being pointed to.
+    //     while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+    //         coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+    //     }
+    //
+    //     // Populate the popup and set its coordinates
+    //     // based on the feature found.
+    //     popup.setLngLat(coordinates).setHTML(address).addTo(map_roof);
+    // });
+    //
+    // map_roof.on('mouseleave', 'roof3', () => {
+    //     map_roof.getCanvas().style.cursor = '';
+    //     popup.remove();
+    // });
+    // map_roof.on('mouseenter', 'roof4', (e) => {
+    //     // Change the cursor style as a UI indicator.
+    //     map_roof.getCanvas().style.cursor = 'pointer';
+    //
+    //     // Copy coordinates array.
+    //     const coordinates = e.lngLat;
+    //     const address = e.features[0].properties.ADDRESS;
+    //
+    //     // Ensure that if the map is zoomed out such that multiple
+    //     // copies of the feature are visible, the popup appears
+    //     // over the copy being pointed to.
+    //     while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+    //         coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+    //     }
+    //
+    //     // Populate the popup and set its coordinates
+    //     // based on the feature found.
+    //     popup.setLngLat(coordinates).setHTML(address).addTo(map_roof);
+    // });
+    //
+    // map_roof.on('mouseleave', 'roof4', () => {
+    //     map_roof.getCanvas().style.cursor = '';
+    //     popup.remove();
+    // });
+    // map_roof.on('mouseenter', 'roof5', (e) => {
+    //     // Change the cursor style as a UI indicator.
+    //     map_roof.getCanvas().style.cursor = 'pointer';
+    //
+    //     // Copy coordinates array.
+    //     const coordinates = e.lngLat;
+    //     const address = e.features[0].properties.ADDRESS;
+    //
+    //     // Ensure that if the map is zoomed out such that multiple
+    //     // copies of the feature are visible, the popup appears
+    //     // over the copy being pointed to.
+    //     while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+    //         coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+    //     }
+    //
+    //     // Populate the popup and set its coordinates
+    //     // based on the feature found.
+    //     popup.setLngLat(coordinates).setHTML(address).addTo(map_roof);
+    // });
+    //
+    // map_roof.on('mouseleave', 'roof5', () => {
+    //     map_roof.getCanvas().style.cursor = '';
+    //     popup.remove();
+    // });
+    // map_roof.on('mouseenter', 'roof6', (e) => {
+    //     // Change the cursor style as a UI indicator.
+    //     map_roof.getCanvas().style.cursor = 'pointer';
+    //
+    //     // Copy coordinates array.
+    //     const coordinates = e.lngLat;
+    //     const address = e.features[0].properties.ADDRESS;
+    //
+    //     // Ensure that if the map is zoomed out such that multiple
+    //     // copies of the feature are visible, the popup appears
+    //     // over the copy being pointed to.
+    //     while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+    //         coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+    //     }
+    //
+    //     // Populate the popup and set its coordinates
+    //     // based on the feature found.
+    //     popup.setLngLat(coordinates).setHTML(address).addTo(map_roof);
+    // });
+    //
+    // map_roof.on('mouseleave', 'roof6', () => {
+    //     map_roof.getCanvas().style.cursor = '';
+    //     popup.remove();
+    // });
+    // map_roof.on('mouseenter', 'roof7', (e) => {
+    //     // Change the cursor style as a UI indicator.
+    //     map_roof.getCanvas().style.cursor = 'pointer';
+    //
+    //     // Copy coordinates array.
+    //     const coordinates = e.lngLat;
+    //     const address = e.features[0].properties.ADDRESS;
+    //
+    //     // Ensure that if the map is zoomed out such that multiple
+    //     // copies of the feature are visible, the popup appears
+    //     // over the copy being pointed to.
+    //     while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+    //         coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+    //     }
+    //
+    //     // Populate the popup and set its coordinates
+    //     // based on the feature found.
+    //     popup.setLngLat(coordinates).setHTML(address).addTo(map_roof);
+    // });
+    //
+    // map_roof.on('mouseleave', 'roof7', () => {
+    //     map_roof.getCanvas().style.cursor = '';
+    //     popup.remove();
+    // });
 });
-
-$("#select-neighbor").change(function(){
-    var selectVal = $("#select-neighbor option:selected").val();
-    let name_arr = selectVal.split('_');
-    if (name_arr.length > 1) {
-        selectVal = name_arr[0];
-        for (let j = 1; j < name_arr.length; j++) {
-            selectVal += ' ' + name_arr[j]
-        }
-    }
-    for (let i = 0; i < neighbors['features'].length; i++) {
-        if (neighbors['features'][i]['properties']['MAPNAME'] === selectVal) {
-            const coordinates = neighbors.features[i].geometry.coordinates[0][0];
-
-            // Create a 'LngLatBounds' with both corners at the first coordinate.
-            const bounds = new mapboxgl.LngLatBounds(
-                coordinates[0],
-                coordinates[0]
-            );
-
-            // Extend the 'LngLatBounds' to include every coordinate in the bounds result.
-            for (const coord of coordinates) {
-                bounds.extend(coord);
-            }
-
-            map.fitBounds(bounds, {
-                padding: 20
-            });
-
-            break
-        }
-    }
-});
-
-

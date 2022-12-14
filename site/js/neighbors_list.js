@@ -1,20 +1,5 @@
 import { htmlToElement } from './template-tools.js';
 
-let neighbors = {};
-
-$.ajax({
-    url: "data/neighborhoods84.geojson",
-    type: "GET",
-    dataType: "json",
-    async: false,
-    success: function(data) {
-        neighbors = data;
-    },
-    error: function (err) {
-        console.log(err);
-    }
-});
-
 let selectNeighbor = document.querySelector('#select-neighbor');
 
 for (let i = 0; i < neighbors['features'].length; i++) {

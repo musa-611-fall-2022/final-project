@@ -4,14 +4,13 @@ let neighbor_info = document.querySelector('#neighbor-info');
 
 let equation = document.querySelector('#neighbor-equation');
 
-let carbon = document.querySelector('#neighbor-carbon');
-
-let car = document.querySelector('#neighbor-car');
-
-let tree = document.querySelector('#neighbor-tree');
+// let carbon = document.querySelector('#neighbor-carbon');
+//
+// let car = document.querySelector('#neighbor-car');
+//
+// let tree = document.querySelector('#neighbor-tree');
 
 $("#select-neighbor").change(function(){
-
     var selectVal = $("#select-neighbor option:selected").val();
     let name_arr = selectVal.split('_');
     if (name_arr.length > 1) {
@@ -31,7 +30,7 @@ $("#select-neighbor").change(function(){
                 <li style="list-style: none; padding: 15px 30px 15px 80px; position: relative; height: 33%; width: 100%">
                     <div class="icon-sun panel-icon"></div>
                         <div class="panel-text">
-                             ${parseFloat(neighbors['features'][i]['properties']['Solar_Rad__sum']).toFixed(2)} kWh of usable sunlight per year
+                             ${parseFloat(neighbors['features'][i]['properties']['Solar_Rad__sum']).toFixed(2)} MWh of usable sunlight per year
                         </div>
                         <div class="panel-caption">
                             Based on day-to-day analysis of weather patterns
@@ -66,12 +65,13 @@ $("#select-neighbor").change(function(){
 
             const opt1 = htmlToElement(li1);
             const opt2 = htmlToElement(divide);
+            const opt22 = htmlToElement(divide);
             const opt3 = htmlToElement(li2);
             const optli3 = htmlToElement(li3);
             neighbor_info.append(opt1);
             neighbor_info.append(opt2);
             neighbor_info.append(opt3);
-            neighbor_info.append(opt2);
+            neighbor_info.append(opt22);
             neighbor_info.append(optli3);
 
             const carbon_info = `
