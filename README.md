@@ -22,8 +22,8 @@ The second map creates an animation of recent 24-hour earthquakes in chronologic
 
 
 ## Requirements
-- Leaflet (http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js)
-- D3 V4 (http://d3js.org/d3.v4.min.js)
+- Leaflet (https://leafletjs-cdn.s3.amazonaws.com/content/leaflet/v1.9.3/leaflet.zip)
+- D3 (https://d3js.org/d3.v7.min.js)
 - World Atlas TopoJSON (https://www.npmjs.com/package/world-atlas)
 - TopoJSON (https://unpkg.com/topojson-client@3)
 - MapBox Documentation (https://docs.mapbox.com/)
