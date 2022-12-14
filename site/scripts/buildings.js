@@ -1,5 +1,6 @@
 import { tooltipEvents } from "./tooltip.js";
 
+//setting B# and Hammer icon positions
 function setLabelPos(b, outline, XY, m){
     if (b != "N/A"){
         let txtMargin = parseInt(m);
@@ -31,6 +32,7 @@ function setLabelPos(b, outline, XY, m){
     }
 }
 
+//function for adding buildings
 function loadPathsLoop(data, svg, selectedMap){
     d3.selectAll(".building-svg").remove();
     d3.selectAll("defs").remove();
@@ -38,14 +40,15 @@ function loadPathsLoop(data, svg, selectedMap){
     //D3 to add paths to the SVG    
     let defs = svg.append("defs");
 
-    //masks
-    let buildMasks = defs.selectAll("clipPath")
-        .data(data)
-    .join("clipPath")
-        .attr("id", d => `${d.id}-clip`)
-    .append("path")
-        .attr("d", d => d.path);
+    //putting masks in the <defs> to be referenced later
+    defs.selectAll("clipPath")
+            .data(data)
+        .join("clipPath")
+            .attr("id", d => `${d.id}-clip`)
+        .append("path")
+            .attr("d", d => d.path);
 
+    //creating the unconfirmed gradient with SVG linearGradient
     let gradient = defs.append("linearGradient")
             .attr("id", "unconfirmedGradient");
     
@@ -57,22 +60,20 @@ function loadPathsLoop(data, svg, selectedMap){
     .attr("offset", "75%")
     .attr("stop-color", "#EDABA3")
 
-    //     <linearGradient id="myGradient" gradientTransform="rotate(90)">
-    //     <stop offset="5%" stop-color="gold" />
-    //     <stop offset="95%" stop-color="red" />
-    //   </linearGradient>
-
     //here's the group
     let pathGroup = svg.append("g")
     .attr("class", "building-svg");
 
+    //every unit element
     const stackGenB = d3.stack()
     .keys(["low_income", "moderate_income", "middle_income", "market", "condo"]);
 
+    //colors for everything
     let colorScaleB = d3.scaleOrdinal()
     .domain(["low_income", "moderate_income", "middle_income", "market", "condo", "unconfirmed", "other"])
     .range(["#065F11", "#159524", "#5CB867", "#DC4230", "#99221A", "url(#unconfirmedGradient)", "#395054"]);
 
+    //Looping through every item instead of doing all data joins at once for the sake of ordering buildings correctly
     for (let build of data) {
         let building = [build];
 
@@ -82,25 +83,27 @@ function loadPathsLoop(data, svg, selectedMap){
             let buildGroup = pathGroup.append("g")
                 .attr("class", "building-group");
             
-            console.log(building);
-
+            //create the outline of the buildings
             buildGroup.selectAll(`${build.id}-building`)
                 .data(building)
             .join("path")
                 .attr("d", d => d.path)
-                .attr("stroke", d => {if (selectedMap == "Current Progress") {
-                    return (d.construction == 0 ? "#000000" : "#ffffff")} else {return "#000000"}} )
+                .attr("stroke", d => {if (selectedMap == "Current Progress") { //see if map is the current progress map
+                    return (d.construction == 0 ? "#000000" : "#ffffff")} else {return "#000000"}} ) //change outline if under construction
                 .attr("stroke-width", "3px")
                 .attr("class", `building`)
                 .attr("id",`${build.id}-path`)
-                .call(tooltipEvents)
+                .call(tooltipEvents) //add tooltip events
 
+            //select the outline for dynamic sizing of other elements
             const outline = document.querySelector(`#${build.id}-path`);
 
+            //scale for graphs
             let xScaleB = d3.scaleLinear()
             .domain([0, build.Units])
-            .range([0, outline.getBBox().width]); //replace width with dynamic figure later 
-
+            .range([0, outline.getBBox().width]);  
+            
+            //add the horizontal graphs as fills, scaled to the width of the building
             buildGroup.selectAll("rect")
                 .data(stackedSeriesB)
               .join("rect")
@@ -112,6 +115,7 @@ function loadPathsLoop(data, svg, selectedMap){
                 .attr("stroke", d => colorScaleB(d.key))
                 .attr("clip-path", `url(#${build.id}-clip)`);;
             
+            //add detail lines to buildings
             buildGroup.selectAll(`${build.id}-detail`)
                 .data(building)
             .join("path")
@@ -143,8 +147,9 @@ function loadPathsLoop(data, svg, selectedMap){
                 .attr("y", setLabelPos("TL", outline, "y", 10));
             }
 
-        } else if (build.Units === "N/A" || build.Units === "Unconfirmed"){ // OTHER BUILDINGS
+        } else if (build.Units === "N/A" || build.Units === "Unconfirmed"){ // UNCONFIRMED & OTHER BUILDINGS
 
+            //put each building in its own group
             let buildGroup = pathGroup.append("g")
             .attr("class", "building-group");
 
@@ -162,16 +167,15 @@ function loadPathsLoop(data, svg, selectedMap){
             
             const outline = document.querySelector(`#${build.id}-path`);
 
-            //set the fill with the clippath over a rectangle, set to the wdith and height of the path
-
+            //separate what color to use for fill
             let key = ""
-
             if (build.Units === "Unconfirmed") {
                 key = "unconfirmed";
             } else {
                 key = "other"
             }
 
+            //add the standard fill to the building. Different function than the above bc no stacked series.
             let fill = buildGroup.append("rect")
                 .attr("x", outline.getBBox().x)
                 .attr("y", outline.getBBox().y)
@@ -180,7 +184,8 @@ function loadPathsLoop(data, svg, selectedMap){
                 .attr("fill", colorScaleB(key))
                 .attr("id",`${build.id}-fill`)
                 .attr("clip-path", `url(#${build.id}-clip)`);
-
+            
+            //add detail lines to the building
             buildGroup.selectAll(`${build.id}-detail`)
                 .data(building)
             .join("path")
@@ -193,6 +198,7 @@ function loadPathsLoop(data, svg, selectedMap){
             //move the path above the fill
             d3.select(outline).raise();
 
+            //add building labels
             buildGroup.selectAll("text")
                 .data(building)
             .join("text")
@@ -200,6 +206,17 @@ function loadPathsLoop(data, svg, selectedMap){
                 .attr("x", d => setLabelPos(d.labelPos, outline, "x", d.labelMar))
                 .attr("y", d => setLabelPos(d.labelPos, outline, "y", d.labelMar))
                 .attr("class", "b-label");
+
+            //add hammer if under construction
+            if (build.construction == "1" && selectedMap == "Current Progress") {
+                buildGroup.append("image")
+                .attr("href", "./images/Assets_720x540/Hammer.svg")
+                .attr("width", 25)
+                .attr("height", 25)
+                .attr("x", setLabelPos("TL", outline, "x", 25))
+                .attr("y", setLabelPos("TL", outline, "y", 10));
+            }
+                
         }
     }
     

@@ -20,8 +20,7 @@ function handleMouseleave() {
 
 function setContents(selection) {
 
-console.log(selection);
-    d3.selectAll(".tooltip-header") //Address or B#
+  d3.selectAll(".tooltip-header") //Address or B#
       .data(selection)
       .join("h3")
         .text(d => d.address) 
@@ -33,7 +32,7 @@ console.log(selection);
     
     const otherTable = d3.select("#otherTable");
     
-    if (selection[0].Units != "N/A") {
+    if (selection[0].Units != "N/A") { 
 
       //add the svg for the proportion bar
       const miniBar = d3.select("#tooltipContent").append('svg')
@@ -65,10 +64,12 @@ console.log(selection);
             .attr("height", 10)
             .attr("fill", d => colorScale(d.key));
       
+      //remove the bar if there is nothing in it
       if (selection[0].Units == "Unconfirmed"){
         miniBar.remove();
       }
 
+      //Table content
       const unitTable = d3.select("#tooltipContent")
         .append("table")
           .attr("class", "tooltip-table")
@@ -90,6 +91,7 @@ console.log(selection);
       unitTable.append("col")
         .style("width", "10%")
       
+      //adding the details in the unit table
       for (let z of stackedSeries) {
         let unitCount = z[0][1] - z[0][0];
         if (unitCount > 0) {
@@ -114,6 +116,7 @@ console.log(selection);
 
     }
 
+    //Adding notes at the end
     if (selection[0].other != "N/A"){
       const otherTable = d3.select("#tooltipContent")
         .append("table")
@@ -140,6 +143,7 @@ console.log(selection);
 
 }
 
+//placing the tooltip near the building, on the correct side
 function showTooltip(selection) {
     const MOUSE_POS_OFFSET = 10;
     const toolTipWidth = 220;
@@ -156,6 +160,7 @@ function showTooltip(selection) {
             : (x - toolTipWidth - MOUSE_POS_OFFSET) + "px");
   }
 
+//tooltip mouseout functions
 function hideTooltip() {
     d3.select("#tooltipContainer").style("display", "none");
 }
@@ -181,8 +186,6 @@ function resetBStyle(selection) {
       .classed("selected", false)
       .attr("stroke-width", "3px");
   }
-
-
 
 export {
     tooltipEvents,
