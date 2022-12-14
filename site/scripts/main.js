@@ -1,6 +1,7 @@
 import { readCSV } from "./inventory.js";
 import { tooltipEvents } from "./tooltip.js";
 import { loadBar } from "./bar.js";
+import { loadPathsLoop } from "./buildings.js";
 
 const container = document.getElementById("container");
 
@@ -20,6 +21,7 @@ const controlCurrent = document.getElementById("current");
 const unitTypes = ["low_income", "moderate_income", "middle_income", "remaining_affordable", "market", "condo", "remaining_market"];
 const colors = ["#065F11", "#159524", "#5CB867", "#B6DEBC", "#DC4230", "#99221A", "#DC4230"];
 
+
 //Adding SVG to play with
 
 const body = d3.select("body");
@@ -29,9 +31,9 @@ let svg = body.append("svg")
         .attr("height", height + margin.top + margin.bottom)
         .attr("id", "svg")
         .attr("class", "background")
-      .append("g")
-        .attr("transform", "translate(" + margin.left + ',' + margin.top + ")");
+      .append("g");
 
+// filter based on 
 function whichData(filterTerm) {
     if (selectedMap == "Current Progress") {
         let d = filterTerm.filter(element => element.progress == 1);
@@ -42,26 +44,7 @@ function whichData(filterTerm) {
     };
 }
 
-function loadPaths(data){
-    d3.selectAll(".building-svg").remove();
-
-    //D3 to add paths to the SVG
-    //here's the group
-    let pathGroup = svg.append("g")
-        .attr("class", "building-svg");
-    
-    //here's the append
-    let buildPaths = pathGroup.selectAll("path")
-        .data(whichData(data))
-    .join("path")
-        .attr("d", d => d.path)
-        .attr("stroke", "#000000")
-        .attr("stroke-width", "3px")
-        .attr("class", "building")
-        .call(tooltipEvents)
-    .append("rect")
-        .attr("fill", "black")
-}
+//getting totals for the bottom bar text labels, which summarize in a broader category than individual units used for each building
 
 function getUnitTotals(data) {
     let totals = {totalUnits: 0};
@@ -93,12 +76,11 @@ function getUnitTotals(data) {
     return totals;
 }
 
-//getting totals for the bottom bar text labels, which summarize in a broader category than individual units used for each building
 
 function onInventoryLoadSuccess(data) {
     //Function to load the current progress or the future approved plans of the development
     console.log(data);
-    loadPaths(data);
+    loadPathsLoop(whichData(data), svg);
     controlAppr.addEventListener("click", changeFilter);
     controlCurrent.addEventListener("click", changeFilter);
     loadBar(getUnitTotals(whichData(data)), selectedMap);

@@ -19,7 +19,8 @@ function handleMouseleave() {
 }
 
 function setContents(selection) {
- 
+
+console.log(selection);
     d3.selectAll(".tooltip-header") //Address or B#
       .data(selection)
       .join("h3")
@@ -136,8 +137,8 @@ function setContents(selection) {
 }
 
 function showTooltip(selection) {
-    const MOUSE_POS_OFFSET = 8;
-    const toolTipWidth = 200;
+    const MOUSE_POS_OFFSET = 10;
+    const toolTipWidth = 220;
 
     let bbox = selection.node().getBBox();
     let x = bbox.x;
@@ -145,7 +146,7 @@ function showTooltip(selection) {
 
     d3.select("#tooltipContainer")
         .style("display", "block")
-        .style("top", y+"px")
+        .style("top", y +"px")
         .style("left", 
              x < (width + margin.left + margin.right) / 2 ? (x + bbox.width + MOUSE_POS_OFFSET) + "px"
             : (x - toolTipWidth - MOUSE_POS_OFFSET) + "px");
