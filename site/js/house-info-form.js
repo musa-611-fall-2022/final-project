@@ -15,10 +15,10 @@ function urlToLink (str){
 };
 
 function showHouseDataInForm(house, notes) {
-  const houseName = "Name: "+house.properties['RESNAME'];
-  const cityName = "City: "+house.properties['City'];
-  const url = "Check the archive: "+urlToLink(house.properties['NARA_URL']);
-  const houseType = "Type: "+house.properties['ResType'];
+  const houseName = "🏡Name: "+house.properties['RESNAME'];
+  const cityName = "🏙️City: "+house.properties['City'];
+  const url = "📃Check the archive: "+urlToLink(house.properties['NARA_URL']);
+  const houseType = "🌉Type: "+house.properties['ResType'];
   houseNameEl.innerHTML = houseName;
   cityNameEl.innerHTML = cityName;
   urlEl.innerHTML = url;

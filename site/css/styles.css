@@ -13,10 +13,12 @@ h1 {
   font-size: 1.2rem;
   margin-top: 0;
   text-align:center;
+  font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 }
 h2 {
   font-size: 1rem;
   margin-top: 0;
+  font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 }
 a:hover {
   color:#fff;
@@ -26,6 +28,7 @@ h3 {
   margin:0.4em 0 0 0 ;
   font-size:30px; 
    text-align:center;
+   font-family: "Comic Sans MS", cursive, sans-serif;
  }
 h3 a,
 h3 a:hover {
@@ -38,13 +41,13 @@ margin: 6px;
 float:center;
 width:60%;
 height:100%;
-
+font-family: "Comic Sans MS", cursive, sans-serif;
 }
 
 #post-it {
 	width:500px;
 	height:10em;
-	
+	line-height: 120%;
 	padding:1em;
 	position:absolute;
 	left:63%;
@@ -53,11 +56,13 @@ height:100%;
 	border:1px solid #c6bb58;
 	box-shadow: 2px 2px 6px #999;
 	color:#666;
+  font-family: "Comic Sans MS", cursive, sans-serif;
 }
 
 .house-info {
   padding: 1rem;
   width:500px;
+  line-height: 120%;
   position:absolute;
   left:63%;
   bottom:10px;
@@ -66,6 +71,7 @@ height:100%;
 	border:5px dashed #fffbda;
   box-shadow: 2px 2px 6px #999;
   color:#666;
+  font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 }
 
 textarea {
@@ -74,6 +80,7 @@ textarea {
   margin-bottom: 1rem;
   height: 4rem;
   box-sizing: border-box;
+  font-family:"Comic Sans MS", cursive, sans-serif;
 }
 
 button {
@@ -81,6 +88,7 @@ button {
   display: block;
   padding: 0.5rem;
   float:left;
+  font-family: "Comic Sans MS", cursive, sans-serif;
 }
 
 .load-overlay {

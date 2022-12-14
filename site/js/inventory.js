@@ -3,13 +3,13 @@ import { getFirestore, doc, setDoc, getDoc } from 'https://www.gstatic.com/fireb
 
 // Config object gotten aaccording to https://support.google.com/firebase/answer/7015592
 const firebaseConfig = {
-   apiKey: "AIzaSyDL11M21sMZ6wJ1SxFvEqEvQkipD7DFKjk",
-  authDomain: "voter-canvassing.firebaseapp.com",
-  projectId: "voter-canvassing",
-  storageBucket: "voter-canvassing.appspot.com",
-  messagingSenderId: "20100623977",
-  appId: "1:20100623977:web:2d20af24c659bdda17bcf8",
-  measurementId: "G-BXCLNBWQH6",
+  apiKey: "AIzaSyC7suOtksCNMwlMdWTYqPEkvU9qEKAI2LU",
+  authDomain: "final-project-e7285.firebaseapp.com",
+  projectId: "final-project-e7285",
+  storageBucket: "final-project-e7285.appspot.com",
+  messagingSenderId: "138535656771",
+  appId: "1:138535656771:web:5a7d6d37c6aecd6781e3f6",
+  measurementId: "G-WJJJSF5XP1"
 };
 const firebaseApp = initializeApp(firebaseConfig);
 const firestoreDb = getFirestore(firebaseApp);
