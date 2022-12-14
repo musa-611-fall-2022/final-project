@@ -13,13 +13,13 @@
 import { initMap, updateUserPositionOn } from './map.js';
 import { initHouseInfoForm, showHouseDataInForm } from './house-info-form.js';
 import { initToast, showToast } from './toast.js';
-import { downloadInventory, loadNotes, saveNotes } from './inventory.js';
+import { downloadInventory,loadNotes,saveNotes} from './inventory.js';
 
 
 
 let app = {
   currentHouse: null,
-  notes: null,
+  notes: JSON.parse(localStorage.getItem('notes') || '{}'),
 };
 
 const loadOverlayEl = document.getElementById('load-overlay');
@@ -52,9 +52,9 @@ function onHouseSelected(evt) {
   const house = evt.detail.house;
   app.currentHouse = house;
 
-  //const houseId = house.properties['OBJECTID'];
-  //const notes = app.notes[houseId] || '';
-  showHouseDataInForm(house);
+  const houseId = house.properties['OBJECTID'];
+  const notes = app.notes[houseId] || '';
+  showHouseDataInForm(house, notes);
 }
 
 // **Geolocation** -- `onUserPositionSuccess` will be called by the geolocation

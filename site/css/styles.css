@@ -23,7 +23,7 @@ a:hover {
 }
 h3 {
   white-space:nowrap;
-  margin:0.8em 0 0 0;
+  margin:0.4em 0 0 0 ;
   font-size:30px; 
    text-align:center;
  }
@@ -34,7 +34,7 @@ h3 a:hover {
 #map {
   border-radius:.125em;
 border:2px solid #1978cf;
-margin: 4px 0;
+margin: 6px;
 float:center;
 width:60%;
 height:100%;
@@ -42,13 +42,13 @@ height:100%;
 }
 
 #post-it {
-	width:32%;
+	width:500px;
 	height:10em;
-	margin-left:2em;
+	
 	padding:1em;
 	position:absolute;
-	left:61%;
-	top:14%;
+	left:63%;
+	top:11%;
 	background:#fbf5bf;
 	border:1px solid #c6bb58;
 	box-shadow: 2px 2px 6px #999;
@@ -57,11 +57,15 @@ height:100%;
 
 .house-info {
   padding: 1rem;
-  width:36%;
+  width:500px;
   position:absolute;
-  left:61%;
-  bottom:0%;
+  left:63%;
+  bottom:10px;
   text-align:center;
+  background:rgb(192 233 249 / 40%);
+	border:5px dashed #fffbda;
+  box-shadow: 2px 2px 6px #999;
+  color:#666;
 }
 
 textarea {

@@ -31,11 +31,19 @@ function initMap() {
       },*/
                        
       pointToLayer: function (feature, latlng) {
-        var geojsonMarkerOptions = {fillColor: '#942929',
+        /*var geojsonMarkerOptions = {fillColor: '#942929',
         fillOpacity: 0.9,
-        stroke: true};
+        stroke: true};*/
         var popup = L.popup().setContent("position: " + latlng+ "<br>"+"Name:"+feature.properties['RESNAME']);
-        var marker = L.circleMarker(latlng, geojsonMarkerOptions);
+        var houseIcon = L.icon({
+          iconUrl: 'images/house-icon.png',
+               
+          iconSize:     [30,30], // size of the icon
+          iconAnchor:   [0,0], // point of the icon which will correspond to marker's location
+          popupAnchor:  [14,-10], // point from which the popup should open relative to the iconAnchor
+          
+      });
+        var marker = L.marker(latlng, {icon: houseIcon});
         marker.bindPopup(popup);
         return marker;               
      }
