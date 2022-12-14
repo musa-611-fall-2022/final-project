@@ -1,3 +1,5 @@
+import { highlightFeature } from "./infobar.js";
+
 function initializeMap () {
     const southWest = L.latLng(39.960774719794294, -75.14086971621691),
     northEast = L.latLng(39.9825160929394, -75.11223550383296),
@@ -15,6 +17,21 @@ function initializeMap () {
 return Map;
 }
 
+
+
+    function parcelColors(p) {
+        if(p === "Other") return "tan";
+        if(p === "Park / Rec Center") return "green";
+        if(p === "Parking") return "grey";
+        if(p === "Cemetery / Golf") return "darkgreen";
+        if(p === "Religous") return "yellow";
+        if(p === "Hospital") return "pink";
+        if(p === "Restaurant / Nightclub / Entertainment") return "blue";
+        if(p === "Store") return "lightblue";
+        if(p === "Bank") return "green";
+        if(p === "Vacant") return "darkbrown";
+        return "grey";
+    }
 
 function parcelLayerFun (Map) {
     function parcelColors(p) {
@@ -64,15 +81,17 @@ function parcelLayerFun (Map) {
         };
     }
 
-    function highlightFeature(e) {
-        e.target.setStyle({ weight: 5, color: "yellow" });
-        e.target.bringToFront();
-    }
 
     Map.parcelLayer = L.geoJSON(null, {
         style: initstyle,
         onEachFeature: function(feature, layer) {
+            layer.zoningCode = feature.properties.LONG_CODE;
+            layer.height = feature.properties['height'];
+            layer.bcType = feature.properties.BC_TYPE;
+            layer.owner = feature.properties.OWNER1;
+            layer.addy = feature.properties.ADDRESS;
             layer.addEventListener("click", highlightFeature);
+
         },
     }).addTo(Map);
 }
@@ -82,4 +101,5 @@ function parcelLayerFun (Map) {
 export {
     initializeMap,
     parcelLayerFun,
- };
+    parcelColors,
+};

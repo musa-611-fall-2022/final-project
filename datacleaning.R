@@ -13,17 +13,57 @@ library(lubridate)
 sf::sf_use_s2(FALSE)
 
 
-buildings <- read_sf("C:/Users/cchue/Documents/GIS/PhillyData/LI_BUILDING_FOOTPRINTS_1.shp")
 
 rco <- read_sf("C:/Users/cchue/Documents/GIS/PhillyData/Zoning_RCO.shp")
 fishtown <- rco %>% filter(OBJECTID==35)
 
-fishtownbuilds <- buildings[fishtown,]
+
+### parcels
+
+parcels <- read_sf("C:/Users/cchue/Documents/GIS/PhillyData/gsiplans.shp") %>%
+  st_transform(crs = 2272)
+
+ft_parcels <- parcels[fishtown,]
+
+ggplot(ft_parcels)+
+  geom_sf()
+
+ownertab <- table(ft_parcels$OWNER1) %>% as.data.frame()
+lottab <- table(ft_parcels$BC_TYPE) %>% as.data.frame()
 
 
+ft_vacant <- ft_parcels %>% filter(BC_TYPE == 'Vacant')
+levels(factor(ft_vacant$OWNER_CATE))
 
-ggplot(fishtownbuilds)+
-  geom_sf(color= NA,aes(fill=MAX_HGT))
+###
+
+
+buildings <- read_sf("C:/Users/cchue/Documents/GIS/PhillyData/LI_BUILDING_FOOTPRINTS_1.shp")
+buildings <- buildings %>% st_transfrom(crs = 2272)
+
+ft_builds <- buildings[fishtown,]
+
+
+#buildparcels <- table(ft_builds$PARCEL_ID_) %>% data.frame() 
+
+#ft_builds <- left_join(ft_builds, buildparcels, by = c("PARCEL_ID_" = 'Var1'))
+
+ft_build_parc <- ft_builds %>%  group_by(PARCEL_ID_) %>% 
+  summarise(height = max(MAX_HGT), do_union = TRUE)  %>% st_centroid()
+
+ft_parcels <- st_join(ft_parcels, ft_build_parc) 
+
+
+# ggplot()+
+#   geom_sf(data = ft_parcels1,aes(fill= height),color=NA)
+# 
+# 
+# 
+# ggplot()+
+#   geom_sf(data = ft_parcels, color= NA, fill = 'blue')+
+#   geom_sf(data = ft_build_parc, color= NA, fill = 'red')
+
+
 
 
 ##L&I
@@ -38,11 +78,11 @@ ft_bperms <- ft_perms %>% filter(permittype == 'BUILDING') %>%
          date2 = ymd(mostrecent),
          issue_date2 = date2-perm_issued)
 
-ggplot(ft_bperms)+
-  geom_bar(aes(x=perm_issued, y = issue_date2), stat= 'identity')
+#ggplot(ft_bperms)+
+  #geom_bar(aes(x=perm_issued, y = issue_date2), stat= 'identity')
 
-ggplot(ft_bperms)+
-  geom_sf(aes(color = perm_issued))
+#ggplot(ft_bperms)+
+ # geom_sf(aes(color = perm_issued))
 
 #boundsfishtown <- c(ymax = 39.99, ymin = 39.964, xmin =-75.1525, xmax = -75.1125)
 
@@ -71,23 +111,6 @@ ggplot(builddemo)+
   geom_sf(aes(fill = typeofwork),color =NA)
 
 
-### parcels
-
-parcels <- read_sf("C:/Users/cchue/Documents/GIS/PhillyData/gsiplans.shp")
-
-ft_parcels <- parcels[fishtown,]
-
-ggplot(ft_parcels)+
-  geom_sf()
-
-ownertab <- table(ft_parcels$OWNER1) %>% as.data.frame()
-lottab <- table(ft_parcels$BC_TYPE) %>% as.data.frame()
-
-
-ft_vacant <- ft_parcels %>% filter(BC_TYPE == 'Vacant')
-levels(factor(ft_vacant$OWNER_CATE))
-
- 
 
 ## Zoning
 zoning  <- read_sf("C:/Users/cchue/Documents/GIS/PhillyData/zoningbd.shp")
@@ -143,10 +166,10 @@ ggplot()+
 
 #export data
 
-
+##Parcels +  zoning + buildingheight
 
 ft_parcels_out <- ft_parcels %>% 
-  select(ADDRESS, OWNER1, BC_TYPE, BC_LANDUSE, OWNER_CATE, LONG_CODE, PENDING, geometry)
+  select(ADDRESS, OWNER1, BC_TYPE, BC_LANDUSE, OWNER_CATE, LONG_CODE, PENDING, height, geometry)
 
 geojson_write(ft_parcels_out, geometry = "MULTIPOLYGON", file = "C:/Users/cchue/Documents/Penn MUSA/Javascript Programming/final-project/site/data/parcels.geojson")
 
