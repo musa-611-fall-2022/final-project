@@ -1,5 +1,36 @@
 import { tooltipEvents } from "./tooltip.js";
 
+function setLabelPos(b, outline, XY, m){
+    if (b != "N/A"){
+        let txtMargin = parseInt(m);
+        if (b == "TL") {
+            return (
+                XY == "x" ?  outline.getBBox().x - txtMargin :
+                XY == "y" ?  outline.getBBox().y - txtMargin :
+                0
+            )
+        } else if (b == "TR") {
+            return (
+                XY == "x" ?  outline.getBBox().x + outline.getBBox().width + txtMargin :
+                XY == "y" ?  outline.getBBox().y - txtMargin :
+                0
+            )
+        } else if (b == "BL") {
+            return (
+                XY == "x" ?  outline.getBBox().x - txtMargin :
+                XY == "y" ?  outline.getBBox().y + outline.getBBox().height + txtMargin :
+                0
+            )
+        } else if (b == "BR") {
+            return (
+                XY == "x" ?  outline.getBBox().x + outline.getBBox().width + txtMargin :
+                XY == "y" ?  outline.getBBox().y + outline.getBBox().height + txtMargin :
+                0
+            )
+        }
+    }
+}
+
 function loadPathsLoop(data, svg, selectedMap){
     d3.selectAll(".building-svg").remove();
     d3.selectAll("defs").remove();
@@ -23,7 +54,7 @@ function loadPathsLoop(data, svg, selectedMap){
     .attr("stop-color", "#B6DEBC")
 
     gradient.append("stop")
-    .attr("offset", "95%")
+    .attr("offset", "75%")
     .attr("stop-color", "#EDABA3")
 
     //     <linearGradient id="myGradient" gradientTransform="rotate(90)">
@@ -44,19 +75,21 @@ function loadPathsLoop(data, svg, selectedMap){
 
     for (let build of data) {
         let building = [build];
-        console.log(build);
+
         if (parseInt(build.Units)){ //UNIT BUILDINGS
-            console.log("units");
 
             let stackedSeriesB = stackGenB(building);
             let buildGroup = pathGroup.append("g")
                 .attr("class", "building-group");
             
+            console.log(building);
+
             buildGroup.selectAll(`${build.id}-building`)
                 .data(building)
             .join("path")
                 .attr("d", d => d.path)
-                .attr("stroke", "#000000")
+                .attr("stroke", d => {if (selectedMap == "Current Progress") {
+                    return (d.construction == 0 ? "#000000" : "#ffffff")} else {return "#000000"}} )
                 .attr("stroke-width", "3px")
                 .attr("class", `building`)
                 .attr("id",`${build.id}-path`)
@@ -79,8 +112,36 @@ function loadPathsLoop(data, svg, selectedMap){
                 .attr("stroke", d => colorScaleB(d.key))
                 .attr("clip-path", `url(#${build.id}-clip)`);;
             
+            buildGroup.selectAll(`${build.id}-detail`)
+                .data(building)
+            .join("path")
+                .attr("d", d => d.edges)
+                .attr("stroke", "white")
+                .attr("stroke-width", "0.5px")
+                .attr("class", `detail`)
+                .attr("id",`${build.id}-detail`)
+
             //move the path above the fill
             d3.select(outline).raise();
+
+            //Add building labels
+            buildGroup.selectAll("text")
+                .data(building)
+            .join("text")
+                .text(d => d.id.toUpperCase())
+                .attr("x", d => setLabelPos(d.labelPos, outline, "x", d.labelMar))
+                .attr("y", d => setLabelPos(d.labelPos, outline, "y", d.labelMar))
+                .attr("class", "b-label");
+
+            //add hammer to show construction
+            if (build.construction == "1" && selectedMap == "Current Progress") {
+                buildGroup.append("image")
+                .attr("href", "./images/Assets_720x540/Hammer.svg")
+                .attr("width", 25)
+                .attr("height", 25)
+                .attr("x", setLabelPos("TL", outline, "x", 25))
+                .attr("y", setLabelPos("TL", outline, "y", 10));
+            }
 
         } else if (build.Units === "N/A" || build.Units === "Unconfirmed"){ // OTHER BUILDINGS
 
@@ -92,7 +153,8 @@ function loadPathsLoop(data, svg, selectedMap){
                 .data(building)
             .join("path")
                 .attr("d", d => d.path)
-                .attr("stroke", "#000000")
+                .attr("stroke", d => {if (selectedMap == "Current Progress") {
+                    return (d.construction == 0 ? "#000000" : "#ffffff")} else {return "#000000"}} )
                 .attr("stroke-width", "3px")
                 .attr("class", "building")
                 .attr("id", `${build.id}-path`)
@@ -118,9 +180,26 @@ function loadPathsLoop(data, svg, selectedMap){
                 .attr("fill", colorScaleB(key))
                 .attr("id",`${build.id}-fill`)
                 .attr("clip-path", `url(#${build.id}-clip)`);
-               
+
+            buildGroup.selectAll(`${build.id}-detail`)
+                .data(building)
+            .join("path")
+                .attr("d", d => d.edges)
+                .attr("stroke", "white")
+                .attr("stroke-width", "0.5px")
+                .attr("class", `detail`)
+                .attr("id",`${build.id}-detail`)
+
             //move the path above the fill
             d3.select(outline).raise();
+
+            buildGroup.selectAll("text")
+                .data(building)
+            .join("text")
+                .text(d => d.id.toUpperCase())
+                .attr("x", d => setLabelPos(d.labelPos, outline, "x", d.labelMar))
+                .attr("y", d => setLabelPos(d.labelPos, outline, "y", d.labelMar))
+                .attr("class", "b-label");
         }
     }
     

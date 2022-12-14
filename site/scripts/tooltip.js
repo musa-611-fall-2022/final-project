@@ -41,7 +41,7 @@ console.log(selection);
       
       //generate and call stack function, returns array of stacked data in number series
       const stackGen = d3.stack()
-        .keys(unitTypes);
+        .keys(["low_income", "moderate_income",	"middle_income", "market", "condo"]);
 
       let stackedSeries = stackGen(selection)
 
@@ -52,7 +52,7 @@ console.log(selection);
       
       //colors to match the unit affordability designations
       let colorScale = d3.scaleOrdinal()
-        .domain(["low-income", "moderate-income",	"middle-income", "market", "condo", "remaining"])
+        .domain(["low_income", "moderate_income",	"middle_income", "market", "condo", "remaining"])
         .range(["#065F11", "#159524", "#5CB867", "#DC4230", "#99221A", "#CCCCCC"]);
         
       //add the stacked bar
@@ -65,6 +65,10 @@ console.log(selection);
             .attr("height", 10)
             .attr("fill", d => colorScale(d.key));
       
+      if (selection[0].Units == "Unconfirmed"){
+        miniBar.remove();
+      }
+
       const unitTable = d3.select("#tooltipContent")
         .append("table")
           .attr("class", "tooltip-table")

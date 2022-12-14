@@ -9,8 +9,7 @@
     <link rel="stylesheet" href="styles/stylesheet.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Condensed">
-    
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Condensed">    
 
     </head>
 
@@ -28,16 +27,29 @@
           <h3 class="key-label">Affordable</h3>
           <h3 class="key-label">Market-Rate</h3>
           <h3 class="key-label">Condo</h3>
+          <h3 class="key-label">Unconfirmed</h3>
           <h3 class="key-label">Other</h3>
         </div>
 
         <div class="key">
-          <span id="key-aff" class="key-rect"></span>
+          <div class="key-small">
+            <span id="key-lowinc" class="key-rect-aff"></span>
+            <span id="key-modinc" class="key-rect-aff"></span>
+            <span id="key-medinc" class="key-rect-aff"></span>
+          </div>
           <span id="key-mr" class="key-rect"></span>
           <span id="key-condo" class="key-rect"></span>
+          <span id="key-unconfirmed" class="key-rect"></span>
           <span id="key-other" class="key-rect"></span>
         </div>
         
+        <div class = "key">
+          <div class="key-small">
+            <p class="key-p">Low Incomes</p>
+            <p class="key-p">Mod</p>
+            <p class="key-p">Med</p>
+          </div>
+        </div>
       </div>
 
       <div id="tooltipContainer" class = "tooltip-container">

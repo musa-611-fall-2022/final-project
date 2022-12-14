@@ -1,5 +1,4 @@
 import { readCSV } from "./inventory.js";
-import { tooltipEvents } from "./tooltip.js";
 import { loadBar } from "./bar.js";
 import { loadPathsLoop } from "./buildings.js";
 
@@ -80,7 +79,7 @@ function getUnitTotals(data) {
 function onInventoryLoadSuccess(data) {
     //Function to load the current progress or the future approved plans of the development
     console.log(data);
-    loadPathsLoop(whichData(data), svg);
+    loadPathsLoop(whichData(data), svg, selectedMap);
     controlAppr.addEventListener("click", changeFilter);
     controlCurrent.addEventListener("click", changeFilter);
     loadBar(getUnitTotals(whichData(data)), selectedMap);
