@@ -5,6 +5,7 @@
 2. Zoning Board Chair leading a meeting
 
 ## Data from OpenDataPhilly and organized in R
+Parcel as the base polygon layer, other attributes spatially joined
 
 ## Features:
 Map of Fishtown
