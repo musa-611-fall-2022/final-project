@@ -15,7 +15,7 @@ This web application will include the following features:
     * Start year
     * End year
     * Address
-* An option to filter by business type .
+* An option to filter by business type.
 * An option to filter by  business name.
 
  This web application will additionally include an opportunity for users to input a new business that is not already part of the existing dataset, where users can add:
@@ -26,5 +26,7 @@ This web application will include the following features:
 * End year
 * Address
 * Memories
+
+Lastly, the data submitted by users will be sent to a FirebaseDB to store and collect the information for review.
 
 The features of this web application serves to provide users an opportunity to engage with history and placemaking by acknowleding the history of space while simultaneously contributing to history by filling in the missing gaps.
