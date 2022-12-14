@@ -2,6 +2,14 @@
 
 This independent project visualized seismic events(earthquakes) happening around the world using the real time APIs provided by the United States Geological Survey(USGS). This project also makes use of D3 JavaScript Library as well as Leaflet.js. 
 
+# How to use the application
+1. Fork and download the code.
+
+2. Type "npx http-server" in the terminal.
+
+3. Open the local link in the browser.
+
+
 ![usgs](Images/usgs.png)
 
 United States Geological Survey is a scientific division of the American government. The USGS's scientists conduct research on the country's topography, natural resources, and potential threats from natural hazards like earthquakes. Program on Earthquake Hazards. The data are available in the form of GeoJSON which gives the coordinates so one could easily map them out on a map.
