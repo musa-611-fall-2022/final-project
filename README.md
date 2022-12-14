@@ -7,7 +7,7 @@
 <p> 1. Fork and download the code.
 <p> 2. Type "npx http-server" in your console.</p>
 <p> 3. Open the local host link to the application.</p>
-<p> 4. The interface of the web application will appear.</p>
+<p> 4. The interface of the web application will appear. Alternatively, you can navigate to the following link: https://myronbanez.github.io/final-project/site/</p>
 <img src="site/images/1.png" alt="First">
 <p> 5. Click on any green point to see a historic Filipino business. There are also filter functions on the right to filter by the type of business and business name</p>
 <img src="site/images/2.png" alt="First">
