@@ -24,8 +24,8 @@ const slides = [
   {
     title: 'K-12 Experience',
     content: `
-    I grew up in a subrub of Columbus, Ohio with a fair amount of diversity. <br>
-    While I was not the highest achieving student, I 
+    I grew up in a subrub of Columbus, Ohio with a fair amount of diversity. Despite this, there was still presssure to conform to the model minority myth and adhere to the stereotype of Asian Americans. The pressure for high academic achievement shaped my own college decision process which led me to apply to a school that was prestigious; however, my family did not have the financial means to support me. 
+
     <img class="image" src= "https://scontent.fewr1-5.fna.fbcdn.net/v/t39.30808-6/292099577_374215361487006_4793559578936715906_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=e3f864&_nc_ohc=yLTqYbYhouwAX9GRDKj&_nc_ht=scontent.fewr1-5.fna&oh=00_AfBzC9TJKNf_0KHBhCIiYLgbbr0LcXH8nbqzZX3ec6EwzQ&oe=639D42F3">
     `,
     era: 'K-12',
@@ -35,6 +35,8 @@ const slides = [
   {
     title: 'Undergraduate: Denison University',
     content: `
+    The first university I attended was Denison University. This university was tucked into the verdent rolling hills of Granville, Ohio. However this university was far from diverse, and was my first real encounter recognizing that I shared a very different experience from my fellow students. Here I continued to pursue what I thought would allow me to fill the expectation of being Asian American, and studied music composition and chemistry in hopes of one day applying to dental school.
+
     <img class="image" src="https://denison.edu/sites/default/files/file_attachments/big-red-athletics.png" />
     `,
     era: "Undergraduate",
@@ -44,6 +46,9 @@ const slides = [
   {
     title: 'Undergraduate: The Ohio State University',
     content: `
+    At the end of my first year of college, I transferred to The Ohio State University. Here, I dropped my pursuit of music and chose to pursue chemistry. While I had no intention of taking an Asian American studies course, I enrolled in Introduction to Asian American studies. This course helped me realize how much of my lived experience was rooted in the model minority and made me curious to how others navigated this phenomenon. <br>
+    This led me to pursue sociology where I was able to study with Dr. Korie Edwards and learn to think about problems from a sociological lens. However, with my involvement in student activities I was also interested in pursuing education issues.
+
     <img class="image" src="https://sociology.osu.edu/themes/asc_bootstrap/images/logos/asc-logo.svg" />
     `,
     era: "Undergraduate",
@@ -53,6 +58,7 @@ const slides = [
   {
     title: 'Graduate',
     content: `
+    Upon completing undergrad, I pursued my masters in Education Leadership and Policy Analysis with an emphasis in Student Affairs. During this time, I worked with Amalia Dache who worked on postcolonial education geographies. Under her training I conducted my own Master's thesis examining the experience of Asian American undergraduates religious experiences.
 
     <img class="image" src="https://education.missouri.edu/wp-content/uploads/2021/06/MU_UnitSig_EducationHumanDevelopment_2c-uncoated_std_vert-1024x541.jpg" />
     `,
@@ -62,7 +68,7 @@ const slides = [
 
   {
     title: 'Working',
-    content: `
+    content: ` Despite my advisor's advice to pursue a doctorate degree, I chose to work in student affairs. During my time in student affairs I worked at Rider Unviersity as the Assistant director for the inaugural center for diversity and inclusion where I led a committee that assessed the needs of LGBTQ+ students and developed mentoring programs for students of color. Working at Rider, I was closely connected to 
       
      <img class="image" src="https://www.rider.edu/themes/custom/rider_foundation/logo.svg" />
     `,
@@ -73,7 +79,13 @@ const slides = [
     title: 'Introduction to Asian Americans',
     content: `Asian Americans, as an aggregate group, seem to be well-educated, and scholars have attempted to frame their success through biological, cultural, and structural lenses. While Asian Americans have educational success, scholars have also cautioned that a singular narrative of Asian American success invisibilizes the educational outcomes of different ethnic groups in Asian America and puts Asian Americans at odds with other minority groups as the model minority.
     
-    
+    <h4> Legend </h4>
+    <div class = "legend">
+    <i style="background: #00FFDB"></i><span>high frequency high clustering</span><br>
+    <i style="background: #00A3FF"></i><span>high frequency low clustering</span><br>
+    <i style="background: #5B00FF"></i><span>low frequency low clustering</span><br>
+    <i style="background: #FF00A4"></i><span>No Relationship</span><br>
+    </div>
     `,
     era: 'PhD',
     showpopups: true,
@@ -82,16 +94,10 @@ const slides = [
     title: 'Asian American Clustering Methodology',
     content: `I use data from the 2019 American Community Survey (ACS), primarily relying on data that describes highest form of education attainment, Asian country of origin, and annual income. These variables were selected using Perna’s (2006) conceptual model of higher education particularly focusing on the school and community context. Broad Asian American racial categories were developed from research that addresses Asian American movements (Nadal, 2019; Yi et al., 2020). <br>
     LISA is defined as having two properties. <br> 
-    (1) the LISA for each observation gives an indication of the extent of significant spatial clustering of similar values around that observation and <br>
-    (2) the sum of LISAs for all observations is proportional to a global indicator of spatial association. In our case each census block is calculated individually and then summed to provide the I from Moran's I. The calculated LISA describes each blocks effects of the clustering within the data.
-    
-    <h4> Legend </h4>
-    <div class = "legend">
-    <i style="background: #00FFDB"></i><span>high frequency high clustering</span><br>
-    <i style="background: #00A3FF"></i><span>high frequency low clustering</span><br>
-    <i style="background: #5B00FF"></i><span>low frequency low clustering</span><br>
-    <i style="background: #FF00A4"></i><span>No Relationship</span><br>
-    </div>`,
+    <ol>
+      <li> the LISA for each observation gives an indication of the extent of significant spatial clustering of similar values around that observation and </li>
+      <li> the sum of LISAs for all observations is proportional to a global indicator of spatial association. In our case each census block is calculated individually and then summed to provide the I from Moran's I. The calculated LISA describes each blocks effects of the clustering within the data.</li>
+    </ol>`,
     era: 'PhD',
     showpopups: true,
   },
@@ -107,7 +113,7 @@ const slides = [
       <li> Thai </li> 
     </ul>
 
-
+    Within Asian American populations there are differences across ethnic group such as information to college access and campus resources (Museus & Truong, 2009; Palmer & Maramba, 2015; O. A. Poon & Byrd, 2013). Teranishi et al. (2004) found in their study that Chinese and Korean Americans had the greatest representation in selective institutions; however, even within ethnic groups there exist differences across socioeconomic status. Because of such cases, scholars and researchers have frequently called for the disaggregation of Asian American data to ensure that ethnic minorities are supported within the Asian American racial category (Museus & Truong, 2009). 
 
     <h4> Legend </h4>
     <div class = "legend">
@@ -156,6 +162,7 @@ const slides = [
       <li> Sri Lankan </li> 
    </ul>
 
+   Southeast Asians live in census tracts with significantly more black people, while East Asian and South Asian populations live in areas with significantly more white people. Asian Americans in white spaces is not a new finding, Cheng (2013) found that Asian Americans and Mexican Americans were able to move into white neighborhoods, and transformed these spaces to be multiracial communities. However, these findings also provide geographic context to other studies that argue Asian Americans are nearing “white status” and reinforcing the black and white divide (Bonilla-Silva, 2004; J. C. Lee & Kye, 2016). <br>
 
    <h4> Legend </h4>
    <div class = "legend">
