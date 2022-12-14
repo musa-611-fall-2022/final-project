@@ -33,3 +33,12 @@ The My Roof Potential page is a main page that provides information about indivi
   * Estimated net profits over 20 years
   * Potential environmental impact
     
+## Problem & Methods
+
+The maps are all based on Mapbox.gl, we have come across several problems and solved them:
+
+* Huge Data: our building geojson data's size is approaching 650Mb, it's too huge to load them into a geojson layer once, so we divided it into seven parts through QGIS and loaded them. We don't use Asynchronous loading.
+
+* Select box doesn't listen to changes from Js, just from the web page, mouse or keyboard. So we added a trigger to attention the change event.
+
+* The geocoder part is from Mapbox, we failed to change the input address when we click the roof polygon in the map. But we have defined a variable to tell the app whether the input address is from the clicked roof polygon or the input box.
