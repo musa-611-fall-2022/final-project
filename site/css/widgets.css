@@ -251,6 +251,7 @@ input[type="range"]:active::-webkit-slider-thumb {
   align-items: center;
   background-color: white;
   border-color: var(--hero-reg);
+  color: var(--hero-reg);
 }
 
 /* ---- Categorical filters factor selection ----- */
