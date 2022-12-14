@@ -22,14 +22,28 @@ function initMap() {
 
     
     map.houseLayer = L.geoJSON(null, {
-      pointToLayer: (feature, latlng) => L.circleMarker(latlng),
+      /*pointToLayer: (feature, latlng) => L.circleMarker(latlng),
       style: {
         fillColor: '#942929',
         fillOpacity: 0.9,
         stroke: true,
-      },
+    
+      },*/
+            
+      pointToLayer: function (feature, latlng) {
+        var geojsonMarkerOptions = {fillColor: '#942929',
+        fillOpacity: 0.9,
+        stroke: true};
+        var popup = L.popup().setContent("position: " + latlng+ "<br>"+"Name:"+feature.properties['RESNAME']);
+        var marker = L.circleMarker(latlng, geojsonMarkerOptions);
+        marker.bindPopup(popup);
+        return marker;               
+     }
+      
           })
     .addTo(map)
+
+    
     
     /*
     function onEachFeature(feature, layer) {
