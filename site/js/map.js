@@ -27,7 +27,7 @@ function initializeSeattleMap() {
             width: 115%;
             height: 80%;
             overflow-y: scroll;
-            max-height: 25vh;
+            max-height: 40vh;
             overflow: auto;
             transition: max-height 0.75s;
           } 
@@ -35,6 +35,10 @@ function initializeSeattleMap() {
 
         <div class="new-biz-container">
             <h2 class = 'newbiz'> Add Business </h2>
+            <h3>Your Name:</h3>
+            <input type="text" id="user-name" placeholder="Enter your name">
+            <h3>Your Phone Number:</h3>
+            <input type="text" id="user-phone" placeholder="Enter your phone number">
             <h3>Business Name:</h3>
             <input type="text" id="business-name" placeholder="Enter business name">
             <h3>Business Type:</h3>
@@ -59,10 +63,10 @@ function initializeSeattleMap() {
             <h3>Address:</h3>
             <input type="text" id="address" placeholder="Enter address">
             <h3>Preserve history:</h3>
-            <input type="text" id="history" placeholder="Please share any memories you have with this space" height=10>
+            <input type="text" id="history" placeholder="Your favorite memories" height=10>
             <br></br>
             <button id = 'add-point' class = 'add-point' type="submit" value="Add">Add</button>
-            <button id = 'view' class = 'view' type="submit" value="Submit">Submit</button>
+            <button id = 'submit' class = 'submit' type="submit" value="Submit">Submit</button>
         </div>
         `)
         .openOn(seattleMap);
@@ -70,8 +74,6 @@ function initializeSeattleMap() {
     }
     seattleMap.on('click', onMapClick);
 
-// get element by ID and put it down in here using innerHTML
-// update geojson from later with existing data, clear the old one and show the new one
     function newBusiness() {
         document.querySelector('.add-point').addEventListener('click', () => {
             let businessName = document.getElementById('business-name').value;
@@ -105,18 +107,54 @@ function initializeSeattleMap() {
                 notes: null,
             };
 
-            const saveBizEl = document.getElementById('view');
+            const saveBizEl = document.getElementById('submit');
 
+            const userNameEl = document.getElementById('user-name');
+            const userPhoneEl = document.getElementById('user-phone');
             const bizNameEl = document.getElementById('business-name');
-
+            const bizTypeEl = document.getElementById('business-type');
+            const bizOwnerEl = document.getElementById('owner');
+            const bizStartEl = document.getElementById('start');
+            const bizEndEl = document.getElementById('end');
+            const bizAddressEl = document.getElementById('address');
+            const bizHistoryEl = document.getElementById('history');
 
             function showBizDataInForm(biz) {
+                const userName = biz.properties['user-name'];
+                const userPhone = biz.properties['user-phone'];
                 const bizName = biz.properties['business-name'];
+                const bizType = biz.properties['business-type'];
+                const bizOwner = biz.properties['owner'];
+                const bizStart = biz.properties['start'];
+                const bizEnd = biz.properties['end'];
+                const bizAddress = biz.properties['address'];
+                const bizHistory = biz.properties['history'];
+                userNameEl.innerHTML = userName;
+                userPhoneEl.innerHTML = userPhone;
+                bizTypeEl.innerHTML = bizType;
                 bizNameEl.innerHTML = bizName;
+                bizTypeEl.innerHTML = bizType;
+                bizOwnerEl.innerHTML = bizOwner;
+                bizStartEl.innerHTML = bizStart;
+                bizEndEl.innerHTML = bizEnd;
+                bizAddressEl.innerHTML = bizAddress;
+                bizHistoryEl.innerHTML = bizHistory;
             }
 
             function getFormContent() {
-                const note = bizNameEl.value;
+                const userNameNote = userNameEl.value;
+                const userPhoneNote = userPhoneEl.value;
+                const nameNote = bizNameEl.value;
+                const typeNote = bizTypeEl.value;
+                const ownerNote = bizOwnerEl.value;
+                const startNote = bizStartEl.value;
+                const endNote = bizEndEl.value;
+                const addressNote = bizAddressEl.value;
+                const historyNote = bizHistoryEl.value;
+                const colon = ": ";
+                const comma = ", ";
+                const note = userNameNote + comma + userPhoneNote + colon + nameNote + comma + typeNote + comma + ownerNote + comma + startNote + comma + endNote + comma + addressNote + comma + historyNote;
+                console.log(note);
                 return note;
               }
 
@@ -127,7 +165,7 @@ function initializeSeattleMap() {
             function onSaveClicked() {
                 const content = getFormContent();
                 const bizId = app.newBusinesses.features['name'];
-                saveNote(bizId, content, app,  onNotesSaveSuccess);
+                saveNote(bizId, content, app, onNotesSaveSuccess);
             }
 
             function onBizSelected(evt) {
@@ -152,7 +190,7 @@ function initializeSeattleMap() {
 
             let newPoint = L.circleMarker(mapClickPoint, {
                 stroke: null,
-                color: "blue",
+                color: "#164161",
                 fillOpacity: 0.7,
                 radius: 5,
             })
@@ -173,7 +211,6 @@ function initializeSeattleMap() {
 
     return seattleMap;
 }
-
 
 function makeFtFeature(filipinotown) {
     const ftInfo = {

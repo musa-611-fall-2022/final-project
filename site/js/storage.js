@@ -37,14 +37,6 @@ async function loadNotes(onSuccess, onFailure) {
     }
     // Save in memory
     app.notes[bizId] = content;
-    /*
-      For example, app.notes might look something like this...
-      app.notes = {
-        "1": "this is the note for tree 1",
-        "56": "this is the note for tree 56",
-        "8235": "this is the note for tree 8235"
-      }
-    */
     // Save locally.
     // localStorage.setItem('notes', JSON.stringify(app.notes));
     // Save in the cloud.

@@ -1,9 +1,6 @@
 import filipinotown from '../data/seattle.js';
 import { initializeSeattleMap, showFtOnMap } from './map.js';
 import { showFtInList }  from './list.js';
-// import { initToast, showToast } from './toast.js';
-// import { saveNote } from './storage.js';
-
 
 let seattleMap = initializeSeattleMap();
 showFtOnMap(filipinotown, seattleMap);
@@ -16,7 +13,6 @@ let seattleNameFilter = document.querySelector('#seattle-name-filter');
 
 function shouldShowSeattle () {
     let filteredFt = filipinotown;
-
     const text = seattleNameFilter.value;
     filteredFt = filteredFt.filter(function(seattle) {
         const name = seattle.properties.Name.toLowerCase();

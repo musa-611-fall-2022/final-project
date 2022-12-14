@@ -29,4 +29,4 @@ This web application will include the following features:
 
 Lastly, the data submitted by users will be sent to a FirebaseDB to store and collect the information for review.
 
-The features of this web application serves to provide users an opportunity to engage with history and placemaking by acknowleding the history of space while simultaneously contributing to history by filling in the missing gaps.
+The features of this web application serves to provide users an opportunity to engage with history and placemaking by acknowledging the history of space while simultaneously contributing to history by filling in the missing gaps.
