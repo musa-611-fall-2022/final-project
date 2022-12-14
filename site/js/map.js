@@ -1,7 +1,6 @@
 import { loadNotes, saveNote } from './storage.js';
 import { initToast, showToast } from './toast.js';
 
-
 let newBusinesses = {
     type: 'FeatureCollection',
     features: [],
@@ -62,7 +61,7 @@ function initializeSeattleMap() {
             <input type="text" id="end" placeholder="Enter ending year">
             <h3>Address:</h3>
             <input type="text" id="address" placeholder="Enter address">
-            <h3>Preserve history:</h3>
+            <h3>Memories:</h3>
             <input type="text" id="history" placeholder="Your favorite memories" height=10>
             <br></br>
             <button id = 'add-point' class = 'add-point' type="submit" value="Add">Add</button>
@@ -97,10 +96,26 @@ function initializeSeattleMap() {
                     },
                 "geometry": businessGeometry,
             };
-            console.log(newFeature);
-            // seattleMap.newBusinessLayer.addData(newFeature);
             newBusinesses.features.push(newFeature);
             console.log(newBusinesses);
+
+            let newPoint = L.circleMarker(mapClickPoint, {
+                stroke: null,
+                color: "#164161",
+                fillOpacity: 0.7,
+                radius: 5,
+            })
+            .bindPopup(() => `
+            <h2>${newFeature.features['name']}</h2>
+            <h3>Business Type: ${newFeature.features['bizType']}</h3>
+            <h3>Owner: ${newFeature.features['owner']}</h3>
+            <h3>Opening Year: ${newFeature.features['startYear']}</h3>
+            <h3>Ending Year: ${newFeature.features['endYear']}</h3>
+            <h3>Address: ${newFeature.features['address']}</h3>
+            <h3>Memories: ${newFeature.features['history']}</h3>
+            `).openPopup()
+            .addTo(seattleMap);
+            console.log(newPoint);
 
             let app = {
                 notes: [],
@@ -193,30 +208,13 @@ function initializeSeattleMap() {
               initToast();
 
             window.app = app;
-
-            let newPoint = L.circleMarker(mapClickPoint, {
-                stroke: null,
-                color: "#164161",
-                fillOpacity: 0.7,
-                radius: 5,
-            })
-            .bindPopup(() => `
-            <h2>${newFeature.properties['name']}</h2>
-            <h3>Business Type: ${newFeature.properties['bizType']}</h3>
-            <h3>Owner: ${newFeature.properties['owner']}</h3>
-            <h3>Opening Year: ${newFeature.properties['startYear']}</h3>
-            <h3>Ending Year: ${newFeature.properties['endYear']}</h3>
-            <h3>Address: ${newFeature.properties['address']}</h3>
-            <h3>History: ${newFeature.properties['history']}</h3>
-            `).openPopup()
-            .addTo(seattleMap);
-            console.log(newPoint);
         });
         }
     seattleMap.on('click', newBusiness);
 
     return seattleMap;
 }
+
 
 function makeFtFeature(filipinotown) {
     const ftInfo = {
