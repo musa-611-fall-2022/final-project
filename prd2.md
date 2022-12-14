@@ -17,7 +17,7 @@ Map of Fishtown
 ## How is this different from Atlas? 
 
 ## Limitations:
-  - Data availaibilty
+  - Building and Zoning data is not up to date!
 
 ## To Add
 
