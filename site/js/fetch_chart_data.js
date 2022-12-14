@@ -52,7 +52,7 @@ function fetchStreetsData() {
 function fetchAllData() {
   return Promise.all([
     fetchComplaintData(),
-    fetchInfoData(),
+    //fetchInfoData(),
     fetchQOLData(),
     fetchMiscData(),
     fetchStreetsData(),

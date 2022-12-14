@@ -1,12 +1,27 @@
-
 //import data and functions
 import { initializeMap} from './map.js';
 import {fetchAllData} from './fetch_chart_data.js';
 
 
 
+
 fetchAllData()
 .then(() => {
+
+  var timer = null;
+  window.addEventListener('scroll', function() {
+      if(timer !== null) {
+          clearTimeout(timer);        
+      }
+      timer = setTimeout(function() {
+        map.infoLayer.clearLayers();
+        map.miscLayer.clearLayers();
+        map.qolLayer.clearLayers(); 
+        map.complaintLayer.clearLayers();
+        map.streetsLayer.clearLayers();
+        console.log('data cleared!')
+      }, 2000);
+  }, false);
 
 
 function restructureData(data, cleandata){
@@ -26,7 +41,7 @@ const cleanStreetsData = [];
 
 restructureData(window.complaintData.data,cleanComplaintData);
 restructureData(window.qolData.data,cleanQOLData);
-restructureData(window.infoData.data,cleanInfoData);
+//restructureData(window.infoData.data,cleanInfoData);
 restructureData(window.miscData.data,cleanMiscData);
 restructureData(window.streetsData.data,cleanStreetsData);
 
@@ -76,7 +91,7 @@ fetchData();
 let minScroll = 0;
 let maxScroll = 100;
 let minInt = 0;
-let maxInt = 640;
+let maxInt = 540;
 //let minMs = 1666843200000;
 //let maxMs = 1667707200000;
 //let proportion = (maxMs - minMs)/(maxScroll-minScroll);
@@ -85,6 +100,8 @@ let proportion2 = (maxInt - minInt)/(maxScroll-minScroll);
 /*function scrollToDate(scrolled){
   return Math.floor(minMs + (proportion * (scrolled - minScroll)));
 }*/
+
+
 
 function scrollToInt(scrolled){
   return Math.floor(minInt + (proportion2 * (scrolled - minScroll)));
@@ -95,7 +112,7 @@ function progressBarScroll() {
         height = document.documentElement.scrollHeight - document.documentElement.clientHeight,
         scrolled = (winScroll / height) * 100;
     document.getElementById("progressBar").style.width = scrolled + "%";
-    let scrollInt = scrollToInt(scrolled);
+    let scrollInt = scrollToInt(scrolled) + 20;
     console.log("you have scrolled " + scrolled + '%');
     console.log("The interal you are on is " + scrollInt);
     //if (window.dataDic[scrollSimple]){
@@ -125,9 +142,9 @@ function progressBarScroll() {
 function addToMap(dataToAdd) {
     const dataFeature = make311Feature(dataToAdd);
     //console.log(dataFeature.properties["parsed-interval"]);
-    console.log(dataFeature);
+    //console.log(dataFeature);
     if (dataFeature.properties.data["categories"] === "information"){
-      map.infoLayer.addData(dataFeature);
+      //map.infoLayer.addData(dataFeature);
     } else if (dataFeature.properties.data["categories"] === "quality of life"){
       map.qolLayer.addData(dataFeature);
     } else if (dataFeature.properties.data["categories"] === "streets"){
@@ -151,11 +168,11 @@ function addToMap(dataToAdd) {
     {
       name: 'Quality of Life',
       data: cleanQOLData
-    },
+    }/*,
     {
       name: 'Information',
       data: cleanInfoData
-    },
+    }*/,
     {
       name: 'Streets',
       data: cleanStreetsData
@@ -178,7 +195,7 @@ function addToMap(dataToAdd) {
       }
     },
   },
-  colors: ['#f94e08', '#11ad7d', '#00c6fc', '#f8f6a7', '#d3a112'],
+  colors: ['#f94e08', '#00c6fc', '#f8f6a7', '#d3a112'],
   dataLabels: {
     enabled: false
   },
@@ -191,14 +208,34 @@ function addToMap(dataToAdd) {
   },
   legend: {
     position: 'top',
-    horizontalAlign: 'left',
+    horizontalAlign: 'right',
     labels: {
       colors: undefined,
       useSeriesColors: true
     },
+  animations:{
+    enabled: false,
+    dynamicAnimation: {
+      enabled: false,
+    }
+  }
+  },
+  tooltip: {
+    x: {
+      show: true,
+      format: 'dd MM HH:mm',
+      formatter: undefined,
+  }
   },
   xaxis: {
-    type: 'datetime'
+    type: 'datetime',
+    tickPlacement: 'between',
+    tickAmount: '20',
+    labels:{
+      style: {
+        colors: "#ffffff",
+      }
+    },
   },
   yaxis:{
     show: false,

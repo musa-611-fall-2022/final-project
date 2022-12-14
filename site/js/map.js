@@ -5,37 +5,37 @@ const mapboxToken = 'pk.eyJ1IjoiY29udHJhaWwtZW50aHVzaWFzdCIsImEiOiJjbDlsbTRteXEw
 
 var infoIcon = L.icon({
     iconUrl: './assets/blue.png',
-    iconSize: [20, 20],
+    iconSize: [15, 15],
     className: 'fadeaway',
 });
 
 var qolIcon = L.icon({
-    iconUrl: './assets/green.png',
-    iconSize: [20, 20],
+    iconUrl: './assets/blue.png',
+    iconSize: [15, 15],
     className: 'fadeaway',
 });
 
 var streetsIcon = L.icon({
     iconUrl: './assets/yellow.png',
-    iconSize: [20, 20],
+    iconSize: [15, 15],
     className: 'fadeaway',
 });
 
 var complaintIcon = L.icon({
     iconUrl: './assets/red.png',
-    iconSize: [20, 20],
+    iconSize: [15, 15],
     className: 'fadeaway',
 });
 
 var miscIcon = L.icon({
     iconUrl: './assets/orange.png',
-    iconSize: [20, 20],
+    iconSize: [15, 15],
     className: 'fadeaway',
 });
 
 function initializeMap () {
     //initial zoom and center
-    let map = L.map('map', { zoomControl: false }).setView([39.95764876954889, -75.1629638671875], 12.5);
+    let map = L.map('map', { zoomControl: false }).setView([39.962443024832446, -75.16139981702757], 12);
 
     //add basemap
     L.tileLayer(`https://tile.jawg.io/jawg-dark/{z}/{x}/{y}{r}.png?access-token=RiEiQBgvMlMLXAfQL2dASmd8CHzIHfvNFFReiWxhPPIbhFt1c8CVubEJSPhcAVyf`, {
