@@ -85,8 +85,8 @@ function initializeSeattleMap() {
             let businessHistory = document.getElementById('history').value;
             let businessGeometry = mapClickPoint;
             const newFeature = {
-                "type":"Feature",
-                "properties": {
+                "type":"FeatureCollection",
+                "features": {
                     "name": businessName,
                     "bizType": businessType,
                     "owner": businessOwner,
@@ -103,8 +103,8 @@ function initializeSeattleMap() {
             console.log(newBusinesses);
 
             let app = {
+                notes: [],
                 newBusinesses,
-                notes: null,
             };
 
             const saveBizEl = document.getElementById('submit');
@@ -142,18 +142,24 @@ function initializeSeattleMap() {
             }
 
             function getFormContent() {
-                const userNameNote = userNameEl.value;
-                const userPhoneNote = userPhoneEl.value;
-                const nameNote = bizNameEl.value;
-                const typeNote = bizTypeEl.value;
-                const ownerNote = bizOwnerEl.value;
-                const startNote = bizStartEl.value;
-                const endNote = bizEndEl.value;
-                const addressNote = bizAddressEl.value;
-                const historyNote = bizHistoryEl.value;
-                const colon = ": ";
-                const comma = ", ";
-                const note = userNameNote + comma + userPhoneNote + colon + nameNote + comma + typeNote + comma + ownerNote + comma + startNote + comma + endNote + comma + addressNote + comma + historyNote;
+                const newBusinessFeatureCollection = {
+                    "type":"Feature",
+                    "properties": {
+                        userNameNote: userNameEl.value,
+                        userPhoneNote: userPhoneEl.value,
+                        nameNote: bizNameEl.value,
+                        typeNote: bizTypeEl.value,
+                        ownerNote: bizOwnerEl.value,
+                        startNote: bizStartEl.value,
+                        endNote: bizEndEl.value,
+                        addressNote: bizAddressEl.value,
+                        historyNote: bizHistoryEl.value,
+                },
+            };
+
+            Array.prototype.push.call(app.notes, newBusinessFeatureCollection);
+
+            const note = app;
                 console.log(note);
                 return note;
               }
