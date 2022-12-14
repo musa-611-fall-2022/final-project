@@ -57,12 +57,14 @@ a {
   font-weight: bold;
 }
 .logo {
-  background-image: url("../data/graphics/Logo_Large_wht.png");
-  height: 76px;
-  width: 1197px;
+  height: 15%;
+  width: 50%;
   position: absolute;
   top: 40%;
   left: 30%;
+}
+img {
+  width:auto; height:auto; max-width:100%; max-height:100%;
 }
 .mycontainer {
   margin: 0;
