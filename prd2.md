@@ -9,9 +9,9 @@
 ## Features:
 Map of Fishtown
   - Toggleable Layer selection
-      Current
      - Zoning
      - Building height
+  - Individual Parcel characteristics
    
 
 ## How is this different from Atlas? 
@@ -19,7 +19,7 @@ Map of Fishtown
 ## Limitations:
   - Data availaibilty
 
-##To Add
+## To Add
 
 Layers for
   - Demolition and Construction History
