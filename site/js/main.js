@@ -93,12 +93,14 @@ let currentListData;
 // When click the "Load List" button, load the address
 $("#voterFileLoadButton").click(function() {
   let listName = document.querySelector('#stop-name-input').value;
-  if(url.features[0].properties.COUNTY_NAME == listName) {
-  currentListData = getListData(url);
-  showCountyLocation(currentListData);}
-});
+  for(let i=0; i < 67 ; i++){
+  if(url.features[0].properties.COUNTY_NUMBER == listName) {
+  currentListData = url.features[i];}}
+  showCountyLocation(currentListData);
+  return currrentListData;
+} )  
 
-window.currentListData = currentListData
+window.currentListData = currentListData;
 
 // Initialize the app components and events
 // ----------------------------------------
