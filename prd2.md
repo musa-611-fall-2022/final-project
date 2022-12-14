@@ -20,9 +20,10 @@ Limitations:
   - Data availaibilty
 
 To Add
-    Layers for
+
+      Layers for
   - Demolition and Construction History
   - Currenty Demolitions / Construction
   - Commerical Establishments
   
-    Renderings of Projects
+  - Renderings of Projects
