@@ -45,6 +45,7 @@ function showSitesOnMap(sitesToShow, siteMap) {
   "features": sitesToShow.map(makeSiteFeature),
 };
 
+// Will try to figure out how to use the following code to make different colored leaflet markers if time!
 //function featureStyle(feature) {
  // const challengeColors = {
     //"Ghost Ads": "#217e79",
@@ -93,3 +94,4 @@ export {
     initializeSiteMap,
     showSitesOnMap,
 };
+
