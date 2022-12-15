@@ -12,6 +12,10 @@ Morgan Griffths
 * Mapbox, with the theme "dark-v11" for the custom map tiles
 * Font from W3Schools: "https://www.w3schools.com/w3css/4/w3.css" 
 
+# Steps to get site running
+* make sure that all external packages/libraries mentioned above are installed and running
+* use npx http-server to start a server in your browser 
+
 
 # Process 
 * I downloaded the data from the Google MyMaps map as a KMZ and used an online tool to convert it into a geoJSON
