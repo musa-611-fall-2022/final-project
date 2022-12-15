@@ -10,7 +10,7 @@ let quintiles = [];
  * @param {Number} val representing a value to be color coded 
  * @returns {String} hex of the output color
  */
-function getQuintileColor(val) {
+function getQuintileColor(val, quintiles) {
   return val > Number(quintiles[4]) ? '#353797' :
          val > Number(quintiles[3]) ? '#5557c3' :
          val > Number(quintiles[2]) ? '#8e8fd7' :
@@ -24,9 +24,9 @@ function getQuintileColor(val) {
  * @param {Object.Feature} feature geo feature
  * @returns {Object} styling options
  */
-function quintileStyle(feature) {
+function quintileStyle(feature, quintiles) {
   return {
-    fillColor: getQuintileColor(feature.properties.mapDisplayVal),
+    fillColor: getQuintileColor(feature.properties.mapDisplayVal, quintiles),
     color: "white",
     weight: 1,
     dashArray: '3',
@@ -262,7 +262,7 @@ function makeDisplayData(mapBaseData, mapUpdateData) {
 
   map.blockGroupLayer.clearLayers();
   map.blockGroupLayer.addData(mapBaseDataUpdated);
-  map.blockGroupLayer.setStyle(quintileStyle);
+  map.blockGroupLayer.setStyle(feature => quintileStyle(feature, quintiles));
   map.blockGroupLayer.bindTooltip(layer => {
     const displayContent = makeTooltipContent(layer.feature, key);
     return displayContent;
