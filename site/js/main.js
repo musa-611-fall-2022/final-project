@@ -65,7 +65,7 @@ export const continuousVarsDict = {
     max: 31,
   },
 }
-// Dictionary for categorical filter variables
+// Dictionary for categorical filter variables (used to make HTML)
 export const categoricalVarsDict = {
   trip_purpose: {
     displayName: 'Purpose',
@@ -201,6 +201,7 @@ export const filterParams = {
 
 /* ==========
 For Toggle Display section, add HTML elements and add recorders
+|| Update: in Toggle Display section, update map right after clicking
 =========== */
 
 import { addDisplayVarsEl } from "./add-html.js";
@@ -264,6 +265,8 @@ for(const cbEl of displayVarOptionsEl) {
     const buttonEl = document.querySelector('#display-var-button');
     buttonEl.innerHTML = cbEl.nextElementSibling.firstChild.innerHTML;
 
+    onConfirmButtonClick();
+
     // Collapse the window by simulating a click (after a short period of time)
     setTimeout(( ) => { document.querySelector('#display-var-button').click() }, 250);
   })
@@ -279,6 +282,7 @@ for(const cbEl of departOrArriveOptionsEl) {
   cbEl.addEventListener('click', ( ) => {
     toggleDisplayParams.groupBy = cbEl.value;
     console.log(toggleDisplayParams);
+    onConfirmButtonClick();
   })
 
   // by default, click on Departures
@@ -334,6 +338,53 @@ for(const varName of ['primary_mode', 'trip_purpose', 'trip_taker_available_vehi
 addResetToFactorSelectors();
 
 /* ==========
+Geoselector
+=========== */
+
+// Store a global object: geoselection
+export const geoSelection = {
+  inSelection: false,
+  selected: [],
+}
+
+
+const geoSelectorButtonEl = document.querySelector('#geo-selector-button');
+geoSelectorButtonEl.addEventListener('click', ( ) => {
+  const filterVar = toggleDisplayParams.groupBy === 'origin_geoid' ? 'destination_geoid' : 'origin_geoid';
+  // Switch `inSelection`
+  geoSelection.inSelection = geoSelection.inSelection === false ? true : false;
+  if(geoSelection.inSelection === true) {
+    // Change to selection state
+    geoSelectorButtonEl.classList.add('geo-selector-button-selected');
+    geoSelectorButtonEl.innerHTML = 'Click on map and confirm here';
+
+    // Remove all existing selections
+    geoSelection.selected = [];
+    map.blockGroupLayer.setStyle({
+      weight: 1,
+      dashArray: '3',
+    });
+  } else {
+    // Confirm selection
+    geoSelectorButtonEl.innerHTML = 'Confirmed';
+    // Update `filterParams`
+    // filterParams.categoricalVars[filterVar]
+    if(geoSelection.selected.length > 0) {
+      filterParams.categoricalVars[filterVar].isApplied = true;
+      filterParams.categoricalVars[filterVar].selectedCategories = geoSelection.selected.map(item => item.substring(5));
+      console.log(filterParams);
+    } else {
+      filterParams.categoricalVars[filterVar].isApplied = false;
+    }
+
+    setTimeout(( ) => {
+      geoSelectorButtonEl.innerHTML = 'Edit selection';
+      geoSelectorButtonEl.classList.remove('geo-selector-button-selected');
+    }, 700);
+  }
+})
+
+/* ==========
 Construct WHERE clause
 =========== */
 
@@ -360,7 +411,13 @@ function makeCategoricalWhereClause(whereClause, filterParams) {
   for(const key of Object.keys(filterParams.categoricalVars)) {
     const filter = filterParams.categoricalVars[key];
     if(filter.isApplied) {
-      const thisWhere = ` AND (${filter.varName} IN (${filter.selectedCategories.join(', ')}))`;
+      let thisWhere;
+      if(typeof(filter.selectedCategories[0]) === 'string') {
+        thisWhere = ` AND (${filter.varName} IN ('${filter.selectedCategories.join(`', '`)}'))`;
+      } else {
+        thisWhere = ` AND (${filter.varName} IN (${filter.selectedCategories.join(', ')}))`;
+      }
+      
       whereClause += thisWhere;
     }
   }

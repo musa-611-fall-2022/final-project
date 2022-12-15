@@ -175,6 +175,7 @@ and when screen is smaller than 20rem, go for 100% */
   gap: 0.5rem;
   flex-direction: column;
   pointer-events: auto;
+  overflow: auto;
 }
 
 /* ------- Main panels --------- */

@@ -53,7 +53,7 @@
         <div class="panel toggle-display-panel">
           <!-- Select by departure or arrival-->
           <div class="selector-kit">
-            <div class="selector-kit-title">Trips attached to geographies by</div>
+            <div class="selector-kit-title strong">Trips attached to geographies by</div>
             <div class="cb-group cb-group-exclusive" id="toggle-display-tofrom">
               <label>
                 <input type="checkbox" class="cb-invisible" value="origin_geoid">
@@ -78,7 +78,7 @@
 
           <!-- Dropdown select variable to display -->
           <div class="dropdown">
-            <div class="selector-kit-title">Showing...</div>
+            <div class="selector-kit-title strong">Showing...</div>
             <button class="dropdown-button display-var-button" id="display-var-button"><span class="italic strong">Per capita trip count</span></button>
             <div class="dropdown-content">
               <div class="cb-group cb-group-exclusive cb-group-wrap" id="toggle-display-vars">
@@ -90,6 +90,14 @@
         <!-- Filters panel -->
         <div class="panel" id="filter-panel">
           <h2 class="panel-title">Filter trips</h2>
+
+          <!-- Geographical selector -->
+          <div class="selector-kit">
+            <div class="selector-kit-title">Destination</div> 
+            <button class="geo-selector-button" id="geo-selector-button">Edit selection</button>
+          </div>
+
+          <!-- The other filters are added through [add-html.js] -->
         </div>
 
         <!-- Confirm filter button -->

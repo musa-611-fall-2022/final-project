@@ -128,6 +128,18 @@
   width: auto;
 }
 
+/* ------- Geoselector --------- */
+
+.geo-selector-button-selected{
+  background-color: var(--primary-reg);
+  color: white;
+  border-color: var(--primary-reg);
+}
+
+.geo-selector-button-selected:hover {
+  background-color: var(--primary-reg);
+}
+
 /* ------- Double-range slider --------- */
 
 .selector-kit {

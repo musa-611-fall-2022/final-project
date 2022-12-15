@@ -17,11 +17,11 @@ function monochromeStyle(feature) {
 }
 
 function getQuintileColor(val) {
-  return val > quintiles[4] ? '#353797' :
-         val > quintiles[3] ? '#5557c3' :
-         val > quintiles[2] ? '#8e8fd7' :
-         val > quintiles[1] ? '#c6c7eb' :
-                              '#ffffff';
+  return val > Number(quintiles[4]) ? '#353797' :
+         val > Number(quintiles[3]) ? '#5557c3' :
+         val > Number(quintiles[2]) ? '#8e8fd7' :
+         val > Number(quintiles[1]) ? '#c6c7eb' :
+                                      '#ffffff';
 }
 
 // Sets quintile display styles
@@ -37,7 +37,11 @@ function quintileStyle(feature) {
 
 // Initializes map with empty block group layer on screen, and returns map obj
 function initMap() {
-  const map = L.map('map', { maxZoom: 22, preferCanvas: true, zoomControl: false }).setView([39.98, -75.16], 11.5);
+  const map = L.map('map', { 
+    maxZoom: 22, preferCanvas: true, 
+    zoomControl: false,
+    tap: false, // Prevent firing two onclick events at once
+  }).setView([39.98, -75.16], 11.5);
 
   // MapBox credentials
   const mapboxAccount = 'mapbox';
@@ -82,8 +86,7 @@ function filterBlockGroups(mapData) {
 async function fetchMapBaseData() {
   const resp = await fetch('./data/block-group-population.geojson');
   const mapData = await resp.json();
-  const filteredMapData = filterBlockGroups(mapData);
-  return filteredMapData;
+  return mapData;
 }
 
 // Fetches info to display and adds data to block group layer
@@ -104,12 +107,18 @@ import { map } from './main.js';
 // Merges data gotten from API to map base data
 function mergeAttributeToMapData(mapBaseData, updateData, key) {
   for(const feature of mapBaseData.features) {
+    feature.properties.mapDisplayVal = 0;
     for(let i = 0; i < updateData.length; i++) {
       const entry = updateData[i];
-      if(entry.geoid == feature.properties.GEOID10) {
+      if(String(entry.geoid) === String(feature.properties.GEOID10)) { // If matched
+        if(entry.geoid == '421019803001') console.log('look here ', entry[key]);
         // Update || If total or count, use per person
-        if(key === 'count' || key === 'sum') {
+        if(key === 'sum') {
           feature.properties.mapDisplayVal = entry[key] / feature.properties.population;
+          // Remove if population < 100 for per capita
+          if(feature.properties.population < 100) {
+            mapBaseData.features.splice(mapBaseData.features.indexOf(feature), 1);
+          }
         } else {
           feature.properties.mapDisplayVal = entry[key];
         }
@@ -146,22 +155,60 @@ function computeQuintiles(dataArr, ntiles) {
   return quintiles;
 }
 
-// Makes tooltip content
+// Makes tooltip content (hover)
 function makeTooltipContent(feature, key) {
   const GEOID = feature.properties.GEOID10;
   const population = feature.properties.population;
-  const displayVal = Math.round(feature.properties.mapDisplayVal, 1);
+  const displayVal = Math.round(feature.properties.mapDisplayVal, 2);
   const percentSign = key === 'ratio' ? '%' : '';
   return `<strong class="italic">geoid:</strong>${GEOID}<br />
           <strong class="italic">population: </strong>${population}<br />
           <strong class="italic">${key}: </strong>${displayVal}${percentSign}`;
 }
 
+// Import object storing geoselection info
+import { geoSelection } from './main.js';
+
+// Selects block group geo [Three Functions]
+function onLayerSelected(layer) {
+  // Store the GEOID
+  geoSelection.selected.push(layer.feature.properties.GEOID10);
+  // Set layer style
+  layer.setStyle({
+    weight: 5,
+    dashArray: null,
+  });
+}
+function onLayerUnselected(layer) {
+  // Un-store the GEOID
+  geoSelection.selected.splice(geoSelection.selected.indexOf(layer.feature.properties.GEOID10));
+  // Revert style
+  layer.setStyle({
+    weight: 1,
+    dashArray: '3',
+  });
+}
+function onLayerClicked(layer) {
+  if(!geoSelection.selected.includes(layer.feature.properties.GEOID10)) {
+    // If currently not selected, select
+    onLayerSelected(layer);
+  } else {
+    // Otherwise, unselect
+    onLayerUnselected(layer);
+  }
+  console.log(geoSelection);
+}
+
 // Creates a data that joins information fetched from API to base map
+// Then, add event listeners to
+// But first, create a date-time object
+// ---- Bug with leaflet: each click generates two clicks
+// ---- Bug fix: see if this click is at least some time away from the last click
+let currentTime = 0;
 function makeDisplayData(mapBaseData, mapUpdateData) {
   // First update mapUpdateData
   mapUpdateData.map(item => {
-    item.geoid = '42101' + item.geoid;
+    item.geoid = '42101' + String(item.geoid);
   })
 
   // Copy a version
@@ -187,8 +234,16 @@ function makeDisplayData(mapBaseData, mapUpdateData) {
   map.blockGroupLayer.bindTooltip(layer => {
     const displayContent = makeTooltipContent(layer.feature, key);
     return displayContent;
-  });
-  console.log('updated: ', mapBaseData);
+  })
+  .addEventListener('click', (e) => {
+    // Check if in selection state || if so:
+    if(geoSelection.inSelection === false) return;
+    // Check if this click is following right after the last click
+    if(Number(Date.now()) - currentTime < 10) return;
+    currentTime = Number(Date.now());
+
+    onLayerClicked(e.layer);
+  })
 }
 
 export {
