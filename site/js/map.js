@@ -33,7 +33,7 @@ function initializeSeattleMap() {
         </style>
 
         <div class="new-biz-container">
-            <h2 class = 'newbiz'> Add Business </h2>
+            <h3 class = 'newbiz'> Add Business </h3>
             <h3>Your Name:</h3>
             <input type="text" id="user-name" placeholder="Enter your name">
             <h3>Your Phone Number:</h3>
@@ -106,7 +106,7 @@ function initializeSeattleMap() {
                 radius: 5,
             })
             .bindPopup(() => `
-            <h2>${newFeature.features['name']}</h2>
+            <h3>${newFeature.features['name']}</h3>
             <h3>Business Type: ${newFeature.features['bizType']}</h3>
             <h3>Owner: ${newFeature.features['owner']}</h3>
             <h3>Opening Year: ${newFeature.features['startYear']}</h3>
@@ -253,7 +253,7 @@ seattleMap.seattleLayers = L.geoJSON(ftFeatureCollection, {
     },
 })
 .bindPopup(layer => `
-    <h2>${layer.feature.properties['name']}</h2>
+    <h3>${layer.feature.properties['name']}</h3>
     <h3>Business Type: ${layer.feature.properties['bizType']}</h3>
     <h3>Opening Year: ${layer.feature.properties['startYear']}</h3>
     <h3>Ending Year: ${layer.feature.properties['endYear']}</h3>
