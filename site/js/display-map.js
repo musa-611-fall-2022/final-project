@@ -125,7 +125,6 @@ function mergeAttributeToMapData(mapBaseData, updateData, key) {
   return mapBaseData;
 }
 
-
 // Computes quintile breakpoints
 function computeQuintiles(dataArr, ntiles) {
   const quintiles = [];

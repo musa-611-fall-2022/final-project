@@ -51,32 +51,34 @@
 
         <!-- Toggle display panel -->
         <div class="panel toggle-display-panel">
-          <h2 class="panel-title">Displaying on map...</h2>
-
           <!-- Select by departure or arrival-->
-          <div class="cb-group cb-group-exclusive" id="toggle-display-tofrom">
-            <label>
-              <input type="checkbox" class="cb-invisible" value="origin_geoid">
-              <div class="cb-option">
-                <button>
-                  <span class="material-symbols-outlined" style="--this-color: var(--hero-reg)">logout</span>
-                  <span>Departures</span>
-                </button>
-              </div>
-            </label>
-            <label>
-              <input type="checkbox" class="cb-invisible" value="destination_geoid">
-              <div class="cb-option">
-                <button>
-                  <span class="material-symbols-outlined" style="--this-color: var(--primary-reg)">login</span> 
-                  <span>Arrivals</span>
-                </button>
-              </div>
-            </label>
+          <div class="selector-kit">
+            <div class="selector-kit-title">Trips attached to geographies by</div>
+            <div class="cb-group cb-group-exclusive" id="toggle-display-tofrom">
+              <label>
+                <input type="checkbox" class="cb-invisible" value="origin_geoid">
+                <div class="cb-option">
+                  <button>
+                    <span class="material-symbols-outlined" style="--this-color: var(--hero-reg)">logout</span>
+                    <span>departures</span>
+                  </button>
+                </div>
+              </label>
+              <label>
+                <input type="checkbox" class="cb-invisible" value="destination_geoid">
+                <div class="cb-option">
+                  <button>
+                    <span class="material-symbols-outlined" style="--this-color: var(--primary-reg)">login</span> 
+                    <span>arrivals</span>
+                  </button>
+                </div>
+              </label>
+            </div>
           </div>
 
           <!-- Dropdown select variable to display -->
           <div class="dropdown">
+            <div class="selector-kit-title">Showing...</div>
             <button class="dropdown-button display-var-button" id="display-var-button"><span class="italic strong">Per capita trip count</span></button>
             <div class="dropdown-content">
               <div class="cb-group cb-group-exclusive cb-group-wrap" id="toggle-display-vars">
