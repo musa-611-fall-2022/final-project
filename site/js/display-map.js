@@ -104,11 +104,10 @@ async function fetchMapBaseData() {
  * @param {Object} map the leaflet map
  * @param {Object.FeatureCollection} mapBaseData block group feature collection
  */
-async function addBlockGroups(map, mapBaseData) {
+async function addInitialBlockGroups(map, mapBaseData) {
   try {
     mapBaseData = await fetchMapBaseData();
     map.blockGroupLayer.addData(mapBaseData);
-    console.log(mapBaseData);
   } catch(err) {
     console.log(err);
   }
@@ -117,7 +116,16 @@ async function addBlockGroups(map, mapBaseData) {
 import { map } from './main.js';
 
 // Merges data gotten from API to map base data
+/**
+ * 
+ * @param {Object.FeatureCollection} mapBaseData map block group base shapes
+ * @param {Array} updateData array of objects containing GEOID and count/avg/sum, queried from db
+ * @param {String} key either count or avg or sum
+ * @returns 
+ */
 function mergeAttributeToMapData(mapBaseData, updateData, key) {
+  
+  // Initiate new FeatureCollection
   const mapBaseDataUpdated = {
     type: 'FeatureCollection',
     crs: mapBaseData.crs,
@@ -130,20 +138,24 @@ function mergeAttributeToMapData(mapBaseData, updateData, key) {
       if(String(entry.geoid) === String(feature.properties.GEOID10)) { // If matched
         // Update
         feature.properties.mapDisplayVal = entry[key];
+        // Add to new FeatureCollection
         mapBaseDataUpdated.features.push(feature);
         // get this out of the arr to make later processes faster
         updateData.splice(i, 1);
         break;
       }
     }
-    if(feature.properties.mapDisplayVal == undefined) {
-      feature.properties.mapDisplayVal = null;
-    }
   }
   return mapBaseDataUpdated;
 }
 
 // Computes quintile breakpoints
+/**
+ * 
+ * @param {Arr} dataArr simple array of all the numbers/values
+ * @param {Number} ntiles 
+ * @returns {Arr} Array of `ntiles + 1`, with the 0-index value being the min, and the ntile-index value bing the max
+ */
 function computeQuintiles(dataArr, ntiles) {
   const quintiles = [];
   // First turn object into array
@@ -165,6 +177,12 @@ function computeQuintiles(dataArr, ntiles) {
 }
 
 // Makes tooltip content (hover)
+/**
+ * 
+ * @param {Object.Feature} feature the input feature object
+ * @param {String} key display type: count, sum, or mean
+ * @returns {text} HTML content of the tooltip
+ */
 function makeTooltipContent(feature, key) {
   const GEOID = feature.properties.GEOID10;
   const population = feature.properties.population;
@@ -179,6 +197,8 @@ function makeTooltipContent(feature, key) {
 import { geoSelection } from './main.js';
 
 // Selects block group geo [Three Functions]
+
+// layer unselected -> selected
 function onLayerSelected(layer) {
   // Store the GEOID
   geoSelection.selected.push(layer.feature.properties.GEOID10);
@@ -188,6 +208,7 @@ function onLayerSelected(layer) {
     dashArray: null,
   });
 }
+// layer selected -> unselected
 function onLayerUnselected(layer) {
   // Un-store the GEOID
   geoSelection.selected.splice(geoSelection.selected.indexOf(layer.feature.properties.GEOID10));
@@ -197,6 +218,7 @@ function onLayerUnselected(layer) {
     dashArray: '3',
   });
 }
+// determine whether to use `onLayerSelected` or `onLayerUnselected`, and use that
 function onLayerClicked(layer) {
   if(!geoSelection.selected.includes(layer.feature.properties.GEOID10)) {
     // If currently not selected, select
@@ -213,28 +235,29 @@ function onLayerClicked(layer) {
 // But first, create a date-time object
 // ---- Bug with leaflet: each click generates two clicks
 // ---- Bug fix: see if this click is at least some time away from the last click
+
 let currentTime = 0;
+/**
+ * 
+ * @param {Object.FeatureCollection} mapBaseData geo object base
+ * @param {Array} mapUpdateData object queried from db; array; each element is an object with two properties 1. GEOID, 2. count/avg/sum
+ */
 function makeDisplayData(mapBaseData, mapUpdateData) {
-  // First update mapUpdateData
+  // First update mapUpdateData, add `42101` in front of the GEOID
   mapUpdateData.map(item => {
     item.geoid = '42101' + String(item.geoid);
   })
 
   // Copy a version
   const updateData = mapUpdateData.slice();
-
   // Get the key name of updateData (count, avg, or else)
   const key = Object.keys(updateData[0])[1];
-  console.log('map update data', updateData);
-
   // Merge info back to map base data
   const mapBaseDataUpdated = mergeAttributeToMapData(mapBaseData, updateData, key);
 
   // Get quintiles of display data || Update the global arr
   quintiles = computeQuintiles(
-    mapBaseDataUpdated.features.map(item => item.properties.mapDisplayVal),
-    5,
-  );
+    mapBaseDataUpdated.features.map(item => item.properties.mapDisplayVal), 5);
   console.log(quintiles);
 
   map.blockGroupLayer.clearLayers();
@@ -257,7 +280,7 @@ function makeDisplayData(mapBaseData, mapUpdateData) {
 
 export {
   initMap,
-  addBlockGroups,
+  addInitialBlockGroups,
   fetchMapBaseData,
   makeDisplayData,
 };

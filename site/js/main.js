@@ -7,7 +7,7 @@ and is a coordinator of all different modules
 @date: 12/08/2022
 ================================================= */
 
-import { initMap, fetchMapBaseData, addBlockGroups } from "./display-map.js";
+import { initMap, fetchMapBaseData, addInitialBlockGroups } from "./display-map.js";
 
 // Create map
 export const map = initMap();
@@ -20,7 +20,7 @@ fetchMapBaseData()
   mapBaseData = resp;
 })
 
-addBlockGroups(map, mapBaseData);
+addInitialBlockGroups(map, mapBaseData);
 
 /* ==========
 Define some constant objects
@@ -512,8 +512,7 @@ async function onConfirmButtonClick() {
     const mapResp = await fetch(`https://mobiladelphia.herokuapp.com/test-query/${mapQuery}`);
     const mapData = await mapResp.json();
     const mapUpdateData = mapData.results;
-    console.log('map base data ', mapBaseData);
-    const mapDisplayData = makeDisplayData(mapBaseData, mapUpdateData);
+    makeDisplayData(mapBaseData, mapUpdateData);
   } catch(err) {
     console.log(err);  
   }
