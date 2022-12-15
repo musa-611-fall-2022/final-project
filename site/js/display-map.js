@@ -5,17 +5,11 @@ This script contains functions dealing with the map
 // Arr that store map style quintile breaks
 let quintiles = [];
 
-// Sets block group layer styles (uniform color)
-function monochromeStyle(feature) {
-  return {
-    fillColor: "#c8b7d9",
-    color: "white",
-    weight: 1,
-    dashArray: '3',
-    fillOpacity: 0.5,
-  }
-}
-
+/**
+ * 
+ * @param {Number} val representing a value to be color coded 
+ * @returns {String} hex of the output color
+ */
 function getQuintileColor(val) {
   return val > Number(quintiles[4]) ? '#353797' :
          val > Number(quintiles[3]) ? '#5557c3' :
@@ -25,6 +19,11 @@ function getQuintileColor(val) {
 }
 
 // Sets quintile display styles
+/**
+ * 
+ * @param {Object.Feature} feature geo feature
+ * @returns {Object} styling options
+ */
 function quintileStyle(feature) {
   return {
     fillColor: getQuintileColor(feature.properties.mapDisplayVal),
@@ -36,6 +35,10 @@ function quintileStyle(feature) {
 }
 
 // Initializes map with empty block group layer on screen, and returns map obj
+/**
+ * 
+ * @returns {Object} Map
+ */
 function initMap() {
   const map = L.map('map', { 
     maxZoom: 22, preferCanvas: true, 
@@ -64,7 +67,13 @@ function initMap() {
 
   // Initialize polygon layer for later
   map.blockGroupLayer = L.geoJSON(null, {
-    style: monochromeStyle,
+    style: {
+      fillColor: "#c8b7d9",
+      color: "white",
+      weight: 1,
+      dashArray: '3',
+      fillOpacity: 0.5,
+    },
   })
   .addTo(map);
 
@@ -89,9 +98,12 @@ async function fetchMapBaseData() {
   return mapData;
 }
 
-// Fetches info to display and adds data to block group layer
-// `map` is the map object to add data to
-// `mapBaseData` should be a global variable to update
+// Add block groups in the first go, before fetching data from the database
+/**
+ * 
+ * @param {Object} map the leaflet map
+ * @param {Object.FeatureCollection} mapBaseData block group feature collection
+ */
 async function addBlockGroups(map, mapBaseData) {
   try {
     mapBaseData = await fetchMapBaseData();
@@ -106,22 +118,19 @@ import { map } from './main.js';
 
 // Merges data gotten from API to map base data
 function mergeAttributeToMapData(mapBaseData, updateData, key) {
+  const mapBaseDataUpdated = {
+    type: 'FeatureCollection',
+    crs: mapBaseData.crs,
+    features: [],
+  }
   for(const feature of mapBaseData.features) {
     feature.properties.mapDisplayVal = 0;
     for(let i = 0; i < updateData.length; i++) {
       const entry = updateData[i];
       if(String(entry.geoid) === String(feature.properties.GEOID10)) { // If matched
-        if(entry.geoid == '421019803001') console.log('look here ', entry[key]);
-        // Update || If total or count, use per person
-        if(key === 'sum') {
-          feature.properties.mapDisplayVal = entry[key] / feature.properties.population;
-          // Remove if population < 100 for per capita
-          if(feature.properties.population < 100) {
-            mapBaseData.features.splice(mapBaseData.features.indexOf(feature), 1);
-          }
-        } else {
-          feature.properties.mapDisplayVal = entry[key];
-        }
+        // Update
+        feature.properties.mapDisplayVal = entry[key];
+        mapBaseDataUpdated.features.push(feature);
         // get this out of the arr to make later processes faster
         updateData.splice(i, 1);
         break;
@@ -131,7 +140,7 @@ function mergeAttributeToMapData(mapBaseData, updateData, key) {
       feature.properties.mapDisplayVal = null;
     }
   }
-  return mapBaseData;
+  return mapBaseDataUpdated;
 }
 
 // Computes quintile breakpoints
@@ -219,17 +228,17 @@ function makeDisplayData(mapBaseData, mapUpdateData) {
   console.log('map update data', updateData);
 
   // Merge info back to map base data
-  mapBaseData = mergeAttributeToMapData(mapBaseData, updateData, key);
+  const mapBaseDataUpdated = mergeAttributeToMapData(mapBaseData, updateData, key);
 
   // Get quintiles of display data || Update the global arr
   quintiles = computeQuintiles(
-    mapBaseData.features.map(item => item.properties.mapDisplayVal),
+    mapBaseDataUpdated.features.map(item => item.properties.mapDisplayVal),
     5,
   );
   console.log(quintiles);
 
   map.blockGroupLayer.clearLayers();
-  map.blockGroupLayer.addData(mapBaseData);
+  map.blockGroupLayer.addData(mapBaseDataUpdated);
   map.blockGroupLayer.setStyle(quintileStyle);
   map.blockGroupLayer.bindTooltip(layer => {
     const displayContent = makeTooltipContent(layer.feature, key);
