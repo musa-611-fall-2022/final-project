@@ -24,6 +24,15 @@ let url = buildURL('recentObs');
 let currentPoints = await getData(url, dataPullSuccess, dataPullFailure, map, 'recentObs');
 buildRecentObsList(currentPoints);
 
+// get DOMs
+let recentObsButton = document.querySelector("#recent-obs");
+let notableObsButton = document.querySelector("#notable-obs");
+let hotspotButton = document.querySelector("#hotspots");
+let searchButton = document.querySelector("#bird-search-button");
+let searchBar = document.querySelector("#bird-search");
+let savedHotspotButton = document.querySelector("#show-hotspot-list");
+let clearHotspotButton = document.querySelector("#clear-hotspot-list");
+
 async function onRecentObsClick() {
     if (recentObsButton.classList.contains("unpressed")) {
         recentObsButton.classList.remove("unpressed");
@@ -82,7 +91,6 @@ async function onHotspotClick() {
 }
 
 function onSavedHotspotButtonClick() {
-    console.log('jotspot lick');
     if (savedHotspotButton.classList.contains("unpressed")) {
         savedHotspotButton.classList.remove("unpressed");
         savedHotspotButton.classList.add("pressed");
@@ -112,35 +120,28 @@ async function onSearchClick() {
         return data.comName.toLowerCase() === searchBar.value.toLowerCase();
     })[0];
     console.log(filteredData);
-    let url = `https://api.ebird.org/v2/data/obs/geo/recent/${filteredData.speciesCode}?lat=39.952&lng=-75.164&back=30&dist=50`
+    let url = `https://api.ebird.org/v2/data/obs/geo/recent/${filteredData.speciesCode}?lat=39.952&lng=-75.164&back=30&dist=50`;
     currentPoints = await getData(url, dataPullSuccess, dataPullFailure, map, 'birdObs');
     searchBar.value = "";
 }
 
 // event listener for recent observations
-let recentObsButton = document.querySelector("#recent-obs");
-recentObsButton.addEventListener('click', onRecentObsClick)
+recentObsButton.addEventListener('click', onRecentObsClick);
 // event listener for notable observations
-let notableObsButton = document.querySelector("#notable-obs");
 notableObsButton.addEventListener('click', onNotableObsClick);
 // event listener for hotspots
-let hotspotButton = document.querySelector("#hotspots");
 hotspotButton.addEventListener('click', onHotspotClick);
 // event listener for search button
-let searchButton = document.querySelector("#bird-search-button");
 searchButton.addEventListener('click', onSearchClick);
 // event listener for search bar enter key
-let searchBar = document.querySelector("#bird-search");
 searchBar.addEventListener('keypress', function(event) {
     if (event.keyCode === 13) {
         searchButton.click();
     }
 });
 // event listener for show saved hotspots button
-let savedHotspotButton = document.querySelector("#show-hotspot-list");
 savedHotspotButton.addEventListener('click', onSavedHotspotButtonClick);
 // event listener for clear saved hotspots button
-let clearHotspotButton = document.querySelector("#clear-hotspot-list");
 clearHotspotButton.addEventListener('click', onClearHotspotButtonClick);
 
 export {
