@@ -1,0 +1,198 @@
+html {
+  font-family: Raleway, sans-serif;
+  margin: 0;
+  height: 100vh;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  box-sizing: border-box;
+}
+
+.content-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.map-container {
+  height: 100%;
+  box-sizing: border-box;
+}
+
+#map {
+  height: 100%;
+}
+
+.input-container {
+  display: flex;
+  align-items: flex-start;
+  height: 21%;
+  box-sizing: border-box;
+}
+
+.filter-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.bird-list-container {
+  overflow-y: scroll;
+  margin-top: 0.5rem;
+  margin-left: 0.5rem;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.label {
+  margin: 0.5rem;
+  padding: 0.2rem;
+  padding-left: 0;
+  font-style: italic;
+  font-weight: 600;
+  border-bottom: 5px solid blueviolet;
+}
+
+.popup-container {
+  height: 0;
+  width: 0;
+}
+
+.popup-container-up {
+  background-color: #e8e8e8;
+}
+
+.popup {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-bottom: 0.3rem;
+}
+
+.popup-button {
+  height: 100%;
+}
+
+.popup-info {
+  display: flex;
+  flex-direction: column;
+  padding-left: 0.3rem;
+  padding-right: 0.3rem;
+}
+
+.popup-info-box {
+  border: 2px solid black;
+  border-radius: 5px;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  padding: 0.3rem;
+}
+
+.common-name {
+  font-weight: 600;
+  font-size: 2rem;
+  border-bottom: 2px solid blueviolet;
+  padding-bottom: 0;
+}
+
+.scientific-name {
+  font-weight: 300;
+  font-style: italic;
+  font-size: small;
+  margin-top: 2px;
+  margin-bottom: 0.3rem;
+}
+
+.pressed {
+  background-color: blueviolet;
+  color: white;
+  border-color: gray;
+}
+
+.unpressed {
+  background-color: white;
+  color: black;
+  border-color: black;
+}
+
+.filter-button {
+  margin: 0.5rem;
+  padding: 0.2rem;
+  border-radius: 5px;
+}
+
+.bird-search {
+  box-sizing: border-box;
+  border-color: blueviolet;
+  border-width: 2px;
+  border-radius: 5px;
+  padding: 0.2rem;
+  margin: 0.5rem;
+  resize: none;
+  overflow-wrap: normal;
+}
+
+.bird-search-button {
+  width: 50%;
+}
+
+.title-container {
+  padding-left: 0.5rem;
+  padding-right: 4rem;
+  color: white;
+  background-color: #8a2be2;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+h1 {
+  margin-block-start: 0;
+  margin-block-end: 0;
+}
+
+.img-size {
+  max-width: 50px;
+  margin-top: 0.5rem;
+  margin-bottom: 0;
+}
+
+.listed-obs {
+  display: flex;
+  flex-direction: column;
+  background-color: #e8e8e8;
+  border-radius: 5px;
+  margin-bottom: 0.5rem;
+  margin-right: 0.15rem;
+  padding: 0.3rem;
+}
+
+.list-com-name {
+  font-weight: 600;
+}
+
+.list-date {
+  font-style: italic;
+  font-weight: 300;
+  font-size: small;
+}
+
+.list-how-many {
+  font-style: italic;
+  font-weight: 300;
+  font-size: small;
+}
+
+#show-hotspot-list {
+  margin-top: 3.4rem;
+}

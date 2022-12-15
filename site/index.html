@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        <title>Philly Birding Explorer</title>
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.2/leaflet.min.css" integrity="sha512-ekzf1ud/EngtmWo8xbIkhtBQsSgkOhTyyD6AA6b/J4/YXTInuNgeKVQDCH/pysNYnrGgsZazWSuWsNtFKzHbmg==" crossorigin="anonymous" referrerpolicy="no-referrer">
+        <link rel="stylesheet" href="css/styles.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300&family=Raleway:ital,wght@0,400;0,600;1,300;1,600&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <div class="content-container" role="main">
+
+            <div class="map-container">
+                <div id="map"></div>
+            </div>
+
+            <div class="popup-container" id="popup-container"></div>
+
+            <div class="input-container">
+                <div class="title-container">
+                    <h1>Philly<br>Birding<br>Explorer</h1>
+                    <img alt="drawing of a ruffed grouse" src="images/logo.png" class="img-size">
+                </div>
+                <div class="filter-container">
+                    <span class="label">Select Data to Show:</span>
+                    <button id="recent-obs" class="filter-button pressed">Show Recent Observations</button>
+                    <button id="notable-obs" class="filter-button unpressed">Show Recent Notable Observations</button>
+                    <button id="hotspots" class="filter-button unpressed">Show Regional Hotspots</button>
+                </div>
+                <div class="filter-container">
+                    <span class="label">Search for a Bird:</span>
+                    <textarea id="bird-search" class="bird-search" placeholder="Enter species name..." rows="1"></textarea>
+                    <button id="bird-search-button" class="bird-search-button filter-button">Search</button>
+                </div>
+                <div class="filter-container">
+                    <span class="label">Recent Observations:</span>
+                    <div class="bird-list-container" id="bird-list-container"></div>
+                </div>
+                <div class="filter-container">
+                    <span class="label">Saved Hotspots:</span>
+                    <div class="bird-list-container" id="hotspot-list-container"></div>
+                </div>
+                <div class="filter-container">
+                    <button id="show-hotspot-list" class="filter-button unpressed">Show Hotspot List</button>
+                    <button id="clear-hotspot-list" class="filter-button unpressed">Clear Hotspot List</button>
+                </div>
+            </div>
+        </div>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.2/leaflet.min.js" integrity="sha512-QPePsP1y4BuymxYZEuQdJ4dsUzZR9MmyrMOLK//zHK4ZoDfMA7zQOJefboRSIm6QKCfzC7djwDOO/+0f72w7Zg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script type="module" src="js/main.js"></script>
+    </body>
+</html>
