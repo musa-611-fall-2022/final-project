@@ -47,6 +47,13 @@ h2 {
 h3 {
   font-family: Barlow, sans-serif;
   font-style: bold;
+  font-size: 120%;
+  color: black;
+}
+
+h4 {
+  font-family: Barlow, sans-serif;
+  font-style: bold;
   color: black;
 }
 

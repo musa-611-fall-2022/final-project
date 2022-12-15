@@ -107,12 +107,12 @@ function initializeSeattleMap() {
             })
             .bindPopup(() => `
             <h3>${newFeature.features['name']}</h3>
-            <h3>Business Type: ${newFeature.features['bizType']}</h3>
-            <h3>Owner: ${newFeature.features['owner']}</h3>
-            <h3>Opening Year: ${newFeature.features['startYear']}</h3>
-            <h3>Ending Year: ${newFeature.features['endYear']}</h3>
-            <h3>Address: ${newFeature.features['address']}</h3>
-            <h3>Memories: ${newFeature.features['history']}</h3>
+            <h4>Business Type: ${newFeature.features['bizType']}</h4>
+            <h4>Owner: ${newFeature.features['owner']}</h4>
+            <h4>Opening Year: ${newFeature.features['startYear']}</h4>
+            <h4>Ending Year: ${newFeature.features['endYear']}</h4>
+            <h4>Address: ${newFeature.features['address']}</h4>
+            <h4>Memories: ${newFeature.features['history']}</h4>
             `).openPopup()
             .addTo(seattleMap);
             console.log(newPoint);
@@ -253,11 +253,11 @@ seattleMap.seattleLayers = L.geoJSON(ftFeatureCollection, {
     },
 })
 .bindPopup(layer => `
-    <h3>${layer.feature.properties['name']}</h3>
-    <h3>Business Type: ${layer.feature.properties['bizType']}</h3>
-    <h3>Opening Year: ${layer.feature.properties['startYear']}</h3>
-    <h3>Ending Year: ${layer.feature.properties['endYear']}</h3>
-    <h3>Address: ${layer.feature.properties['address']}</h3>
+    <h3>${layer.feature.properties['name']}</h4>
+    <h4>Business Type: ${layer.feature.properties['bizType']}</h4>
+    <h4>Opening Year: ${layer.feature.properties['startYear']}</h4>
+    <h4>Ending Year: ${layer.feature.properties['endYear']}</h4>
+    <h4>Address: ${layer.feature.properties['address']}</h4>
 
 `).openPopup()
 
