@@ -1,3 +1,5 @@
+/* eslint-disable no-undef */
+
 import { margin, unitTypes, width, height } from "./main.js";
 
 function loadBar(data, selectedMap){

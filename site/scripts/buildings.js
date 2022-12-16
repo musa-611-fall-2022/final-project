@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import { tooltipEvents } from "./tooltip.js";
 
 //setting B# and Hammer icon positions
@@ -89,7 +90,7 @@ function loadPathsLoop(data, svg, selectedMap){
             .join("path")
                 .attr("d", d => d.path)
                 .attr("stroke", d => {if (selectedMap == "Current Progress") { //see if map is the current progress map
-                    return (d.construction == 0 ? "#000000" : "#ffffff")} else {return "#000000"}} ) //change outline if under construction
+                    return (d.construction == 0 ? "#000000" : "#ffffff");} else {return "#000000"}} ) //change outline if under construction
                 .attr("stroke-width", "3px")
                 .attr("class", `building`)
                 .attr("id", `${build.id}-path`)
@@ -113,7 +114,7 @@ function loadPathsLoop(data, svg, selectedMap){
                 .attr("height", outline.getBBox().height)
                 .attr("fill", d => colorScaleB(d.key))
                 .attr("stroke", d => colorScaleB(d.key))
-                .attr("clip-path", `url(#${build.id}-clip)`);;
+                .attr("clip-path", `url(#${build.id}-clip)`);
 
             //add detail lines to buildings
             buildGroup.selectAll(`${build.id}-detail`)
@@ -159,7 +160,7 @@ function loadPathsLoop(data, svg, selectedMap){
             .join("path")
                 .attr("d", d => d.path)
                 .attr("stroke", d => {if (selectedMap == "Current Progress") {
-                    return (d.construction == 0 ? "#000000" : "#ffffff")} else {return "#000000"}} )
+                    return (d.construction == 0 ? "#000000" : "#ffffff");} else {return "#000000"}} )
                 .attr("stroke-width", "3px")
                 .attr("class", "building")
                 .attr("id", `${build.id}-path`)

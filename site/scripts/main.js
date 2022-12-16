@@ -21,6 +21,7 @@ const colors = ["#065F11", "#159524", "#5CB867", "#B6DEBC", "#DC4230", "#99221A"
 
 //Adding SVG to play with
 
+// eslint-disable-next-line no-undef
 const body = d3.select("body");
 
 let svg = body.append("svg")

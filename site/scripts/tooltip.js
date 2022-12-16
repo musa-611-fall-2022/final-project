@@ -1,3 +1,5 @@
+/* eslint-disable no-undef */
+
 import { margin, tooltipWidth, width } from "./main.js";
 
 //placing the tooltip near the building, on the correct side
