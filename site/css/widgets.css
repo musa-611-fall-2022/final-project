@@ -140,6 +140,65 @@
   background-color: var(--primary-reg);
 }
 
+.geo-filter-kit p {
+  margin: 0;
+  font-size: 0.78rem;
+  font-style: italic;
+  color: var(--primary-reg);
+}
+
+.geo-unapply-button {
+  background-color: var(--hero-reg);
+  color: white;
+  font-size: 0.85rem;
+  width: 5rem;
+  height: 1.2rem;
+  align-self: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0.25rem;
+  border-color: var(--hero-reg);
+}
+
+.geo-unapply-button:hover {
+  background-color: var(--hero-reg);
+}
+
+.selector-kit.geo-filter-kit {
+  gap: 0.35rem;
+}
+
+.geo-select-legend {
+  display: flex;
+  justify-content: flex-start;
+  gap: 1rem;
+}
+
+.geo-select-legend > * {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.geo-select-legend-icon {
+  height: 0.8rem;
+  width: 2rem;
+  border-color: #ddd;
+  border-style: solid;
+  border-width: 0.15rem;
+  border-radius: 0.4rem;
+}
+
+.geo-select-legend-text {
+  font-size: 0.85rem;
+  color: var(--text-gray);
+}
+
+.geo-select-legend-origin .geo-select-legend-icon {
+  border-style: dashed;
+}
+
 /* ------- Double-range slider --------- */
 
 .selector-kit {

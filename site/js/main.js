@@ -348,6 +348,22 @@ export const geoSelection = {
   selectedFeatures: [],
 }
 
+import { clearAllGeoFilters, clearSelected } from "./display-map.js";
+
+// Reset button || Same as the reset button in the popup
+const panelGeoResetButtonEl = document.querySelector('#panel-geo-select-reset');
+panelGeoResetButtonEl.addEventListener('click', ( ) => {
+  clearAllGeoFilters(map);
+  clearSelected(map);
+})
+
+// Unapply button: first click on reset button, then click on confirm button
+const geoUnapplyButtonEl = document.querySelector('#geo-unapply-button');
+geoUnapplyButtonEl.addEventListener('click', ( ) => {
+  panelGeoResetButtonEl.click();
+  onConfirmButtonClick();
+})
+
 /* ==========
 Construct WHERE clause
 =========== */

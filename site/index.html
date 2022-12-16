@@ -86,23 +86,42 @@
             </div>
           </div>
         </div>
-
-        <!-- Filters panel -->
-        <div class="panel" id="filter-panel">
-          <h2 class="panel-title">Filter trips</h2>
-
-          <!-- The other filters are added through [add-html.js] -->
-        </div>
-
-        <!-- Confirm filter button -->
-        <button class="confirm-button" id="confirm-button">Update map & dashboard</button>
-
       </section>
 
       <!-- Right (bottom) column -->
       <section class="column">
-        <!-- <div class="panel"></div>
-        <div class="panel"></div> -->
+        <!-- Filters panel -->
+        <div class="panel" id="filter-panel">
+          <h2 class="panel-title">Filter trips</h2>
+          <div class="selector-kit geo-filter-kit">
+            <div class="selector-kit-top">
+              <div class="selector-kit-title">To / From</div>
+              <div class="selector-top-right">
+                <button class="filter-reset-button" id="panel-geo-select-reset">Reset</button>
+                <button class="geo-unapply-button" id="geo-unapply-button">Unapply</button>
+              </div>
+            </div>
+            <p>
+              Click on the map to add filters of trip orgin and destination.
+            </p>
+            <div class="geo-select-legend">
+              <div class="geo-select-legend-origin">
+                <div class="geo-select-legend-icon"></div>
+                <div class="geo-select-legend-text">Origin</div>
+              </div>
+              <div class="geo-select-legend-destination">
+                <div class="geo-select-legend-icon"></div>
+                <div class="geo-select-legend-text">Destination</div>
+              </div>
+            </div>
+          </div>
+          <!-- The other filters are added through [add-html.js] -->
+        </div>
+
+        <!-- Confirm filter button -->
+        <button class="confirm-button" id="confirm-button">
+          Update map & dashboard
+        </button>
       </section>
     </section>
 

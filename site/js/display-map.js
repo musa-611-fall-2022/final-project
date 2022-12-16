@@ -91,7 +91,7 @@ function initMap() {
       fillColor: null,
       color: 'white',
       weight: 5,
-      dashArray: '4',
+      dashArray: '7',
       fillOpacity: 0,
     },
     interactive: false,
@@ -217,16 +217,8 @@ function makeTooltipContent(feature, key) {
  * @returns {text} HTML content of the tooltip
  */
 function makePopupContent(feature, key) {
-  const GEOID = feature.properties.GEOID10;
-  const population = feature.properties.population;
-  const displayVal = Math.round(feature.properties.mapDisplayVal, 2);
-  const percentSign = key === 'ratio' ? '%' : '';
   return `
-    <div>
-      <div><strong class="italic">geoid:</strong>${GEOID}</div>
-      <div><strong class="italic">population: </strong>${population}</div>
-      <div><strong class="italic">${key}: </strong>${displayVal}${percentSign}</div>
-    </div>
+    ${makeTooltipContent(feature, key)}
     <button class="geo-select-button select-origin-button">Filter origins to selected</button>
     <button class="geo-select-button select-destination-button">Filter destinations to selected</button>
     <button class="geo-select-button reset-geo-select-button">Reset location filter</button>
@@ -269,6 +261,13 @@ function clearAllGeoFilters(map) {
 }
 
 // Make buttons in the popup (geofilters) functional
+// 1. Add currently selected to Origin filter
+// 2. Add currently selected to Destination filter
+// 3. Clear current geo-filters
+/**
+ * 
+ * @param {*} map 
+ */
 function functionalizeGeoFilterButtons(map) {
   // add selected features as Origin filter
   const originSelectButtonEl = document.querySelector('.select-origin-button');
@@ -437,4 +436,6 @@ export {
   fetchMapBaseData,
   makeDisplayData,
   updateMap,
+  clearAllGeoFilters,
+  clearSelected,
 };
