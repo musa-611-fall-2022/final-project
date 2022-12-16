@@ -19,8 +19,12 @@ function loadBar(data, selectedMap){
 
     let domainEnd = function () {
         if (selectedMap == "Current Progress") {
+            console.log(data.totalUnits);
             return data.totalUnits;
         } else if (selectedMap == "Approved Plans") { 
+            console.log(data);
+            
+
             return data.totalUnits + data.remaining_affordable + data.remaining_market;
         };
     }
@@ -38,7 +42,7 @@ function loadBar(data, selectedMap){
     bar.selectAll("rect")
             .data(stackedSeries).join("rect")
         .attr("y", height - barHeight)
-        .attr("x", d => xScale(d[0][0])+margin.left)
+        .attr("x", d => xScale(d[0][0]) + margin.left)
         .attr('height', barHeight)
         .attr("width", d => ((xScale(d[0][1]) - xScale(d[0][0]))))
         .attr("fill", d => colorScale(d.key))
@@ -52,7 +56,6 @@ function loadBar(data, selectedMap){
 
     const stackedSeriesLabels = stackGenLabels(getTotalsAM(data));
 
-    console.log(selectedMap);
     //Create the LABELS
     bar.selectAll("text")
     .data(stackedSeriesLabels).join("text")

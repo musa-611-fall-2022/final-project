@@ -54,11 +54,11 @@ function loadPathsLoop(data, svg, selectedMap){
     
     gradient.append("stop")
     .attr("offset", "25%")
-    .attr("stop-color", "#B6DEBC")
+    .attr("stop-color", "#B6DEBC");
 
     gradient.append("stop")
     .attr("offset", "75%")
-    .attr("stop-color", "#EDABA3")
+    .attr("stop-color", "#EDABA3");
 
     //here's the group
     let pathGroup = svg.append("g")
@@ -153,8 +153,8 @@ function loadPathsLoop(data, svg, selectedMap){
             let buildGroup = pathGroup.append("g")
             .attr("class", "building-group");
 
-            //set the path
-            let buildPaths = buildGroup.selectAll("building")
+            //set the outline path
+            buildGroup.selectAll("building")
                 .data(building)
             .join("path")
                 .attr("d", d => d.path)
@@ -165,6 +165,7 @@ function loadPathsLoop(data, svg, selectedMap){
                 .attr("id", `${build.id}-path`)
                 .call(tooltipEvents);
             
+            //id the outline to inform widths and heights
             const outline = document.querySelector(`#${build.id}-path`);
 
             //separate what color to use for fill
@@ -176,7 +177,7 @@ function loadPathsLoop(data, svg, selectedMap){
             }
 
             //add the standard fill to the building. Different function than the above bc no stacked series.
-            let fill = buildGroup.append("rect")
+            buildGroup.append("rect")
                 .attr("x", outline.getBBox().x)
                 .attr("y", outline.getBBox().y)
                 .attr("width", outline.getBBox().width)

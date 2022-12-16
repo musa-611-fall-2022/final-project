@@ -2,10 +2,8 @@ import { readCSV } from "./inventory.js";
 import { loadBar } from "./bar.js";
 import { loadPathsLoop } from "./buildings.js";
 
-const container = document.getElementById("container");
-
-const margin = {top: 0, right: 30, bottom: 50, left: 30};
-const tooltipMargin = {top: 12, right: 12, bottom: 12, left: 12};
+const margin = { top: 0, right: 30, bottom: 50, left: 30 };
+const tooltipMargin = { top: 12, right: 12, bottom: 12, left: 12 };
 
 const width = 720 - margin.left - margin.right;
 const height = 540 - margin.top - margin.bottom;
@@ -32,31 +30,31 @@ let svg = body.append("svg")
         .attr("class", "background")
       .append("g");
 
-// filter based on 
+// filter based on
 function whichData(filterTerm) {
     if (selectedMap == "Current Progress") {
         let d = filterTerm.filter(element => element.progress == 1);
         return d;
-    } else if (selectedMap == "Approved Plans") { 
-        let d = filterTerm.filter(element => element);  
+    } else if (selectedMap == "Approved Plans") {
+        let d = filterTerm.filter(element => element);
         return d;
-    };
+    }
 }
 
 //getting totals for the bottom bar text labels, which summarize in a broader category than individual units used for each building
 
 function getUnitTotals(data) {
-    let totals = {totalUnits: 0};
+    let totals = { totalUnits: 0 };
     for (let u of unitTypes) {
-        Object.defineProperty(totals, u, {  
+        Object.defineProperty(totals, u, {
             value: 0,
-            writable: true});
+            writable: true });
     }
 
     for (let r of data) {
         for (let u of unitTypes) {
             if (parseInt(r[u]) == 0 || (parseInt(r[u]))) {
-                let y = parseInt(r[u]);        
+                let y = parseInt(r[u]);
                 totals[u] += y;
                 totals.totalUnits += y;
             }
@@ -64,28 +62,23 @@ function getUnitTotals(data) {
     }
 
     if (selectedMap == "Approved Plans"){
-    Object.defineProperty(totals, "remaining_affordable", {    
+    Object.defineProperty(totals, "remaining_affordable", {
         value: 2250 - totals.low_income - totals.middle_income - totals.moderate_income,
-        writable: true});
-    Object.defineProperty(totals, "remaining_market", {    
+        writable: true });
+    Object.defineProperty(totals, "remaining_market", {
         value: 4180 - totals.market - totals.condo,
-        writable: true});
+        writable: true });
     }
 
     return totals;
 }
 
-
 function onInventoryLoadSuccess(data) {
     //Function to load the current progress or the future approved plans of the development
     console.log(data);
     loadPathsLoop(whichData(data), svg, selectedMap);
-    controlAppr.addEventListener("click", changeFilter);
-    controlCurrent.addEventListener("click", changeFilter);
     loadBar(getUnitTotals(whichData(data)), selectedMap);
 }
-
-readCSV(onInventoryLoadSuccess);
 
 function changeFilter(evt) {
     if (evt.target.id === "approved") {
@@ -103,6 +96,17 @@ function changeFilter(evt) {
     }
     readCSV(onInventoryLoadSuccess);
 }
+
+controlAppr.addEventListener("click", changeFilter);
+controlCurrent.addEventListener("click", changeFilter);
+
+readCSV(onInventoryLoadSuccess);
+
+export {
+    tooltipWidth,
+    margin,
+    width,
+};
 
 window.width = width;
 window.height = height;
