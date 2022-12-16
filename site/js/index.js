@@ -3,10 +3,10 @@
 import eastasiancluster from '../data/EastAsianCluster.geojson.js';
 import southasiancluster from '../data/SouthAsianCluster.geojson.js';
 import southeastasiancluster from '../data/SoutheastAsianCluster.geojson.js';
-import aapicluster from '../data/AAPICluster.geojson.js'
-//import { loadResearchData } from './researchdata.js'   
+import aapicluster from '../data/AAPICluster.geojson.js' ;
+//import { loadResearchData } from './researchdata.js'
 
-let map = L.map('map', {scrollWheelZoom: false}).setView([0, 0], 0);
+let map = L.map('map', { scrollWheelZoom: false } ).setView([0, 0], 0);
 let layerGroup = L.layerGroup().addTo(map);
 let lifeCollection = { features: [] };
 
@@ -57,64 +57,6 @@ function syncMapToSlide(slide) {
   } else if (slide.era) {
     map.flyToBounds(layer.getBounds());
   }
-}
-
-function syncMapToCurrentSlide() {
-  const slide = slides[currentSlideIndex];
-  syncMapToSlide(slide);
-  loadResearchData(currentSlideIndex);
-}
-
-function initSlides() {
-  const converter = new showdown.Converter({ smartIndentationFix: true });
-
-  slidesDiv.innerHTML = '';
-  for (const [index, slide] of slides.entries()) {
-    const slideDiv = htmlToElement(`
-      <div class="slide" id="slide-${index}">
-        <h2>${slide.title}</h2>
-        ${converter.makeHtml(slide.content)}
-      </div>
-    `);
-    slidesDiv.appendChild(slideDiv);
-  }
-}
-
-function loadLifeData() {
-  fetch('data/journey.json')
-    .then(resp => resp.json())
-    .then(data => {
-      lifeCollection = data;
-      syncMapToCurrentSlide();
-    });
-}
-
-function calcCurrentSlideIndex() {
-  const scrollPos = window.scrollY;
-  const windowHeight = window.innerHeight;
-  const slideDivs = document.getElementsByClassName('slide');
-
-  let i;
-  for (i = 0; i < slideDivs.length; i++) {
-    const slidePos = slideDivs[i].offsetTop;
-    if (slidePos - scrollPos - windowHeight > 0) {
-      break;
-    }
-  }
-
-  if (i === 0) {
-    currentSlideIndex = 0;
-  } else if (currentSlideIndex != i - 1) {
-    currentSlideIndex = i - 1;
-    syncMapToCurrentSlide();
-  }
-}
-
-const clusterTypeColors = {
-  "high frequency high clustering":"#00FFDB",
-  "high frequency low clustering":"#00A3FF",
-  "low frequency low clustering":"#5B00FF",
-  "No_Relationship": "#FF00A4",
 }
 
 function loadResearchData(currentSlideIndex) {
@@ -190,6 +132,66 @@ function loadResearchData(currentSlideIndex) {
     }).bindTooltip(l => `GEOID: ${l.feature.properties['GEOID']} | South Asian | ${l.feature.properties['Clustering_cat']} `).addTo(layerGroup);
   }
 }
+
+function syncMapToCurrentSlide() {
+  const slide = slides[currentSlideIndex];
+  syncMapToSlide(slide);
+  loadResearchData(currentSlideIndex);
+}
+
+function initSlides() {
+  const converter = new showdown.Converter({ smartIndentationFix: true });
+
+  slidesDiv.innerHTML = '';
+  for (const [index, slide] of slides.entries()) {
+    const slideDiv = htmlToElement(`
+      <div class="slide" id="slide-${index}">
+        <h2>${slide.title}</h2>
+        ${converter.makeHtml(slide.content)}
+      </div>
+    `);
+    slidesDiv.appendChild(slideDiv);
+  }
+}
+
+function loadLifeData() {
+  fetch('data/journey.json')
+    .then(resp => resp.json())
+    .then(data => {
+      lifeCollection = data;
+      syncMapToCurrentSlide();
+    });
+}
+
+function calcCurrentSlideIndex() {
+  const scrollPos = window.scrollY;
+  const windowHeight = window.innerHeight;
+  const slideDivs = document.getElementsByClassName('slide');
+
+  let i;
+  for (i = 0; i < slideDivs.length; i++) {
+    const slidePos = slideDivs[i].offsetTop;
+    if (slidePos - scrollPos - windowHeight > 0) {
+      break;
+    }
+  }
+
+  if (i === 0) {
+    currentSlideIndex = 0;
+  } else if (currentSlideIndex != i - 1) {
+    currentSlideIndex = i - 1;
+    syncMapToCurrentSlide();
+  }
+}
+
+const clusterTypeColors = {
+  "high frequency high clustering":"#00FFDB",
+  "high frequency low clustering":"#00A3FF",
+  "low frequency low clustering":"#5B00FF",
+  "No_Relationship": "#FF00A4",
+}
+
+
 
 document.addEventListener('scroll', calcCurrentSlideIndex);
 
