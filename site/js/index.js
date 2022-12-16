@@ -64,7 +64,7 @@ const clusterTypeColors = {
   "high frequency low clustering":"#00A3FF",
   "low frequency low clustering":"#5B00FF",
   "No_Relationship": "#FF00A4",
-}
+};
 
 function loadResearchData(currentSlideIndex) {
   if(currentSlideIndex == 7) {
@@ -76,13 +76,13 @@ function loadResearchData(currentSlideIndex) {
         return {
           color: '#000000',
           weight: 1,
-          fillColor: color, 
+          fillColor: color,
           fillOpacity: 1,
         };
-      }
+      },
     }).bindTooltip(l => `GEOID: ${l.feature.properties['GEOID']} | Asian all | ${l.feature.properties['Clustering_cat']}`).addTo(layerGroup);
   } else if(currentSlideIndex == 8) {
-    layerGroup.clearLayers()
+    layerGroup.clearLayers();
     L.geoJSON(aapicluster, {
       style: (feature) => {
         const ct = feature.properties['Clustering_cat']; //<-- cluster type
@@ -91,12 +91,12 @@ function loadResearchData(currentSlideIndex) {
           color: '#000000',
           weight: 1,
           fillColor: color,
-          fillOpacity: 1, 
+          fillOpacity: 1,
         };
-      }
-    }).bindTooltip(l => `GEOID: ${l.feature.properties['GEOID']} | Asian all | ${l.feature.properties['Clustering_cat']}`).addTo(layerGroup);  
+      },
+    }).bindTooltip(l => `GEOID: ${l.feature.properties['GEOID']} | Asian all | ${l.feature.properties['Clustering_cat']}`).addTo(layerGroup);
   } else if(currentSlideIndex == 9) {
-    layerGroup.clearLayers()
+    layerGroup.clearLayers();
     L.geoJSON(eastasiancluster, {
       style: (feature) => {
         const ct = feature.properties['Clustering_cat']; //<-- cluster type
@@ -105,12 +105,12 @@ function loadResearchData(currentSlideIndex) {
           color: '#000000',
           weight: 1,
           fillColor: color,
-          fillOpacity: 1, 
+          fillOpacity: 1,
         };
-      }
+      },
     }).bindTooltip(l => `GEOID: ${l.feature.properties['GEOID']} | East Asian | ${l.feature.properties['Clustering_cat']}`).addTo(layerGroup);
   } else if(currentSlideIndex == 10) {
-    layerGroup.clearLayers()
+    layerGroup.clearLayers(),
     L.geoJSON(southeastasiancluster, {
       style: (feature) => {
         const ct = feature.properties['Clustering_cat']; //<-- cluster type
@@ -121,10 +121,10 @@ function loadResearchData(currentSlideIndex) {
           fillColor: color,
           fillOpacity: 1,
         };
-      }
+      },
     }).bindTooltip(l => `GEOID: ${l.feature.properties['GEOID']} | SouthEast Asian | ${l.feature.properties['Clustering_cat']}`).addTo(layerGroup);
   } else if(currentSlideIndex == 11) {
-    layerGroup.clearLayers()
+    layerGroup.clearLayers();
     L.geoJSON(southasiancluster, {
       style: (feature) => {
         const ct = feature.properties['Clustering_cat']; //<-- cluster type
@@ -133,15 +133,15 @@ function loadResearchData(currentSlideIndex) {
           color: '#000000',
           weight: 1,
           fillColor: color,
-          fillOpacity: 1, 
+          fillOpacity: 1,
         };
-      }
+      },
     }).bindTooltip(l => `GEOID: ${l.feature.properties['GEOID']} | South Asian | ${l.feature.properties['Clustering_cat']} `).addTo(layerGroup);
   }
 }
 
 function syncMapToCurrentSlide() {
-  const slide = slides[currentSlideIndex];
+  const slide = slide[currentSlideIndex];
   syncMapToSlide(slide);
   loadResearchData(currentSlideIndex);
 }
