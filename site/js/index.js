@@ -59,9 +59,16 @@ function syncMapToSlide(slide) {
   }
 }
 
+const clusterTypeColors = {
+  "high frequency high clustering":"#00FFDB",
+  "high frequency low clustering":"#00A3FF",
+  "low frequency low clustering":"#5B00FF",
+  "No_Relationship": "#FF00A4",
+}
+
 function loadResearchData(currentSlideIndex) {
   if(currentSlideIndex == 7) {
-    layerGroup.clearLayers()
+    layerGroup.clearLayers();
     L.geoJSON(aapicluster, {
       style: (feature) => {
         const ct = feature.properties['Clustering_cat']; //<-- cluster type
@@ -182,13 +189,6 @@ function calcCurrentSlideIndex() {
     currentSlideIndex = i - 1;
     syncMapToCurrentSlide();
   }
-}
-
-const clusterTypeColors = {
-  "high frequency high clustering":"#00FFDB",
-  "high frequency low clustering":"#00A3FF",
-  "low frequency low clustering":"#5B00FF",
-  "No_Relationship": "#FF00A4",
 }
 
 
