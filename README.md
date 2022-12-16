@@ -1,4 +1,4 @@
-# final-project
+# MUSA 611 Final Project: Atlantic Yards/Pacific Park Plans Interactive
 
 ## Team Members:
 
