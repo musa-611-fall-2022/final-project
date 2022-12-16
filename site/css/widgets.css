@@ -130,7 +130,7 @@
 
 /* ------- Geoselector --------- */
 
-.geo-selector-button-selected{
+.geo-selector-button-selected {
   background-color: var(--primary-reg);
   color: white;
   border-color: var(--primary-reg);
@@ -292,4 +292,40 @@ input[type="range"]:active::-webkit-slider-thumb {
 .confirm-button:hover {
   background-color: var(--highlight-reg);
   border-color: var(--highlight-reg);
+}
+
+/* ------ Popup ----------- */
+
+.leaflet-popup-content-wrapper {
+  pointer-events: none;
+  border-radius: 0.3rem;
+  z-index: 999;
+}
+
+.leaflet-popup-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  pointer-events: none;
+  margin: 0.5rem;
+}
+
+.leaflet-popup-content * {
+  pointer-events: auto;
+}
+
+.leaflet-popup-content .geo-select-button {
+  width: 100%;
+}
+
+.reset-geo-select-button {
+  background-color: white;
+  color: var(--hero-reg);
+  border-color: var(--hero-reg);
+}
+
+.leaflet-container a.leaflet-popup-close-button {
+  font-size: 2.5rem;
+  color: var(--hero-reg);
+  margin-left: -0.5rem;
 }

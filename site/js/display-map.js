@@ -2,9 +2,6 @@
 This script contains functions dealing with the map
 =============================================================== */
 
-// Arr that store map style quintile breaks
-let quintiles = [];
-
 /**
  * 
  * @param {Number} val representing a value to be color coded 
@@ -74,21 +71,46 @@ function initMap() {
       dashArray: '3',
       fillOpacity: 0.5,
     },
+  }).addTo(map);
+
+  // Initialize selected layer
+  map.selectedLayer = L.geoJSON(null, {
+    style: {
+      fillColor: null,
+      color: "white",
+      weight: 3,
+      dashArray: '3',
+      fillOpacity: 0,
+    },
+    interactive: false,
+  }).addTo(map);
+
+  // Initialize origin filter layer
+  map.originFilterLayer = L.geoJSON(null, {
+    style: {
+      fillColor: null,
+      color: 'white',
+      weight: 5,
+      dashArray: '4',
+      fillOpacity: 0,
+    },
+    interactive: false,
+  }).addTo(map);
+
+  // Initialize destination filter layer
+  map.destinationFilterLayer = L.geoJSON(null, {
+    style: {
+      fillColor: null,
+      color: 'white',
+      weight: 5,
+      dashArray: null,
+      fillOpacity: 0,
+    },
+    interactive: false,
   })
   .addTo(map);
 
   return map;
-}
-
-// Goes through map base data and remove those with pop < 100
-function filterBlockGroups(mapData) {
-  const filteredData = mapData;
-  for(let i = 0; i < mapData.features.length; i++) {
-    if(mapData.features[i].properties.population < 100) {
-      mapData.features.splice(i, 1);
-    }
-  }
-  return filteredData;
 }
 
 // Feteches map data from local directory
@@ -113,8 +135,6 @@ async function addInitialBlockGroups(map, mapBaseData) {
   }
 }
 
-import { map } from './main.js';
-
 // Merges data gotten from API to map base data
 /**
  * 
@@ -124,7 +144,6 @@ import { map } from './main.js';
  * @returns 
  */
 function mergeAttributeToMapData(mapBaseData, updateData, key) {
-  
   // Initiate new FeatureCollection
   const mapBaseDataUpdated = {
     type: 'FeatureCollection',
@@ -183,64 +202,172 @@ function computeQuintiles(dataArr, ntiles) {
  * @param {String} key display type: count, sum, or mean
  * @returns {text} HTML content of the tooltip
  */
-function makeTooltipContent(feature, key) {
+function makePopupContent(feature, key) {
   const GEOID = feature.properties.GEOID10;
   const population = feature.properties.population;
   const displayVal = Math.round(feature.properties.mapDisplayVal, 2);
   const percentSign = key === 'ratio' ? '%' : '';
-  return `<strong class="italic">geoid:</strong>${GEOID}<br />
-          <strong class="italic">population: </strong>${population}<br />
-          <strong class="italic">${key}: </strong>${displayVal}${percentSign}`;
+  return `
+    <div>
+      <div><strong class="italic">geoid:</strong>${GEOID}</div>
+      <div><strong class="italic">population: </strong>${population}</div>
+      <div><strong class="italic">${key}: </strong>${displayVal}${percentSign}</div>
+    </div>
+    <button class="geo-select-button select-origin-button">Filter origins to selected</button>
+    <button class="geo-select-button select-destination-button">Filter destinations to selected</button>
+    <button class="geo-select-button reset-geo-select-button">Reset location filter</button>
+`;
 }
 
 // Import object storing geoselection info
-import { geoSelection } from './main.js';
+import { geoSelection, filterParams } from './main.js';
 
 // Selects block group geo [Three Functions]
 
+// Adds an array of features to a map layer
+/**
+ * 
+ * @param {Layer} mapLayer 
+ * @param {Arr} featuresArr 
+ */
+function addFeaturesArrToLayer(mapLayer, featuresArr) {
+  featuresArr.forEach(feature => {
+    mapLayer.addData(feature);
+  })
+}
+
+// Clears currently selected layer and clear `geoSelection`
+function clearSelected(map) {
+  map.selectedLayer.clearLayers();
+  geoSelection.selected = [];
+  geoSelection.selectedFeatures = [];
+}
+
+// Clear geo filters (on the map and in `filterParams`)
+function clearAllGeoFilters(map) {
+  map.originFilterLayer.clearLayers();
+  map.destinationFilterLayer.clearLayers();
+
+  filterParams.categoricalVars.destination_geoid.isApplied = false;
+  filterParams.categoricalVars.destination_geoid.selectedCategories = [];
+  filterParams.categoricalVars.origin_geoid.isApplied = false;
+  filterParams.categoricalVars.origin_geoid.selectedCategories = [];
+}
+
+// Make buttons in the popup (geofilters) functional
+function functionalizeGeoFilterButtons(map) {
+  // add selected features as Origin filter
+  const originSelectButtonEl = document.querySelector('.select-origin-button');
+  originSelectButtonEl.addEventListener('click', function applyOriginFilter() {
+    map.originFilterLayer.clearLayers();
+    addFeaturesArrToLayer(map.originFilterLayer, geoSelection.selectedFeatures);
+
+    // Add selection to `filterParams
+    filterParams.categoricalVars.origin_geoid.isApplied = true;
+    filterParams.categoricalVars.origin_geoid.selectedCategories = geoSelection.selected.map(item => item.substring(5));
+    console.log(filterParams);
+
+    // Close popup
+    map.closePopup();
+
+    // Clear current selection
+    clearSelected(map);
+  });
+
+  // add selected features as Destination filter
+  const destinationSelectButtonEl = document.querySelector('.select-destination-button');
+  destinationSelectButtonEl.addEventListener('click', function applyDestinationFilter() {
+    map.destinationFilterLayer.clearLayers();
+    addFeaturesArrToLayer(map.destinationFilterLayer, geoSelection.selectedFeatures);
+
+    // Add selected to `filterParams`
+    filterParams.categoricalVars.destination_geoid.isApplied = true;
+    filterParams.categoricalVars.destination_geoid.selectedCategories = geoSelection.selected.map(item => item.substring(5));
+    console.log(filterParams);
+
+    // Close popup
+    map.closePopup();
+
+    // Clear current selection
+    clearSelected(map);
+  });
+
+  // clear all current filters
+  const resetGeoSelectButtonEl = document.querySelector('.reset-geo-select-button');
+  resetGeoSelectButtonEl.addEventListener('click', ( ) => {
+    clearAllGeoFilters(map);
+    // Clear current selection
+    clearSelected(map);
+  })
+}
+
 // layer unselected -> selected
-function onLayerSelected(layer) {
+/**
+ * 
+ * @param {*} map 
+ * @param {*} layer 
+ */
+function onLayerSelected(map, layer) {
   // Store the GEOID
   geoSelection.selected.push(layer.feature.properties.GEOID10);
-  // Set layer style
-  layer.setStyle({
-    weight: 5,
-    dashArray: null,
-  });
+  geoSelection.selectedFeatures.push(layer.feature);
+
+  // Add layer to selected layer
+  map.selectedLayer.addData(layer.feature);
+
+  // Open the popup
+  layer.openPopup();
+
+  // Add event listeners to the popup
+  functionalizeGeoFilterButtons(map);
 }
 // layer selected -> unselected
-function onLayerUnselected(layer) {
+/**
+ * 
+ * @param {*} map 
+ * @param {*} layer 
+ */
+function onLayerUnselected(map, layer) {
   // Un-store the GEOID
-  geoSelection.selected.splice(geoSelection.selected.indexOf(layer.feature.properties.GEOID10));
-  // Revert style
-  layer.setStyle({
-    weight: 1,
-    dashArray: '3',
-  });
+  const indexToSplice = geoSelection.selected.indexOf(layer.feature.properties.GEOID10);
+  geoSelection.selected.splice(indexToSplice);
+  geoSelection.selectedFeatures.splice(indexToSplice);
+
+  // Remove from selected layer by first clearing the layer then re-add
+  map.selectedLayer.clearLayers();
+  addFeaturesArrToLayer(map.selectedLayer, geoSelection.selectedFeatures);
+  map.closePopup();
+
 }
-// determine whether to use `onLayerSelected` or `onLayerUnselected`, and use that
-function onLayerClicked(layer) {
+
+// ---- Bug with leaflet: each click generates two clicks
+// ---- Bug fix: see if this click is at least some time away from the last click
+let currentTime = 0;
+
+// prevents from clicking twice
+// determines whether to use `onLayerSelected` or `onLayerUnselected`, and uses that
+function addGeoSelector(map, layer) {
+  // Check if this click is following right after the last click
+  if(Number(Date.now()) - currentTime < 10) return;
+
+  currentTime = Number(Date.now());
+
   if(!geoSelection.selected.includes(layer.feature.properties.GEOID10)) {
     // If currently not selected, select
-    onLayerSelected(layer);
+    onLayerSelected(map, layer);
   } else {
     // Otherwise, unselect
-    onLayerUnselected(layer);
+    onLayerUnselected(map, layer);
   }
   console.log(geoSelection);
 }
 
-// Creates a data that joins information fetched from API to base map
-// Then, add event listeners to
-// But first, create a date-time object
-// ---- Bug with leaflet: each click generates two clicks
-// ---- Bug fix: see if this click is at least some time away from the last click
-
-let currentTime = 0;
+// Creates a data after API fetch, used to update map
 /**
  * 
  * @param {Object.FeatureCollection} mapBaseData geo object base
  * @param {Array} mapUpdateData object queried from db; array; each element is an object with two properties 1. GEOID, 2. count/avg/sum
+ * @returns {Object} mapData: shape to be displayed on map; key: count/avg/sum; quintiles: Arr
  */
 function makeDisplayData(mapBaseData, mapUpdateData) {
   // First update mapUpdateData, add `42101` in front of the GEOID
@@ -256,25 +383,36 @@ function makeDisplayData(mapBaseData, mapUpdateData) {
   const mapBaseDataUpdated = mergeAttributeToMapData(mapBaseData, updateData, key);
 
   // Get quintiles of display data || Update the global arr
-  quintiles = computeQuintiles(
-    mapBaseDataUpdated.features.map(item => item.properties.mapDisplayVal), 5);
-  console.log(quintiles);
+  const quintiles = computeQuintiles(mapBaseDataUpdated.features.map(item => item.properties.mapDisplayVal), 5);
 
+  return {
+    mapData: mapBaseDataUpdated,
+    key: key,
+    quintiles: quintiles,
+  }
+}
+
+// Updates map after API fetch
+/**
+ * 
+ * @param {Leaflet Map} map 
+ * @param {Object.FeatureCollection} mapData 
+ * @param {Arr} quintiles 
+ * @param {String} key 
+ */
+function updateMap(map, mapData, quintiles, key) {
+  // Update the block group layer
   map.blockGroupLayer.clearLayers();
-  map.blockGroupLayer.addData(mapBaseDataUpdated);
+  map.blockGroupLayer.addData(mapData);
+  // Set overall styling
   map.blockGroupLayer.setStyle(feature => quintileStyle(feature, quintiles));
-  map.blockGroupLayer.bindTooltip(layer => {
-    const displayContent = makeTooltipContent(layer.feature, key);
-    return displayContent;
-  })
-  .addEventListener('click', (e) => {
-    // Check if in selection state || if so:
-    if(geoSelection.inSelection === false) return;
-    // Check if this click is following right after the last click
-    if(Number(Date.now()) - currentTime < 10) return;
-    currentTime = Number(Date.now());
 
-    onLayerClicked(e.layer);
+  // Add tooltip
+  map.blockGroupLayer.bindPopup(layer => makePopupContent(layer.feature, key))
+
+  // Add geo selector event listener
+  map.blockGroupLayer.addEventListener('click', (e) => {
+    addGeoSelector(map, e.layer);
   })
 }
 
@@ -283,4 +421,5 @@ export {
   addInitialBlockGroups,
   fetchMapBaseData,
   makeDisplayData,
+  updateMap,
 };

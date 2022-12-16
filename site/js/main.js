@@ -342,47 +342,11 @@ Geoselector
 =========== */
 
 // Store a global object: geoselection
+// Manages currently selected block groups (before pushing them into `filterParams`)
 export const geoSelection = {
-  inSelection: false,
   selected: [],
+  selectedFeatures: [],
 }
-
-
-const geoSelectorButtonEl = document.querySelector('#geo-selector-button');
-geoSelectorButtonEl.addEventListener('click', ( ) => {
-  const filterVar = toggleDisplayParams.groupBy === 'origin_geoid' ? 'destination_geoid' : 'origin_geoid';
-  // Switch `inSelection`
-  geoSelection.inSelection = geoSelection.inSelection === false ? true : false;
-  if(geoSelection.inSelection === true) {
-    // Change to selection state
-    geoSelectorButtonEl.classList.add('geo-selector-button-selected');
-    geoSelectorButtonEl.innerHTML = 'Click on map and confirm here';
-
-    // Remove all existing selections
-    geoSelection.selected = [];
-    map.blockGroupLayer.setStyle({
-      weight: 1,
-      dashArray: '3',
-    });
-  } else {
-    // Confirm selection
-    geoSelectorButtonEl.innerHTML = 'Confirmed';
-    // Update `filterParams`
-    // filterParams.categoricalVars[filterVar]
-    if(geoSelection.selected.length > 0) {
-      filterParams.categoricalVars[filterVar].isApplied = true;
-      filterParams.categoricalVars[filterVar].selectedCategories = geoSelection.selected.map(item => item.substring(5));
-      console.log(filterParams);
-    } else {
-      filterParams.categoricalVars[filterVar].isApplied = false;
-    }
-
-    setTimeout(( ) => {
-      geoSelectorButtonEl.innerHTML = 'Edit selection';
-      geoSelectorButtonEl.classList.remove('geo-selector-button-selected');
-    }, 700);
-  }
-})
 
 /* ==========
 Construct WHERE clause
@@ -501,7 +465,7 @@ function buildQueryForMap(toggleDisplayParams, filterParams) {
 Call API on confirm button click
 ================ */
 
-import { makeDisplayData } from "./display-map.js";
+import { makeDisplayData, updateMap } from "./display-map.js";
 
 async function onConfirmButtonClick() {
   const mapQuery = buildQueryForMap(toggleDisplayParams, filterParams);
@@ -512,7 +476,13 @@ async function onConfirmButtonClick() {
     const mapResp = await fetch(`https://mobiladelphia.herokuapp.com/test-query/${mapQuery}`);
     const mapData = await mapResp.json();
     const mapUpdateData = mapData.results;
-    makeDisplayData(mapBaseData, mapUpdateData);
+    const displayInfo = makeDisplayData(mapBaseData, mapUpdateData);
+    updateMap(
+      map, 
+      displayInfo.mapData, 
+      displayInfo.quintiles, 
+      displayInfo.key,
+    );
   } catch(err) {
     console.log(err);  
   }
