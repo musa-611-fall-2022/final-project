@@ -196,6 +196,20 @@ function computeQuintiles(dataArr, ntiles) {
 }
 
 // Makes tooltip content (hover)
+function makeTooltipContent(feature, key) {
+  const GEOID = feature.properties.GEOID10;
+  const population = feature.properties.population;
+  const displayVal = Math.round(feature.properties.mapDisplayVal, 2);
+  const percentSign = key === 'ratio' ? '%' : '';
+  return `
+    <div>
+      <div><strong class="italic">geoid:</strong>${GEOID}</div>
+      <div><strong class="italic">population: </strong>${population}</div>
+      <div><strong class="italic">${key}: </strong>${displayVal}${percentSign}</div>
+    </div>
+`;
+}
+// Make popup content
 /**
  * 
  * @param {Object.Feature} feature the input feature object
@@ -407,7 +421,8 @@ function updateMap(map, mapData, quintiles, key) {
   // Set overall styling
   map.blockGroupLayer.setStyle(feature => quintileStyle(feature, quintiles));
 
-  // Add tooltip
+  // Add tooltip and popup
+  map.blockGroupLayer.bindTooltip(layer => makeTooltipContent(layer.feature, key))
   map.blockGroupLayer.bindPopup(layer => makePopupContent(layer.feature, key))
 
   // Add geo selector event listener

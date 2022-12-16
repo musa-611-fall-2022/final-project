@@ -462,6 +462,10 @@ function buildQueryForMap(toggleDisplayParams, filterParams) {
 }
 
 /* ==========
+Construct query to make dashboard
+=========== */
+
+/* ==========
 Call API on confirm button click
 ================ */
 
