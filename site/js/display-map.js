@@ -260,6 +260,8 @@ function clearAllGeoFilters(map) {
   filterParams.categoricalVars.origin_geoid.selectedCategories = [];
 }
 
+import { onConfirmButtonClick } from './main.js';
+
 // Make buttons in the popup (geofilters) functional
 // 1. Add currently selected to Origin filter
 // 2. Add currently selected to Destination filter
@@ -285,6 +287,9 @@ function functionalizeGeoFilterButtons(map) {
 
     // Clear current selection
     clearSelected(map);
+
+    // Directly apply filter
+    onConfirmButtonClick();
   });
 
   // add selected features as Destination filter
@@ -303,6 +308,9 @@ function functionalizeGeoFilterButtons(map) {
 
     // Clear current selection
     clearSelected(map);
+
+    // Directly apply filter
+    onConfirmButtonClick()
   });
 
   // clear all current filters
@@ -311,6 +319,12 @@ function functionalizeGeoFilterButtons(map) {
     clearAllGeoFilters(map);
     // Clear current selection
     clearSelected(map);
+
+    // Apply filter
+    onConfirmButtonClick();
+
+    // Close popup
+    map.closePopup();
   })
 }
 

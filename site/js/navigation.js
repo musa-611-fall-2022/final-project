@@ -72,3 +72,58 @@ const allCbGroupsEls = document.querySelectorAll(".cb-group-exclusive");
 for(const cbGroupEl of allCbGroupsEls) {
   makeOptionsExclusive(cbGroupEl);
 }
+
+/* ======= Panel tabs || Switching between panels on small screens =========== */
+
+const displayPanelsElsArr = [
+  document.querySelector('#toggle-display-panel'),
+  document.querySelector('#map-legend-panel'),
+];
+const filterPanelsElsArr = [
+  document.querySelector('#filter-panel'),
+  document.querySelector('#confirm-button'),
+];
+const dashboardPanelsElsArr = [
+  document.querySelector('#dashboard-panel'),
+]
+const allPanelsElsArr = displayPanelsElsArr.concat(filterPanelsElsArr).concat(dashboardPanelsElsArr);
+
+const panelTabsEls = document.querySelectorAll('.panel-tab');
+
+for(const tabEl of panelTabsEls) {
+  let targetElsArr = [];
+
+  tabEl.addEventListener('click', ( ) => {
+    // Identify the panels each tab corresponds to
+    targetElsArr = tabEl.id === 'panel-tab-display' ? displayPanelsElsArr :
+                   tabEl.id === 'panel-tab-filters' ? filterPanelsElsArr :
+                                                      dashboardPanelsElsArr;
+    if(tabEl.classList.contains('panel-tab-selected')) {
+      // If already selected: unselect
+      targetElsArr.forEach(el => { el.style.display = 'none' });
+
+      // Update state
+      tabEl.classList.remove('panel-tab-selected');
+    } else {
+      // If currently not selected:
+      // First hide all
+      allPanelsElsArr.forEach(el => { el.style.display = 'none' });
+      panelTabsEls.forEach(el => { tabEl.classList.remove('panel-tab-selected'); })
+
+      // Show this
+      targetElsArr.forEach(el => { el.style.display = 'flex' });
+
+      // Update state
+      tabEl.classList.add('panel-tab-selected');
+    }
+  })
+}
+
+// Listen for windows resize
+visualViewport.addEventListener('resize', ( ) => {
+  // If greater than 1200 width
+  if(document.documentElement.clientWidth >= 1200) {
+    allPanelsElsArr.forEach(el => { el.style.display = 'flex' });
+    
+  }
+})

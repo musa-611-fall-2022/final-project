@@ -26,6 +26,11 @@ CSS for complex modules, see other files
   --shadow-layer-1: 0.05rem 0.1rem 0.1rem 0.02rem rgba(0 0 0 / 20%);
   --shadow-layer-2: 0.15rem 0.2rem 0.2rem 0.02rem rgba(0 0 0 / 20%);
   --slider-height: 1.2rem;
+  --toggle-display-panel-height: 7.5rem;
+  --map-legend-panel-height: 5rem;
+  --column-total-height: 41rem;
+  --filter-panel-height: 38.5rem;
+  --dashboard-panel-height: 26.5rem;
 }
 
 @media only screen and (max-width: 500px) {
@@ -176,7 +181,10 @@ and when screen is smaller than 20rem, go for 100% */
   gap: 0.5rem;
   flex-direction: column;
   pointer-events: auto;
-  overflow: auto;
+}
+
+.filter-panel {
+  height: var(--filter-panel-height);
 }
 
 /* ------- Main panels --------- */
@@ -199,4 +207,64 @@ and when screen is smaller than 20rem, go for 100% */
   font-size: 1.1rem;
   line-height: 0.9;
   margin: 0;
+}
+
+.toggle-display-panel {
+  z-index: 3;
+  height: var(--toggle-display-panel-height);
+}
+
+.map-legend-panel {
+  height: var(--map-legend-panel-height);
+}
+
+.dashboard-panel {
+  height: var(--dashboard-panel-height);
+}
+
+/* ------ Panel tab ------- */
+
+.panel-select-tabs {
+  flex-direction: row;
+  padding: 0.25rem 0;
+  gap: 0;
+  justify-content: space-between;
+  border-width: 0;
+  display: none;
+}
+
+.panel-tab {
+  flex-grow: 1;
+  background-color: white;
+  border-width: 0;
+  border-radius: 0.15rem;
+  border-right: 1px solid var(--light-gray);
+}
+
+.panel-tab-selected {
+  background-color: var(--hero-reg);
+  color: white;
+  border-color: var(--hero-reg);
+}
+
+.panel-tab-selected:hover {
+  background-color: var(--hero-reg);
+}
+
+@media only screen and (max-width: 1200px) {
+  .panel-select-tabs {
+    display: flex;
+  }
+
+  .dashboard-panel {
+    display: none;
+  }
+
+  .filter-panel {
+    display: none;
+  }
+
+  .confirm-button {
+    display: none;
+  }
 }

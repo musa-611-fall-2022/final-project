@@ -513,3 +513,7 @@ confirmButtonEl.addEventListener('click', onConfirmButtonClick);
 
 // Click on page load
 onConfirmButtonClick();
+
+export {
+  onConfirmButtonClick,
+};

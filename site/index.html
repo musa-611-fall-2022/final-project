@@ -49,8 +49,15 @@
       <!-- Left (top) column -->
       <section class="column">
 
+        <!-- Panel tab panel: select which panel to show on small screens -->
+        <div class="panel panel-select-tabs">
+          <button class="panel-tab panel-tab-selected" id="panel-tab-display">Map display</button>
+          <button class="panel-tab" id="panel-tab-filters">Trip filters</button>
+          <button class="panel-tab" id="panel-tab-dashboard">Dashboard</button>
+        </div>
+
         <!-- Toggle display panel -->
-        <div class="panel toggle-display-panel">
+        <div class="panel toggle-display-panel" id="toggle-display-panel">
           <!-- Select by departure or arrival-->
           <div class="selector-kit">
             <div class="selector-kit-title strong">Trips attached to geographies by</div>
@@ -86,12 +93,18 @@
             </div>
           </div>
         </div>
+
+        <!-- Legend panel -->
+        <div class="panel map-legend-panel" id="map-legend-panel"></div>
+
+        <!-- Dashboard panel -->
+        <div class="panel dashboard-panel" id="dashboard-panel"></div>
       </section>
 
       <!-- Right (bottom) column -->
       <section class="column">
         <!-- Filters panel -->
-        <div class="panel" id="filter-panel">
+        <div class="panel filter-panel" id="filter-panel">
           <h2 class="panel-title">Filter trips</h2>
           <div class="selector-kit geo-filter-kit">
             <div class="selector-kit-top">
