@@ -77,7 +77,9 @@ const slides = [
   },
   {
     title: 'Introduction to Asian Americans',
-    content: `Asian Americans, as an aggregate group, seem to be well-educated, and scholars have attempted to frame their success through biological, cultural, and structural lenses. While Asian Americans have educational success, scholars have also cautioned that a singular narrative of Asian American success invisibilizes the educational outcomes of different ethnic groups in Asian America and puts Asian Americans at odds with other minority groups as the model minority.
+    content: `
+    
+    Asian Americans, as an aggregate group, seem to be well-educated, and scholars have attempted to frame their success through biological, cultural, and structural lenses. While Asian Americans have educational success, scholars have also cautioned that a singular narrative of Asian American success invisibilizes the educational outcomes of different ethnic groups in Asian America and puts Asian Americans at odds with other minority groups as the model minority.
     
     <h4> Legend </h4>
     <div class = "legend">
