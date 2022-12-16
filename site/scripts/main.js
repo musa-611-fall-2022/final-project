@@ -106,6 +106,7 @@ export {
     tooltipWidth,
     margin,
     width,
+    height,
 };
 
 window.width = width;

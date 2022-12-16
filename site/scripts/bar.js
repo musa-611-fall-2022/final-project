@@ -1,8 +1,10 @@
+import { margin, unitTypes, width, height } from "./main.js";
+
 function loadBar(data, selectedMap){
 
     const barHeight = 30;
     const dataA = [data]; //need an array to be able to iterate via d3.stack()
-    
+
     d3.select("#barGroup").remove();
 
     //add the g for the proportion bar group to the base svg
@@ -15,25 +17,20 @@ function loadBar(data, selectedMap){
         .keys(unitTypes);
 
     let stackedSeries = stackGen(dataA);
-    
 
     let domainEnd = function () {
         if (selectedMap == "Current Progress") {
-            console.log(data.totalUnits);
             return data.totalUnits;
-        } else if (selectedMap == "Approved Plans") { 
-            console.log(data);
-            
-
+        } else if (selectedMap == "Approved Plans") {
             return data.totalUnits + data.remaining_affordable + data.remaining_market;
-        };
-    }
+        }
+    };
 
     //scale bar proportion to the width of the tooltip
     let xScale = d3.scaleLinear()
         .domain([0, domainEnd()])
         .range([0, width]);
-    
+
     //colors to match the unit affordability designations
     let colorScale = d3.scaleOrdinal()
         .domain(["low_income", "moderate_income", "middle_income", "remaining_affordable", "market", "condo", "remaining_market"])
@@ -54,6 +51,14 @@ function loadBar(data, selectedMap){
     const stackGenLabels = d3.stack()
     .keys(macroTypes);
 
+    function getTotalsAM(data) {
+        let totalsAM = { affordable: data.low_income + data.middle_income + data.moderate_income + data.remaining_affordable,
+                        market: data.market + data.condo + data.remaining_market,
+        };
+        let totalsAMArray = [totalsAM];
+        return totalsAMArray;
+    }
+
     const stackedSeriesLabels = stackGenLabels(getTotalsAM(data));
 
     //Create the LABELS
@@ -63,9 +68,9 @@ function loadBar(data, selectedMap){
     .attr("x", d => xScale(d[0][0]) + margin.left)
     .text(d => `${d[0][1] - d[0][0]} ${d.key == "affordable" ? "Affordable" : "Market-Rate" } Units 
         ${(selectedMap == "Approved Plans" ? (
-            d.key == "affordable" ? ", " + data.remaining_affordable + " Unconfirmed" : 
-            d.key == "market" ? ", " + data.remaining_market + " Unconfirmed" : 
-            "") : 
+            d.key == "affordable" ? ", " + data.remaining_affordable + " Unconfirmed" :
+            d.key == "market" ? ", " + data.remaining_market + " Unconfirmed" :
+            "") :
         "" )}`)
     .attr("class", "bar-label");
 
@@ -80,19 +85,10 @@ function loadBar(data, selectedMap){
 
 }
 
-function getTotalsAM(data) {
-    let totalsAM = {affordable: data.low_income + data.middle_income + data.moderate_income + data.remaining_affordable,
-                    market: data.market + data.condo + data.remaining_market
-    };
-
-    let totalsAMArray = [totalsAM];
-
-    return totalsAMArray;
-}
 
 
 export {
     loadBar,
-}
+};
 
 

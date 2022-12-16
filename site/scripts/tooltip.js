@@ -21,7 +21,7 @@ function setContents(selection) {
   d3.selectAll(".tooltip-header") //Address or B#
       .data(selection)
       .join("h3")
-        .text(d => d.address) 
+        .text(d => d.address)
     .selectAll(".year") //Year of Completion
         .data(selection)
         .join("div")
