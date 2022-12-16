@@ -465,6 +465,12 @@ function buildQueryForMapRatio(toggleDisplayParams, filterParams) {
 }
 
 // Makes query to make the map (main)
+/**
+ * 
+ * @param {Object} toggleDisplayParams stored globally
+ * @param {Object} filterParams stored globally
+ * @returns 
+ */
 function buildQueryForMap(toggleDisplayParams, filterParams) {
   if(toggleDisplayParams.displayType === 'count') {
     return buildQueryForMapCount(toggleDisplayParams, filterParams);
@@ -481,15 +487,146 @@ function buildQueryForMap(toggleDisplayParams, filterParams) {
 Construct query to make dashboard
 =========== */
 
+function buildQueryForDashboard(filterParams) {
+  const whereClause = makeWhereClause(filterParams);
+  return `
+    WITH filtered AS (
+      SELECT primary_mode, 
+          trip_purpose AS purpose, 
+          trip_start_time, 
+          trip_end_time, 
+          trip_taker_individual_income AS income, 
+          trip_taker_available_vehicles AS car_ownership,
+          trip_duration_minutes AS duration,
+          trip_distance_miles AS distance,
+          (origin_geoid = home_geoid)::int AS start_from_home,
+          (origin_geoid = work_geoid)::int AS start_from_work,
+          (destination_geoid = home_geoid)::int AS end_at_home,
+          (destination_geoid = work_geoid)::int AS end_at_work
+      FROM trips
+      ${whereClause}
+    )(
+      SELECT (WIDTH_BUCKET(duration, 0, 60, 12) - 1) * 5 AS cat,
+          COUNT(*) AS n_trips,
+          AVG(distance) AS mean_distance,
+          AVG(duration) AS mean_duration,
+          'duration' AS var
+      FROM filtered
+      GROUP BY cat
+    ) UNION ALL (
+      SELECT (WIDTH_BUCKET(distance, 0, 10, 20) - 1) * 0.5 AS cat,
+          COUNT(*) AS n_trips,
+          AVG(distance) AS mean_distance,
+          AVG(duration) AS mean_duration,
+          'distance' AS var
+      FROM filtered
+      GROUP BY cat
+    ) UNION ALL (
+      SELECT (WIDTH_BUCKET(income, 10000, 210000, 20) - 1) * 10000 + 10000 AS cat,
+          COUNT(*) AS n_trips,
+          AVG(distance) AS mean_distance,
+          AVG(duration) AS mean_duration,
+          'income' AS var
+      FROM filtered
+      GROUP BY cat
+    ) UNION ALL (
+      SELECT car_ownership AS cat,
+          COUNT(*) AS n_trips,
+          AVG(distance) AS mean_distance,
+          AVG(duration) AS mean_duration,
+          'car_ownership' AS var
+      FROM filtered
+      GROUP BY cat
+    ) UNION ALL (
+      SELECT primary_mode AS cat,
+          COUNT(*) AS n_trips,
+          AVG(distance) AS mean_distance,
+          AVG(duration) AS mean_duration,
+          'primary_mode' AS var
+      FROM filtered
+      GROUP BY cat
+    ) UNION ALL (
+      SELECT purpose AS cat,
+          COUNT(*) AS n_trips,
+          AVG(distance) AS mean_distance,
+          AVG(duration) AS mean_duration,
+          'purpose' AS var
+      FROM filtered
+      GROUP BY cat
+    ) UNION ALL (
+      SELECT trip_start_time AS cat,
+          COUNT(*) AS n_trips,
+          AVG(distance) AS mean_distance,
+          AVG(duration) AS mean_duration,
+          'trip_start_time' AS var
+      FROM filtered
+      GROUP BY cat
+    ) UNION ALL (
+      SELECT trip_end_time AS cat,
+          COUNT(*) AS n_trips,
+          AVG(distance) AS mean_distance,
+          AVG(duration) AS mean_duration,
+          'trip_end_time' AS var
+      FROM filtered
+      GROUP BY cat
+    ) UNION ALL (
+      SELECT start_from_home AS cat,
+          COUNT(*) AS n_trips,
+          AVG(distance) AS mean_distance,
+          AVG(duration) AS mean_duration,
+          'start_from_home' AS var
+      FROM filtered
+      GROUP BY cat
+    ) UNION ALL (
+      SELECT start_from_work AS cat,
+          COUNT(*) AS n_trips,
+          AVG(distance) AS mean_distance,
+          AVG(duration) AS mean_duration,
+          'start_from_work' AS var
+      FROM filtered
+      GROUP BY cat
+    ) UNION ALL (
+      SELECT end_at_home AS cat,
+          COUNT(*) AS n_trips,
+          AVG(distance) AS mean_distance,
+          AVG(duration) AS mean_duration,
+          'end_at_home' AS var
+      FROM filtered
+      GROUP BY cat
+    ) UNION ALL (
+      SELECT end_at_work AS cat,
+          COUNT(*) AS n_trips,
+          AVG(distance) AS mean_distance,
+          AVG(duration) AS mean_duration,
+          'end_at_work' AS var
+      FROM filtered
+      GROUP BY cat
+    )
+    ORDER BY var
+  `
+}
+
 /* ==========
 Call API on confirm button click
 ================ */
 
+const dashboardPanel = document.querySelector('#dashboard-panel')
+
+function startDashboarPanelWaitSign() {
+  dashboardPanel.innerHTML = 'Please wait while making query';
+}
+
+function removeDashboardPanelWeightSign () {
+  dashboardPanel.innerHTML = 'Success';
+}
+
 import { makeDisplayData, updateMap } from "./display-map.js";
+import { makeDashboard } from "./display-dashboard.js";
 
 async function onConfirmButtonClick() {
   const mapQuery = buildQueryForMap(toggleDisplayParams, filterParams);
-  console.log(mapQuery);
+
+  const dashboardQuery = buildQueryForDashboard(filterParams);
 
   // query map
   try {
@@ -505,6 +642,20 @@ async function onConfirmButtonClick() {
     );
   } catch(err) {
     console.log(err);  
+  }
+
+  // query for dashboard
+  startDashboarPanelWaitSign();
+  try {
+    const dashboarResp = await fetch(`https://mobiladelphia.herokuapp.com/test-query/${dashboardQuery}`);
+    const dashboardJson = await dashboarResp.json();
+    const dashboardData = dashboardJson.results;
+    removeDashboardPanelWeightSign();
+    makeDashboard(dashboardData);
+  } catch(err) {
+    console.log(err);
+  } finally {
+    //
   }
 }
 
