@@ -2,13 +2,13 @@
 
 ## Team Members:
 
-Ben Keel
-
+**Ben Keel, MUSA '23 Student
+**
 Design, Development
 [https://github.com/bennkeel](https://github.com/bennkeel)
 
-Norman Oder, NYC Journalist 
-
+**Norman Oder, NYC Journalist 
+**
 Research, Editing
 [Twitter](https://twitter.com/AYReport)
 [His Blog](https://atlanticyardsreport.blogspot.com/)
