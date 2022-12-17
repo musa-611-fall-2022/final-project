@@ -27,9 +27,6 @@ app
   .get('/', (req, res) => {
     res.sendFile('index.html');
   })
-  .get('/dashboardraw', (req, res) => {
-    res.sendFile('data/dashboard-data-raw.csv');
-  })
   .get('/test-query/:query', async(req, res) => {
     try {
       const client = await pool.connect();
