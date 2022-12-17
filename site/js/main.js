@@ -497,7 +497,8 @@ function buildQueryForDashboard(filterParams) {
           trip_taker_individual_income AS income, 
           trip_taker_available_vehicles AS car_ownership,
           trip_duration_minutes AS duration,
-          trip_distance_miles AS distance
+          trip_distance_miles AS distance,
+          trip_taker_age AS age
       FROM trips 
       ${whereClause} 
     )(
