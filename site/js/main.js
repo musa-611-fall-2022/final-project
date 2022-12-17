@@ -636,14 +636,14 @@ async function onConfirmButtonClick() {
     console.log(err);  
   }
 
-  // query for dashboard
-  startDashboarPanelWaitSign();
   try {
     const query = `https://mobiladelphia.herokuapp.com/test-query/${dashboardQuery}`;
     if(query === currentDashboardQuery) {
       return;
     } else {
       currentDashboardQuery = query;
+      // query for dashboard
+      startDashboarPanelWaitSign();
     }
     let dashboardData;
     if(query.includes('WHERE true')) {

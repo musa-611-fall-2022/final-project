@@ -125,7 +125,12 @@
             <select class="dashboard-selector">
               <option value="distance">Distance</option>
               <option value="duration">Duration</option>
+              <option value="age">Trip taker age</option>
               <option value="income">Trip taker income</option>
+              <option value="primary_mode">Mode</option>
+              <option value="trip_start_time">Departure hour</option>
+              <option value="purpose">Purpose</option>
+              <option value="car_ownership">Car ownership</option>
             </select>
             <!-- Distance dashboard -->
             <div class="dashboard-var-container dashboard-var-container-visible" id="dashboard-distance">
@@ -160,6 +165,36 @@
               <div class="graph income-graph" id="income-graph"></div>
             </div>
 
+            <!-- Age -->
+            <div class="dashboard-var-container" id="dashboard-age">
+  
+              <div class="dashboard-mean-figures">
+                <div class="dashboard-mean-title">Mean:</div>
+                <div class="dashboard-mean-figure" id="age-mean">111</div>
+                <div class="dashboard-mean-unit" id="age-unit">miles</div>
+              </div>
+              <div class="graph age-graph" id="age-graph"></div>
+            </div>
+            
+            <!-- Mode -->
+            <div class="dashboard-var-container" id="dashboard-primary_mode">
+              <div class="graph primary_mode-graph" id="primary_mode-graph"></div>
+            </div>
+
+            <!-- Trip Start Time -->
+            <div class="dashboard-var-container" id="dashboard-trip_start_time">
+              <div class="graph trip_start_time-graph" id="trip_start_time-graph"></div>
+            </div>
+
+            <!-- Purpose -->
+            <div class="dashboard-var-container" id="dashboard-purpose">
+              <div class="graph purpose-graph" id="purpose-graph"></div>
+            </div>
+
+            <!-- Car ownership -->
+            <div class="dashboard-var-container" id="dashboard-car_ownership">
+              <div class="graph car_ownership-graph" id="car_ownership-graph"></div>
+            </div>
           </div>
         </div>
       </section>

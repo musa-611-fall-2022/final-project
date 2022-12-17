@@ -38,11 +38,82 @@ const dashboardVarsDict = {
     displayName: 'Age',
     type: 'continuous',
     numCat: 10,
-    smallerValues: true,
-    binWidth: 15000,
-    floor: 10000,
-    unit: 'dollars',
+    smallerValues: false,
+    binWidth: 10,
+    floor: 0,
+    unit: 'years',
+  },
+  primary_mode: {
+    displayName: 'mode',
+    type: 'categorical',
+    factors: {
+      1: "Own car",
+      2: "Carpool",
+      3: "Walking",
+      4: "Biking",
+      5: "TNC",
+      6: "Transit",
+      7: "Other"
+    }
+  },
+  trip_start_time: {
+    displayName: 'departure hour',
+    type: 'categorical',
+    factors: {
+      '0': '0-1',
+      '1': '1-2',
+      '2': '2-3',
+      '3': '3-4',
+      '4': '4-5',
+      '5': '5-6',
+      '6': '6-7',
+      '7': '7-8',
+      '8': '8-9',
+      '9': '9-10',
+      '10': '10-11',
+      '11': '11-12',
+      '12': '12-13',
+      '13': '13-14',
+      '14': '14-15',
+      '15': '15-16',
+      '16': '16-17',
+      '17': '17-18',
+      '18': '18-19',
+      '19': '19-20',
+      '20': '20-21',
+      '21': '21-22',
+      '22': '22-23',
+      '23': '23-24',
+      '24': '24-0',
+    },
+  },
+  purpose: {
+    displayName: 'purpose',
+    type: 'categorical',
+    factors: {
+      "1": "Social",
+      "2": "School",
+      "3": "Work",
+      "4": "Eat",
+      "5": "Shop",
+      "6": "Maintenance",
+      "7": "Recreation",
+      "8": "Home",
+      "9": "Other"
+    },
+  },
+  car_ownership: {
+    displayName: 'purpose',
+    type: 'categorical',
+    factors: {
+      "0": "0 car",
+      "1": "1 car",
+      "2": "2 cars",
+      "3": "3+ cars",
+      "9": "Unknown",
+    },
   }
+
 }
 
 // Finds corresponding category in given array and pushes it to newly initiated array
@@ -77,10 +148,8 @@ function findMatchAndPush(newArr, refArr, catName) {
  * @param {String} displayName name of variable, e.g., distance, duration
  * @returns {Array}
  */
-function prepDataForVega(filtered, varName, displayName) {
+function prepareContinuousVarForVega(filtered, varName, displayName) {
   const thisBinWidth = dashboardVarsDict[varName].binWidth;
-  // First filter, then do some other modification
-
   
   // Initiate an empty array
   const result = [];
@@ -89,7 +158,6 @@ function prepDataForVega(filtered, varName, displayName) {
   if(dashboardVarsDict[varName].smallerValues) {
     findMatchAndPush(result, filtered, '0');
   }
-
   for(let i = 1; i <= dashboardVarsDict[varName].numCat + 1; i++) {
     findMatchAndPush(result, filtered, i);
   }
@@ -101,7 +169,7 @@ function prepDataForVega(filtered, varName, displayName) {
     if(Number(item.cat) > dashboardVarsDict[varName].numCat) {
       item.cat = `${thisBinFloor}+`;
     } else if(Number(item.cat) === 0) {
-      item.cat = `${thisBinFloor - thisBinWidth}-`;
+      item.cat = `${thisBinFloor}-`;
     } else {
       item.cat = `${thisBinFloor}—${thisBinFloor + thisBinWidth}`;
     }
@@ -112,9 +180,32 @@ function prepDataForVega(filtered, varName, displayName) {
   return(result)
 }
 
+function prepareCategoricalVarForVega(filtered, varName, displayName) {
+  // Initiate a result array
+  const result = [];
+  const keys = Object.keys(dashboardVarsDict[varName].factors);
+  for(const key of keys) {
+    findMatchAndPush(result, filtered, key)
+  }
+  result.map(item => {
+    item.cat = dashboardVarsDict[varName].factors[item.cat];
+    item[displayName] = item.cat;
+    item.Trips = item.n_trips;
+  })
+  return result;
+}
+
 // Makes object to feed into Vega Lite
+/**
+ * 
+ * @param {Array} preparedData 
+ * @param {String} displayName 
+ * @param {String} xAxisUnit unit (miles, etc., to be displayed by the x axis)
+ * @returns 
+ */
 function makeVegaObj(preparedData, displayName, xAxisUnit) {
   return {
+    "width": 220,
     "data": {
       "values": preparedData,
     },
@@ -128,7 +219,7 @@ function makeVegaObj(preparedData, displayName, xAxisUnit) {
         "type": "ordinal", 
         "axis": { 
           "title": `${xAxisUnit}`,
-          "labelColor": "#bbbbbb",
+          "labelColor": "#353795",
           "titleColor": "#353795",
           "grid": false,
         },
@@ -179,6 +270,12 @@ function makeVegaObj(preparedData, displayName, xAxisUnit) {
 }
 
 // Estimate mean of binned data
+/**
+ * 
+ * @param {Array} filtered 
+ * @param {String} varName `distance` `duration` etc
+ * @returns Number
+ */
 function estimateMean(filtered, varName) {
   const thisBinWidth = dashboardVarsDict[varName].binWidth;
   const thisFloor = dashboardVarsDict[varName].floor;
@@ -194,8 +291,9 @@ function estimateMean(filtered, varName) {
 }
 
 function makeDashboard(dataArr) {
-  const varList = ['distance', 'duration', 'income'];
-  for(const varName of varList) {
+  // First make plots for the continuous variables
+  const continuousVarsList = ['distance', 'duration', 'income', 'age'];
+  for(const varName of continuousVarsList) {
     // Filter out the data used to make this graph
     const filtered = dataArr.filter(item => {
       return item.var === varName;
@@ -210,12 +308,11 @@ function makeDashboard(dataArr) {
     document.querySelector(`#${varName}-mean`).innerHTML = estimatedMean;
     document.querySelector(`#${varName}-unit`).innerHTML = dashboardVarsDict[varName].unit;
 
-    const preparedData = prepDataForVega(
+    const preparedData = prepareContinuousVarForVega(
       filtered, 
       varName, 
       dashboardVarsDict[varName].displayName
     );
-    console.log(preparedData);
     vegaEmbed(
       `#${varName}-graph`, 
       makeVegaObj(
@@ -224,6 +321,31 @@ function makeDashboard(dataArr) {
         dashboardVarsDict[varName].unit
       )
     );
+  }
+
+  // Then make plots for the categorical variables
+  const categoricalVarsList = ['primary_mode', 'trip_start_time', 'purpose', 'car_ownership'];
+  for(const varName of categoricalVarsList) {
+    const filtered = dataArr.filter(item =>  item.var === varName).map(item => {
+      return {
+        cat: item.cat,
+        n_trips: Number(item.n_trips),
+      }
+    })
+    const preparedData = prepareCategoricalVarForVega(
+      filtered,
+      varName,
+      dashboardVarsDict[varName].displayName,
+    )
+    console.log(preparedData);
+    vegaEmbed(
+      `#${varName}-graph`,
+      makeVegaObj(
+        preparedData,
+        dashboardVarsDict[varName].displayName,
+        '',
+      )
+    )
   }
 }
 
