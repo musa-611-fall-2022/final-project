@@ -71,7 +71,7 @@ function loadResearchData(currentSlideIndex) {
     layerGroup.clearLayers();
     L.geoJSON(aapicluster, {
       style: (feature) => {
-        const ct = feature.properties['Clustering_cat']; //<-- cluster type
+        const ct = feature.properties['Cluster type']; //<-- cluster type
         const color = clusterTypeColors[ct];
         return {
           color: '#000000',
@@ -85,7 +85,7 @@ function loadResearchData(currentSlideIndex) {
     layerGroup.clearLayers();
     L.geoJSON(aapicluster, {
       style: (feature) => {
-        const ct = feature.properties['Clustering_cat']; //<-- cluster type
+        const ct = feature.properties['Cluster type']; //<-- cluster type
         const color = clusterTypeColors[ct];
         return {
           color: '#000000',
@@ -99,7 +99,7 @@ function loadResearchData(currentSlideIndex) {
     layerGroup.clearLayers();
     L.geoJSON(eastasiancluster, {
       style: (feature) => {
-        const ct = feature.properties['Clustering_cat']; //<-- cluster type
+        const ct = feature.properties['Cluster type']; //<-- cluster type
         const color = clusterTypeColors[ct];
         return {
           color: '#000000',
@@ -113,13 +113,12 @@ function loadResearchData(currentSlideIndex) {
     layerGroup.clearLayers(),
     L.geoJSON(southeastasiancluster, {
       style: (feature) => {
-        const ct = feature.properties['Clustering_cat']; //<-- cluster type
+        const ct = feature.properties['Cluster type']; //<-- cluster type
         const color = clusterTypeColors[ct];
         return {
           color: '#000000',
           weight: 1,
-          fillColor: color,
-          fillOpacity: 1,
+          fillColor: color, 
         };
       },
     }).bindTooltip(l => `GEOID: ${l.feature.properties['GEOID']} | SouthEast Asian | ${l.feature.properties['Clustering_cat']}`).addTo(layerGroup);
@@ -127,7 +126,7 @@ function loadResearchData(currentSlideIndex) {
     layerGroup.clearLayers();
     L.geoJSON(southasiancluster, {
       style: (feature) => {
-        const ct = feature.properties['Clustering_cat']; //<-- cluster type
+        const ct = feature.properties['Cluster type']; //<-- cluster type
         const color = clusterTypeColors[ct];
         return {
           color: '#000000',
