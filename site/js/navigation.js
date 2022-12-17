@@ -140,3 +140,18 @@ visualViewport.addEventListener('resize', ( ) => {
     })
   }
 })
+
+/* ======= Dashboard dropdown =========== */
+
+const allDashboardContainersEls = document.querySelectorAll('.dashboard-var-container');
+
+const selectEl = document.querySelector('.dashboard-selector');
+selectEl.addEventListener('change', ( ) => {
+  const thisId = selectEl.value;
+  // Hide all graphs
+  allDashboardContainersEls.forEach(el => {
+    el.style.display = 'none';
+  });
+  // Show this graph
+  document.querySelector(`#dashboard-${thisId}`).style.display = 'flex';
+})

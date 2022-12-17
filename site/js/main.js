@@ -210,7 +210,7 @@ import { addDisplayVarsEl } from "./add-html.js";
 const toggleDisplayVarsGroupEl = document.querySelector('#toggle-display-vars');
 
 // Add 'count'
-addDisplayVarsEl(toggleDisplayVarsGroupEl, 'count', null, null, `<span class="italic strong">Per capita trip count</span>`);
+addDisplayVarsEl(toggleDisplayVarsGroupEl, 'count', null, null, `<span class="italic strong">Trip count</span>`);
 
 // 'agg' type
 for(const displayVar of mapDisplayVars.meanType) {
@@ -219,7 +219,7 @@ for(const displayVar of mapDisplayVars.meanType) {
     'agg', 
     displayVar.varName, 
     null, 
-    `<span class="italic strong">Per capita</span> ${displayVar.displayName}`,
+    `<span class="italic strong">Total</span> ${displayVar.displayName}`,
   );
 }
 
@@ -322,7 +322,7 @@ For categorical filters, add factor selectors, Resetters, and Recorders
 Note: Includes home/work related
 ================================================ */
 
-import { addFilterCbGroupEl, addHomeWorkCbGroupEl } from "./add-html.js";
+import { addFilterCbGroupEl } from "./add-html.js";
 import { addCategoricalFilterRecorder, addResetToFactorSelectors } from "./filter.js";
 
 for(const varName of ['primary_mode', 'trip_purpose', 'trip_taker_available_vehicles', 'home_work']) {
@@ -501,19 +501,25 @@ function buildQueryForDashboard(filterParams) {
       FROM trips 
       ${whereClause} 
     )(
-      SELECT (WIDTH_BUCKET(duration, 0, 60, 6) - 1) * 10 AS cat,
+      SELECT WIDTH_BUCKET(duration, 0, 60, 6) AS cat,
           COUNT(*) AS n_trips,
           'duration' AS var
       FROM filtered
       GROUP BY cat
     ) UNION ALL (
-      SELECT (WIDTH_BUCKET(distance, 0, 10, 10) - 1) AS cat,
+      SELECT WIDTH_BUCKET(age, 0, 100, 10) AS cat,
+          COUNT(*) AS n_trips,
+          'age' AS var
+      FROM filtered
+      GROUP BY cat
+    ) UNION ALL (
+      SELECT WIDTH_BUCKET(distance, 0, 10, 10) AS cat,
           COUNT(*) AS n_trips,
           'distance' AS var
       FROM filtered
       GROUP BY cat
     ) UNION ALL (
-      SELECT (WIDTH_BUCKET(income, 10000, 160000, 10) - 1) * 15000 + 15000 AS cat,
+      SELECT WIDTH_BUCKET(income, 10000, 160000, 10) AS cat,
           COUNT(*) AS n_trips,
           'income' AS var
       FROM filtered
@@ -551,14 +557,18 @@ function buildQueryForDashboard(filterParams) {
 Call API on confirm button click
 ================ */
 
-const dashboardPanel = document.querySelector('#dashboard-panel')
+const dashboardMessageEl = document.querySelector('#dashboard-waiting-message');
+const dashboardContainerEl = document.querySelector('#dashboard-container');
 
 function startDashboarPanelWaitSign() {
-  dashboardPanel.innerHTML = 'Please wait while making query';
+  dashboardMessageEl.style.display = 'flex';
+  dashboardContainerEl.style.display = 'none';
+  dashboardMessageEl.innerHTML = 'Please wait while making dashboard...';
 }
 
 function removeDashboardPanelWeightSign () {
-  dashboardPanel.innerHTML = 'Success';
+  dashboardMessageEl.style.display = 'none';
+  dashboardContainerEl.style.display = 'flex';
 }
 
 // Formats numbers before placing them in the legend
@@ -569,14 +579,14 @@ function removeDashboardPanelWeightSign () {
  */
 function formatLegendNumber(number, key) {
   if(number >= 1000000) {
-    return `${Math.round(number / 1000000)}M`;
+    return `${Math.round(number * 10 / 1000000) / 10}M`;
   } else if(number >= 1000) {
-    return `${Math.round(number / 1000)}K`;
+    return `${Math.round(number * 10 / 1000) / 10}K`;
   }
   if(key === 'ratio') {
-    return `${Math.round(number)}%`;
+    return `${Math.round(number * 10) / 10}%`;
   } else {
-    return `${Math.round(number)}`;
+    return `${Math.round(number * 10) / 10}`;
   }
 
 }
@@ -595,6 +605,9 @@ function updateLegendText(quintileArr, key) {
 
 import { makeDisplayData, updateMap } from "./display-map.js";
 import { makeDashboard } from "./display-dashboard.js";
+
+// Existing query for dashboard: if new query for dashboard is the same, don't do query
+let currentDashboardQuery = ``;
 
 async function onConfirmButtonClick() {
   const mapQuery = buildQueryForMap(toggleDisplayParams, filterParams);
@@ -626,10 +639,15 @@ async function onConfirmButtonClick() {
   startDashboarPanelWaitSign();
   try {
     const query = `https://mobiladelphia.herokuapp.com/test-query/${dashboardQuery}`;
+    if(query === currentDashboardQuery) {
+      return;
+    } else {
+      currentDashboardQuery = query;
+    }
     let dashboardData;
     if(query.includes('WHERE true')) {
       // Use locally stored
-      const path = '../data/dashboard-data-raw';
+      const path = 'https://raw.githubusercontent.com/Leejere/js-final-project/main/site/data/dashboard-data-raw.csv';
       const dashboardResp = await fetch(path);
       const dashboardText = await dashboardResp.text();
       dashboardData = Papa.parse(dashboardText, { header: true, skipEmptyLines: true }).data;
@@ -640,6 +658,8 @@ async function onConfirmButtonClick() {
     }
     removeDashboardPanelWeightSign();
     makeDashboard(dashboardData);
+
+    console.log(dashboardData);
   } catch(err) {
     console.log(err);
   }

@@ -30,7 +30,7 @@ CSS for complex modules, see other files
   --map-legend-panel-height: 3rem;
   --column-total-height: 41rem;
   --filter-panel-height: 38.5rem;
-  --dashboard-panel-height: 28.5rem;
+  --dashboard-panel-height: auto;
 }
 
 @media only screen and (max-width: 500px) {
@@ -239,6 +239,7 @@ and when screen is smaller than 20rem, go for 100% */
   border-width: 0;
   border-radius: 0.15rem;
   border-right: 1px solid var(--light-gray);
+  color: var(--hero-reg);
 }
 
 .panel-tab-selected {

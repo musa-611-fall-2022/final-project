@@ -23,6 +23,7 @@
     <!-- Custom style sheets -->
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/widgets.css">
+    <link rel="stylesheet" href="css/dashboard.css">
   </head>
 
   <body>
@@ -86,7 +87,7 @@
           <!-- Dropdown select variable to display -->
           <div class="dropdown">
             <div class="selector-kit-title strong">Showing...</div>
-            <button class="dropdown-button display-var-button" id="display-var-button"><span class="italic strong">Per capita trip count</span></button>
+            <button class="dropdown-button display-var-button" id="display-var-button"><span class="italic strong">Trip count</span></button>
             <div class="dropdown-content">
               <div class="cb-group cb-group-exclusive cb-group-wrap" id="toggle-display-vars">
               </div>
@@ -104,18 +105,63 @@
             <div class="legend-block" style="--this-color: #353797"></div>
           </div>
           <div class="legend-texts">
-            <div class="legend-text" id="legend-text-1">0</div>
-            <div class="legend-text" id="legend-text-2">0</div>
-            <div class="legend-text" id="legend-text-3">0</div>
-            <div class="legend-text" id="legend-text-4">0</div>
-            <div class="legend-text" id="legend-text-5">0</div>
-            <div class="legend-text" id="legend-text-6">0</div>
+            <div class="legend-text" id="legend-text-1">Waiting</div>
+            <div class="legend-text" id="legend-text-2"></div>
+            <div class="legend-text" id="legend-text-3"></div>
+            <div class="legend-text" id="legend-text-4"></div>
+            <div class="legend-text" id="legend-text-5"></div>
+            <div class="legend-text" id="legend-text-6"></div>
 
           </div>
         </div>
 
         <!-- Dashboard panel -->
-        <div class="panel dashboard-panel" id="dashboard-panel"></div>
+        <div class="panel dashboard-panel" id="dashboard-panel">
+          <div class="dashboard-waiting-message" id="dashboard-waiting-message">
+            Please wait while making dashboard...
+          </div>
+          <div class="dashboard-container" id="dashboard-container">
+            <div class="selector-kit-title">Choose a variable to view</div>
+            <select class="dashboard-selector">
+              <option value="distance">Distance</option>
+              <option value="duration">Duration</option>
+              <option value="income">Trip taker income</option>
+            </select>
+            <!-- Distance dashboard -->
+            <div class="dashboard-var-container dashboard-var-container-visible" id="dashboard-distance">
+  
+              <div class="dashboard-mean-figures">
+                <div class="dashboard-mean-title">Mean:</div>
+                <div class="dashboard-mean-figure" id="distance-mean">111</div>
+                <div class="dashboard-mean-unit" id="distance-unit">miles</div>
+              </div>
+              <div class="graph distance-graph" id="distance-graph"></div>
+            </div>
+
+            <!-- Duration -->
+            <div class="dashboard-var-container" id="dashboard-duration">
+  
+              <div class="dashboard-mean-figures">
+                <div class="dashboard-mean-title">Mean:</div>
+                <div class="dashboard-mean-figure" id="duration-mean">111</div>
+                <div class="dashboard-mean-unit" id="duration-unit">miles</div>
+              </div>
+              <div class="graph duration-graph" id="duration-graph"></div>
+            </div>
+
+            <!-- Income -->
+            <div class="dashboard-var-container" id="dashboard-income">
+  
+              <div class="dashboard-mean-figures">
+                <div class="dashboard-mean-title">Mean:</div>
+                <div class="dashboard-mean-figure" id="income-mean">111</div>
+                <div class="dashboard-mean-unit" id="income-unit">miles</div>
+              </div>
+              <div class="graph income-graph" id="income-graph"></div>
+            </div>
+
+          </div>
+        </div>
       </section>
 
       <!-- Right (bottom) column -->
@@ -160,6 +206,11 @@
     
     <!-- Papa Parse -->
     <script src="https://unpkg.com/papaparse@5.3.2/papaparse.min.js"></script>
+
+    <!-- Vega Lite -->
+    <script src="https://cdn.jsdelivr.net/npm/vega@5.22.1"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.6.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.21.0"></script>
 
     <!-- Custom JS -->
     <script type="module" src="js/add-html.js"></script>

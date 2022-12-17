@@ -1,0 +1,76 @@
+.dashboard-panel {
+  align-items: center;
+  justify-content: center;
+}
+
+.dashboard-container {
+  display: none;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+  height: 100%;
+}
+
+.dashboard-container > * {
+  display: flex;
+}
+
+.dashboard-waiting-message {
+  font-size: 0.85rem;
+  font-style: italic;
+  color: var(--text-gray);
+  width: 75%;
+}
+
+.vega-embed.has-actions {
+  padding: 0;
+}
+
+.dashboard-var-container {
+  gap: 0.5rem;
+  flex-direction: column;
+  display: none;
+}
+
+.dashboard-var-container-visible {
+  display: flex;
+}
+
+select {
+  border-radius: 0.25rem;
+  color: var(--hero-reg);
+  width: 75%;
+  height: 1.4rem;
+}
+
+select:focus {
+  border: 2.5px solid var(--hero-reg);
+}
+
+select::after {
+  box-shadow: var(--shadow-layer-2);
+  border-radius: 0;
+  gap: 1rem;
+}
+
+.dashboard-mean-figures {
+  display: flex;
+  color: var(--hero-reg);
+  align-items: baseline;
+  gap: 1rem;
+}
+
+.dashboard-mean-title {
+  font-size: 0.9rem;
+}
+
+.dashboard-mean-unit {
+  font-size: 0.9rem;
+  font-style: italic;
+  margin-left: -0.5rem;
+}
+
+.dashboard-mean-figure {
+  font-size: 1.4rem;
+  font-weight: 800;
+}
