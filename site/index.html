@@ -95,7 +95,24 @@
         </div>
 
         <!-- Legend panel -->
-        <div class="panel map-legend-panel" id="map-legend-panel"></div>
+        <div class="panel map-legend-panel" id="map-legend-panel">
+          <div class="legend-blocks">
+            <div class="legend-block" style="--this-color: #ffffff"></div>
+            <div class="legend-block" style="--this-color: #c6c7eb"></div>
+            <div class="legend-block" style="--this-color: #8e8fd7"></div>
+            <div class="legend-block" style="--this-color: #5557c3"></div>
+            <div class="legend-block" style="--this-color: #353797"></div>
+          </div>
+          <div class="legend-texts">
+            <div class="legend-text" id="legend-text-1">0</div>
+            <div class="legend-text" id="legend-text-2">0</div>
+            <div class="legend-text" id="legend-text-3">0</div>
+            <div class="legend-text" id="legend-text-4">0</div>
+            <div class="legend-text" id="legend-text-5">0</div>
+            <div class="legend-text" id="legend-text-6">0</div>
+
+          </div>
+        </div>
 
         <!-- Dashboard panel -->
         <div class="panel dashboard-panel" id="dashboard-panel"></div>
@@ -140,6 +157,9 @@
 
     <!-- Leaflet script -->
     <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
+    
+    <!-- Papa Parse -->
+    <script src="https://unpkg.com/papaparse@5.3.2/papaparse.min.js"></script>
 
     <!-- Custom JS -->
     <script type="module" src="js/add-html.js"></script>

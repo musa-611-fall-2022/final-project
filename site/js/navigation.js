@@ -108,7 +108,7 @@ for(const tabEl of panelTabsEls) {
       // If currently not selected:
       // First hide all
       allPanelsElsArr.forEach(el => { el.style.display = 'none' });
-      panelTabsEls.forEach(el => { tabEl.classList.remove('panel-tab-selected'); })
+      panelTabsEls.forEach(el => { el.classList.remove('panel-tab-selected'); })
 
       // Show this
       targetElsArr.forEach(el => { el.style.display = 'flex' });
@@ -124,6 +124,19 @@ visualViewport.addEventListener('resize', ( ) => {
   // If greater than 1200 width
   if(document.documentElement.clientWidth >= 1200) {
     allPanelsElsArr.forEach(el => { el.style.display = 'flex' });
+  } else { // If resized to smaller
+    allPanelsElsArr.forEach(el => { el.style.display = 'none '});
+    displayPanelsElsArr.forEach(el => { el.style.display = 'flex' });
     
+    panelTabsEls.forEach(el => {
+      if(el.id === 'panel-tab-display') {
+        if(!el.classList.contains('panel-tab-selected')) {
+          el.classList.add('panel-tab-selected');
+        }
+        return;
+      }
+      el.classList.remove('panel-tab-selected'); 
+      return;
+    })
   }
 })

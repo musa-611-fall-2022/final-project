@@ -494,111 +494,52 @@ function buildQueryForDashboard(filterParams) {
       SELECT primary_mode, 
           trip_purpose AS purpose, 
           trip_start_time, 
-          trip_end_time, 
           trip_taker_individual_income AS income, 
           trip_taker_available_vehicles AS car_ownership,
           trip_duration_minutes AS duration,
-          trip_distance_miles AS distance,
-          (origin_geoid = home_geoid)::int AS start_from_home,
-          (origin_geoid = work_geoid)::int AS start_from_work,
-          (destination_geoid = home_geoid)::int AS end_at_home,
-          (destination_geoid = work_geoid)::int AS end_at_work
-      FROM trips
-      ${whereClause}
+          trip_distance_miles AS distance
+      FROM trips 
+      ${whereClause} 
     )(
-      SELECT (WIDTH_BUCKET(duration, 0, 60, 12) - 1) * 5 AS cat,
+      SELECT (WIDTH_BUCKET(duration, 0, 60, 6) - 1) * 10 AS cat,
           COUNT(*) AS n_trips,
-          AVG(distance) AS mean_distance,
-          AVG(duration) AS mean_duration,
           'duration' AS var
       FROM filtered
       GROUP BY cat
     ) UNION ALL (
-      SELECT (WIDTH_BUCKET(distance, 0, 10, 20) - 1) * 0.5 AS cat,
+      SELECT (WIDTH_BUCKET(distance, 0, 10, 10) - 1) AS cat,
           COUNT(*) AS n_trips,
-          AVG(distance) AS mean_distance,
-          AVG(duration) AS mean_duration,
           'distance' AS var
       FROM filtered
       GROUP BY cat
     ) UNION ALL (
-      SELECT (WIDTH_BUCKET(income, 10000, 210000, 20) - 1) * 10000 + 10000 AS cat,
+      SELECT (WIDTH_BUCKET(income, 10000, 160000, 10) - 1) * 15000 + 15000 AS cat,
           COUNT(*) AS n_trips,
-          AVG(distance) AS mean_distance,
-          AVG(duration) AS mean_duration,
           'income' AS var
       FROM filtered
       GROUP BY cat
     ) UNION ALL (
       SELECT car_ownership AS cat,
           COUNT(*) AS n_trips,
-          AVG(distance) AS mean_distance,
-          AVG(duration) AS mean_duration,
           'car_ownership' AS var
       FROM filtered
       GROUP BY cat
     ) UNION ALL (
       SELECT primary_mode AS cat,
           COUNT(*) AS n_trips,
-          AVG(distance) AS mean_distance,
-          AVG(duration) AS mean_duration,
           'primary_mode' AS var
       FROM filtered
       GROUP BY cat
     ) UNION ALL (
       SELECT purpose AS cat,
           COUNT(*) AS n_trips,
-          AVG(distance) AS mean_distance,
-          AVG(duration) AS mean_duration,
           'purpose' AS var
       FROM filtered
       GROUP BY cat
     ) UNION ALL (
       SELECT trip_start_time AS cat,
           COUNT(*) AS n_trips,
-          AVG(distance) AS mean_distance,
-          AVG(duration) AS mean_duration,
           'trip_start_time' AS var
-      FROM filtered
-      GROUP BY cat
-    ) UNION ALL (
-      SELECT trip_end_time AS cat,
-          COUNT(*) AS n_trips,
-          AVG(distance) AS mean_distance,
-          AVG(duration) AS mean_duration,
-          'trip_end_time' AS var
-      FROM filtered
-      GROUP BY cat
-    ) UNION ALL (
-      SELECT start_from_home AS cat,
-          COUNT(*) AS n_trips,
-          AVG(distance) AS mean_distance,
-          AVG(duration) AS mean_duration,
-          'start_from_home' AS var
-      FROM filtered
-      GROUP BY cat
-    ) UNION ALL (
-      SELECT start_from_work AS cat,
-          COUNT(*) AS n_trips,
-          AVG(distance) AS mean_distance,
-          AVG(duration) AS mean_duration,
-          'start_from_work' AS var
-      FROM filtered
-      GROUP BY cat
-    ) UNION ALL (
-      SELECT end_at_home AS cat,
-          COUNT(*) AS n_trips,
-          AVG(distance) AS mean_distance,
-          AVG(duration) AS mean_duration,
-          'end_at_home' AS var
-      FROM filtered
-      GROUP BY cat
-    ) UNION ALL (
-      SELECT end_at_work AS cat,
-          COUNT(*) AS n_trips,
-          AVG(distance) AS mean_distance,
-          AVG(duration) AS mean_duration,
-          'end_at_work' AS var
       FROM filtered
       GROUP BY cat
     )
@@ -620,12 +561,43 @@ function removeDashboardPanelWeightSign () {
   dashboardPanel.innerHTML = 'Success';
 }
 
+// Formats numbers before placing them in the legend
+/**
+ * 
+ * @param {Number} number 
+ * @returns {String}
+ */
+function formatLegendNumber(number, key) {
+  if(number >= 1000000) {
+    return `${Math.round(number / 1000000)}M`;
+  } else if(number >= 1000) {
+    return `${Math.round(number / 1000)}K`;
+  }
+  if(key === 'ratio') {
+    return `${Math.round(number)}%`;
+  } else {
+    return `${Math.round(number)}`;
+  }
+
+}
+
+// Updates legend based on aquired quintiles
+/**
+ * 
+ * @param {Array} quintileArr
+ * @param {String} key count, avg, sum or ratio
+ */
+function updateLegendText(quintileArr, key) {
+  for(let i = 0; i < quintileArr.length; i++) {
+    document.querySelector(`#legend-text-${i + 1}`).innerHTML = formatLegendNumber(quintileArr[i], key);
+  }
+}
+
 import { makeDisplayData, updateMap } from "./display-map.js";
 import { makeDashboard } from "./display-dashboard.js";
 
 async function onConfirmButtonClick() {
   const mapQuery = buildQueryForMap(toggleDisplayParams, filterParams);
-
   const dashboardQuery = buildQueryForDashboard(filterParams);
 
   // query map
@@ -634,12 +606,18 @@ async function onConfirmButtonClick() {
     const mapData = await mapResp.json();
     const mapUpdateData = mapData.results;
     const displayInfo = makeDisplayData(mapBaseData, mapUpdateData);
+
+    // Update the map and add all tooltips, popups, and event listeners
     updateMap(
       map, 
       displayInfo.mapData, 
       displayInfo.quintiles, 
       displayInfo.key,
     );
+    
+    // Update the legend
+    updateLegendText(displayInfo.quintiles, displayInfo.key);
+
   } catch(err) {
     console.log(err);  
   }
@@ -647,15 +625,23 @@ async function onConfirmButtonClick() {
   // query for dashboard
   startDashboarPanelWaitSign();
   try {
-    const dashboarResp = await fetch(`https://mobiladelphia.herokuapp.com/test-query/${dashboardQuery}`);
-    const dashboardJson = await dashboarResp.json();
-    const dashboardData = dashboardJson.results;
+    const query = `https://mobiladelphia.herokuapp.com/test-query/${dashboardQuery}`;
+    let dashboardData;
+    if(query.includes('WHERE true')) {
+      // Use locally stored
+      const path = '../data/dashboard-data-raw';
+      const dashboardResp = await fetch(path);
+      const dashboardText = await dashboardResp.text();
+      dashboardData = Papa.parse(dashboardText, { header: true, skipEmptyLines: true }).data;
+    } else {
+      const dashboardResp = await fetch(query);
+      const dashboardJson = await dashboardResp.json();
+      dashboardData = dashboardJson.results;
+    }
     removeDashboardPanelWeightSign();
     makeDashboard(dashboardData);
   } catch(err) {
     console.log(err);
-  } finally {
-    //
   }
 }
 

@@ -27,10 +27,10 @@ CSS for complex modules, see other files
   --shadow-layer-2: 0.15rem 0.2rem 0.2rem 0.02rem rgba(0 0 0 / 20%);
   --slider-height: 1.2rem;
   --toggle-display-panel-height: 7.5rem;
-  --map-legend-panel-height: 5rem;
+  --map-legend-panel-height: 3rem;
   --column-total-height: 41rem;
   --filter-panel-height: 38.5rem;
-  --dashboard-panel-height: 26.5rem;
+  --dashboard-panel-height: 28.5rem;
 }
 
 @media only screen and (max-width: 500px) {
