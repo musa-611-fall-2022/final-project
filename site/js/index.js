@@ -119,6 +119,7 @@ function loadResearchData(currentSlideIndex) {
           color: '#000000',
           weight: 1,
           fillColor: color,
+          fillOpacity: 1,
         };
       },
     }).bindTooltip(l => `GEOID: ${l.feature.properties['GEOID']} | SouthEast Asian | ${l.feature.properties['Clustering_cat']}`).addTo(layerGroup);
@@ -140,7 +141,7 @@ function loadResearchData(currentSlideIndex) {
 }
 
 function syncMapToCurrentSlide() {
-  const slide = slide[currentSlideIndex];
+  const slide = slides[currentSlideIndex];
   syncMapToSlide(slide);
   loadResearchData(currentSlideIndex);
 }
