@@ -3,7 +3,7 @@ body {
   border-width: 0;
   box-sizing: border-box;
   height: 100vh;
-  font-family: 'Open Sans', 'sans-serif';
+  font-family: 'Open Sans', "sans-serif";
 }
 
 .map-container {
@@ -19,7 +19,7 @@ body {
 .slides {
   margin-top: -30vh;
   pointer-events: none;
-  position: relative
+  position: relative;
 }
 
 .slide {

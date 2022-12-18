@@ -118,7 +118,7 @@ function loadResearchData(currentSlideIndex) {
         return {
           color: '#000000',
           weight: 1,
-          fillColor: color, 
+          fillColor: color,
         };
       },
     }).bindTooltip(l => `GEOID: ${l.feature.properties['GEOID']} | SouthEast Asian | ${l.feature.properties['Clustering_cat']}`).addTo(layerGroup);
@@ -197,5 +197,3 @@ document.addEventListener('scroll', calcCurrentSlideIndex);
 initSlides();
 syncMapToCurrentSlide();
 loadLifeData();
-
-window.southasiacluster = southasiancluster
