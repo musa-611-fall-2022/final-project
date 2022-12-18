@@ -26,7 +26,7 @@ const slides = [
     content: `
     I grew up in a subrub of Columbus, Ohio with a fair amount of diversity. <br>
     While I was not the highest achieving student, I 
-    <img class="image" src= "https://scontent.fewr1-5.fna.fbcdn.net/v/t39.30808-6/292099577_374215361487006_4793559578936715906_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=e3f864&_nc_ohc=yLTqYbYhouwAX9GRDKj&_nc_ht=scontent.fewr1-5.fna&oh=00_AfBzC9TJKNf_0KHBhCIiYLgbbr0LcXH8nbqzZX3ec6EwzQ&oe=639D42F3">
+    <img class="image" src="https://scontent.fewr1-5.fna.fbcdn.net/v/t39.30808-6/292099577_374215361487006_4793559578936715906_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=e3f864&_nc_ohc=yLTqYbYhouwAX9GRDKj&_nc_ht=scontent.fewr1-5.fna&oh=00_AfBzC9TJKNf_0KHBhCIiYLgbbr0LcXH8nbqzZX3ec6EwzQ&oe=639D42F3" alt="large building with glass exterior. There are two large pine trees" />
     `,
     era: 'K-12',
     showpopups: true,
@@ -35,7 +35,7 @@ const slides = [
   {
     title: 'Undergraduate: Denison University',
     content: `
-    <img class="image" src="https://denison.edu/sites/default/files/file_attachments/big-red-athletics.png" />
+    <img class="image" src="https://denison.edu/sites/default/files/file_attachments/big-red-athletics.png" alt="D with Denison written in red."/>
     `,
     era: "Undergraduate",
     showpopups: true,
@@ -168,7 +168,7 @@ const slides = [
     era: 'PhD',
     showpopups: true,
   },
-  
+
   {
     title: 'Locations in Southeast Asian Chinatown',
     content: `
