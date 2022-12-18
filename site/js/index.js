@@ -3,10 +3,10 @@
 import eastasiancluster from '../data/EastAsianCluster.geojson.js';
 import southasiancluster from '../data/SouthAsianCluster.geojson.js';
 import southeastasiancluster from '../data/SoutheastAsianCluster.geojson.js';
-import aapicluster from '../data/AAPICluster.geojson.js'
-//import { loadResearchData } from './researchdata.js'   
+import aapicluster from '../data/AAPICluster.geojson.js' ;
+//import { loadResearchData } from './researchdata.js'
 
-let map = L.map('map', {scrollWheelZoom: false}).setView([0, 0], 0);
+let map = L.map('map', { scrollWheelZoom: false } ).setView([0, 0], 0);
 let layerGroup = L.layerGroup().addTo(map);
 let lifeCollection = { features: [] };
 
@@ -59,8 +59,88 @@ function syncMapToSlide(slide) {
   }
 }
 
+const clusterTypeColors = {
+  "high frequency high clustering":"#00FFDB",
+  "high frequency low clustering":"#00A3FF",
+  "low frequency low clustering":"#5B00FF",
+  "No_Relationship": "#FF00A4",
+};
+
+function loadResearchData(currentSlideIndex) {
+  if(currentSlideIndex == 7) {
+    layerGroup.clearLayers();
+    L.geoJSON(aapicluster, {
+      style: (feature) => {
+        const ct = feature.properties['Cluster type']; //<-- cluster type
+        const color = clusterTypeColors[ct];
+        return {
+          color: '#000000',
+          weight: 1,
+          fillColor: color,
+          fillOpacity: 1,
+        };
+      },
+    }).bindTooltip(l => `GEOID: ${l.feature.properties['GEOID']} | Asian all | ${l.feature.properties['Clustering_cat']}`).addTo(layerGroup);
+  } else if(currentSlideIndex == 8) {
+    layerGroup.clearLayers();
+    L.geoJSON(aapicluster, {
+      style: (feature) => {
+        const ct = feature.properties['Cluster type']; //<-- cluster type
+        const color = clusterTypeColors[ct];
+        return {
+          color: '#000000',
+          weight: 1,
+          fillColor: color,
+          fillOpacity: 1,
+        };
+      },
+    }).bindTooltip(l => `GEOID: ${l.feature.properties['GEOID']} | Asian all | ${l.feature.properties['Clustering_cat']}`).addTo(layerGroup);
+  } else if(currentSlideIndex == 9) {
+    layerGroup.clearLayers();
+    L.geoJSON(eastasiancluster, {
+      style: (feature) => {
+        const ct = feature.properties['Cluster type']; //<-- cluster type
+        const color = clusterTypeColors[ct];
+        return {
+          color: '#000000',
+          weight: 1,
+          fillColor: color,
+          fillOpacity: 1,
+        };
+      },
+    }).bindTooltip(l => `GEOID: ${l.feature.properties['GEOID']} | East Asian | ${l.feature.properties['Clustering_cat']}`).addTo(layerGroup);
+  } else if(currentSlideIndex == 10) {
+    layerGroup.clearLayers(),
+    L.geoJSON(southeastasiancluster, {
+      style: (feature) => {
+        const ct = feature.properties['Cluster type']; //<-- cluster type
+        const color = clusterTypeColors[ct];
+        return {
+          color: '#000000',
+          weight: 1,
+          fillColor: color, 
+        };
+      },
+    }).bindTooltip(l => `GEOID: ${l.feature.properties['GEOID']} | SouthEast Asian | ${l.feature.properties['Clustering_cat']}`).addTo(layerGroup);
+  } else if(currentSlideIndex == 11) {
+    layerGroup.clearLayers();
+    L.geoJSON(southasiancluster, {
+      style: (feature) => {
+        const ct = feature.properties['Cluster type']; //<-- cluster type
+        const color = clusterTypeColors[ct];
+        return {
+          color: '#000000',
+          weight: 1,
+          fillColor: color,
+          fillOpacity: 1,
+        };
+      },
+    }).bindTooltip(l => `GEOID: ${l.feature.properties['GEOID']} | South Asian | ${l.feature.properties['Clustering_cat']} `).addTo(layerGroup);
+  }
+}
+
 function syncMapToCurrentSlide() {
-  const slide = slides[currentSlideIndex];
+  const slide = slide[currentSlideIndex];
   syncMapToSlide(slide);
   loadResearchData(currentSlideIndex);
 }
@@ -110,86 +190,7 @@ function calcCurrentSlideIndex() {
   }
 }
 
-const clusterTypeColors = {
-  "high frequency high clustering":"#00FFDB",
-  "high frequency low clustering":"#00A3FF",
-  "low frequency low clustering":"#5B00FF",
-  "No_Relationship": "#FF00A4",
-}
 
-function loadResearchData(currentSlideIndex) {
-  if(currentSlideIndex == 7) {
-    layerGroup.clearLayers()
-    L.geoJSON(aapicluster, {
-      style: (feature) => {
-        const ct = feature.properties['Clustering_cat']; //<-- cluster type
-        const color = clusterTypeColors[ct];
-        return {
-          color: '#000000',
-          weight: 1,
-          fillColor: color, 
-          fillOpacity: 1,
-        };
-      }
-    }).bindTooltip(l => `GEOID: ${l.feature.properties['GEOID']} | Asian all | ${l.feature.properties['Clustering_cat']}`).addTo(layerGroup);
-  } else if(currentSlideIndex == 8) {
-    layerGroup.clearLayers()
-    L.geoJSON(aapicluster, {
-      style: (feature) => {
-        const ct = feature.properties['Clustering_cat']; //<-- cluster type
-        const color = clusterTypeColors[ct];
-        return {
-          color: '#000000',
-          weight: 1,
-          fillColor: color,
-          fillOpacity: 1, 
-        };
-      }
-    }).bindTooltip(l => `GEOID: ${l.feature.properties['GEOID']} | Asian all | ${l.feature.properties['Clustering_cat']}`).addTo(layerGroup);  
-  } else if(currentSlideIndex == 9) {
-    layerGroup.clearLayers()
-    L.geoJSON(eastasiancluster, {
-      style: (feature) => {
-        const ct = feature.properties['Clustering_cat']; //<-- cluster type
-        const color = clusterTypeColors[ct];
-        return {
-          color: '#000000',
-          weight: 1,
-          fillColor: color,
-          fillOpacity: 1, 
-        };
-      }
-    }).bindTooltip(l => `GEOID: ${l.feature.properties['GEOID']} | East Asian | ${l.feature.properties['Clustering_cat']}`).addTo(layerGroup);
-  } else if(currentSlideIndex == 10) {
-    layerGroup.clearLayers()
-    L.geoJSON(southeastasiancluster, {
-      style: (feature) => {
-        const ct = feature.properties['Clustering_cat']; //<-- cluster type
-        const color = clusterTypeColors[ct];
-        return {
-          color: '#000000',
-          weight: 1,
-          fillColor: color,
-          fillOpacity: 1,
-        };
-      }
-    }).bindTooltip(l => `GEOID: ${l.feature.properties['GEOID']} | SouthEast Asian | ${l.feature.properties['Clustering_cat']}`).addTo(layerGroup);
-  } else if(currentSlideIndex == 11) {
-    layerGroup.clearLayers()
-    L.geoJSON(southasiancluster, {
-      style: (feature) => {
-        const ct = feature.properties['Clustering_cat']; //<-- cluster type
-        const color = clusterTypeColors[ct];
-        return {
-          color: '#000000',
-          weight: 1,
-          fillColor: color,
-          fillOpacity: 1, 
-        };
-      }
-    }).bindTooltip(l => `GEOID: ${l.feature.properties['GEOID']} | South Asian | ${l.feature.properties['Clustering_cat']} `).addTo(layerGroup);
-  }
-}
 
 document.addEventListener('scroll', calcCurrentSlideIndex);
 
