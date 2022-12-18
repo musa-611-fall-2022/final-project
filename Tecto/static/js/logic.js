@@ -1,7 +1,7 @@
-var earthquakes = new L.LayerGroup();
-var tect = new L.LayerGroup();
+let earthquakes = new L.LayerGroup();
+let tect = new L.LayerGroup();
 
-var getUrl = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson";
+let getUrl = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson";
 
 d3.json(getUrl, function (data) {
   createFeatures(data.features);
@@ -10,8 +10,8 @@ d3.json(getUrl, function (data) {
 function createFeatures(earthquakeData) {
 
   function onEachFeature(feature, layer) {
-    layer.bindPopup("<h3> Location: " + feature.properties.place + 
-    "<h3> Magnitude: " + feature.properties.mag + 
+    layer.bindPopup("<h3> Location: " + feature.properties.place +
+    "<h3> Magnitude: " + feature.properties.mag +
     "<h3> Depth: " + feature.geometry.coordinates[2] +
       "</h3><hr><p> Data: " + new Date(feature.properties.time) + "</p>");
   }
@@ -24,9 +24,9 @@ function createFeatures(earthquakeData) {
         fillColor: chooseColor(feature.geometry.coordinates[2]),
         weight: 1,
         opacity: 0.7,
-        fillOpacity: 0.7
+        fillOpacity: 0.7,
       });
-    }
+    },
   });
 
   createMap(earthquakes);
@@ -35,69 +35,69 @@ function createFeatures(earthquakeData) {
 // Dataset Site: https://github.com/fraxen/tectonicplates/tree/master/GeoJSON
 // var tectUrl ="https://raw.githubusercontent.com/fraxen/tectonicplates/master/GeoJSON/PB2002_steps.json"
 
-var tectUrl = "https://raw.githubusercontent.com/fraxen/tectonicplates/master/GeoJSON/PB2002_boundaries.json"
+let tectUrl = "https://raw.githubusercontent.com/fraxen/tectonicplates/master/GeoJSON/PB2002_boundaries.json";
 d3.json(tectUrl, function(tData){
-  L.geoJSON(tData,{
+  L.geoJSON(tData, {
 
-  }).addTo(tect)
-  tect.addTo(myMap)
-})
+  }).addTo(tect);
+  tect.addTo(myMap);
+});
 
 function createMap(earthquakes) {
 
-  var streetmap = L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
+  let streetmap = L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
     attribution: "© <a href='https://www.mapbox.com/about/maps/'>Mapbox</a> © <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap</a> <strong><a href='https://www.mapbox.com/map-feedback/' target='_blank'>Improve this map</a></strong>",
     tileSize: 512,
     maxZoom: 18,
     zoomOffset: -1,
     id: "mapbox/streets-v11",
-    accessToken: API_KEY
+    accessToken: API_KEY,
   });
 
-  var satellite = L.tileLayer("https://api.mapbox.com/styles/v1/mapbox/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
+  let satellite = L.tileLayer("https://api.mapbox.com/styles/v1/mapbox/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
     attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
     maxZoom: 18,
     id: "satellite-v9",
-    accessToken: API_KEY
+    accessToken: API_KEY,
   });
 
-  var outdoor = L.tileLayer("https://api.mapbox.com/styles/v1/mapbox/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
+  let outdoor = L.tileLayer("https://api.mapbox.com/styles/v1/mapbox/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
     attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
     maxZoom: 18,
     id: "outdoors-v11",
-    accessToken: API_KEY
+    accessToken: API_KEY,
   });
 
-  var baseMaps = {
+  let baseMaps = {
     "Street Map": streetmap,
     "Satellite": satellite,
-    "Outdoor": outdoor
+    "Outdoor": outdoor,
   };
 
-  var overlayMaps = {
+  let overlayMaps = {
     Earthquakes: earthquakes,
-    Tectonicplates: tect
+    Tectonicplates: tect,
   };
 
-  var myMap = L.map("map", {
+  let myMap = L.map("map", {
     center: [
-      50, -120
+      50, -120,
     ],
     zoom: 4,
-    layers: [streetmap, earthquakes]
+    layers: [streetmap, earthquakes],
   });
 
   L.control.layers(baseMaps, overlayMaps, {
-    collapsed: false
+    collapsed: false,
   }).addTo(myMap);
 
-  var legend = L.control({ position: 'bottomright' });
+  let legend = L.control({ position: 'bottomright' });
   legend.onAdd = function (myMap) {
-    var div = L.DomUtil.create('div', 'info legend'),
+    let div = L.DomUtil.create('div', 'info legend'),
       magnitude = [-10, 10, 30, 50, 70, 90],
       labels = [];
 
-    for (var i = 0; i < magnitude.length; i++) {
+    for (let i = 0; i < magnitude.length; i++) {
       div.innerHTML +=
         '<i style="background:' + chooseColor(magnitude[i] + 1) + '"></i> ' +
         magnitude[i] + (magnitude[i + 1] ? '&ndash;' + magnitude[i + 1] + '<br>' : '+');
