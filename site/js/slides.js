@@ -84,14 +84,14 @@ const slides = [
     LISA is defined as having two properties. <br> 
     (1) the LISA for each observation gives an indication of the extent of significant spatial clustering of similar values around that observation and <br>
     (2) the sum of LISAs for all observations is proportional to a global indicator of spatial association. In our case each census block is calculated individually and then summed to provide the I from Moran's I. The calculated LISA describes each blocks effects of the clustering within the data.
-    
     <h4> Legend </h4>
     <div class = "legend">
     <i style="background: #00FFDB"></i><span>high frequency high clustering</span><br>
     <i style="background: #00A3FF"></i><span>high frequency low clustering</span><br>
     <i style="background: #5B00FF"></i><span>low frequency low clustering</span><br>
     <i style="background: #FF00A4"></i><span>No Relationship</span><br>
-    </div>`,
+    </div>
+    `,
     era: 'PhD',
     showpopups: true,
   },
