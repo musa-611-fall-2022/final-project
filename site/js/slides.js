@@ -25,7 +25,7 @@ const slides = [
     title: 'K-12 Experience',
     content: `
     I grew up in a subrub of Columbus, Ohio with a fair amount of diversity. <br>
-    While I was not the highest achieving student, I 
+    Although there was a decent amount of diversity, I was still one of only a handful of Asian Americans at my school. Throughout my schooling experience I had understood Asian Americans to be academically high achieving students who excelled in mathematics. Although I did my best to attempt to fulfill this stereotype, I was not the most academically high achieving student.
     <img class="image" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Dublin_Scioto_High_School.JPG/250px-Dublin_Scioto_High_School.JPG" alt="large building with glass exterior. There are two large pine trees" title="large building with glass exterior. There are two large pine trees" />
     `,
     era: 'K-12',
@@ -35,6 +35,8 @@ const slides = [
   {
     title: 'Undergraduate: Denison University',
     content: `
+    The first university I attended was Denison University. This university was tucked into the verdent rolling hills of Granville, Ohio. However this university was far from diverse, and was my first real encounter recognizing that I shared a very different experience from my fellow students. Here I continued to pursue what I thought would allow me to fill the expectation of being Asian American, and studied music composition and chemistry in hopes of one day applying to dental school. <br>
+    In considering what it meant for me to be Asian American at the time, I felt pressure to attend a school that was well known and was incredibly selective. While I was rejected from the local public higher education institution, I was accepted by a private liberal arts school. This school was selective; however, very expensive as well. My family could not afford to continue sending me here, and nor did I feel like I belonged at this campus. This was the first experience that I had realizing that as an Asian American I was different. 
     <img class="image" src="https://denison.edu/sites/default/files/file_attachments/big-red-athletics.png" alt="D with Denison written in red."/>
     `,
     era: "Undergraduate",
@@ -44,7 +46,8 @@ const slides = [
   {
     title: 'Undergraduate: The Ohio State University',
     content: `
-    <img class="image" src="https://sociology.osu.edu/themes/asc_bootstrap/images/logos/asc-logo.svg" />
+    I decided to transfer to the local public university where I was able to enroll in Asian American studies. I learned about Asian American issues and began to be involved with Asian American advocacy and other Asian American organizations at the university. I eventually studied sociology. 
+    <img class="image" src="https://sociology.osu.edu/themes/asc_bootstrap/images/logos/asc-logo.svg" alt="The Ohio State University is written in text underneath it says College of Arts and Sciences />
     `,
     era: "Undergraduate",
     showpopups: true,
@@ -53,8 +56,8 @@ const slides = [
   {
     title: 'Graduate',
     content: `
-
-    <img class="image" src="https://education.missouri.edu/wp-content/uploads/2021/06/MU_UnitSig_EducationHumanDevelopment_2c-uncoated_std_vert-1024x541.jpg" />
+    Upon completing undergrad, I pursued my masters in Education Leadership and Policy Analysis with an emphasis in Student Affairs. During this time, I worked with Amalia Dache who worked on postcolonial education geographies. Under her training I conducted my own Master's thesis examining the experience of Asian American undergraduates religious experiences. 
+    <img class="image" src="https://education.missouri.edu/wp-content/uploads/2021/06/MU_UnitSig_EducationHumanDevelopment_2c-uncoated_std_vert-1024x541.jpg" alt="University of Missouri College of Education and Humant Development"/>
     `,
     era: 'Masters',
     showpopups: true,
@@ -63,7 +66,7 @@ const slides = [
   {
     title: 'Working',
     content: `
-      
+    Despite my advisor's advice to pursue a doctorate degree, I chose to work in student affairs. During my time in student affairs I worked at Rider Unviersity as the Assistant director for the inaugural center for diversity and inclusion where I led a committee that assessed the needs of LGBTQ+ students and developed mentoring programs for students of color. Working at Rider, I was closely connected to 
      <img class="image" src="https://www.rider.edu/themes/custom/rider_foundation/logo.svg" />
     `,
     era: 'Working',
@@ -106,9 +109,7 @@ const slides = [
       <li> Mongolian </li> 
       <li> Thai </li> 
     </ul>
-
-
-
+    Within Asian American populations there are differences across ethnic group such as information to college access and campus resources (Museus & Truong, 2009; Palmer & Maramba, 2015; O. A. Poon & Byrd, 2013). Teranishi et al. (2004) found in their study that Chinese and Korean Americans had the greatest representation in selective institutions; however, even within ethnic groups there exist differences across socioeconomic status. Because of such cases, scholars and researchers have frequently called for the disaggregation of Asian American data to ensure that ethnic minorities are supported within the Asian American racial category (Museus & Truong, 2009). 
     <div class = "legend-header"> Legend </div> 
     <div class = "legend">
     <i style="background: #00FFDB"></i><span>high frequency high clustering</span><br>
@@ -130,8 +131,7 @@ const slides = [
       <li> Pakistani </li> 
       <li> Sri Lankan </li> 
     </ul>
-    Southeast Asians generally lived in areas with a higher frequency of people who attained a High School diploma or less, in contrast to South Asians and East Asians who generally live in areas where people attain a bachelor’s degree or more. Additionally Southeast Asians have statistically significant differences when comparing frequency of people who make $100k, and median income in the past 12 months. 
-    
+    Southeast Asians live in census tracts with significantly more black people, while East Asian and South Asian populations live in areas with significantly more white people. Asian Americans in white spaces is not a new finding, Cheng (2013) found that Asian Americans and Mexican Americans were able to move into white neighborhoods, and transformed these spaces to be multiracial communities. However, these findings also provide geographic context to other studies that argue Asian Americans are nearing “white status” and reinforcing the black and white divide (Bonilla-Silva, 2004; J. C. Lee & Kye, 2016). <br>
     <div class = "legend-header"> Legend </div> 
     <div class = "legend">
     <i style="background: #00FFDB"></i><span>high frequency high clustering</span><br>

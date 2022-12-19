@@ -23,7 +23,7 @@ const slidesDiv = document.querySelector('.slides');
 
 function updateMap(collection) {
   layerGroup.clearLayers();
-  const geoJsonLayer = L.geoJSON(collection, { pointToLayer: (p, latlng) => L.marker(latlng, { alt: "I'm trying to be accessible"} ) })
+  const geoJsonLayer = L.geoJSON(collection, { pointToLayer: (p, latlng) => L.marker(latlng, { alt: "I'm trying to be accessible" } ) })
     .bindTooltip(l => l.feature.properties.label)
     .addTo(layerGroup);
 
