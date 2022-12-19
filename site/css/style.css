@@ -19,6 +19,13 @@ body {
   background: #ffe6b6;
 }
 
+.inner{
+  position: absolute;
+  top:80px;
+  height: 674px;
+  width: 100%;
+}
+
 .map {
   position: absolute;
   width: 360px;
@@ -59,8 +66,8 @@ body {
   position: absolute;
   width: 338px;
   height: 47px;
-  left: 26px;
-  top: 46px;
+  left: 12px;
+  top: 136px;
   font-family: cursive;
   font-style: italic;
   font-weight: 800;
@@ -74,8 +81,8 @@ body {
   position: absolute;
   width: 338px;
   height: 47px;
-  left: 24px;
-  top: 44px;
+  left: 10px;
+  top: 134px;
   font-family: cursive;
   font-style: italic;
   font-weight: 800;
@@ -89,8 +96,8 @@ body {
   position: absolute;
   width: 338px;
   height: 47px;
-  left: 22px;
-  top: 42px;
+  left: 8px;
+  top: 132px;
   font-family: cursive;
   font-style: italic;
   font-weight: 800;
