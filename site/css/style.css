@@ -161,74 +161,6 @@ body {
   border-radius: 20px;
 }
 
-.galleryicon {
-  width: 13px;
-  height: 13px;
-  background: rgb(255 168 0 / 64%);
-  opacity: 1;
-  position: absolute;
-  top: 483px;
-  left: 73px;
-  border-radius: 50%;
-  box-shadow: 0 4px 4px rgb(0 0 0 / 35%);
-}
-
-.usericon {
-  width: 30px;
-  height: 30px;
-  background: rgb(252 71 169 / 100%);
-  opacity: 1;
-  position: absolute;
-  top: 466px;
-  left: 24px;
-  border-radius: 50%;
-  box-shadow: 4px 4px 4px rgb(0 0 0 / 35%);
-}
-
-.commentbox {
-  position: absolute;
-  width: 372px;
-  height: 275px;
-  left: 9px;
-  top: 528px;
-  background: rgb(231 231 231 / 60%);
-  border: 3px solid #a4a4a4;
-  box-shadow: 4px 4px 4px rgb(0 0 0 / 38%);
-  border-radius: 28px;
-}
-
-.boxtext {
-  position: absolute;
-  width: 138px;
-  height: 15px;
-  left: 72px;
-  top: 107px;
-  font-family: Inter, sans-serif;
-  font-style: italic;
-  font-weight: 500;
-  font-size: 12px;
-  line-height: 15px;
-
-  /* identical to box height */
-  text-align: center;
-  color: #b5b5b5;
-}
-
-.researchtext {
-  position: absolute;
-  width: 42px;
-  height: 15px;
-  left: 282px;
-  top: 107px;
-  font-family: Inter, sans-serif;
-  font-style: italic;
-  font-weight: 500;
-  font-size: 12px;
-  line-height: 15px;
-  text-align: center;
-  color: #656565;
-}
-
 .savebutton {
   position: absolute;
   width: 50px;
@@ -297,21 +229,6 @@ body {
 
 .hidden {
   display: none;
-}
-
-.savetext {
-  position: absolute;
-  width: 51px;
-  height: 15px;
-  left: 309px;
-  top: 498px;
-  font-family: Inter, sans-serif;
-  font-style: italic;
-  font-weight: 500;
-  font-size: 12px;
-  line-height: 15px;
-  text-align: center;
-  color: #656565;
 }
 
 ul {
