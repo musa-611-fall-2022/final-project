@@ -26,7 +26,7 @@ const slides = [
     content: `
     I grew up in a subrub of Columbus, Ohio with a fair amount of diversity. <br>
     Although there was a decent amount of diversity, I was still one of only a handful of Asian Americans at my school. Throughout my schooling experience I had understood Asian Americans to be academically high achieving students who excelled in mathematics. Although I did my best to attempt to fulfill this stereotype, I was not the most academically high achieving student.
-    <img class="image" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Dublin_Scioto_High_School.JPG/250px-Dublin_Scioto_High_School.JPG" alt="large building with glass exterior. There are two large pine trees" title="large building with glass exterior. There are two large pine trees" />
+    <img class="image" src="https://npr.brightspotcdn.com/dims4/default/ce7ffee/2147483647/strip/true/crop/1000x656+0+0/resize/1760x1154!/format/webp/quality/90/?url=http%3A%2F%2Fnpr-brightspot.s3.amazonaws.com%2Flegacy%2Fsites%2Fwosu2%2Ffiles%2F201801%2FImg_Dublin_Scioto_High_School_Entry.jpg" alt="large building with glass exterior. There are two large pine trees" title="large building with glass exterior. There are two large pine trees" />
     `,
     era: 'K-12',
     showpopups: true,
@@ -46,8 +46,8 @@ const slides = [
   {
     title: 'Undergraduate: The Ohio State University',
     content: `
-    I decided to transfer to the local public university where I was able to enroll in Asian American studies. I learned about Asian American issues and began to be involved with Asian American advocacy and other Asian American organizations at the university. I eventually studied sociology. 
-    <img class="image" src="https://sociology.osu.edu/themes/asc_bootstrap/images/logos/asc-logo.svg" alt="The Ohio State University is written in text underneath it says College of Arts and Sciences />
+    I decided to transfer to the local public university where I was able to enroll in Asian American studies. I learned about Asian American issues and began to be involved with Asian American advocacy and other Asian American organizations at the university. I eventually studied sociology. <br>
+    <img class="image" src="https://sociology.osu.edu/themes/asc_bootstrap/images/logos/asc-logo.svg" alt="The Ohio State University is written in text underneath it says College of Arts and Sciences" />
     `,
     era: "Undergraduate",
     showpopups: true,
@@ -66,8 +66,8 @@ const slides = [
   {
     title: 'Working',
     content: `
-    Despite my advisor's advice to pursue a doctorate degree, I chose to work in student affairs. During my time in student affairs I worked at Rider Unviersity as the Assistant director for the inaugural center for diversity and inclusion where I led a committee that assessed the needs of LGBTQ+ students and developed mentoring programs for students of color. Working at Rider, I was closely connected to 
-     <img class="image" src="https://www.rider.edu/themes/custom/rider_foundation/logo.svg" />
+    Despite my advisor's advice to pursue a doctorate degree, I chose to work in student affairs. During my time in student affairs I worked at Rider Unviersity as the Assistant director for the inaugural center for diversity and inclusion where I led a committee that assessed the needs of LGBTQ+ students and developed mentoring programs for students of color. Working at Rider, I was closely connected to <br>
+     <img class="image" src="https://www.rider.edu/themes/custom/rider_foundation/logo.svg" alt="Rider University large font. The year 1865 is also included with a tree underneath/>
     `,
     era: 'Working',
     showpopups: true,
@@ -75,8 +75,6 @@ const slides = [
   {
     title: 'Introduction to Asian Americans',
     content: `Asian Americans, as an aggregate group, seem to be well-educated, and scholars have attempted to frame their success through biological, cultural, and structural lenses. While Asian Americans have educational success, scholars have also cautioned that a singular narrative of Asian American success invisibilizes the educational outcomes of different ethnic groups in Asian America and puts Asian Americans at odds with other minority groups as the model minority.
-    
-    
     `,
     era: 'PhD',
     showpopups: true,
@@ -173,7 +171,7 @@ const slides = [
     title: 'Locations in Southeast Asian Chinatown',
     content: `
     In addition to locating where Asian American are clustered by broader racial/ethnic group, I also located areas that were significant to the community. One of these locations is Hoa Bin Plaza which lies on Washington Avenue. To understand that context of this area better, I conducted field notes along Washington avenue taking notes of the buildings and taking time in some of the local stores. 
-    <img class="image" src="data/Photos/HoaBinhPlaza.png" />
+    <img class="image" src="data/Photos/HoaBinhPlaza.png" alt="The image comes from a WHYY article and the headline reads Philadelphia made it possible for community shopping centers like Hoa Binh Plaza to be erased"/>
     `,
     era: 'Research SEA',
     showpopups: true,
@@ -185,7 +183,7 @@ const slides = [
     I frequented one location regularly was Mr.Wish. I took notes weekly for four weeks while I was on campus. I've included an excerpt from my field notes... <br>
     
     <i>After that I proceed to the outside of the store. I was originally intending to do the same walk that I had done the week before; however, I saw that Mr.Wish had a particularly busy crowd in front of the store. As I walked past the store, I saw a woman working on her laptop in front of the store, and another group of people sitting at the other table. Seeing this crowd of people, I decided that I would take notes in Mr. Wish.<i/>
-    <img class="image" src="data/Photos/FieldnotesHuongVuong.jpg" />
+    <img class="image" src="data/Photos/FieldnotesHuongVuong.jpg" alt="Researcher sits at a booth and waves while taking a selfie. There are 4 people in the background standing near a cash register order a drink at Mr. Wish"/>
     `,
     era: 'Research SEA',
     showpopups: true,
@@ -195,7 +193,7 @@ const slides = [
     title: 'Chinatown Fieldnotes',
     content: `
     I also took field notes in Chinatown, and documented my journey to chinatown from North Philadelphia. 
-    <img class="image" src="data/Photos/ChinatownDemolition.jpg" />
+    <img class="image" src="data/Photos/ChinatownDemolition.jpg" alt="Burned down building in chinatown. There are construction fences and catution tape all around the building"/>
     `,
     era: 'Research EA',
     showpopups: true,
@@ -247,7 +245,7 @@ const slides = [
     The primary argument used to dismantle affirmative action is that Asian Americans have overcome discrimination, as such there is no longer a need for affirmative action. Rather Asian Americans do not benefit from this, despite multiple studies showing that Asian Americans do benefit from the policy (Kang, 1996; C. J. Kim, 2018; Park & Liu, 2014; Poon et al., 2019). Takagi (1990) examined how discourse and information about Asian American admissions evolved from discrimination against Asian Americans, to diversity in higher education, to how highly qualified Asian Americans are systematically disadvantaged because of affirmative action. <br>
 
     Takagi’s (1990) examination shows how Asian American discrimination from elite institutions is tied to affirmative action. More importantly, Takagi highlights how systematic quantitative analysis continues to have flaws in its interpretation and warns that the discourse over Asian American admissions will continue. 
-    <img class="image" src="data/Photos/SupremeCourt.jpg" />
+    <img class="image" src="data/Photos/SupremeCourt.jpg" alt="Four asian women are holding signs for Southeast Asians for Affirmative action. They are wearing blue to match the defend diversity signs"/>
     `,
     era: "Research AA",
     showpopups: true,
@@ -256,7 +254,7 @@ const slides = [
   {
     title: 'Affirmative Action Field Notes',
     content: `
-    <img class="image" src="data/Photos/SupremeCourtChineseAmericans.jpg" />
+    <img class="image" src="data/Photos/SupremeCourtChineseAmericans.jpg" alt="Jonathon takes selfie with other Asian Americans holding sign that says Chinese Americans for Affirmative Action." />
     At this event I also observed wrote down my memos later and excerpt of my mom has been included below.  
     <i> During my time at the rally, I spent a decent portion of my time holding a banner with the text, “Chinese Americans for Affirmative Action”. People were taking a lot of pictures while students were speaking and doing chants such as, “No justice, no Peace”, and “Hey Hey, Ho Ho, Edward Blum has got to go”. There were also more speakers speaking about the benefits of affirmative action. One of the speakers was the executive director for SEARAC, the southeast Asian advocacy group. Later on, we saw a large group of people standing in a circle across the street. The were silently doing something, so I walked over and saw that they were praying. They went through the Lord’s prayer and then started chanting something along the lines of forgive us of our sins, but I wasn’t able to pick up what they were praying about. </i>  
     `,
