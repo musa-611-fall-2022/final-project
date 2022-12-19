@@ -1,1 +1,0 @@
-export let bottomComponentEl =document.getElementById('info');
