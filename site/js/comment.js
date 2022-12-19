@@ -19,7 +19,7 @@ const firebaseConfig = {
 // Initialize Firebase
 const firebaseApp = initializeApp(firebaseConfig);
 const firestoreDb = getFirestore(firebaseApp);
-  
+
 
   const commentEl = document.getElementById('notebox');
 
@@ -39,17 +39,17 @@ const firestoreDb = getFirestore(firebaseApp);
     }
   }
 
-  async function savenote(galleryID,note, app, onSuccess, onFailure) {
-    // Save in memory  
+  async function savenote(galleryID, note, app, onSuccess, onFailure) {
+    // Save in memory
 
     app.notes[galleryID] = note;
   /* if(app.notes==null){
-    
+
     app.notes[galleryID]={
       type: "FeatureCollection",
       features: [],
     };
-    
+
     app.notes.features.push( {
       "type": "Feature",
       "properties": {
@@ -60,10 +60,10 @@ const firestoreDb = getFirestore(firebaseApp);
   }else{
     app.notes.features.properties['comment']=note;
   }*/
-  
+
     // Save locally.
    localStorage.setItem('notes', JSON.stringify(app.notes));
-  
+
     // Save in the cloud.
     try {
       const notesDoc = doc(firestoreDb, "gallery-comment-notes", "notes");
@@ -80,7 +80,7 @@ const firestoreDb = getFirestore(firebaseApp);
   }
 
 
-function showcommentinform(gallery,app) {
+function showcommentinform(gallery, app) {
     const galleryID = gallery.properties['ID'];
     const note = app.notes[galleryID] || '';
    /* let note;
@@ -90,7 +90,7 @@ function showcommentinform(gallery,app) {
     }*/
     commentEl .value = note;
   }
-  
+
   function getFormContent() {
     const note = commentEl.value;
     return note;

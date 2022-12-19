@@ -4,7 +4,7 @@ window.galleryEl=galleryEl;
 
 
 
-function showgalleryDataInForm(gallery) { 
+function showgalleryDataInForm(gallery) {
 
     const Name = gallery.properties['name'];
     const TELnumber = gallery.properties['tel'];

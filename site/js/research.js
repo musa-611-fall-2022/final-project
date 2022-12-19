@@ -4,12 +4,12 @@ let galleryButton=document.querySelector('#researchbutton');
 window.galleryButton = galleryButton;
 export let galleries;
 export let gallerydata;
-import{updateselectedgalleryPositionOn}from'./map.js';
+import{ updateselectedgalleryPositionOn }from'./main.js';
 
 gallerydata =  $.parseJSON($.ajax({
     url: "data/New York City Art Galleries.geojson",
-    dataType: "json", 
-    async: false
+    dataType: "json",
+    async: false,
 }).responseText);
 
 function makegalleryFeatureCollection() {
@@ -22,14 +22,14 @@ function makegalleryFeatureCollection() {
       type: "FeatureCollection",
       features: [],
     };
-  
+
     // Write into geojson
     for(let i = 0; i < 917; i++) {
 
             galleries.features.push( {
             "type": "Feature",
            "geometry":gallerydata.features[i].geometry['coordinates'],
-            
+
             "properties": {
                 "name": gallerydata.features[i].properties['name'],
                 "tel": gallerydata.features[i].properties['tel'],
@@ -39,7 +39,7 @@ function makegalleryFeatureCollection() {
             },
           });
     }
-    return galleries;  
+    return galleries;
   }
   makegalleryFeatureCollection();
 
@@ -90,7 +90,7 @@ function showinputtedgalleryinfo(){
 
 galleryButton.addEventListener("click", ()=>{
     showinputtedgalleryinfo();
-    
+
 });
 
 

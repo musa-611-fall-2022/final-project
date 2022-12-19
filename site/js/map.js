@@ -1,7 +1,8 @@
 export let thegallery;
 
+
 function highlightFeature(e) {
-  var layerss=e.layer;
+  let layerss=e.layer;
 if(e.layer.options['color']=="#FF94B1"){
   layerss.setStyle({
     radius: 7,
@@ -23,7 +24,7 @@ if(e.layer.options['color']=="#FF94B1"){
 
 
 let map;
-function initMap() {    
+function initMap() {
 map = L.map('map', { maxZoom: 22, preferCanvas: true  }).setView([40.748717, -73.999580], 11);
 const mapboxAccount = 'mapbox';
 const mapboxStyle = 'light-v10';
@@ -43,14 +44,14 @@ const mapboxToken = 'pk.eyJ1IjoibGktamllLWZqIiwiYSI6ImNsYWU2dWtqbzByZHYzb3F5dndr
         },
       })
       .on("click", highlightFeature)
-      .bindTooltip(Layer => Layer.feature.properties['name'],)
+      .bindTooltip(Layer => Layer.feature.properties['name'])
       .addTo(map);
       map.positionLayer = L.geoJSON(null).addTo(map);
       map.selectedLayer = L.geoJSON(null).addTo(map);
       return map;
     }
 
-  
+
 
 
       function updateUserPositionOn(map, pos) {
@@ -61,20 +62,9 @@ const mapboxToken = 'pk.eyJ1IjoibGktamllLWZqIiwiYSI6ImNsYWU2dWtqbzByZHYzb3F5dndr
         map.setView([pos.coords.latitude, pos.coords.longitude], 19);
       }
 
-      function updateselectedgalleryPositionOn(gallery) {
-        baseMap.selectedLayer.addData({
-          'type': 'Point',
-          'coordinates': [gallery.geometry[0],gallery.geometry[1]],
-        });
-        /*let lnglat=gallery.geometry['coordinates'];
-        let longitude=Number(lnglat.split(",")[0]);
-        let latitude=Number(lnglat.split(",")[1]);*/
-        baseMap.setView([gallery.geometry[1],gallery.geometry[0]], 10);
-      }
-       
+
       export {
         initMap,
         updateUserPositionOn,
         highlightFeature,
-        updateselectedgalleryPositionOn,
       };

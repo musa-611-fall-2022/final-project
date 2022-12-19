@@ -1,9 +1,9 @@
 
 
   import { showgalleryDataInForm } from './galleryinfo.js';
-  import { initMap,updateUserPositionOn } from './map.js';
-  import { downloadgalleries} from './position.js';
-  import{ showcommentinform,getFormContent,savenote,loadcomments}from './comment.js';
+  import { initMap, updateUserPositionOn } from './map.js';
+  import { downloadgalleries } from './position.js';
+  import{ showcommentinform, getFormContent, savenote, loadcomments }from './comment.js';
   import { initToast, showToast } from './toast.js';
   let app;
   window.app=app;
@@ -13,7 +13,7 @@ function apparray(){
     currentgallery: null,
     notes:null,
   };
-  var arr=Array.apply(null,{length:917});
+  let arr=Array.apply(null, { length:917 });
   app.notes=arr;
 return app;
 }
@@ -23,6 +23,18 @@ const savecommentEl = document.getElementById('savebutton');
 const loadOverlayEl = document.getElementById('load-overlay');
 let baseMap = initMap();
 window.baseMap=baseMap;
+
+function updateselectedgalleryPositionOn(gallery) {
+  baseMap.selectedLayer.addData({
+    'type': 'Point',
+
+    'coordinates': [gallery.geometry[0], gallery.geometry[1]],
+  });
+  /*let lnglat=gallery.geometry['coordinates'];
+  let longitude=Number(lnglat.split(",")[0]);
+  let latitude=Number(lnglat.split(",")[1]);*/
+  baseMap.setView([gallery.geometry[1], gallery.geometry[0]], 10);
+}
 
   // `ongalleriesLoadSuccess` will be called if and when `downloadgalleries`
 // function completes the download of the gallery file successfully.
@@ -43,7 +55,7 @@ function onSaveClicked() {
   const content = getFormContent();
   const galleryID = app.currentgallery.properties['ID'];
 
-  savenote(galleryID,content, app, onNotesSaveSuccess);
+  savenote(galleryID, content, app, onNotesSaveSuccess);
 }
 
 // `ongallerySelected` will be called if and when the user clicks on a gallery on the
@@ -52,7 +64,7 @@ function ongallerySelected(evt) {
     const gallery = evt.layer.feature;
     app.currentgallery = gallery;
     showgalleryDataInForm(gallery);
-    showcommentinform(gallery,app);
+    showcommentinform(gallery, app);
   }
 
   //read the file by name and then input
@@ -79,20 +91,24 @@ function setupGeolocationEvent() {
       onUserPositionSuccess,
       onUserPositionFailure,
     );
-  } 
+  }
 
 
   function setupInteractionEvents() {
     baseMap.galleryLayer.addEventListener('click', ongallerySelected);
     savecommentEl.addEventListener('click', onSaveClicked);
   }
-  
- 
+
+
   downloadgalleries(ongalleriesLoadSuccess);
   setupInteractionEvents();
   setupGeolocationEvent();
-  
+
   loadcomments(notes => {
     app.notes = notes;
   });
   initToast();
+
+  export{
+    updateselectedgalleryPositionOn,
+  }
