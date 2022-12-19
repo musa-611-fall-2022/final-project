@@ -26,7 +26,7 @@ const slides = [
     content: `
     I grew up in a subrub of Columbus, Ohio with a fair amount of diversity. <br>
     While I was not the highest achieving student, I 
-    <img class="image" src="https://scontent.fewr1-5.fna.fbcdn.net/v/t39.30808-6/292099577_374215361487006_4793559578936715906_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=e3f864&_nc_ohc=yLTqYbYhouwAX9GRDKj&_nc_ht=scontent.fewr1-5.fna&oh=00_AfBzC9TJKNf_0KHBhCIiYLgbbr0LcXH8nbqzZX3ec6EwzQ&oe=639D42F3" alt="large building with glass exterior. There are two large pine trees" />
+    <img class="image" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Dublin_Scioto_High_School.JPG/250px-Dublin_Scioto_High_School.JPG" alt="large building with glass exterior. There are two large pine trees" title="large building with glass exterior. There are two large pine trees" />
     `,
     era: 'K-12',
     showpopups: true,
@@ -84,7 +84,7 @@ const slides = [
     LISA is defined as having two properties. <br> 
     (1) the LISA for each observation gives an indication of the extent of significant spatial clustering of similar values around that observation and <br>
     (2) the sum of LISAs for all observations is proportional to a global indicator of spatial association. In our case each census block is calculated individually and then summed to provide the I from Moran's I. The calculated LISA describes each blocks effects of the clustering within the data.
-    <h4> Legend </h4>
+    <div class = "legend-header"> Legend </div> 
     <div class = "legend">
     <i style="background: #00FFDB"></i><span>high frequency high clustering</span><br>
     <i style="background: #00A3FF"></i><span>high frequency low clustering</span><br>
@@ -109,7 +109,7 @@ const slides = [
 
 
 
-    <h4> Legend </h4>
+    <div class = "legend-header"> Legend </div> 
     <div class = "legend">
     <i style="background: #00FFDB"></i><span>high frequency high clustering</span><br>
     <i style="background: #00A3FF"></i><span>high frequency low clustering</span><br>
@@ -132,7 +132,7 @@ const slides = [
     </ul>
     Southeast Asians generally lived in areas with a higher frequency of people who attained a High School diploma or less, in contrast to South Asians and East Asians who generally live in areas where people attain a bachelor’s degree or more. Additionally Southeast Asians have statistically significant differences when comparing frequency of people who make $100k, and median income in the past 12 months. 
     
-    <h4> Legend </h4>
+    <div class = "legend-header"> Legend </div> 
     <div class = "legend">
     <i style="background: #00FFDB"></i><span>high frequency high clustering</span><br>
     <i style="background: #00A3FF"></i><span>high frequency low clustering</span><br>
@@ -157,7 +157,7 @@ const slides = [
    </ul>
 
 
-   <h4> Legend </h4>
+   <div class = "legend-header"> Legend </div> 
    <div class = "legend">
    <i style="background: #00FFDB"></i><span>high frequency high clustering</span><br>
    <i style="background: #00A3FF"></i><span>high frequency low clustering</span><br>
@@ -260,3 +260,5 @@ const slides = [
     bounds: [[-75, -180], [75, 180]],
   },
 ];
+
+window.slides = slides;

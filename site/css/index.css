@@ -23,10 +23,7 @@ body {
 }
 
 .slide {
-  margin-top: 90vh;
-  margin-bottom: 100vh;
-  margin-left: auto;
-  margin-right: 2rem;
+  margin: 90vh 2rem 100vh auto;
   padding: 1rem;
   box-shadow: -0.5rem 0 1rem rgb(0 0 0 / 50%);
   border: 1px solid gray;
@@ -95,4 +92,9 @@ body {
 .legend i.icon {
   background-size: 18px;
   background-color: rgb(255 255 255 / 100%);
+}
+
+.legend-header{
+  font-family: "Open Sans", sans-serif;
+  font-size: 1.3em;
 }

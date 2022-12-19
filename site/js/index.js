@@ -1,4 +1,4 @@
-/* globals showdown */
+/* globals showdown slides htmlToElement */
 
 import eastasiancluster from '../data/EastAsianCluster.geojson.js';
 import southasiancluster from '../data/SouthAsianCluster.geojson.js';
@@ -23,7 +23,7 @@ const slidesDiv = document.querySelector('.slides');
 
 function updateMap(collection) {
   layerGroup.clearLayers();
-  const geoJsonLayer = L.geoJSON(collection, { pointToLayer: (p, latlng) => L.marker(latlng) })
+  const geoJsonLayer = L.geoJSON(collection, { pointToLayer: (p, latlng) => L.marker(latlng, {alt: "I'm trying to be accessible"}) })
     .bindTooltip(l => l.feature.properties.label)
     .addTo(layerGroup);
 
@@ -71,7 +71,7 @@ function loadResearchData(currentSlideIndex) {
     layerGroup.clearLayers();
     L.geoJSON(aapicluster, {
       style: (feature) => {
-        const ct = feature.properties['Cluster type']; //<-- cluster type
+        const ct = feature.properties['Clustering_cat']; //<-- cluster type
         const color = clusterTypeColors[ct];
         return {
           color: '#000000',
@@ -85,7 +85,7 @@ function loadResearchData(currentSlideIndex) {
     layerGroup.clearLayers();
     L.geoJSON(aapicluster, {
       style: (feature) => {
-        const ct = feature.properties['Cluster type']; //<-- cluster type
+        const ct = feature.properties['Clustering_cat']; //<-- cluster type
         const color = clusterTypeColors[ct];
         return {
           color: '#000000',
@@ -99,7 +99,7 @@ function loadResearchData(currentSlideIndex) {
     layerGroup.clearLayers();
     L.geoJSON(eastasiancluster, {
       style: (feature) => {
-        const ct = feature.properties['Cluster type']; //<-- cluster type
+        const ct = feature.properties['Clustering_cat']; //<-- cluster type
         const color = clusterTypeColors[ct];
         return {
           color: '#000000',
@@ -113,7 +113,7 @@ function loadResearchData(currentSlideIndex) {
     layerGroup.clearLayers(),
     L.geoJSON(southeastasiancluster, {
       style: (feature) => {
-        const ct = feature.properties['Cluster type']; //<-- cluster type
+        const ct = feature.properties['Clustering_cat']; //<-- cluster type
         const color = clusterTypeColors[ct];
         return {
           color: '#000000',
@@ -127,7 +127,7 @@ function loadResearchData(currentSlideIndex) {
     layerGroup.clearLayers();
     L.geoJSON(southasiancluster, {
       style: (feature) => {
-        const ct = feature.properties['Cluster type']; //<-- cluster type
+        const ct = feature.properties['Clustering_cat']; //<-- cluster type
         const color = clusterTypeColors[ct];
         return {
           color: '#000000',
@@ -144,6 +144,7 @@ function syncMapToCurrentSlide() {
   const slide = slides[currentSlideIndex];
   syncMapToSlide(slide);
   loadResearchData(currentSlideIndex);
+  console.log(currentSlideIndex)
 }
 
 function initSlides() {
@@ -153,7 +154,7 @@ function initSlides() {
   for (const [index, slide] of slides.entries()) {
     const slideDiv = htmlToElement(`
       <div class="slide" id="slide-${index}">
-        <h2>${slide.title}</h2>
+        <h1>${slide.title}</h1>
         ${converter.makeHtml(slide.content)}
       </div>
     `);
