@@ -13,7 +13,7 @@ body {
 .root {
   position: relative;
   width: 415px;   /* 390 */
-  height: 844px;
+  height: 800px;
   left: 35%;
   overflow-y: scroll;
   background: #ffe6b6;
@@ -60,7 +60,7 @@ body {
   width: 338px;
   height: 47px;
   left: 28px;
-  top: 43px;
+  top: 35px;
   font-family: cursive;
   font-style: italic;
   font-weight: 800;
