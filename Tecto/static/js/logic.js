@@ -1,47 +1,20 @@
+/* global d3 API_KEY */
+
 let earthquakes = new L.LayerGroup();
 let tect = new L.LayerGroup();
 
 let getUrl = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson";
 
-d3.json(getUrl, function (data) {
-  createFeatures(data.features);
-});
-
-function createFeatures(earthquakeData) {
-
-  function onEachFeature(feature, layer) {
-    layer.bindPopup("<h3> Location: " + feature.properties.place +
-    "<h3> Magnitude: " + feature.properties.mag +
-    "<h3> Depth: " + feature.geometry.coordinates[2] +
-      "</h3><hr><p> Data: " + new Date(feature.properties.time) + "</p>");
-  }
-
-  earthquakes = L.geoJSON(earthquakeData, {
-    onEachFeature: onEachFeature,
-    pointToLayer: function (feature, latlng) {
-      return L.circleMarker(latlng, {
-        radius: feature.properties.mag * 4,
-        fillColor: chooseColor(feature.geometry.coordinates[2]),
-        weight: 1,
-        opacity: 0.7,
-        fillOpacity: 0.7,
-      });
-    },
-  });
-
-  createMap(earthquakes);
-}
-// Tectonic Plate data from: World tectonic plates and boundaries (Hugo Ahlenius)
-// Dataset Site: https://github.com/fraxen/tectonicplates/tree/master/GeoJSON
-// var tectUrl ="https://raw.githubusercontent.com/fraxen/tectonicplates/master/GeoJSON/PB2002_steps.json"
-
 let tectUrl = "https://raw.githubusercontent.com/fraxen/tectonicplates/master/GeoJSON/PB2002_boundaries.json";
-d3.json(tectUrl, function(tData){
-  L.geoJSON(tData, {
 
-  }).addTo(tect);
-  tect.addTo(myMap);
-});
+function chooseColor(d) {
+  return d > 90 ? '#e6537a' :
+    d > 70 ? '#fbd580' :
+      d > 50 ? '#f6faa5' :
+        d > 30 ? '#c9ef9d' :
+          d > 10 ? '#8cefec' :
+            '#6f737c';
+}
 
 function createMap(earthquakes) {
 
@@ -87,15 +60,22 @@ function createMap(earthquakes) {
     layers: [streetmap, earthquakes],
   });
 
+  d3.json(tectUrl, function(tData){
+    L.geoJSON(tData, {
+
+    }).addTo(tect);
+    tect.addTo(myMap);
+  });
+
   L.control.layers(baseMaps, overlayMaps, {
     collapsed: false,
   }).addTo(myMap);
 
   let legend = L.control({ position: 'bottomright' });
-  legend.onAdd = function (myMap) {
+  legend.onAdd = function () {
     let div = L.DomUtil.create('div', 'info legend'),
-      magnitude = [-10, 10, 30, 50, 70, 90],
-      labels = [];
+      magnitude = [-10, 10, 30, 50, 70, 90];
+      // labels = [];
 
     for (let i = 0; i < magnitude.length; i++) {
       div.innerHTML +=
@@ -108,11 +88,43 @@ function createMap(earthquakes) {
   legend.addTo(myMap);
 }
 
-function chooseColor(d) {
-  return d > 90 ? '#e6537a' :
-    d > 70 ? '#fbd580' :
-      d > 50 ? '#f6faa5' :
-        d > 30 ? '#c9ef9d' :
-          d > 10 ? '#8cefec' :
-            '#6f737c';
+
+
+function createFeatures(earthquakeData) {
+
+  function onEachFeature(feature, layer) {
+    layer.bindPopup("<h3> Location: " + feature.properties.place +
+    "<h3> Magnitude: " + feature.properties.mag +
+    "<h3> Depth: " + feature.geometry.coordinates[2] +
+      "</h3><hr><p> Data: " + new Date(feature.properties.time) + "</p>");
+  }
+
+  earthquakes = L.geoJSON(earthquakeData, {
+    onEachFeature: onEachFeature,
+    pointToLayer: function (feature, latlng) {
+      return L.circleMarker(latlng, {
+        radius: feature.properties.mag * 4,
+        fillColor: chooseColor(feature.geometry.coordinates[2]),
+        weight: 1,
+        opacity: 0.7,
+        fillOpacity: 0.7,
+      });
+    },
+  });
+
+  createMap(earthquakes);
 }
+// Tectonic Plate data from: World tectonic plates and boundaries (Hugo Ahlenius)
+// Dataset Site: https://github.com/fraxen/tectonicplates/tree/master/GeoJSON
+// var tectUrl ="https://raw.githubusercontent.com/fraxen/tectonicplates/master/GeoJSON/PB2002_steps.json"
+
+
+
+
+
+
+
+
+d3.json(getUrl, function (data) {
+  createFeatures(data.features);
+});
