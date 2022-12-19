@@ -2,15 +2,21 @@ let galleryInput = document.querySelector('#researchbox');
 window.galleryInput = galleryInput;
 let galleryButton=document.querySelector('#researchbutton');
 window.galleryButton = galleryButton;
+const galleryEl = document.getElementById('info');
 export let galleries;
 export let gallerydata;
 import{ updateselectedgalleryPositionOn }from'./main.js';
 
-gallerydata =  $.parseJSON($.ajax({
+/*gallerydata =  $.getJSON($.ajax({
     url: "data/New York City Art Galleries.geojson",
     dataType: "json",
     async: false,
-}).responseText);
+}).responseText);*/
+
+let response = await fetch('data/New York City Art Galleries.geojson');
+
+gallerydata = await response.json();
+
 
 function makegalleryFeatureCollection() {
     /*const resp =fetch('data/New York City Art Galleries.geojson');

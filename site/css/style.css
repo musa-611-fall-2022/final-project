@@ -203,7 +203,7 @@ body {
   height: 15px;
   left: 72px;
   top: 107px;
-  font-family: Inter;
+  font-family: Inter, sans-serif;
   font-style: italic;
   font-weight: 500;
   font-size: 12px;
@@ -220,7 +220,7 @@ body {
   height: 15px;
   left: 282px;
   top: 107px;
-  font-family: Inter;
+  font-family: Inter, sans-serif;
   font-style: italic;
   font-weight: 500;
   font-size: 12px;
@@ -305,7 +305,7 @@ body {
   height: 15px;
   left: 309px;
   top: 498px;
-  font-family: Inter;
+  font-family: Inter, sans-serif;
   font-style: italic;
   font-weight: 500;
   font-size: 12px;

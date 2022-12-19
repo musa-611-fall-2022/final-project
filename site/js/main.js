@@ -111,4 +111,4 @@ function setupGeolocationEvent() {
 
   export{
     updateselectedgalleryPositionOn,
-  }
+  };

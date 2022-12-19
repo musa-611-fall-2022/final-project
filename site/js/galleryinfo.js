@@ -1,5 +1,5 @@
 const galleryEl = document.getElementById('info');
-window.galleryEl=galleryEl;
+
 
 
 
