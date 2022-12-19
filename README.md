@@ -13,5 +13,5 @@
 <img src="site/images/2.png" alt="First">
 <p> 6. To add a new business, click on where the business is located within the map and enter the data for the fields, then press "Add."</p>
 <img src="site/images/3.png" alt="First">
-<p> 7. To save the business in the database, click on the "Submit" button next to "Add". You will see "Save!" appear on the top of your screen when it is successfully submitted. Do not forget to close the window on the top right!</p>
+<p> 7. To save the business in the database, click on the "Submit" button next to "Add". You will see "Saved!" appear on the top of your screen when it is successfully submitted. Do not forget to close the window on the top right!</p>
 <img src="site/images/4.png" alt="First">
