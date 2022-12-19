@@ -5,10 +5,8 @@
         <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MY SPACE IN NYC ART !</title>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
     
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>Tree Surveyor</title>
 
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.2/leaflet.min.css" integrity="sha512-ekzf1ud/EngtmWo8xbIkhtBQsSgkOhTyyD6AA6b/J4/YXTInuNgeKVQDCH/pysNYnrGgsZazWSuWsNtFKzHbmg==" crossorigin="anonymous" referrerpolicy="no-referrer">
         
@@ -18,14 +16,14 @@
     
     <body>
         <div class="root">
-            <div class="background"></div>
-                <span class="appname2">MY SPACE IN NYC ART !</span> 
-            
+                <h1 id="appname2">MY SPACE IN NYC ART !</h1> 
                 <div id="map" class="map"></div>
                 <div id="load-overlay" class="load-overlay">Loading...</div>
                 <div id="toast" class="toast hidden"></div>
-                <div id="infoback" class="infoback"></div>
-                <ul id="info" class="info"></ul>
+                
+                <div class="list-container">
+                    <ul id="info" class="info"></ul>
+                </div>
                 <span class="infoname">GALLERY INFORMATION</span>
                 <textarea id="notebox" class="notebox" placeholder=" Write down your comments."></textarea>
                 <textarea id="researchbox" class="researchbox" placeholder="gallery's name..."></textarea>
@@ -33,13 +31,6 @@
                 <button id="savebutton" class="savebutton">SAVE</button>    
         </div>
 
-
-
-
-
-
-
-        
         <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.2/leaflet.min.js" integrity="sha512-QPePsP1y4BuymxYZEuQdJ4dsUzZR9MmyrMOLK//zHK4ZoDfMA7zQOJefboRSIm6QKCfzC7djwDOO/+0f72w7Zg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script type="module" src="js/main.js"></script>
         <script type="module" src="js/map.js"></script>

@@ -55,8 +55,7 @@ body {
   border-radius: 6px;
 }
 
-
-.appname2 {
+#appname2 {
   position: absolute;
   width: 338px;
   height: 47px;
