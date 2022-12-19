@@ -1,5 +1,5 @@
 <h1> Historic Seattle Filipinotown </h1>
-<p>Team Members: <a href="github.com/myronbanez">Myron Bañez</a></p>
+<p>Name: <a href="github.com/myronbanez">Myron Bañez</a></p>
 
 <h3>This project hopes to preserve Seattle Filipinotown's history by allowing users to see businesses that have existed in the space but also allowing users to input any business that is not already present.</h3>
 
