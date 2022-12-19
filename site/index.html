@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <title> Seattle Filipinotown </title>
+
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css" integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ==" crossorigin=""/>
+        <link rel="stylesheet" href="css/styles.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,200;0,300;0,400;1,200;1,300;1,400&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+        
+    </head>
+    <body>
+        <div id="toast" class="toast hidden"></div>
+        <div id="banner">
+            <header> HISTORIC SEATTLE FILIPINOTOWN </header>
+        </div>
+
+        <div role = "navigation" aria-label="content" class="content-container">
+            <div role = "navigation" aria-label = "map" class="map-container">
+                <div role = "navigation" id="seattle-map"></div>
+            </div>
+
+            <div role = "search" aria-label="sidebar" id="mySidebar" class="seattle-contents">
+            <div role = "navigation" aria-label="list" class="list-container">
+                <h1> Select by Business Type </h1>
+                <h2> Select by Business Type </h2>
+                <h3> Select by Business Type </h3>
+                    <a href="#" aria-label="beauty"><span><label><input type="checkbox" class="seattle-checkbox" value="Beauty"><span class = "cb-label"><span class="material-symbols-outlined">self_care</span></a> - Beauty</label></br>
+                    <a href="#" aria-label="cafe"><span><label><input type="checkbox" class="seattle-checkbox" value="Cafe"><span class = "cb-label"><span class="material-symbols-outlined">coffee</span></a> - Cafe</label></br>
+                    <a href="#" aria-label="food"><span><label><input type="checkbox" class="seattle-checkbox" value="Food"><span class = "cb-label"><span class="material-symbols-outlined">rice_bowl</span></a> - Food</label></br>
+                    <a href="#" aria-label="furniture"><span><label><input type="checkbox" class="seattle-checkbox" value="Furniture"><span class = "cb-label"><span class="material-symbols-outlined">chair</span></a> - Furniture</label></br>
+                    <a href="#" aria-label="grocery"><span><label><input type="checkbox" class="seattle-checkbox" value="Grocery"><span class = "cb-label"><span class="material-symbols-outlined">nutrition</span></a> - Grocery</label></br>
+                    <a href="#" aria-label="hotel"><span><label><input type="checkbox" class="seattle-checkbox" value="Hotel"><span class = "cb-label"><span class="material-symbols-outlined">room_service</span></a> - Hotel</label></br>
+                    <a href="#" aria-label="news"><span><label><input type="checkbox" class="seattle-checkbox" value="News"><span class = "cb-label"><span class="material-symbols-outlined">newspaper</span></a> - News</label></br>
+                    <a href="#" aria-label="recreation"><span><label><input type="checkbox" class="seattle-checkbox" value="Recreation"><span class = "cb-label"><span class="material-symbols-outlined">sports_basketball</span></a> - Recreation</label></br>
+                    <a href="#" aria-label="service"><span><label><input type="checkbox" class="seattle-checkbox" value="Service"><span class = "cb-label"><span class="material-symbols-outlined">volunteer_activism</span></a> - Service</label></br>
+                    <a href="#" aria-label="social"><span><label><input type="checkbox" class="seattle-checkbox" value="Social"><span class = "cb-label"><span class="material-symbols-outlined">diversity_1</span></a> - Social</label></br>
+                    <br></br>
+            </div> 
+
+            <div role = "search" class="seattle-list-container">     
+                <h3> Search For Business </h3>
+                <input type="text" id="seattle-name-filter" placeholder="Enter business name">
+                <ul id="seattle-list"></ul>
+            </div>
+        </div>
+            </div>
+        </div>
+
+        <div role = "main" id="history" class="history-contents">
+            <div role = "complementary" class="history-container">
+                <p> Seattle is home to a vibrant Filipino community with a history that is deeply rooted into the fabric of the city. Historic Seattle Filipinotown
+                    exists within the boundaries of the Chinatown-International District. At one point, there was over 90 Filipino owned establishments that served
+                    the community, and in the present day there are only a handful that remain as well as new establishments. Preserve the essence of Historic Filipnotown 
+                    and it's stewards by interacting with this tool to see who and where they were.
+                </p>
+
+                <p> Contribute to our history by clicking on any point in the map to add an establishment that is currently not accounted for, and share your memories to preserve 
+                    a piece of Historic Seattle Filipinotown!
+                </p>
+
+                <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js" integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ==" crossorigin=""></script>
+        <script type="module" src="js/main.js"></script>
+    </body>
+</html>
