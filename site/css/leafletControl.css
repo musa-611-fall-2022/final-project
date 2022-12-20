@@ -36,9 +36,9 @@
 }
 
 .leaflet-routing-collapsible .leaflet-routing-geocoders {
-    margin-top: 20px;
-  }
-  
+  margin-top: 20px;
+}
+
 .leaflet-control-container .leaflet-routing-container-hide .leaflet-routing-alt,
 .leaflet-control-container .leaflet-routing-container-hide .leaflet-routing-geocoders {
   display: none;
