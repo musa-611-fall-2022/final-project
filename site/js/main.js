@@ -16,10 +16,10 @@ let facilities = document.querySelector('#name');
 let directionButton = document.querySelector('#direction');
 
 function hidePopUp() {
-  let popup = document.getElementById("popUp");
-  let mapAfter = document.getElementById("map");
-  popup.classList.remove("open-popUp");
-  mapAfter.classList.remove("mapAfter");
+  let popup = document.getElementById("popup");
+  let mapafter = document.getElementById("map");
+  popup.classList.remove("open-popup");
+  mapafter.classList.remove("mapafter");
 }
 
 function Search(map, search, facilities){

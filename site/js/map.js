@@ -101,8 +101,8 @@ function showFonMap(map, name)
         });
 
         //popup bar
-        let popup = document.getElementById("popUp");
-        let mapAfter = document.getElementById("map");
+        let popup = document.getElementById("popup");
+        let mapafter = document.getElementById("map");
         const facTyElement = document.getElementById('tp');
         const facNameElement = document.getElementById('nam');
         const facVillyElement = document.getElementById('villy');
@@ -112,8 +112,8 @@ function showFonMap(map, name)
         facTyElement.innerHTML = facType;
         facNameElement.innerHTML = facName;
         facVillyElement.innerHTML = facVillage;
-        popup.classList.add("open-popUp");
-        mapAfter.classList.add("mapAfter");
+        popup.classList.add("open-popup");
+        mapafter.classList.add("mapafter");
 
         //show comments
         const comments = document.getElementById('comment');
