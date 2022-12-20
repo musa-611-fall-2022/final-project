@@ -1,118 +1,118 @@
 body {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-    margin: 0;
-    padding: 0;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
 }
 
 .popUp{
-    position:relative;
-    top: 148px;
-    height: 0;
+  position:relative;
+  top: 148px;
+  height: 0;
 
-    background: rgb(218, 138, 138);
-    border-radius: 12px;
-    display: flex;
-    flex-direction: column;
-    padding: 10px 30px 100px;
-    transform: scale(0);
-    color: rgb(255, 255, 255);
-    visibility: hidden;
-    transition: transform 0.4s, top 1s;
-    margin: 15px;
-    font-family: cursive;
-    padding-bottom: 35px;
+  background: rgb(218, 138, 138);
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  padding: 10px 30px 100px;
+  transform: scale(0);
+  color: rgb(255, 255, 255);
+  visibility: hidden;
+  transition: transform 0.4s, top 1s;
+  margin: 15px;
+  font-family: cursive;
+  padding-bottom: 35px;
 }
 
 .open-popUp{
-
-    visibility: visible;
-    transform: scale(1);
-    height: 65%;
+  visibility: visible;
+  transform: scale(1);
+  height: 65%;
 }
 
 #popUpTitle {
-    position: relative;
-    padding: 9px;
-    margin-top: -5px;
-    margin-bottom: -2px;
-    font-weight: bold;
-    text-align: center;
+  position: relative;
+  padding: 9px;
+  margin-top: -5px;
+  margin-bottom: -2px;
+  font-weight: bold;
+  text-align: center;
 }
 
 #detail {
-    border-radius: 18px;
-    margin-top: 5px;
-    margin-bottom: 5px;
-    border: 2px solid rgb(255, 255, 255);
-    text-align: center;
+  border-radius: 18px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  border: 2px solid rgb(255, 255, 255);
+  text-align: center;
 }
 
 
 #comment {
-    border-radius: 11px;
-    padding-bottom: 54px;
-    padding-left: 10px;
-    margin-top: 6px;
-    font-family: cursive;
-    border: 1px solid rgb(255, 255, 255);
-    height: 20px;
+  border-radius: 11px;
+  padding-bottom: 54px;
+  padding-left: 10px;
+  margin-top: 6px;
+  font-family: cursive;
+  border: 1px solid rgb(255, 255, 255);
+  height: 20px;
 }
 
 .popUp button{
-    width: 100%;
-    margin-top: 11px;
-    padding: 10px 0;
-    background: #7388ad;
-    color: #fff;
-    border: 0;
-    font-size: 18px;
-    border-radius: 10px;
-    cursor: pointer;
-    box-shadow: 0 2px 5px rgb(0 0 0 / 20%);
-    font-family: cursive;
-    font-weight: bold;
+  width: 100%;
+  margin-top: 11px;
+  padding: 10px 0;
+  background: #7388ad;
+  color: #fff;
+  border: 0;
+  font-size: 18px;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgb(0 0 0 / 20%);
+  font-family: cursive;
+  font-weight: bold;
 }
 
 .map {
-    height: 100%;
-      width: 100%;
-      position: absolute;
+  height: 100%;
+  width: 100%;
+  position: absolute;
 
 }
 
 .mapAfter {
-    height: 25%;
+  height: 25%;
 }
 
 .searchBar {
-    position: absolute;
-    z-index: 10000;
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: end;
-    align-items: flex-end;
-    margin-top: 12px;
-    margin-left: -10px;
+  position: absolute;
+  z-index: 10000;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+  align-items: flex-end;
+  margin-top: 12px;
+  margin-left: -10px;
 }
 
 #name {
-    height: 35px;
-    width: 220px;
-    border-radius: 9px;
-    font-family: cursive;
-    border: 2px solid rgb(0, 0, 0);
+  height: 35px;
+  width: 220px;
+  border-radius: 9px;
+  font-family: cursive;
+  border: 2px solid rgb(0, 0, 0);
 }
+
 #showlocation {
-    height: 35px;
-    border-radius: 9px;
-    background: rgb(49, 52, 112);
-    color: #fff;
-    font-family: cursive;
-    border: 1px solid rgb(0, 0, 0);
-    width: 90px;
-    font-weight: bold;
+  height: 35px;
+  border-radius: 9px;
+  background: rgb(49, 52, 112);
+  color: #fff;
+  font-family: cursive;
+  border: 1px solid rgb(0, 0, 0);
+  width: 90px;
+  font-weight: bold;
 }
 
