@@ -27,8 +27,8 @@
   margin-top: 20px;
 }
 
-.leaflet-routing-alt,
 .leaflet-routing-geocoders,
+.leaflet-routing-alt,
 .leaflet-routing-error {
   padding: 6px;
   margin-top: 2px;
