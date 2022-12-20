@@ -51,10 +51,10 @@ function showFonMap(map, name)
 .then(geojson => {
     if (map.FLayer !== undefined){
         map.removeLayer(map.FLayer);
-        };
+        }
     if (map.pLayer !== undefined){
         map.removeLayer(map.pLayer);
-        };
+        }
     // Save the resulting object as a variable
     const filteredGeojson = {
         type: 'FeatureCollection',
@@ -84,22 +84,22 @@ function showFonMap(map, name)
     // Set the map's center and zoom level based on the bounds of the added layer
     map.fitBounds(bounds, { padding: [-60, 0] });
     map.FLayer.addEventListener('click', (evt) =>{
-        //save current facility 
+        //save current facility
         app.currentFac = evt.layer.feature;
         // leave only cliked point
         if (map.pLayer !== undefined){
             map.removeLayer(map.pLayer);
-            };
+            }
         map.pLayer = L.circleMarker(evt.latlng).addTo(map);
         map.FLayer.addLayer(map.pLayer);
         map.pLayer.setStyle({
             icon: "https://maps.gstatic.com/mapfiles/markers2/marker.png",
-            color: '#6195ed', 
+            color: '#6195ed',
             fillColor: '#ad4b5a', // Red
             fillOpacity: 0.5,
             radius: 5,
         });
-    
+
         //popup bar
         let popup = document.getElementById("popUp");
         let mapAfter = document.getElementById("map");
@@ -116,16 +116,18 @@ function showFonMap(map, name)
         mapAfter.classList.add("mapAfter");
 
         //show comments
-        app.comments = JSON.parse(localStorage.getItem('comments'))
+        const comments = document.getElementById('comment');
+        const savedComments = document.getElementById('saved-comments');
+        app.comments = JSON.parse(localStorage.getItem('comments'));
         const facID = app.currentFac.properties['FID'];
         comments.value = "";
         let commentsAdded = app.comments[facID];
         if (commentsAdded == undefined){
             commentsAdded = "Nothing for now";
-            };
+            }
         savedComments.innerHTML = `Notes: ${commentsAdded}`;
     });
-})};
+});}
 
 
 
@@ -133,5 +135,5 @@ window.app = app;
 export {
     initMap,
     showFonMap,
-
+    app,
 };
