@@ -6,18 +6,18 @@ body {
   padding: 0;
 }
 
-.popUp{
-  position:relative;
+.popUp {
+  position :relative;
   top: 148px;
   height: 0;
 
-  background: rgb(218, 138, 138);
+  background: rgb(218 138 138);
   border-radius: 12px;
   display: flex;
   flex-direction: column;
   padding: 10px 30px 100px;
   transform: scale(0);
-  color: rgb(255, 255, 255);
+  color: rgb(255 255 255);
   visibility: hidden;
   transition: transform 0.4s, top 1s;
   margin: 15px;
@@ -44,10 +44,9 @@ body {
   border-radius: 18px;
   margin-top: 5px;
   margin-bottom: 5px;
-  border: 2px solid rgb(255, 255, 255);
+  border: 2px solid rgb(255 255 255);
   text-align: center;
 }
-
 
 #comment {
   border-radius: 11px;
@@ -59,7 +58,7 @@ body {
   height: 20px;
 }
 
-.popUp button{
+.popUp button {
   width: 100%;
   margin-top: 11px;
   padding: 10px 0;
@@ -78,7 +77,6 @@ body {
   height: 100%;
   width: 100%;
   position: absolute;
-
 }
 
 .mapAfter {
@@ -102,17 +100,16 @@ body {
   width: 220px;
   border-radius: 9px;
   font-family: cursive;
-  border: 2px solid rgb(0, 0, 0);
+  border: 2px solid rgb(0 0 0);
 }
 
 #showlocation {
   height: 35px;
   border-radius: 9px;
-  background: rgb(49, 52, 112);
+  background: rgb(49 52 112);
   color: #fff;
   font-family: cursive;
-  border: 1px solid rgb(0, 0, 0);
+  border: 1px solid rgb(0 0 0);
   width: 90px;
   font-weight: bold;
 }
-
