@@ -158,6 +158,5 @@ body::-webkit-scrollbar {
 
 .apexcharts-legend-series {
   background-color: #343332;
-  box-shadow: 1px -1px 53px 17px #343332;
-  box-shadow: 1px -1px 53px 17px #343332;
+  box-shadow: #343332;
 }
