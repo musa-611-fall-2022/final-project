@@ -11,28 +11,27 @@
         <head>
             <meta name="viewport" content="width=device-width, initial-scale=1" />
             <title>Mathare</title>
+
+            <!--leaflet's css-->
+            <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.2/dist/leaflet.css"
+            integrity="sha256-sA+zWATbFveLLNqWO2gtiw3HL/lh1giY/Inf1BJ0z14="
+            crossorigin=""/>
+            <link rel="stylesheet" href="css/leafletControl.css" />
+            <!-- Make sure you put this AFTER Leaflet's CSS -->
+            <script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js"
+            integrity="sha512-nMMmRyTVoLYqjP9hrbed9S+FzjZHW5gY1TWCHA5ckwXZBadntCNs8kEqAWdrb9O7rxbCaA4lKTIWjDXZxflOcA=="
+            crossorigin=""></script>
+            <!--my css-->
+            <link rel="stylesheet" type="text/css" href="css/style.css">
+
         </head>
 
     <body>
-        <!--leaflet's css-->
-        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.2/dist/leaflet.css"
-        integrity="sha256-sA+zWATbFveLLNqWO2gtiw3HL/lh1giY/Inf1BJ0z14="
-        crossorigin=""/>
-        <link rel="stylesheet" href="css/leafletControl.css" />
-        <!-- Make sure you put this AFTER Leaflet's CSS -->
-        <script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js"
-        integrity="sha512-nMMmRyTVoLYqjP9hrbed9S+FzjZHW5gY1TWCHA5ckwXZBadntCNs8kEqAWdrb9O7rxbCaA4lKTIWjDXZxflOcA=="
-        crossorigin=""></script>
-        <!--my css-->
-        <link rel="stylesheet" type="text/css" href="css/style.css">
-
 
         <!--map part-->
         <div id="map" class="map"></div>
         <div class="searchbar">
-            <div>
-                <input type="search" id="name" placeholder="Enter a name..." />               
-            </div>
+            <input type="search" id="name" placeholder="Enter a name..." />
             <button id="showlocation">Search</button>
         </div>
 
