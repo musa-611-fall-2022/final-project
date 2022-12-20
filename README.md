@@ -1,7 +1,7 @@
 # Mathare Slum Facility App
 
-##team member: 
-* Yuhao Jia
+## team member: 
+* [Yuhao Jia](https://github.com/YuhaoChrisJ "悬停显示文字")
 * Yifei Sun
   
   A list of team members (with links to their github profiles)
