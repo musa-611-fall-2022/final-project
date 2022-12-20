@@ -31,7 +31,6 @@
         <!--map part-->
         <div id="map" class="map"></div>
         <div class="searchbar">
-            <input type="search" id="name" placeholder="Enter a name..." >
             <button id="showlocation">Search</button>
         </div>
 
@@ -76,7 +75,7 @@
                 app.comments[facID] = commentInput;
 
                 localStorage.setItem('comments', JSON.stringify(app.comments));
-            }
+            };
         </script>
 
     </body>
