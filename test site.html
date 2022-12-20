@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://api.mapbox.com/mapbox-gl-js/v2.11.0/mapbox-gl.css"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.css"
+      type="text/css"
+    />
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.11.0/mapbox-gl.js"></script>
+    <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.min.js"></script>
+
+    <style>
+      body {
+        margin: 0 16px 0;
+        padding: 0;
+        font-family: "Roboto", helvetica, sans-serif;
+      }
+      table,
+      tr,
+      td {
+        border: 1px solid #000;
+        border-collapse: collapse;
+      }
+      ul {
+        list-style-type: none;
+      }
+      h1 {
+        margin: 0;
+      }
+      h2 {
+        margin: 0;
+      }
+      h3 {
+        margin: 0;
+      }
+      h4 {
+        margin: 0;
+      }
+      h5 {
+        margin: 0;
+      }
+      h6 {
+        margin: 0;
+      }
+      .nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .nav-links {
+        display: flex;
+        gap: 8px;
+      }
+      .nav-link {
+        text-decoration: none;
+        color: #104d90;
+      }
+      .nav-link.active {
+        color: #378fee;
+      }
+      .nav-link:hover {
+        color: #378fee;
+      }
+      .header {
+        background-color: #104d90;
+        padding: 8px 16px;
+        color: #ffffff;
+      }
+      .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .map-container {
+        position: relative;
+        width: 100%;
+        height: 600px;
+      }
+      #map {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 100%;
+        height: 100%;
+      }
+      .marker {
+        background-size: contain;
+        background-repeat: no-repeat;
+        width: 25px;
+        cursor: pointer;
+      }
+      .mapboxgl-popup {
+        width: 750px;
+        font: 12px/20px "Helvetica Neue", Arial, Helvetica, sans-serif;
+      }
+      .mapboxgl-popup-content {
+        width: 750px;
+        height: 300px;
+        overflow-y: auto;
+        font-family: "Open Sans", sans-serif;
+      }
+      @media screen and (min-width: 1920px) {
+        body {
+          width: 1280px;
+          margin: 0 auto;
+        }
+      }
+      @media screen and (min-width: 2160px) {
+        body {
+          width: 2140px;
+          height: 1680px;
+        }
+        .map-container {
+          height: 1680px;
+        }
+      }
+    </style>
+    <title>Test Center</title>
+  </head>
+  <body>
+    <nav class="nav">
+      <img src="" alt="Logo of City Philadelphia" />
+      <ul class="nav-links">
+        <li>
+          <a href="./cases.html" class="nav-link"> Cases </a>
+        </li>
+        <li>
+          <a href="./test-center.html" class="nav-link active"> Test Center </a>
+        </li>
+        <li>
+          <a href="./more-info.html" class="nav-link"> More Info </a>
+        </li>
+      </ul>
+    </nav>
+    <main>
+      <header class="header">
+        <h1>COVID-19 Testing Sites</h1>
+        <h2>Find a COVID-19 test near you</h2>
+      </header>
+      <div class="container">
+        <div class="map-container">
+          <div id="map"></div>
+        </div>
+      </div>
+    </main>
+
+    <script src="test-center.js"></script>
+    <script>
+      mapboxgl.accessToken =
+        "pk.eyJ1Ijoib3Jlb3dvcmsiLCJhIjoiY2xiZGhieHQ3MDFhcjN2bWhtYXlnNjNvcyJ9.PTmbdYsTinA5IPu0UaOV6w";
+
+      const map = new mapboxgl.Map({
+        container: "map",
+        style: "mapbox://styles/mapbox/streets-v12",
+        center: [-75.165222, 39.952583], // Centered in Philadelphia in [longitude, latitude]
+        zoom: 10.75,
+      });
+
+      // Add the search bar to the map.
+      map.addControl(
+        new MapboxGeocoder({
+          accessToken: mapboxgl.accessToken,
+          mapboxgl: mapboxgl,
+        })
+      );
+
+      map.on("load", () => {
+        // Add a new source from our GeoJSON data and set the 'cluster' option to true. GL-JS will add the point_count property to your source data.
+        map.addSource("centers", {
+          type: "geojson",
+          data: centers,
+        });
+
+        map.addLayer({
+          id: "clusters",
+          type: "circle",
+          source: "centers",
+          filter: ["has", "point_count"],
+          paint: {
+            // Orange for covid 19 test center
+            "circle-color": [
+              "step",
+              ["get", "point_count"],
+              "#ff9d14",
+              100,
+              "#ff9d14",
+              750,
+              "#ff9d14",
+            ],
+            "circle-radius": [
+              "step",
+              ["get", "point_count"],
+              20,
+              100,
+              30,
+              750,
+              40,
+            ],
+          },
+        });
+
+        map.addLayer({
+          id: "cluster-count",
+          type: "symbol",
+          source: "centers",
+          filter: ["has", "point_count"],
+          layout: {
+            "text-field": ["get", "point_count_abbreviated"],
+            "text-font": ["DIN Offc Pro Medium", "Arial Unicode MS Bold"],
+            "text-size": 12,
+          },
+        });
+
+        map.addLayer({
+          id: "unclustered-point",
+          type: "symbol",
+          source: "centers",
+          layout: {
+            "icon-image": "test-icon",
+            "icon-size": 0.05,
+          },
+          paint: {
+            "icon-color": "#104d90",
+          },
+        });
+
+        for (const marker of centers.features) {
+          const el = document.createElement("div");
+          const width = 20;
+          const height = 50;
+          el.className = "marker";
+          el.style.backgroundImage = `url(blue-point.png)`;
+          el.style.width = `${width}px`;
+          el.style.height = `${height}px`;
+          el.style.backgroundSize = "100%";
+
+          const coordinates = marker.geometry.coordinates.slice();
+          const objectId = marker.properties.OBJECTID;
+          const id = marker.properties.id;
+          const title = marker.properties.title;
+          const phone = marker.properties.phone_number;
+          const address = marker.properties.address;
+          const restrictions = marker.properties.restrictions;
+          const driveThru = marker.properties.drive_thruwalk_up;
+          const type = marker.properties.facility_type;
+          const status = marker.properties.status ? "Yes" : "No";
+          const url = marker.properties.provider_url;
+          const visability = marker.properties.visability;
+          const monday = marker.properties.monday;
+          const tuesday = marker.properties.tuesday;
+          const wednesday = marker.properties.wednesday;
+          const thursday = marker.properties.thursday;
+          const friday = marker.properties.friday;
+          const saturday = marker.properties.saturday;
+          const sunday = marker.properties.sunday;
+          const zipcode = marker.properties.zipcode;
+          const neighborhood = marker.properties.neighborhood;
+          const referral = marker.properties.referral;
+          const city = marker.properties.city;
+          const age = marker.properties.age;
+          const symptoms = marker.properties.symptoms || null;
+          const language_spoken = marker.properties.language_spoken;
+          const translation_services = marker.properties.translation_services
+            ? "Yes"
+            : "No";
+          const rapid_testing = marker.properties.rapid_testing || null;
+          const monday_rapid_tests =
+            marker.properties.monday_rapid_tests || null;
+          const tuesday_rapid_tests =
+            marker.properties.tuesday_rapid_tests || null;
+          const wednesday_rapid_tests =
+            marker.properties.wednesday_rapid_tests || null;
+          const thursday_rapid_tests =
+            marker.properties.thursday_rapid_tests || null;
+          const friday_rapid_tests =
+            marker.properties.friday_rapid_tests || null;
+          const saturday_rapid_tests =
+            marker.properties.saturday_rapid_tests || null;
+          const sunday_rapid_tests =
+            marker.properties.sunday_rapid_tests || null;
+          const uninsured_free_testing =
+            marker.properties.uninsured_free_testing || null;
+
+          const popup = new mapboxgl.Popup(el).setHTML(
+            `
+                    <table>
+                        <tr>
+                            <td>OBJECTID</td>
+                            <td>${objectId}</td>
+                        </tr>
+                        <tr>
+                            <td>globalid</td>
+                            <td>${id}</td>
+                        </tr>
+                        <tr>
+                            <td>testing_location_operator_name</td>
+                            <td>${title}</td>
+                        </tr>
+                        <tr>
+                            <td>contact_phone_number</td>
+                            <td>${phone}</td>
+                        </tr>
+                        <tr>
+                            <td>testing_location_address</td>
+                            <td>${address}</td>
+                        </tr>
+                        <tr>
+                            <td>testing_restrictions</td>
+                            <td>${restrictions}</td>
+                        </tr>
+                        <tr>
+                            <td>drive_thruwalk_up</td>
+                            <td>${driveThru}</td>
+                        </tr>
+                        <tr>
+                            <td>facility_type</td>
+                            <td>${type}</td>
+                        </tr>
+                        <tr>
+                            <td>status</td>
+                            <td>${status}</td>
+                        </tr>
+                        <tr>
+                            <td>provider_url</td>
+                            <td>${url}</td>
+                        </tr>
+                        <tr>
+                            <td>visability</td>
+                            <td>${visability}</td>
+                        </tr>
+                        <tr>
+                            <td>monday</td>
+                            <td>${monday}</td>
+                        </tr>
+                        <tr>
+                            <td>tuesday</td>
+                            <td>${tuesday}</td>
+                        </tr>
+                        <tr>
+                            <td>wednesday/td>
+                            <td>${wednesday}</td>
+                        </tr>
+                        <tr>
+                            <td>thursday</td>
+                            <td>${thursday}</td>
+                        </tr>
+                        <tr>
+                            <td>friday</td>
+                            <td>${friday}</td>
+                        </tr>
+                        <tr>
+                            <td>saturday</td>
+                            <td>${saturday}</td>
+                        </tr>
+                        <tr>
+                            <td>sunday</td>
+                            <td>${sunday}</td>
+                        </tr>
+                        <tr>
+                            <td>zipcode</td>
+                            <td>${zipcode}</td>
+                        </tr>
+                        <tr>
+                            <td>neighborhood</td>
+                            <td>${neighborhood}</td>
+                        </tr>
+                        <tr>
+                            <td>referral</td>
+                            <td>${referral}</td>
+                        </tr>
+                        <tr>
+                            <td>city</td>
+                            <td>${city}</td>
+                        </tr>
+                        <tr>
+                            <td>age</td>
+                            <td>${age}</td>
+                        </tr>
+                        <tr>
+                            <td>symptoms</td>
+                            <td>${symptoms}</td>
+                        </tr>
+                        <tr>
+                            <td>language_spoken</td>
+                            <td>${language_spoken}</td>
+                        </tr>
+                        <tr>
+                            <td>translation_services</td>
+                            <td>${translation_services}</td>
+                        </tr>
+                        <tr>
+                            <td>rapid_testing</td>
+                            <td>${rapid_testing}</td>
+                        </tr>
+                        <tr>
+                            <td>monday_rapid_tests</td>
+                            <td>${monday_rapid_tests}</td>
+                        </tr>
+                        <tr>
+                            <td>tuesday_rapid_tests</td>
+                            <td>${tuesday_rapid_tests}</td>
+                        </tr>
+                        <tr>
+                            <td>wednesday_rapid_tests</td>
+                            <td>${wednesday_rapid_tests}</td>
+                        </tr>
+                        <tr>
+                            <td>thursday_rapid_tests</td>
+                            <td>${thursday_rapid_tests}</td>
+                        </tr>
+                        <tr>
+                            <td>friday_rapid_tests</td>
+                            <td>${friday_rapid_tests}</td>
+                        </tr>
+                        <tr>
+                            <td>saturday_rapid_tests</td>
+                            <td>${saturday_rapid_tests}</td>
+                        </tr>
+                        <tr>
+                            <td>sunday_rapid_tests</td>
+                            <td>${sunday_rapid_tests}</td>
+                        </tr>
+                        <tr>
+                            <td>uninsured_free_testing</td>
+                            <td>${uninsured_free_testing}</td>
+                        </tr>
+                    </table>
+                  `
+          );
+          // Add markers to the map.
+          new mapboxgl.Marker(el)
+            .setLngLat(marker.geometry.coordinates)
+            .setPopup(popup)
+            .addTo(map);
+        }
+
+        map.on("mouseenter", "clusters", () => {
+          map.getCanvas().style.cursor = "pointer";
+        });
+        map.on("mouseleave", "clusters", () => {
+          map.getCanvas().style.cursor = "";
+        });
+      });
+    </script>
+  </body>
+</html>
