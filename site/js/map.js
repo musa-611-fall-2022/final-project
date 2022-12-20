@@ -1,39 +1,36 @@
 
-const mapboxAccount = 'mapbox';
-const mapboxStyle = 'light-v10';
-const mapboxToken = 'pk.eyJ1IjoiY29udHJhaWwtZW50aHVzaWFzdCIsImEiOiJjbDlsbTRteXEwMWh0M3VwZjBqc2JrbWZ4In0.MCAs44cMD-2XioBijyx_Iw';
 
-var infoIcon = L.icon({
+let infoIcon = L.icon({
     iconUrl: './assets/blue.png',
     iconSize: [15, 15],
     className: 'fadeaway',
 });
 
-var qolIcon = L.icon({
+let qolIcon = L.icon({
     iconUrl: './assets/blue.png',
     iconSize: [15, 15],
     className: 'fadeaway',
 });
 
-var streetsIcon = L.icon({
+let streetsIcon = L.icon({
     iconUrl: './assets/yellow.png',
     iconSize: [15, 15],
     className: 'fadeaway',
 });
 
-var complaintIcon = L.icon({
+let complaintIcon = L.icon({
     iconUrl: './assets/red.png',
     iconSize: [15, 15],
     className: 'fadeaway',
 });
 
-var miscIcon = L.icon({
+let miscIcon = L.icon({
     iconUrl: './assets/orange.png',
     iconSize: [15, 15],
     className: 'fadeaway',
 });
 
-function initializeMap () {
+function initializeMap() {
     //initial zoom and center
     let map = L.map('map', { zoomControl: false }).setView([39.962443024832446, -75.16139981702757], 12);
 
@@ -44,23 +41,23 @@ function initializeMap () {
     }).addTo(map);
 
     map.infoLayer = L.geoJSON(null, {
-        pointToLayer: (feature, latlng) => L.marker(latlng , {icon: infoIcon}),
+        pointToLayer: (feature, latlng) => L.marker(latlng, { icon: infoIcon }),
     }).addTo(map);
 
-      map.qolLayer = L.geoJSON(null, {
-        pointToLayer: (feature, latlng) => L.marker(latlng , {icon: qolIcon}),
+    map.qolLayer = L.geoJSON(null, {
+        pointToLayer: (feature, latlng) => L.marker(latlng, { icon: qolIcon }),
     }).addTo(map);
 
-      map.streetsLayer = L.geoJSON(null, {
-        pointToLayer: (feature, latlng) => L.marker(latlng , {icon: streetsIcon}),
+    map.streetsLayer = L.geoJSON(null, {
+        pointToLayer: (feature, latlng) => L.marker(latlng, { icon: streetsIcon }),
     }).addTo(map);
 
-      map.complaintLayer = L.geoJSON(null, {
-        pointToLayer: (feature, latlng) => L.marker(latlng , {icon: complaintIcon}),
+    map.complaintLayer = L.geoJSON(null, {
+        pointToLayer: (feature, latlng) => L.marker(latlng, { icon: complaintIcon }),
     }).addTo(map);
 
-      map.miscLayer = L.geoJSON(null, {
-        pointToLayer: (feature, latlng) => L.marker(latlng , {icon: miscIcon}),
+    map.miscLayer = L.geoJSON(null, {
+        pointToLayer: (feature, latlng) => L.marker(latlng, { icon: miscIcon }),
     }).addTo(map);
 
     /*including catchments polygon and restyling
@@ -73,7 +70,7 @@ function initializeMap () {
 }
 
 
-export{
+export {
     initializeMap,
 };
 

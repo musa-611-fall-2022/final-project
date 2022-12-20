@@ -1,3 +1,4 @@
+/*global Promise */
 function fetchComplaintData() {
   return fetch(`./data/complaint.csv`)
     .then(resp => resp.text())
@@ -8,15 +9,7 @@ function fetchComplaintData() {
     });
 }
 
-function fetchInfoData() {
-  return fetch(`./data/information.csv`)
-    .then(resp => resp.text())
-    .then(data => {
-      const infoData = Papa.parse(data, { header: true });
-      window.infoData = infoData;
-      //console.log(infoData);
-    });
-}
+
 
 function fetchQOLData() {
   return fetch(`./data/lifequality.csv`)
@@ -57,7 +50,7 @@ function fetchAllData() {
     fetchMiscData(),
     fetchStreetsData(),
   ]);
-};
+}
 
 
 
