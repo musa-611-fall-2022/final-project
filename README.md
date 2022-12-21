@@ -3,9 +3,7 @@ An App designed for volunteers working in Mathare
 
 ### Team Member: 
 
-   [Yuhao Jia](https://github.com/YuhaoChrisJ "悬停显示文字")
-    
-   [Yifei Sun](https://github.com/miaomiao612 "悬停显示文字")
+   [Yuhao Jia](https://github.com/YuhaoChrisJ "悬停显示文字") & [Yifei Sun](https://github.com/miaomiao612 "悬停显示文字")
     
 ### Brief Introduction
 
@@ -16,7 +14,7 @@ There are tons of NGOs doing projects in Mathare slum (Nairobi, Kenya). Voluntte
 ### Presentations
 
 ### Data Source
-UN-Habitat urban data site———[Mathare Slum Data Points](https://github.com/miaomiao612](https://data.unhabitat.org/datasets/GUO-UN-Habitat::mathare-slum-data-points/explore?location=-0.690293%2C35.785444%2C9.59) "悬停显示文字")
+UN-Habitat urban data site——[Mathare Slum Data Points](https://github.com/miaomiao612](https://data.unhabitat.org/datasets/GUO-UN-Habitat::mathare-slum-data-points/explore?location=-0.690293%2C35.785444%2C9.59) "悬停显示文字")
 
 preparation, cleaning, shortcomings, etc.
 
