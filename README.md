@@ -8,11 +8,11 @@ An App designed for volunteers working in Mathare
 ### Tour of the project：
 Click [here](https://miaomiao612.github.io/final-project/ "悬停显示文字") to try our app!
 
-### Brief Introduction
+### Brief Introduction：
 
 There are tons of NGOs doing projects in Mathare slum (Nairobi, Kenya). Voluntters usually work for educational and medical project, they also have other requirements like using restroom, buying water and so on. However, the location and infromation of these facilities are not in the google/apple map. Also due to the high density of buildings in slum, it's really hard for volunteers to find the right location of their purpose. This app is developed for volunteers working in the slum to find their destinations and the shortest way to get there.
 
-### Main function
+### Main function：
 * Map and My position
 
    There should be a map with whole page size, centered at Mathare Slum.
@@ -40,7 +40,7 @@ After input the name, there should be a button to hit, and the destination(s) wi
 
    <img src="https://github.com/miaomiao612/final-project/blob/main/%E5%8A%A8%E7%94%BB4.gif" width="320" alt="2">
 
-### Data Source
+### Data Source：
 UN-Habitat urban data site——[Mathare Slum Data Points](https://github.com/miaomiao612](https://data.unhabitat.org/datasets/GUO-UN-Habitat::mathare-slum-data-points/explore?location=-0.690293%2C35.785444%2C9.59) "悬停显示文字")
 
 
