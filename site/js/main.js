@@ -589,9 +589,9 @@ function removeMapWaitSign() {
  */
 function formatLegendNumber(number, key) {
   if(number >= 1000000) {
-    return `${Math.round(number * 10 / 1000000) / 10}M`;
+    return `${Math.round(number * 10 / 100000) / 10}M`;
   } else if(number >= 1000) {
-    return `${Math.round(number * 10 / 1000) / 10}K`;
+    return `${Math.round(number * 10 / 100) / 10}K`;
   }
   if(key === 'ratio') {
     return `${Math.round(number * 10) / 10}%`;
