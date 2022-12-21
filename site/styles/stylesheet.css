@@ -180,9 +180,12 @@ h1 {
 h2 {
   font-family: "Open Sans", sans-serif;
   font-style: normal;
-  font-weight: 800;
-  font-size: 20px;
-  line-height: 24px;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 22px;
+
+  margin-top: 0;
+  margin-bottom: 0.2em;
 }
 
 h3 {

@@ -108,6 +108,7 @@ export {
     margin,
     width,
     height,
+    unitTypes,
 };
 
 window.width = width;
@@ -115,7 +116,6 @@ window.height = height;
 window.margin = margin;
 window.tooltip = tooltip;
 window.tooltipWidth = tooltipWidth;
-window.unitTypes = unitTypes;
 window.colors = colors;
 window.selectedMap = selectedMap;
 
