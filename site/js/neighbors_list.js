@@ -9,7 +9,7 @@ for (let i = 0; i < neighbors['features'].length; i++) {
     if (name_arr.length > 1) {
         name = name_arr[0];
         for (let j = 1; j < name_arr.length; j++) {
-            name += '_' + name_arr[j]
+            name += '_' + name_arr[j];
 
         }
     }
