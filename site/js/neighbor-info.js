@@ -11,12 +11,12 @@ let equation = document.querySelector('#neighbor-equation');
 // let tree = document.querySelector('#neighbor-tree');
 
 $("#select-neighbor").change(function(){
-    var selectVal = $("#select-neighbor option:selected").val();
+    let selectVal = $("#select-neighbor option:selected").val();
     let name_arr = selectVal.split('_');
     if (name_arr.length > 1) {
         selectVal = name_arr[0];
         for (let j = 1; j < name_arr.length; j++) {
-            selectVal += ' ' + name_arr[j]
+            selectVal += ' ' + name_arr[j];
         }
     }
     for (let i = 0; i < neighbors['features'].length; i++) {
@@ -39,7 +39,7 @@ $("#select-neighbor").change(function(){
             `;
             const divide= `
                 <div class="dividing-line"></div>
-            `
+            `;
             const li2 = `
                 <li style="list-style: none; padding: 15px 30px 0px 80px; position: relative; height: 33%; width: 100%">
                     <div class="icon-area panel-icon"></div>

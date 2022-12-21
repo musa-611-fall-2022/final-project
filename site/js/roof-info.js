@@ -58,7 +58,7 @@ $("#geocoder-roof").change(function(){
             `;
             const divide= `
                 <div class="dividing-line"></div>
-            `
+            `;
             const li2 = `
                 <li style="list-style: none; padding: 15px 30px 0px 80px; position: relative; height: 33%; width: 100%">
                     <div class="icon-area panel-icon"></div>

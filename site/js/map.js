@@ -5,7 +5,7 @@ const map = new mapboxgl.Map({
     // Choose from Mapbox's core styles, or make your own style with Mapbox Studio
     style: 'mapbox://styles/mapbox/satellite-v9', // style URL
     center: [-75.116728, 39.993436], // starting position [lng, lat],
-    zoom: 11.2 // starting zoom
+    zoom: 11.2, // starting zoom
 });
 
 const map_roof = new mapboxgl.Map({
@@ -13,7 +13,7 @@ const map_roof = new mapboxgl.Map({
     // Choose from Mapbox's core styles, or make your own style with Mapbox Studio
     style: 'mapbox://styles/mapbox/satellite-v9', // style URL
     center: [-75.116728, 39.993436], // starting position [lng, lat],
-    zoom: 11.2 // starting zoom
+    zoom: 11.2, // starting zoom
 });
 
 window.map = map;
@@ -33,7 +33,7 @@ let solar7 = {};
 const geocoder = new MapboxGeocoder({
     accessToken: mapboxgl.accessToken,
     mapboxgl: mapboxgl,
-    language: 'en-EN'
+    language: 'en-EN',
 });
 
 const geocoder_roof = new MapboxGeocoder({
@@ -42,8 +42,8 @@ const geocoder_roof = new MapboxGeocoder({
     language: 'en-EN',
     flyTo: {
         zoom: 18, // If you want your result not to go further than a specific zoom
-        curve:1
-    }
+        curve:1,
+    },
 });
 
 document.getElementById('geocoder').appendChild(geocoder.onAdd(map));
@@ -54,25 +54,25 @@ window.geocoder_roof = geocoder_roof;
 map.addControl(
     new mapboxgl.GeolocateControl({
         positionOptions: {
-            enableHighAccuracy: true
+            enableHighAccuracy: true,
         },
         // When active the map will receive updates to the device's location as it changes.
         trackUserLocation: true,
         // Draw an arrow next to the location dot to indicate which direction the device is heading.
-        showUserHeading: true
-    })
+        showUserHeading: true,
+    }),
 );
 
 map_roof.addControl(
     new mapboxgl.GeolocateControl({
         positionOptions: {
-            enableHighAccuracy: true
+            enableHighAccuracy: true,
         },
         // When active the map will receive updates to the device's location as it changes.
         trackUserLocation: true,
         // Draw an arrow next to the location dot to indicate which direction the device is heading.
-        showUserHeading: true
-    })
+        showUserHeading: true,
+    }),
 );
 
 
@@ -89,7 +89,7 @@ $.ajax({
     },
     error: function (err) {
         console.log(err);
-    }
+    },
 });
 
 $.ajax({
@@ -102,7 +102,7 @@ $.ajax({
     },
     error: function (err) {
         console.log(err);
-    }
+    },
 });
 
 $.ajax({
@@ -113,12 +113,12 @@ $.ajax({
     success: function(data) {
         solar2 = data;
         for (let i = 0; i < data['features'].length; i++) {
-            solar['features'].push(data['features'][i])
+            solar['features'].push(data['features'][i]);
         }
     },
     error: function (err) {
         console.log(err);
-    }
+    },
 });
 
 // console.log(solar)
@@ -130,12 +130,12 @@ $.ajax({
     success: function(data) {
         solar3 = data;
         for (let i = 0; i < data['features'].length; i++) {
-            solar['features'].push(data['features'][i])
+            solar['features'].push(data['features'][i]);
         }
     },
     error: function (err) {
         console.log(err);
-    }
+    },
 });
 
 $.ajax({
@@ -146,12 +146,12 @@ $.ajax({
     success: function(data) {
         solar4 = data;
         for (let i = 0; i < data['features'].length; i++) {
-            solar['features'].push(data['features'][i])
+            solar['features'].push(data['features'][i]);
         }
     },
     error: function (err) {
         console.log(err);
-    }
+    },
 });
 
 $.ajax({
@@ -162,12 +162,12 @@ $.ajax({
     success: function(data) {
         solar5 = data;
         for (let i = 0; i < data['features'].length; i++) {
-            solar['features'].push(data['features'][i])
+            solar['features'].push(data['features'][i]);
         }
     },
     error: function (err) {
         console.log(err);
-    }
+    },
 });
 
 $.ajax({
@@ -178,12 +178,12 @@ $.ajax({
     success: function(data) {
         solar6 = data;
         for (let i = 0; i < data['features'].length; i++) {
-            solar['features'].push(data['features'][i])
+            solar['features'].push(data['features'][i]);
         }
     },
     error: function (err) {
         console.log(err);
-    }
+    },
 });
 
 $.ajax({
@@ -194,12 +194,12 @@ $.ajax({
     success: function(data) {
         solar7 = data;
         for (let i = 0; i < data['features'].length; i++) {
-            solar['features'].push(data['features'][i])
+            solar['features'].push(data['features'][i]);
         }
     },
     error: function (err) {
         console.log(err);
-    }
+    },
 });
 
 let neighbors = {};
@@ -214,7 +214,7 @@ $.ajax({
     },
     error: function (err) {
         console.log(err);
-    }
+    },
 });
 
 window.neighbors = neighbors;
@@ -234,7 +234,7 @@ map.on('load', () => {
 
     map.addSource('neighborhood-boundary', {
         'type': 'geojson',
-        'data': neighbors
+        'data': neighbors,
     });
     map.addLayer({
         'id': 'neighborhood',
@@ -248,7 +248,7 @@ map.on('load', () => {
             'fill-outline-color': 'rgba(0,0,0,0.1)',
             // 'fill-color': '#627BC1',
             'fill-opacity': 0.1,
-        }
+        },
     });
     map.addLayer({
         'id': 'outline',
@@ -257,8 +257,8 @@ map.on('load', () => {
         'layout': {},
         'paint': {
             'line-color': '#ffffff',
-            'line-width': 1
-        }
+            'line-width': 1,
+        },
     });
 
     // When clicked, show the neighborhood information
@@ -277,7 +277,7 @@ map.on('load', () => {
         // Create a 'LngLatBounds' with both corners at the first coordinate.
         const bounds = new mapboxgl.LngLatBounds(
             coordinates[0],
-            coordinates[0]
+            coordinates[0],
         );
 
         // Extend the 'LngLatBounds' to include every coordinate in the bounds result.
@@ -286,19 +286,19 @@ map.on('load', () => {
         }
 
         map.fitBounds(bounds, {
-            padding: 20
+            padding: 20,
         });
 
-        var feature = features[0].toJSON();
+        let feature = features[0].toJSON();
 
         if (typeof map.getLayer('selectedNeighbor') !== "undefined" ){
-            map.removeLayer('selectedNeighbor')
+            map.removeLayer('selectedNeighbor');
             map.removeSource('selectedNeighbor');
         }
 
         map.addSource('selectedNeighbor', {
             "type":"geojson",
-            "data": feature
+            "data": feature,
         });
         map.addLayer({
             "id": "selectedNeighbor",
@@ -306,11 +306,11 @@ map.on('load', () => {
             "source": "selectedNeighbor",
             "layout": {
                 "line-join": "round",
-                "line-cap": "round"
+                "line-cap": "round",
             },
             "paint": {
                 "line-color": "white",
-                "line-width": 6
+                "line-width": 6,
             },
         });
 
@@ -369,12 +369,12 @@ map.on('load', () => {
 
 
 $("#select-neighbor").change(function(){
-    var selectVal = $("#select-neighbor option:selected").val();
+    let selectVal = $("#select-neighbor option:selected").val();
     let name_arr = selectVal.split('_');
     if (name_arr.length > 1) {
         selectVal = name_arr[0];
         for (let j = 1; j < name_arr.length; j++) {
-            selectVal += ' ' + name_arr[j]
+            selectVal += ' ' + name_arr[j];
         }
     }
     for (let i = 0; i < neighbors['features'].length; i++) {
@@ -384,7 +384,7 @@ $("#select-neighbor").change(function(){
             // Create a 'LngLatBounds' with both corners at the first coordinate.
             const bounds = new mapboxgl.LngLatBounds(
                 coordinates[0],
-                coordinates[0]
+                coordinates[0],
             );
 
             // Extend the 'LngLatBounds' to include every coordinate in the bounds result.
@@ -393,19 +393,19 @@ $("#select-neighbor").change(function(){
             }
 
             map.fitBounds(bounds, {
-                padding: 20
+                padding: 20,
             });
 
-            var feature = neighbors['features'][i];
+            let feature = neighbors['features'][i];
 
             if (typeof map.getLayer('selectedNeighbor') !== "undefined" ){
-                map.removeLayer('selectedNeighbor')
+                map.removeLayer('selectedNeighbor');
                 map.removeSource('selectedNeighbor');
             }
 
             map.addSource('selectedNeighbor', {
                 "type":"geojson",
-                "data": feature
+                "data": feature,
             });
             map.addLayer({
                 "id": "selectedNeighbor",
@@ -413,14 +413,14 @@ $("#select-neighbor").change(function(){
                 "source": "selectedNeighbor",
                 "layout": {
                     "line-join": "round",
-                    "line-cap": "round"
+                    "line-cap": "round",
                 },
                 "paint": {
                     "line-color": "white",
-                    "line-width": 6
+                    "line-width": 6,
                 },
             });
-            break
+            break;
         }
     }
 });
@@ -435,31 +435,31 @@ map_roof.on('load', () => {
     });
     map_roof.addSource('solar-roof1', {
         'type': 'geojson',
-        'data': solar1
+        'data': solar1,
     });
     map_roof.addSource('solar-roof2', {
         'type': 'geojson',
-        'data': solar2
+        'data': solar2,
     });
     map_roof.addSource('solar-roof3', {
         'type': 'geojson',
-        'data': solar3
+        'data': solar3,
     });
     map_roof.addSource('solar-roof4', {
         'type': 'geojson',
-        'data': solar4
+        'data': solar4,
     });
     map_roof.addSource('solar-roof5', {
         'type': 'geojson',
-        'data': solar5
+        'data': solar5,
     });
     map_roof.addSource('solar-roof6', {
         'type': 'geojson',
-        'data': solar6
+        'data': solar6,
     });
     map_roof.addSource('solar-roof7', {
         'type': 'geojson',
-        'data': solar7
+        'data': solar7,
     });
 
     map_roof.addLayer({
@@ -473,9 +473,9 @@ map_roof.on('load', () => {
         'source': 'solar-roof1',
         'paint': {
             'fill-color': '#eee',
-            'fill-opacity': 0
+            'fill-opacity': 0,
         },
-        'filter': ['==', '$type', 'Polygon']
+        'filter': ['==', '$type', 'Polygon'],
     });
     map_roof.addLayer({
         'id': 'roof_line1',
@@ -483,7 +483,7 @@ map_roof.on('load', () => {
         'source': 'solar-roof1',
         'paint': {
             'line-color': '#ffffff',
-            'line-width': 1
+            'line-width': 1,
         },
     });
     map_roof.addLayer({
@@ -492,9 +492,9 @@ map_roof.on('load', () => {
         'source': 'solar-roof2',
         'paint': {
             'fill-color': '#eee',
-            'fill-opacity': 0
+            'fill-opacity': 0,
         },
-        'filter': ['==', '$type', 'Polygon']
+        'filter': ['==', '$type', 'Polygon'],
     });
     map_roof.addLayer({
         'id': 'roof2_line',
@@ -502,7 +502,7 @@ map_roof.on('load', () => {
         'source': 'solar-roof2',
         'paint': {
             'line-color': '#ffffff',
-            'line-width': 1
+            'line-width': 1,
         },
     });
     map_roof.addLayer({
@@ -511,9 +511,9 @@ map_roof.on('load', () => {
         'source': 'solar-roof3',
         'paint': {
             'fill-color': '#eee',
-            'fill-opacity': 0
+            'fill-opacity': 0,
         },
-        'filter': ['==', '$type', 'Polygon']
+        'filter': ['==', '$type', 'Polygon'],
     });
     map_roof.addLayer({
         'id': 'roof3_line',
@@ -521,7 +521,7 @@ map_roof.on('load', () => {
         'source': 'solar-roof3',
         'paint': {
             'line-color': '#ffffff',
-            'line-width': 1
+            'line-width': 1,
         },
     });
     map_roof.addLayer({
@@ -530,9 +530,9 @@ map_roof.on('load', () => {
         'source': 'solar-roof4',
         'paint': {
             'fill-color': '#eee',
-            'fill-opacity': 0
+            'fill-opacity': 0,
         },
-        'filter': ['==', '$type', 'Polygon']
+        'filter': ['==', '$type', 'Polygon'],
     });
     map_roof.addLayer({
         'id': 'roof4_line',
@@ -540,7 +540,7 @@ map_roof.on('load', () => {
         'source': 'solar-roof4',
         'paint': {
             'line-color': '#ffffff',
-            'line-width': 1
+            'line-width': 1,
         },
     });
     map_roof.addLayer({
@@ -549,9 +549,9 @@ map_roof.on('load', () => {
         'source': 'solar-roof5',
         'paint': {
             'fill-color': '#eee',
-            'fill-opacity': 0
+            'fill-opacity': 0,
         },
-        'filter': ['==', '$type', 'Polygon']
+        'filter': ['==', '$type', 'Polygon'],
     });
     map_roof.addLayer({
         'id': 'roof5_line',
@@ -559,7 +559,7 @@ map_roof.on('load', () => {
         'source': 'solar-roof5',
         'paint': {
             'line-color': '#ffffff',
-            'line-width': 1
+            'line-width': 1,
         },
     });
     map_roof.addLayer({
@@ -568,9 +568,9 @@ map_roof.on('load', () => {
         'source': 'solar-roof6',
         'paint': {
             'fill-color': '#eee',
-            'fill-opacity': 0
+            'fill-opacity': 0,
         },
-        'filter': ['==', '$type', 'Polygon']
+        'filter': ['==', '$type', 'Polygon'],
     });
     map_roof.addLayer({
         'id': 'roof6_line',
@@ -578,7 +578,7 @@ map_roof.on('load', () => {
         'source': 'solar-roof6',
         'paint': {
             'line-color': '#ffffff',
-            'line-width': 1
+            'line-width': 1,
         },
     });
     map_roof.addLayer({
@@ -587,9 +587,9 @@ map_roof.on('load', () => {
         'source': 'solar-roof7',
         'paint': {
             'fill-color': '#eee',
-            'fill-opacity': 0
+            'fill-opacity': 0,
         },
-        'filter': ['==', '$type', 'Polygon']
+        'filter': ['==', '$type', 'Polygon'],
     });
     map_roof.addLayer({
         'id': 'roof7_line',
@@ -597,7 +597,7 @@ map_roof.on('load', () => {
         'source': 'solar-roof7',
         'paint': {
             'line-color': '#ffffff',
-            'line-width': 1
+            'line-width': 1,
         },
     });
 
@@ -628,16 +628,16 @@ map_roof.on('load', () => {
         //     padding: 20
         // });
 
-        var feature = features[0].toJSON();
+        let feature = features[0].toJSON();
 
         if (typeof map_roof.getLayer('selectedRoof') !== "undefined" ){
-            map_roof.removeLayer('selectedRoof')
+            map_roof.removeLayer('selectedRoof');
             map_roof.removeSource('selectedRoof');
         }
 
         map_roof.addSource('selectedRoof', {
             "type":"geojson",
-            "data": feature
+            "data": feature,
         });
         map_roof.addLayer({
             "id": "selectedRoof",
@@ -645,11 +645,11 @@ map_roof.on('load', () => {
             "source": "selectedRoof",
             "layout": {
                 "line-join": "round",
-                "line-cap": "round"
+                "line-cap": "round",
             },
             "paint": {
                 "line-color": "white",
-                "line-width": 6
+                "line-width": 6,
             },
         });
 
@@ -693,16 +693,16 @@ map_roof.on('load', () => {
         //     padding: 20
         // });
 
-        var feature = features[0].toJSON();
+        let feature = features[0].toJSON();
 
         if (typeof map_roof.getLayer('selectedRoof') !== "undefined" ){
-            map_roof.removeLayer('selectedRoof')
+            map_roof.removeLayer('selectedRoof');
             map_roof.removeSource('selectedRoof');
         }
 
         map_roof.addSource('selectedRoof', {
             "type":"geojson",
-            "data": feature
+            "data": feature,
         });
         map_roof.addLayer({
             "id": "selectedRoof",
@@ -710,11 +710,11 @@ map_roof.on('load', () => {
             "source": "selectedRoof",
             "layout": {
                 "line-join": "round",
-                "line-cap": "round"
+                "line-cap": "round",
             },
             "paint": {
                 "line-color": "white",
-                "line-width": 6
+                "line-width": 6,
             },
         });
 
@@ -758,16 +758,16 @@ map_roof.on('load', () => {
         //     padding: 20
         // });
 
-        var feature = features[0].toJSON();
+        let feature = features[0].toJSON();
 
         if (typeof map_roof.getLayer('selectedRoof') !== "undefined" ){
-            map_roof.removeLayer('selectedRoof')
+            map_roof.removeLayer('selectedRoof');
             map_roof.removeSource('selectedRoof');
         }
 
         map_roof.addSource('selectedRoof', {
             "type":"geojson",
-            "data": feature
+            "data": feature,
         });
         map_roof.addLayer({
             "id": "selectedRoof",
@@ -775,11 +775,11 @@ map_roof.on('load', () => {
             "source": "selectedRoof",
             "layout": {
                 "line-join": "round",
-                "line-cap": "round"
+                "line-cap": "round",
             },
             "paint": {
                 "line-color": "white",
-                "line-width": 6
+                "line-width": 6,
             },
         });
 
@@ -823,16 +823,16 @@ map_roof.on('load', () => {
         //     padding: 20
         // });
 
-        var feature = features[0].toJSON();
+        let feature = features[0].toJSON();
 
         if (typeof map_roof.getLayer('selectedRoof') !== "undefined" ){
-            map_roof.removeLayer('selectedRoof')
+            map_roof.removeLayer('selectedRoof');
             map_roof.removeSource('selectedRoof');
         }
 
         map_roof.addSource('selectedRoof', {
             "type":"geojson",
-            "data": feature
+            "data": feature,
         });
         map_roof.addLayer({
             "id": "selectedRoof",
@@ -840,11 +840,11 @@ map_roof.on('load', () => {
             "source": "selectedRoof",
             "layout": {
                 "line-join": "round",
-                "line-cap": "round"
+                "line-cap": "round",
             },
             "paint": {
                 "line-color": "white",
-                "line-width": 6
+                "line-width": 6,
             },
         });
 
@@ -888,16 +888,16 @@ map_roof.on('load', () => {
         //     padding: 20
         // });
 
-        var feature = features[0].toJSON();
+        let feature = features[0].toJSON();
 
         if (typeof map_roof.getLayer('selectedRoof') !== "undefined" ){
-            map_roof.removeLayer('selectedRoof')
+            map_roof.removeLayer('selectedRoof');
             map_roof.removeSource('selectedRoof');
         }
 
         map_roof.addSource('selectedRoof', {
             "type":"geojson",
-            "data": feature
+            "data": feature,
         });
         map_roof.addLayer({
             "id": "selectedRoof",
@@ -905,11 +905,11 @@ map_roof.on('load', () => {
             "source": "selectedRoof",
             "layout": {
                 "line-join": "round",
-                "line-cap": "round"
+                "line-cap": "round",
             },
             "paint": {
                 "line-color": "white",
-                "line-width": 6
+                "line-width": 6,
             },
         });
 
@@ -953,16 +953,16 @@ map_roof.on('load', () => {
         //     padding: 20
         // });
 
-        var feature = features[0].toJSON();
+        let feature = features[0].toJSON();
 
         if (typeof map_roof.getLayer('selectedRoof') !== "undefined" ){
-            map_roof.removeLayer('selectedRoof')
+            map_roof.removeLayer('selectedRoof');
             map_roof.removeSource('selectedRoof');
         }
 
         map_roof.addSource('selectedRoof', {
             "type":"geojson",
-            "data": feature
+            "data": feature,
         });
         map_roof.addLayer({
             "id": "selectedRoof",
@@ -970,11 +970,11 @@ map_roof.on('load', () => {
             "source": "selectedRoof",
             "layout": {
                 "line-join": "round",
-                "line-cap": "round"
+                "line-cap": "round",
             },
             "paint": {
                 "line-color": "white",
-                "line-width": 6
+                "line-width": 6,
             },
         });
 
@@ -1018,16 +1018,16 @@ map_roof.on('load', () => {
         //     padding: 20
         // });
 
-        var feature = features[0].toJSON();
+        let feature = features[0].toJSON();
 
         if (typeof map_roof.getLayer('selectedRoof') !== "undefined" ){
-            map_roof.removeLayer('selectedRoof')
+            map_roof.removeLayer('selectedRoof');
             map_roof.removeSource('selectedRoof');
         }
 
         map_roof.addSource('selectedRoof', {
             "type":"geojson",
-            "data": feature
+            "data": feature,
         });
         map_roof.addLayer({
             "id": "selectedRoof",
@@ -1035,11 +1035,11 @@ map_roof.on('load', () => {
             "source": "selectedRoof",
             "layout": {
                 "line-join": "round",
-                "line-cap": "round"
+                "line-cap": "round",
             },
             "paint": {
                 "line-color": "white",
-                "line-width": 6
+                "line-width": 6,
             },
         });
 
