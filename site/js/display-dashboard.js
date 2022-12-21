@@ -99,7 +99,7 @@ const dashboardVarsDict = {
       "6": "Maintenance",
       "7": "Recreation",
       "8": "Home",
-      "9": "Other"
+      "9": "Other",
     },
   },
   "car_ownership": {
@@ -210,13 +210,13 @@ function makeVegaObj(preparedData, displayName, xAxisUnit) {
     },
     "selection": {
       "highlight": { "type": "single", "empty": "none", "on": "mouseover", "tooltip": true },
-      "select": { "type": "multi" }
+      "select": { "type": "multi" },
     },
     "encoding": {
       "x": {
-        "field": `${displayName}`, 
-        "type": "ordinal", 
-        "axis": { 
+        "field": `${displayName}`,
+        "type": "ordinal",
+        "axis": {
           "title": `${xAxisUnit}`,
           "labelColor": "#353795",
           "titleColor": "#353795",
@@ -225,28 +225,28 @@ function makeVegaObj(preparedData, displayName, xAxisUnit) {
         "sort": "none",
       },
       "y": {
-        "field": "Trips", 
-        "type": "quantitative", 
-        "axis": { 
-          "title": null, 
-          "domainColor": "#cccccc", 
+        "field": "Trips",
+        "type": "quantitative",
+        "axis": {
+          "title": null,
+          "domainColor": "#cccccc",
           "labelColor": "#bbbbbb",
           "grid": false,
         },
       },
       "fillOpacity": {
-        "condition": {"selection": "select", "value": 1},
-        "value": 0.5
+        "condition": { "selection": "select", "value": 1 },
+        "value": 0.5,
       },
       "strokeWidth": {
-        "value": 0
+        "value": 0,
       },
       "color": {
         "condition": [
-          { "selection": "highlight", "value": "#353795" }
+          { "selection": "highlight", "value": "#353795" },
         ],
         "value": "#c8b7d9",
-      }
+      },
     },
     "mark": {
       "type": "bar",
@@ -262,8 +262,8 @@ function makeVegaObj(preparedData, displayName, xAxisUnit) {
       "axis": {
         "labelFont": "monospace",
         "titleFont": "monospace",
-      }
-    }
+      },
+    },
   }
   ;
 }
@@ -285,7 +285,7 @@ function estimateMean(filtered, varName) {
     const thisWeight = item.n_trips;
     sum = sum + thisCenter * thisWeight;
     count = count + item.n_trips;
-  })
+  });
   return Math.round(sum * 10 / count) / 10;
 }
 

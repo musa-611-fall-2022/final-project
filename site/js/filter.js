@@ -16,10 +16,10 @@ function addContinuousFilterRecorder(varName) {
   const toSliderEl = thisSliderKit.getElementsByClassName("to-slider")[0];
   const sliderMinValEl = thisSliderKit.getElementsByClassName("slider-min-val")[0];
   const sliderMaxValEl = thisSliderKit.getElementsByClassName("slider-max-val")[0];
-  
+
   // Minimal gap between the min and max values
   let minGap = 1;
-  
+
   // Control the min slider
   fromSliderEl.addEventListener("input", ( ) => {
     if(parseInt(toSliderEl.value) - parseInt(fromSliderEl.value) <= minGap) {
@@ -79,7 +79,7 @@ function addCategoricalFilterRecorder(varName) {
     for(const optionEl of factorOptionsEls) {
       optionEl.addEventListener('click', ( ) => {
         filterParams.homeWork[optionEl.value].isApplied = optionEl.checked;
-      })
+      });
     }
     return;
   }
@@ -98,7 +98,7 @@ function addCategoricalFilterRecorder(varName) {
         turnOffFilterOnEmpty(filterParams.categoricalVars[varName]);
       }
       filterParams.categoricalVars[varName].isApplied;
-    })
+    });
   }
 }
 
@@ -124,11 +124,11 @@ function addResetToSliders() {
       // Change the record
       const kitEl = sliderEl.parentNode;
       const varName = kitEl.id.substring(0, kitEl.id.length - 7);
-      
+
       filterParams.continuousVars[varName].isApplied = false;
       filterParams.continuousVars[varName].lowerBound = parseInt(fromSliderEl.min);
       filterParams.continuousVars[varName].upperBound = parseInt(toSliderEl.max);
-    })
+    });
   }
 }
 
@@ -146,7 +146,7 @@ function addResetToFactorSelectors() {
   for(const buttonEl of resetButtonsEls) {
     // Get to the corresponding cb group
     const cbGroupEl = buttonEl.parentNode.nextElementSibling;
-    
+
     buttonEl.addEventListener('click', ( ) => {
 
       // First turn off all the checkboxes
@@ -163,7 +163,7 @@ function addResetToFactorSelectors() {
       }
       filterParams.categoricalVars[varName].isApplied = false;
       filterParams.categoricalVars[varName].selectedCategories = [];
-    });    
+    });
   }
 }
 

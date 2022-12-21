@@ -149,7 +149,7 @@ function mergeAttributeToMapData(mapBaseData, updateData, key) {
     type: 'FeatureCollection',
     crs: mapBaseData.crs,
     features: [],
-  }
+  };
   for(const feature of mapBaseData.features) {
     feature.properties.mapDisplayVal = 0;
     for(let i = 0; i < updateData.length; i++) {
@@ -180,7 +180,7 @@ function computeQuintiles(dataArr, ntiles) {
   // First turn object into array
   const ascArr = dataArr.sort((a, b) => a - b);
   const sectionLength = ascArr.length / ntiles;
-  
+
   // Add the min
   quintiles.push(ascArr[0]);
 

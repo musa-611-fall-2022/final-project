@@ -112,13 +112,13 @@ export const categoricalVarsDict = {
 const mapDisplayVars = {
   meanType: [
     {
-      varName: 'trip_duration_minutes', 
+      varName: 'trip_duration_minutes',
       displayName: 'Duration (min)',
     },
     {
       varName: 'trip_distance_miles',
       displayName: 'Distance (mi)',
-    }
+    },
   ],
   ratioType: [
     {
@@ -127,10 +127,10 @@ const mapDisplayVars = {
       factors: {
         1: 'Own car',
         3: 'Walk',
-        4: 'Bike', 
+        4: 'Bike',
         5: 'TNC',
         6: 'Transit',
-      }
+      },
     },
     {
       varName: 'trip_purpose',
@@ -140,13 +140,13 @@ const mapDisplayVars = {
         4: 'Eat',
         5: 'Shop',
         7: 'Recreation',
-      }
-    }
+      },
+    },
   ],
   countType: [
     {
       displayName: 'Count',
-    }
+    },
   ],
 };
 
@@ -215,10 +215,10 @@ addDisplayVarsEl(toggleDisplayVarsGroupEl, 'count', null, null, `<span class="it
 // 'agg' type
 for(const displayVar of mapDisplayVars.meanType) {
   addDisplayVarsEl(
-    toggleDisplayVarsGroupEl, 
-    'agg', 
-    displayVar.varName, 
-    null, 
+    toggleDisplayVarsGroupEl,
+    'agg',
+    displayVar.varName,
+    null,
     `<span class="italic strong">Total</span> ${displayVar.displayName}`,
   );
 }
@@ -226,10 +226,10 @@ for(const displayVar of mapDisplayVars.meanType) {
 // 'mean' type
 for(const displayVar of mapDisplayVars.meanType) {
   addDisplayVarsEl(
-    toggleDisplayVarsGroupEl, 
-    'mean', 
-    displayVar.varName, 
-    null, 
+    toggleDisplayVarsGroupEl,
+    'mean',
+    displayVar.varName,
+    null,
     `<span class="italic strong">Average</span> ${displayVar.displayName}`,
   );
 }
@@ -243,39 +243,9 @@ for(const displayVar of mapDisplayVars.ratioType) {
       displayVar.varName,
       factorKey,
       `<span class="italic strong">${displayVar.displayName} split</span> ${displayVar.factors[factorKey]}`,
-    )
+    );
   }
 }
-
-// Record map display variable || and collapse the window
-const displayVarOptionsEl = toggleDisplayVarsGroupEl.getElementsByClassName('cb-invisible');
-for(const cbEl of displayVarOptionsEl) {
-  cbEl.addEventListener('click', ( ) => {
-    toggleDisplayParams.displayType = cbEl.displayType;
-
-    toggleDisplayParams.displayVar = cbEl.value;
-    if(cbEl.value === 'null') toggleDisplayParams.displayVar = null;
-    
-    toggleDisplayParams.displayFactor = cbEl.displayFactor;
-    if(cbEl.displayFactor === 'null') toggleDisplayParams.displayFactor = null;
-    
-    console.log(toggleDisplayParams);
-
-    // Change the text on the button
-    const buttonEl = document.querySelector('#display-var-button');
-    buttonEl.innerHTML = cbEl.nextElementSibling.firstChild.innerHTML;
-
-    onConfirmButtonClick();
-
-    // Collapse the window by simulating a click (after a short period of time)
-    setTimeout(( ) => { document.querySelector('#display-var-button').click() }, 250);
-  })
-
-  // By default click on the first optin
-  if(cbEl.displayType == 'count') cbEl.checked = true;
-}
-
-
 
 /* ================================================================
 For continuous filters, add sliders and Recorders, and Resetters
@@ -376,7 +346,7 @@ function makeCategoricalWhereClause(whereClause, filterParams) {
       } else {
         thisWhere = ` AND (${filter.varName} IN (${filter.selectedCategories.join(', ')}))`;
       }
-      
+
       whereClause += thisWhere;
     }
   }
@@ -684,6 +654,34 @@ geoUnapplyButtonEl.addEventListener('click', ( ) => {
   panelGeoResetButtonEl.click();
   onConfirmButtonClick();
 });
+
+// Record map display variable || and collapse the window
+const displayVarOptionsEl = toggleDisplayVarsGroupEl.getElementsByClassName('cb-invisible');
+for(const cbEl of displayVarOptionsEl) {
+  cbEl.addEventListener('click', ( ) => {
+    toggleDisplayParams.displayType = cbEl.displayType;
+
+    toggleDisplayParams.displayVar = cbEl.value;
+    if(cbEl.value === 'null') toggleDisplayParams.displayVar = null;
+
+    toggleDisplayParams.displayFactor = cbEl.displayFactor;
+    if(cbEl.displayFactor === 'null') toggleDisplayParams.displayFactor = null;
+
+    console.log(toggleDisplayParams);
+
+    // Change the text on the button
+    const buttonEl = document.querySelector('#display-var-button');
+    buttonEl.innerHTML = cbEl.nextElementSibling.firstChild.innerHTML;
+
+    onConfirmButtonClick();
+
+    // Collapse the window by simulating a click (after a short period of time)
+    setTimeout(( ) => { document.querySelector('#display-var-button').click() }, 250);
+  });
+
+  // By default click on the first optin
+  if(cbEl.displayType == 'count') cbEl.checked = true;
+}
 
 export {
   onConfirmButtonClick,

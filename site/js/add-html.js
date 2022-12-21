@@ -73,7 +73,7 @@ function makeFilterOptionEl(factorKey, displayFactor) {
         <button class="center-content">${displayFactor}</button>
       </div>
     </label>
-  `)
+  `);
   return el;
 }
 
@@ -90,7 +90,7 @@ function makeFilterCbGroupEl(varName) {
       </div>
       <div class="cb-group cb-group-wrap"></div>
     </div>
-  `)
+  `);
   return el;
 }
 
