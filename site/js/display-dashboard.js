@@ -337,7 +337,6 @@ function makeDashboard(dataArr) {
       varName,
       dashboardVarsDict[varName].displayName,
     )
-    console.log(preparedData);
     vegaEmbed(
       `#${varName}-graph`,
       makeVegaObj(

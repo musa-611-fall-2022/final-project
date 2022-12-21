@@ -560,6 +560,7 @@ Call API on confirm button click
 
 const dashboardMessageEl = document.querySelector('#dashboard-waiting-message');
 const dashboardContainerEl = document.querySelector('#dashboard-container');
+const mapLoadOverlayEl = document.querySelector('#map-loading-overlay');
 
 function startDashboarPanelWaitSign() {
   dashboardMessageEl.style.display = 'flex';
@@ -570,6 +571,14 @@ function startDashboarPanelWaitSign() {
 function removeDashboardPanelWeightSign () {
   dashboardMessageEl.style.display = 'none';
   dashboardContainerEl.style.display = 'flex';
+}
+
+function startMapWaitSign() {
+  mapLoadOverlayEl.style.display = 'flex';
+}
+
+function removeMapWaitSign() {
+  mapLoadOverlayEl.style.display = 'none';
 }
 
 // Formats numbers before placing them in the legend
@@ -616,6 +625,7 @@ async function onConfirmButtonClick() {
 
   // query map
   try {
+    startMapWaitSign();
     const mapResp = await fetch(`https://mobiladelphia.herokuapp.com/test-query/${mapQuery}`);
     const mapData = await mapResp.json();
     const mapUpdateData = mapData.results;
@@ -631,9 +641,12 @@ async function onConfirmButtonClick() {
     
     // Update the legend
     updateLegendText(displayInfo.quintiles, displayInfo.key);
-
+    removeMapWaitSign();
   } catch(err) {
-    console.log(err);  
+    console.log(err);
+    setTimeout(( ) => {
+      removeMapWaitSign();
+    }, 2500)
   }
 
   try {
@@ -660,7 +673,6 @@ async function onConfirmButtonClick() {
     removeDashboardPanelWeightSign();
     makeDashboard(dashboardData);
 
-    console.log(dashboardData);
   } catch(err) {
     console.log(err);
   }

@@ -176,11 +176,12 @@ On smaller screens the columns should be stacked vertically
 and when screen is smaller than 20rem, go for 100% */
 
 .column {
-  width: clamp(25%, 20rem, 100%);
+  width: clamp(20%, 20rem, 100%);
   display: flex;
   gap: 0.5rem;
   flex-direction: column;
   pointer-events: auto;
+  overflow: auto;
 }
 
 .filter-panel {
@@ -268,4 +269,20 @@ and when screen is smaller than 20rem, go for 100% */
   .confirm-button {
     display: none;
   }
+}
+
+/* -------- Map loading overlay ----------- */
+
+.map-loading-overlay {
+  height: 100vh;
+  width: 100vw;
+  background-color: white;
+  position: fixed;
+  opacity: 0.82;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--hero-reg);
+  padding: 0 clamp(1rem, 30%, 40%);
 }
