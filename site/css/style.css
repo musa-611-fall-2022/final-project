@@ -55,7 +55,7 @@ a {
   z-index: 10;
 }
 
-.et-hero-tabs-container--top {
+.et-hero-tabs-container-top {
   position: fixed;
   top: 0;
 }
@@ -66,7 +66,7 @@ a {
   align-items: center;
   width: 60%;
   color: black;
-  font-family: "Times New Roman";
+  font-family: "Times New Roman", sans-serif;
   font-size: 2.5em;
   font-weight: bold;
 }

@@ -88,8 +88,6 @@
   bottom: 100%;
 }
 
-
-
 .mapboxgl-ctrl-geocoder-suggestion-title {
   font-weight: bold;
 }
@@ -165,15 +163,15 @@
   color: #909090;
 }
 
+.mapboxgl-ctrl-geocoder-powered-by a:not(:hover) {
+  text-decoration: none;
+}
+
 .mapboxgl-ctrl-geocoder .suggestions > li > a {
   cursor: default;
   display: block;
   padding: 6px 12px;
   color: #404040;
-}
-
-.mapboxgl-ctrl-geocoder-powered-by a:not(:hover) {
-  text-decoration: none;
 }
 
 .mapboxgl-ctrl-geocoder .suggestions > .active > a,
