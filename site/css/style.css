@@ -1,0 +1,370 @@
+body {
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+.et-hero-tabs,
+.et-slide {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  position: relative;
+  background: #eee;
+  text-align: center;
+  padding: 0 2em;
+}
+/*.et-hero-tabs h1,*/
+/*.et-slide h1 {*/
+/*  font-size: 2rem;*/
+/*  margin: 0;*/
+/*  letter-spacing: 1rem;*/
+/*}*/
+/*.et-hero-tabs h3,*/
+/*.et-slide h3 {*/
+/*  font-size: 1rem;*/
+/*  letter-spacing: 0.3rem;*/
+/*  opacity: 0.6;*/
+/*}*/
+
+.et-hero-tabs-container {
+  display: flex;
+  flex-direction: row;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 70px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  background: #fff;
+  z-index: 10;
+}
+.et-hero-tabs-container--top {
+  position: fixed;
+  top: 0;
+}
+.title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 60%;
+  color: black;
+  font-family: "Times New Roman";
+  font-size: 2.5em;
+  font-weight: bold;
+}
+.logo {
+  height: 15%;
+  width: 50%;
+  position: absolute;
+  top: 40%;
+  left: 30%;
+}
+img {
+  width:auto; height:auto; max-width:100%; max-height:100%;
+}
+.mycontainer {
+  margin: 0;
+  height: 100%;
+  width: 100%;
+  background-image: url("../data/Background_Map.jpg");
+  background-size: 100%;
+  background-attachment: fixed;
+}
+.left {
+  position: absolute;
+  float: left;
+  height: 100%;
+  width: 30%;
+  left: 0;
+}
+.right {
+  position: absolute;
+  float: right;
+  height: 100%;
+  width: 70%;
+  left: 30%;
+}
+#map {
+  height: 100%;
+  z-index: 0;
+}
+#map-roof {
+  height: 100%;
+  z-index: 0;
+}
+
+#geocoder {
+  position: relative;
+  z-index: 1;
+  width: 90%;
+  left: 5%;
+  top: 5%;
+}
+
+#geocoder-roof {
+  position: relative;
+  z-index: 1;
+  width: 90%;
+  left: 5%;
+  top: 5%;
+}
+.panel {
+  position: absolute;
+  height: 30%;
+  width: 90%;
+  top: 10%;
+  left: 5%;
+}
+.panel-icon {
+  background-size: 80px;
+  height: 80px;
+  left: 40px;
+  position: absolute;
+  top: 16px;
+  width: 80px;
+}
+.panel-text {
+  color: #212121;
+  font-weight: 400;
+  text-align: left;
+  height: 30%;
+  left: 20%;
+  top: 25%;
+  position: absolute;
+  font-size: 25px;
+}
+.panel-caption {
+  position: absolute;
+  text-align: left;
+  height: 30%;
+  left: 20%;
+  top: 55%;
+  font-size: 14px;
+  color: #757575;
+  font-weight: 300;
+}
+.icon-sun {
+  background-image: url("../data/graphics/Icons-01_color.png");
+}
+.icon-area {
+  background-image: url("../data/graphics/Icons-02_color.png");
+}
+.icon-money {
+  background-image: url("../data/graphics/Icons-03_color.png");
+}
+.icon-carbon {
+  background-image: url("../data/graphics/Icons-04_color.png");
+}
+.icon-car {
+  background-image: url("../data/graphics/Icons-05_color.png");
+}
+.icon-tree {
+  background-image: url("../data/graphics/Icons-06_color.png");
+}
+.eq-icon {
+  background-size: 60px;
+  height: 60px;
+  left: 20px;
+  position: absolute;
+  top: 16px;
+  width: 60px;
+}
+.roof-calculation {
+  top: 43%;
+  position: absolute;
+  width: 90%;
+  height: 60%;
+  margin: 0;
+  left: 5%;
+}
+.equation {
+  height: 100px;
+  width: 100%;
+}
+.place-eq {
+  position: absolute;
+  left: 33%;
+  top: 50%;
+  font-size: 32px;
+  line-height: 80px;
+}
+.place-car {
+  position: absolute;
+  left: 68%;
+  top: 50%;
+  font-size: 32px;
+  line-height: 80px;
+}
+.carbon {
+  position: absolute;
+  height: 50%;
+  width: 30%;
+}
+.cars {
+  position: absolute;
+  height: 50%;
+  width: 30%;
+  left: 35%;
+}
+.tree {
+  position: absolute;
+  height: 50%;
+  width: 30%;
+  left: 70%;
+}
+/*.information {*/
+/*  top: 45%;*/
+/*  position: absolute;*/
+/*  width: 80%;*/
+/*  height: 30%;*/
+/*  margin: 0;*/
+/*  left: 10%;*/
+/*}*/
+.section {
+  display: block;
+  position: relative;
+  width: 100%;
+  height: 20%;
+}
+.section-intro {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 15%;
+  background-image: url("https://www.google.com/get/sunroof/images/bg-dark-2560w.jpg");
+}
+.section-inner {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  color: white;
+  text-align: center;
+  font-weight: 400;
+}
+.section-why {
+  position: absolute;
+  top: 15%;
+  width: 100%;
+  height: 27%;
+}
+.section-how {
+  position: absolute;
+  top: 40%;
+  width: 100%;
+  height: 23%;
+}
+li {
+  margin-bottom: 0.5em;
+}
+.section-technology {
+  position: absolute;
+  top: 62%;
+  width: 100%;
+  height: 50%;
+  background: #eee;
+}
+.footer {
+  position: absolute;
+  width: 100%;
+  height: 8%;
+  top: 112%;
+}
+.footer-links {
+  position: absolute;
+  width: 40%;
+  left: 30%;
+  top: 45%;
+  font-size: 15px;
+
+}
+.b-example-divider {
+  height: 3rem;
+  background-color: rgba(0, 0, 0, .1);
+  border: solid rgba(0, 0, 0, .15);
+  border-width: 1px 0;
+  box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+}
+
+.bi {
+  vertical-align: -.125em;
+  fill: currentColor;
+}
+.dividing-line {
+  background: linear-gradient(to right,#fad961,#f76b1c);
+  content: " ";
+  height: 4px;
+  display: block;
+  position: relative;
+}
+.mapboxgl-ctrl-geocoder {
+  max-width: 100%;
+}
+.legend {
+  background-color: #fff;
+  border-radius: 3px;
+  bottom: 30px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+  padding: 10px;
+  position: absolute;
+  right: 10px;
+  z-index: 1;
+}
+.legend h4 {
+  margin: 0 0 10px;
+}
+
+.legend div span {
+  border-radius: 50%;
+  display: inline-block;
+  height: 10px;
+  margin-right: 5px;
+  width: 10px;
+}
+
+.et-hero-tab {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  color: #000;
+  letter-spacing: 0.1rem;
+  transition: all 0.5s ease;
+  font-size: 10px;
+  font-weight: bold;
+  padding: 0 0 0 0;
+}
+.et-hero-tab:hover {
+  color: white;
+  background: rgba(102, 177, 241, 0.8);
+  transition: all 0.5s ease;
+}
+
+.et-hero-tab-slider {
+  position: absolute;
+  bottom: 0;
+  width: 0;
+  height: 6px;
+  background: #66B1F1;
+  transition: left 0.3s ease;
+}
+
+@media (min-width: 800px) {
+  .et-hero-tabs h1,
+  .et-slide h1 {
+    font-size: 3rem;
+  }
+  .et-hero-tabs h3,
+  .et-slide h3 {
+    font-size: 1rem;
+  }
+
+  .et-hero-tab {
+    font-size: 1rem;
+  }
+}
