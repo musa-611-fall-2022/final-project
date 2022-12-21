@@ -12,7 +12,7 @@ function getQuintileColor(val, quintiles) {
          val > Number(quintiles[3]) ? '#5557c3' :
          val > Number(quintiles[2]) ? '#8e8fd7' :
          val > Number(quintiles[1]) ? '#c6c7eb' :
-                                      '#ffffff';
+                                      '#e0e0f0';
 }
 
 // Sets quintile display styles
