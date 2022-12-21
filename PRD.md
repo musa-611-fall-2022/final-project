@@ -42,3 +42,9 @@ The maps are all based on Mapbox.gl, we have come across several problems and so
 * Select box doesn't listen to changes from Js, just from the web page, mouse or keyboard. So we added a trigger to attention the change event.
 
 * The geocoder part is from Mapbox, we failed to change the input address when we click the roof polygon in the map. But we have defined a variable to tell the app whether the input address is from the clicked roof polygon or the input box.
+
+One essential thing is that:
+
+Maybe the layout, font size in your personal computer don't show very well. It needs you to adjust your computer's system zoom size in the Setting.
+
+We failed to solve this problem.
