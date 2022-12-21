@@ -4,6 +4,8 @@ beforeAll(async () => {
   await page.goto('http://localhost:8080/site/');
 });
 
+jest.setTimeout(10000);
+
 describe('the index.html page', () => {
   it('should not have any obvious accessibility violations', async () => {
     await expect(page).toPassAxeTests();
