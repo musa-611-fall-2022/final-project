@@ -218,6 +218,12 @@
   margin: 0;
 }
 
+.selector-kit-title h1 {
+  color: var(--hero-reg);
+  font-size: 0.9rem;
+  margin: 0;
+}
+
 .dual-range-slider {
   width: 100%;
   position: relative; /* This is necessary as the children are position: absolute */
