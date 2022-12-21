@@ -239,6 +239,7 @@ import { geoSelection, filterParams } from './main.js';
 function addFeaturesArrToLayer(mapLayer, featuresArr) {
   featuresArr.forEach(feature => {
     mapLayer.addData(feature);
+    mapLayer.bringToFront();
   });
 }
 
@@ -341,6 +342,7 @@ function onLayerSelected(map, layer) {
 
   // Add layer to selected layer
   map.selectedLayer.addData(layer.feature);
+  map.selectedLayer.bringToFront();
 
   // Open the popup
   layer.openPopup();
@@ -442,6 +444,10 @@ function updateMap(map, mapData, quintiles, key) {
   map.blockGroupLayer.addEventListener('click', (e) => {
     addGeoSelector(map, e.layer);
   });
+
+  // Bring filter layers to front
+  map.originFilterLayer.bringToFront();
+  map.destinationFilterLayer.bringToFront();
 }
 
 export {
