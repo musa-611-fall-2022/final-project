@@ -1,0 +1,427 @@
+/* ------ Drop downs -------- */
+
+.dropdown-button {
+  width: 100%;
+  height: 1.5rem;
+  border-radius: 0.2rem;
+}
+
+.dropdown-content {
+  position: relative;
+  z-index: 10000;
+  background-color: white;
+  padding: 0 0.5rem;
+  border: var(--light-border);
+  top: 0.3rem;
+  box-sizing: border-box;
+  overflow: hidden;
+  display: none;
+  transition: all 0.3s ease-in-out;
+  max-height: 0;
+  box-shadow: var(--shadow-layer-2);
+  border-radius: 0.25rem;
+}
+
+/* Show dropdown on the right if on wide screen */
+
+@media only screen and (min-width: 37rem) {
+  .dropdown-content {
+    left: 20rem;
+    top: -1.5rem;
+    width: 15rem;
+  }
+}
+
+.dropdown-content ul {
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+
+.dropdown-content li {
+  width: 100%;
+  display: flex;
+  font-size: 0.9rem;
+  padding: 0.2rem 0.5rem;
+  cursor: pointer;
+}
+
+.display-var-button {
+  color: white;
+  background-color: var(--hero-reg);
+  border-color: var(--hero-reg);
+}
+
+.display-var-button:hover {
+  background-color: var(--hero-reg);
+}
+
+/* ------- Checkboxes (EXCLUSIVE) --------- */
+
+.cb-group {
+  display: flex;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.cb-group > * {
+  flex: 1;
+}
+
+.cb-invisible {
+  pointer-events: none;
+  display: none;
+  float: left;
+}
+
+.cb-option {
+  width: 100%;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+.cb-option > button {
+  pointer-events: none;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.cb-option .material-symbols-outlined {
+  font-size: 1.1rem;
+  color: var(--this-color);
+}
+
+.cb-invisible:checked + .cb-option > button {
+  background-color: var(--hero-reg);
+  border-color: var(--hero-reg);
+  color: white;
+}
+
+.cb-invisible:checked + .cb-option .material-symbols-outlined {
+  --hero-reg: white; /* Make all colors white */
+  --primary-reg: white;
+}
+
+/* --- Checkbox groups that have many options ----- */
+
+.cb-group-wrap {
+  flex-wrap: wrap;
+}
+
+.cb-group-wrap * {
+  font-size: 0.8rem;
+}
+
+.cb-group-wrap > * {
+  width: auto;
+  flex: auto;
+}
+
+.cb-group-wrap .cb-option {
+  width: auto;
+}
+
+/* ------- Geoselector --------- */
+
+.geo-selector-button-selected {
+  background-color: var(--primary-reg);
+  color: white;
+  border-color: var(--primary-reg);
+}
+
+.geo-selector-button-selected:hover {
+  background-color: var(--primary-reg);
+}
+
+.geo-filter-kit p {
+  margin: 0;
+  font-size: 0.78rem;
+  font-style: italic;
+  color: var(--primary-reg);
+}
+
+.geo-unapply-button {
+  background-color: var(--hero-reg);
+  color: white;
+  font-size: 0.85rem;
+  width: 5rem;
+  height: 1.2rem;
+  align-self: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0.25rem;
+  border-color: var(--hero-reg);
+}
+
+.geo-unapply-button:hover {
+  background-color: var(--hero-reg);
+}
+
+.selector-kit.geo-filter-kit {
+  gap: 0.35rem;
+}
+
+.geo-select-legend {
+  display: flex;
+  justify-content: flex-start;
+  gap: 1rem;
+}
+
+.geo-select-legend > * {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.geo-select-legend-icon {
+  height: 0.8rem;
+  width: 2rem;
+  border-color: #ddd;
+  border-style: solid;
+  border-width: 0.15rem;
+  border-radius: 0.4rem;
+}
+
+.geo-select-legend-text {
+  font-size: 0.85rem;
+  color: var(--text-gray);
+}
+
+.geo-select-legend-origin .geo-select-legend-icon {
+  border-style: dashed;
+}
+
+/* ------- Double-range slider --------- */
+
+.selector-kit {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.selector-kit-top {
+  display: flex;
+  justify-content: space-between;
+}
+
+.selector-top-right {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.selector-kit-title {
+  color: var(--hero-reg);
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.selector-kit-title h1 {
+  color: var(--hero-reg);
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.dual-range-slider {
+  width: 100%;
+  position: relative; /* This is necessary as the children are position: absolute */
+  height: var(--slider-height);
+}
+
+input[type="range"] {
+  appearance: none;
+  width: 100%;
+  outline: none;
+  position: absolute;
+  top: calc(var(--slider-height) / 2 - 0.6rem);
+  pointer-events: none;
+  background-color: transparent;
+}
+
+.slider-track {
+  --this-height: 0.4rem;
+  width: 100%;
+  height: var(--this-height);
+  background-color: white;
+  border: var(--light-border);
+  position: absolute;
+  top: calc((var(--slider-height) - var(--this-height)) / 2);
+  border-radius: 0.2rem;
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+  appearance: none;
+  height: 0.5rem;
+}
+
+input[type="range"]::-moz-range-track {
+  appearance: none;
+  height: 0.5rem;
+}
+
+input[type="range"]::-ms-track {
+  appearance: none;
+  height: 0.5rem;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  appearance: none;
+  height: 1rem;
+  width: 1rem;
+  background-color: white;
+  border: 1.5px solid var(--primary-reg);
+  cursor: pointer;
+  border-radius: 0.5rem;
+  pointer-events: auto;
+}
+
+input[type="range"]::-moz-range-thumb {
+  appearance: none;
+  height: 1rem;
+  width: 1rem;
+  background-color: var(--primary-reg);
+  border: 1.5px solid var(--primary-reg);
+  cursor: pointer;
+  border-radius: 0.5rem;
+  pointer-events: auto;
+}
+
+input[type="range"]::-ms-thumb {
+  appearance: none;
+  height: 1rem;
+  width: 1rem;
+  background-color: var(--primary-reg);
+  border: 1.5px solid var(--primary-reg);
+  cursor: pointer;
+  border-radius: 0.5rem;
+  pointer-events: auto;
+}
+
+input[type="range"]:active::-webkit-slider-thumb {
+  background-color: var(--primary-reg);
+  border: 1.5px solid var(--primary-reg);
+}
+
+.slider-values {
+  background-color: var(--hero-reg);
+  color: white;
+  font-size: 0.85rem;
+  width: 5rem;
+  height: 1.2rem;
+  align-self: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0.25rem;
+}
+
+.filter-reset-button {
+  height: 1.2rem;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  background-color: white;
+  border-color: var(--hero-reg);
+  color: var(--hero-reg);
+}
+
+/* ---- Categorical filters factor selection ----- */
+
+.factor-selector-kit {
+  gap: 0.4rem;
+}
+
+.cb-group-wrap button.center-content {
+  justify-content: center;
+}
+
+/* ---- Confirm button ------ */
+
+.confirm-button {
+  height: 2rem;
+  z-index: 3;
+  font-weight: 600;
+  color: white;
+  background-color: var(--hero-reg);
+  border-color: var(--hero-reg);
+  box-shadow: var(--shadow-layer-1);
+  font-size: 0.95rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.confirm-button:hover {
+  background-color: var(--highlight-reg);
+  border-color: var(--highlight-reg);
+}
+
+/* ------ Popup ----------- */
+
+.leaflet-popup-content-wrapper {
+  pointer-events: none;
+  border-radius: 0.3rem;
+  z-index: 999;
+}
+
+.leaflet-popup-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  pointer-events: none;
+  margin: 0.5rem;
+}
+
+.leaflet-popup-content * {
+  pointer-events: auto;
+}
+
+.leaflet-popup-content .geo-select-button {
+  width: 100%;
+}
+
+.reset-geo-select-button {
+  background-color: white;
+  color: var(--hero-reg);
+  border-color: var(--hero-reg);
+}
+
+.leaflet-container a.leaflet-popup-close-button {
+  font-size: 2.5rem;
+  color: var(--hero-reg);
+  margin-left: -0.5rem;
+}
+
+/* ------- Legend --------- */
+
+.map-legend-panel {
+  gap: 0.2rem;
+}
+
+.legend-blocks {
+  display: flex;
+  justify-content: space-between;
+}
+
+.legend-block {
+  background-color: var(--this-color);
+  border: 0.8px solid white;
+  border-radius: 0.2rem;
+  width: 100%;
+  height: 0.8rem;
+  flex: 1;
+}
+
+.legend-block:first-child {
+  border-color: var(--fade-gray);
+  border-width: 1.2px;
+  height: calc(0.8rem - 1px);
+}
+
+.legend-texts {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  color: var(--text-gray);
+}

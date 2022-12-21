@@ -1,6 +1,6 @@
 {
   "extends": ["eslint:recommended"],
-  "ignorePatterns": ["site/data/*.js"],
+  "ignorePatterns": ["site/data/*.js", "index.js"],
   "parserOptions": {
     "ecmaVersion": "latest",
     "sourceType": "module"
@@ -13,7 +13,8 @@
     "mapboxgl": "readonly",
     "maplibregl": "readonly",
     "ol": "readonly",
-    "Papa": "readonly"
+    "Papa": "readonly",
+    "vegaEmbed": "readonly"
   },
   "rules": {
     "camelcase": ["error"],

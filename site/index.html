@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Viewport setup for responsive design -->
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    
+    <!-- Title -->
+    <title>Mobiladelphia</title>
+    <!-- Title icon -->
+    <link rel="icon" href="images/phila-shape-hero.png" type="image/icon type">
+
+    <!-- Google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    
+    <!-- Google font icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    
+    <!-- Leaflet -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin=""/>
+
+    <!-- Custom style sheets -->
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/widgets.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+  </head>
+
+  <body>
+    
+    <!-- Navigation bar -->
+    <nav>
+      <div class="nav-left">
+        <img class="nav-phila-icon" src="images/phila-shape-white.png" alt="philadelphia-icon">
+        <h1 class="nav-title">Mobiladelphia</h1>
+      </div>
+
+      <div class="nav-right">
+        <h2 class="nav-subtitle">All the trips in Philadelphia</h2>
+        <span class="material-symbols-outlined" id="show-info-button">info</span>
+      </div>
+    </nav>
+    <aside>
+      <!-- Base map (in the background) -->
+      <section class="map" id="map"></section>
+      <!-- Map overlay while loading -->
+      <section class="map-loading-overlay" id="map-loading-overlay">
+        Please wait while loading map.
+        May take longer to load if inactive for 30 minutes.
+      </section>
+
+      <!-- Information display overlay -->
+      <section class="information-overlay" id="information-overlay">
+        <div class="information-overlay-white" id="information-overlay-white"></div>
+        <div class="information-window" id="information-window">
+          <a title="Replica official website" href = "https://studio.replicahq.com/">Replica</a>
+            provides 
+            <span class="italic">modeled trip-level</span> data 
+            <span class="italic">in a typical weekday</span> using multivarious sources, such as
+            Census and ACS, travel surveys, in-auto GPS data, data from transit agencies, and so on.
+            <a title="Replica data sources" href="http://help.replicahq.com/en/articles/6625924-north-atlantic-fall-2021-release-notes">Here</a>
+            Replica talks more about data sources and its methodology. We subset only trips that start and end in Philadelphia. 
+            The modeled data for Philadelphia is <a title = "Replica definition of trustworthy result" href="http://help.replicahq.com/en/articles/4000393-replica-places-certainty-indicators-overview">
+            trustworthy</a>.
+        </div>
+      </section>
+    </aside>
+
+    <!-- Main section -->
+    <main class="main-section">
+
+      <!-- Left (top) column -->
+      <section class="column">
+
+        <!-- Panel tab panel: select which panel to show on small screens -->
+        <div class="panel panel-select-tabs">
+          <button class="panel-tab panel-tab-selected" id="panel-tab-display">Map display</button>
+          <button class="panel-tab" id="panel-tab-filters">Trip filters</button>
+          <button class="panel-tab" id="panel-tab-dashboard">Dashboard</button>
+        </div>
+
+        <!-- Toggle display panel -->
+        <section class="panel toggle-display-panel" id="toggle-display-panel">
+          <!-- Select by departure or arrival-->
+          <section class="selector-kit">
+            <div class="selector-kit-title strong">Trips attached to geographies by</div>
+            <div class="cb-group cb-group-exclusive" id="toggle-display-tofrom">
+              <label>
+                <input type="checkbox" class="cb-invisible" value="origin_geoid">
+                <div class="cb-option">
+                  <button>
+                    <span class="material-symbols-outlined" style="--this-color: var(--hero-reg)">logout</span>
+                    <span>departures</span>
+                  </button>
+                </div>
+              </label>
+              <label>
+                <input type="checkbox" class="cb-invisible" value="destination_geoid">
+                <div class="cb-option">
+                  <button>
+                    <span class="material-symbols-outlined" style="--this-color: var(--primary-reg)">login</span> 
+                    <span>arrivals</span>
+                  </button>
+                </div>
+              </label>
+            </div>
+          </section>
+
+          <!-- Dropdown select variable to display -->
+          <section class="dropdown">
+            <h2 class="selector-kit-title strong">Showing...</h2>
+            <button class="dropdown-button display-var-button" id="display-var-button"><span class="italic strong">Trip count</span></button>
+            <div class="dropdown-content">
+              <div class="cb-group cb-group-exclusive cb-group-wrap" id="toggle-display-vars">
+              </div>
+            </div>
+          </section>
+        </section>
+
+        <!-- Legend panel -->
+        <section class="panel map-legend-panel" id="map-legend-panel">
+          <div class="legend-blocks">
+            <div class="legend-block" style="--this-color: #e0e0f0"></div>
+            <div class="legend-block" style="--this-color: #c6c7eb"></div>
+            <div class="legend-block" style="--this-color: #8e8fd7"></div>
+            <div class="legend-block" style="--this-color: #5557c3"></div>
+            <div class="legend-block" style="--this-color: #353797"></div>
+          </div>
+          <div class="legend-texts">
+            <div class="legend-text" id="legend-text-1">Waiting</div>
+            <div class="legend-text" id="legend-text-2"></div>
+            <div class="legend-text" id="legend-text-3"></div>
+            <div class="legend-text" id="legend-text-4"></div>
+            <div class="legend-text" id="legend-text-5"></div>
+            <div class="legend-text" id="legend-text-6"></div>
+
+          </div>
+        </section>
+
+        <!-- Dashboard panel -->
+        <div class="panel dashboard-panel" id="dashboard-panel">
+          <div class="dashboard-waiting-message" id="dashboard-waiting-message">
+            Please wait while making dashboard...
+          </div>
+          <div class="dashboard-container" id="dashboard-container">
+            <div class="selector-kit-title">Choose a variable to view dashboard</div>
+            <select class="dashboard-selector">
+              <option value="distance">Distance</option>
+              <option value="duration">Duration</option>
+              <option value="age">Trip taker age</option>
+              <option value="income">Trip taker income</option>
+              <option value="primary_mode">Mode</option>
+              <option value="trip_start_time">Departure hour</option>
+              <option value="purpose">Purpose</option>
+              <option value="car_ownership">Car ownership</option>
+            </select>
+            <!-- Distance dashboard -->
+            <div class="dashboard-var-container dashboard-var-container-visible" id="dashboard-distance">
+  
+              <div class="dashboard-mean-figures">
+                <div class="dashboard-mean-title">Mean:</div>
+                <div class="dashboard-mean-figure" id="distance-mean">111</div>
+                <div class="dashboard-mean-unit" id="distance-unit">miles</div>
+              </div>
+              <div class="graph distance-graph" id="distance-graph"></div>
+            </div>
+
+            <!-- Duration -->
+            <div class="dashboard-var-container" id="dashboard-duration">
+  
+              <div class="dashboard-mean-figures">
+                <div class="dashboard-mean-title">Mean:</div>
+                <div class="dashboard-mean-figure" id="duration-mean">111</div>
+                <div class="dashboard-mean-unit" id="duration-unit">miles</div>
+              </div>
+              <div class="graph duration-graph" id="duration-graph"></div>
+            </div>
+
+            <!-- Income -->
+            <div class="dashboard-var-container" id="dashboard-income">
+  
+              <div class="dashboard-mean-figures">
+                <div class="dashboard-mean-title">Mean:</div>
+                <div class="dashboard-mean-figure" id="income-mean">111</div>
+                <div class="dashboard-mean-unit" id="income-unit">miles</div>
+              </div>
+              <div class="graph income-graph" id="income-graph"></div>
+            </div>
+
+            <!-- Age -->
+            <div class="dashboard-var-container" id="dashboard-age">
+  
+              <div class="dashboard-mean-figures">
+                <div class="dashboard-mean-title">Mean:</div>
+                <div class="dashboard-mean-figure" id="age-mean">111</div>
+                <div class="dashboard-mean-unit" id="age-unit">miles</div>
+              </div>
+              <div class="graph age-graph" id="age-graph"></div>
+            </div>
+            
+            <!-- Mode -->
+            <div class="dashboard-var-container" id="dashboard-primary_mode">
+              <div class="graph primary_mode-graph" id="primary_mode-graph"></div>
+            </div>
+
+            <!-- Trip Start Time -->
+            <div class="dashboard-var-container" id="dashboard-trip_start_time">
+              <div class="graph trip_start_time-graph" id="trip_start_time-graph"></div>
+            </div>
+
+            <!-- Purpose -->
+            <div class="dashboard-var-container" id="dashboard-purpose">
+              <div class="graph purpose-graph" id="purpose-graph"></div>
+            </div>
+
+            <!-- Car ownership -->
+            <div class="dashboard-var-container" id="dashboard-car_ownership">
+              <div class="graph car_ownership-graph" id="car_ownership-graph"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Right (bottom) column -->
+      <section class="column right-column">
+        <!-- Filters panel -->
+        <div class="panel filter-panel" id="filter-panel">
+          <h2 class="panel-title">Filter trips</h2>
+          <div class="selector-kit geo-filter-kit">
+            <div class="selector-kit-top">
+              <div class="selector-kit-title">To / From</div>
+              <div class="selector-top-right">
+                <button class="filter-reset-button" id="panel-geo-select-reset">Reset</button>
+                <button class="geo-unapply-button" id="geo-unapply-button">Unapply</button>
+              </div>
+            </div>
+            <p>
+              Click on the map to add filters of trip orgin and destination.
+            </p>
+            <div class="geo-select-legend">
+              <div class="geo-select-legend-origin">
+                <div class="geo-select-legend-icon"></div>
+                <div class="geo-select-legend-text">Origin</div>
+              </div>
+              <div class="geo-select-legend-destination">
+                <div class="geo-select-legend-icon"></div>
+                <div class="geo-select-legend-text">Destination</div>
+              </div>
+            </div>
+          </div>
+          <!-- The other filters are added through [add-html.js] -->
+        </div>
+
+        <!-- Confirm filter button -->
+        <button class="confirm-button" id="confirm-button">
+          Update map & dashboard
+        </button>
+      </section>
+    </main>
+
+    <!-- Leaflet script -->
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
+    
+    <!-- Papa Parse -->
+    <script src="https://unpkg.com/papaparse@5.3.2/papaparse.min.js"></script>
+
+    <!-- Vega Lite -->
+    <script src="https://cdn.jsdelivr.net/npm/vega@5.22.1"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.6.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.21.0"></script>
+
+    <!-- Custom JS -->
+    <script type="module" src="js/add-html.js"></script>
+    <script type="module" src="js/main.js"></script>
+    <script type="module" src="js/navigation.js"></script>
+  </body>
+</html>
