@@ -1,47 +1,57 @@
 <!DOCTYPE html>
-<html lang="en" >
-  <head>
+<html lang="en">
 
-      <meta charset="UTF-8">
-      <title>Urban Solar Operations</title>
-      <link rel="stylesheet" href="./css/style.css">
-      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-      <script src="https://unpkg.com/deck.gl@^6.2.0/deckgl.min.js"></script>
-      <link href="https://api.mapbox.com/mapbox-gl-js/v2.11.0/mapbox-gl.css" rel="stylesheet">
-      <script src="https://api.mapbox.com/mapbox-gl-js/v2.11.0/mapbox-gl.js"></script>
-      <!-- Leaflet's Default Styles-->
-      <link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css"
-      integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ=="
-      crossorigin=""/>
-      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
-      <!-- Load the `mapbox-gl-geocoder` plugin. -->
-      <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.min.js"></script>
-      <link rel="stylesheet" href="./css/mapbox-gl-geocoder.css" type="text/css">
-      <link rel="stylesheet" href="../../bootstrap-5.1.3-examples/dropdowns/dropdowns.css">
-  </head>
-  <body style="overflow-x: hidden">
-      <section class="et-hero-tabs" style="padding: 0" id="homepage">
-          <div class="mycontainer">
-              <video id="v1" autoplay muted loop style="width: 100%">
+<head>
+
+    <meta charset="UTF-8">
+    <title>Urban Solar Operations</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <script src="https://unpkg.com/deck.gl@^6.2.0/deckgl.min.js"></script>
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.11.0/mapbox-gl.css" rel="stylesheet">
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.11.0/mapbox-gl.js"></script>
+    <!-- Leaflet's Default Styles-->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css"
+        integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ=="
+        crossorigin="" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+        integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+    <!-- Load the `mapbox-gl-geocoder` plugin. -->
+    <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.min.js">
+    </script>
+    <link rel="stylesheet" href="./css/mapbox-gl-geocoder.css" type="text/css">
+    <link rel="stylesheet" href="../../bootstrap-5.1.3-examples/dropdowns/dropdowns.css">
+</head>
+
+<body style="overflow-x: hidden">
+    <section class="et-hero-tabs" style="padding: 0" id="homepage">
+        <div class="mycontainer">
+            <video id="v1" autoplay muted loop style="width: 100%">
                 <source src="./data/Map-main.mp4">
-              </video>
-              <div class="logo">
-                  <img src="./data/graphics/mainlogo" alt="">
-              </div>
-              <a style="position:absolute; top: 60%; left: 40%; z-index: 10; background-color: black; border-color: black" href="#tab-city" type="button" class="et-hero-tab btn btn-primary btn-lg" >My City Potential</a>
-              <a style="position:absolute; top: 60%; left: 60%; background-color: black; border-color: black" href="#tab-roof" type="button" class="btn btn-primary btn-lg">My Roof Potential</a>
-      </div>
+            </video>
+            <div class="logo">
+                <img src="./data/graphics/mainlogo" alt="">
+            </div>
+            <a style="position:absolute; top: 60%; left: 40%; z-index: 10; background-color: black; border-color: black"
+                href="#tab-city" type="button" class="et-hero-tab btn btn-primary btn-lg">My City Potential</a>
+            <a style="position:absolute; top: 60%; left: 60%; background-color: black; border-color: black"
+                href="#tab-roof" type="button" class="btn btn-primary btn-lg">My Roof Potential</a>
+        </div>
 
-      <div class="et-hero-tabs-container">
-          <div class="title">
-<!--              <a style="color: orange; text-decoration: none" href="#homepage" >Urban Solar Operations</a>-->
-              <img src="./data/graphics/Logo_S_wht.png" alt="" style="position:absolute;left: 8%">
-          </div>
-          <a class="et-hero-tab city" href="#tab-city" style="text-decoration: none; font-size: 18px; color: orange">City</a>
-          <a class="et-hero-tab" href="#tab-roof" style="text-decoration: none; font-size: 18px; color: orange">Roof</a>
-          <a class="et-hero-tab" href="#tab-about" style="text-decoration: none; font-size: 18px; color: orange">About</a>
-          <span class="et-hero-tab-slider"></span>
-      </div>
+        <div class="et-hero-tabs-container">
+            <div class="title">
+                <!--              <a style="color: orange; text-decoration: none" href="#homepage" >Urban Solar Operations</a>-->
+                <img src="./data/graphics/Logo_S_wht.png" alt="" style="position:absolute;left: 8%">
+            </div>
+            <a class="et-hero-tab city" href="#tab-city"
+                style="text-decoration: none; font-size: 18px; color: orange">City</a>
+            <a class="et-hero-tab" href="#tab-roof"
+                style="text-decoration: none; font-size: 18px; color: orange">Roof</a>
+            <a class="et-hero-tab" href="#tab-about"
+                style="text-decoration: none; font-size: 18px; color: orange">About</a>
+            <span class="et-hero-tab-slider"></span>
+        </div>
     </section>
 
     <!-- Main -->
@@ -60,42 +70,42 @@
                         <option selected value="" style="display: none">Neighborhoods</option>
                     </select>
                 </div>
-                <div class="panel" id = "neighbor-panel" style="margin-bottom: 0; display: none; top: 15%;">
+                <div class="panel" id="neighbor-panel" style="margin-bottom: 0; display: none; top: 15%;">
                     <ul id="neighbor-info" style="display: block; padding-left: 0; height: 100%">
-<!--                        <li style="list-style: none; padding: 15px 30px 15px 80px; position: relative; height: 33%; width: 100%">-->
-<!--                            <div class="icon-sun panel-icon"></div>-->
-<!--                            <div class="panel-text">-->
-<!--                                1,294 hours of usable sunlight per year-->
-<!--                            </div>-->
-<!--                            <div class="panel-caption">-->
-<!--                                Based on day-to-day analysis of weather patterns-->
-<!--                            </div>-->
-<!--                        </li>-->
-<!--                        <div class="dividing-line"></div>-->
-<!--                        <li style="list-style: none; padding: 15px 30px 0px 80px; position: relative; height: 33%; width: 100%">-->
-<!--                            <div class="icon-area panel-icon"></div>-->
-<!--                            <div class="panel-text">-->
-<!--                                16,438 sq feet available for solar panels-->
-<!--                            </div>-->
-<!--                            <div class="panel-caption">-->
-<!--                                Based on 3D modeling of your roof and nearby trees-->
-<!--                            </div>-->
-<!--                        </li>-->
-<!--                        <div class="dividing-line"></div>-->
-<!--                        <li style="list-style: none; padding: 15px 30px 0px 80px; position: relative; height: 33%; width: 100%">-->
-<!--                            <div class="icon-money panel-icon"></div>-->
-<!--                            <div class="panel-text">-->
-<!--                                $9,000 savings-->
-<!--                            </div>-->
-<!--                            <div class="panel-caption">-->
-<!--                                Estimated net savings for your roof over 20 years-->
-<!--                            </div>-->
-<!--                        </li>-->
+                        <!--                        <li style="list-style: none; padding: 15px 30px 15px 80px; position: relative; height: 33%; width: 100%">-->
+                        <!--                            <div class="icon-sun panel-icon"></div>-->
+                        <!--                            <div class="panel-text">-->
+                        <!--                                1,294 hours of usable sunlight per year-->
+                        <!--                            </div>-->
+                        <!--                            <div class="panel-caption">-->
+                        <!--                                Based on day-to-day analysis of weather patterns-->
+                        <!--                            </div>-->
+                        <!--                        </li>-->
+                        <!--                        <div class="dividing-line"></div>-->
+                        <!--                        <li style="list-style: none; padding: 15px 30px 0px 80px; position: relative; height: 33%; width: 100%">-->
+                        <!--                            <div class="icon-area panel-icon"></div>-->
+                        <!--                            <div class="panel-text">-->
+                        <!--                                16,438 sq feet available for solar panels-->
+                        <!--                            </div>-->
+                        <!--                            <div class="panel-caption">-->
+                        <!--                                Based on 3D modeling of your roof and nearby trees-->
+                        <!--                            </div>-->
+                        <!--                        </li>-->
+                        <!--                        <div class="dividing-line"></div>-->
+                        <!--                        <li style="list-style: none; padding: 15px 30px 0px 80px; position: relative; height: 33%; width: 100%">-->
+                        <!--                            <div class="icon-money panel-icon"></div>-->
+                        <!--                            <div class="panel-text">-->
+                        <!--                                $9,000 savings-->
+                        <!--                            </div>-->
+                        <!--                            <div class="panel-caption">-->
+                        <!--                                Estimated net savings for your roof over 20 years-->
+                        <!--                            </div>-->
+                        <!--                        </li>-->
                     </ul>
                 </div>
                 <div class="roof-calculation" style="top: 47%">
                     <br>
-                    <div class="card" id = "neighbor-impact" style="display: none">
+                    <div class="card" id="neighbor-impact" style="display: none">
                         <div class="card-header" style="text-align: left; font-weight: bold; font-size: 15px">
                             YOUR POTENTIAL ENVIRONMENTAL IMPACT
                         </div>
@@ -104,26 +114,26 @@
                                 <p>Estimated annual environmental impact of the recommended solar installation size.</p>
                             </blockquote>
                             <div class="equation" id="neighbor-equation">
-<!--                                <div class="carbon">-->
-<!--                                    <div class="icon-carbon eq-icon"></div>-->
-<!--                                    <span style="position:absolute; left: 43%; font-size: 15px; width: 60%; top:15%; font-weight: bold">Carbon dioxide</span>-->
-<!--                                    <span style="position:absolute; left: 43%; font-size: 40px; width: 30%; top:25%; font-weight: bold">58</span>-->
-<!--                                    <span style="position:absolute; left: 42%; font-size: 10px; width: 40%; top:75%;">metric tons</span>-->
-<!--                                </div>-->
-<!--                                <span class="place-eq">=</span>-->
-<!--                                <div class="cars">-->
-<!--                                    <div class="icon-car eq-icon"></div>-->
-<!--                                    <span style="position:absolute; left: 43%; font-size: 15px; width: 60%; top:15%; font-weight: bold">Passenger cars</span>-->
-<!--                                    <span style="position:absolute; left: 43%; font-size: 40px; width: 30%; top:25%; font-weight: bold">58</span>-->
-<!--                                    <span style="position:absolute; left: 42%; font-size: 10px; width: 70%; top:75%;">taken off the road for 1 yr</span>-->
-<!--                                </div>-->
-<!--                                <span class="place-car">=</span>-->
-<!--                                <div class="tree">-->
-<!--                                    <div class="icon-tree eq-icon"></div>-->
-<!--                                    <span style="position:absolute; left: 40%; font-size: 15px; width: 60%; top:15%; font-weight: bold">Tree seedlings</span>-->
-<!--                                    <span style="position:absolute; left: 43%; font-size: 40px; width: 30%; top:25%; font-weight: bold">58</span>-->
-<!--                                    <span style="position:absolute; left: 42%; font-size: 10px; width: 50%; top:75%;">grown for 10 yrs</span>-->
-<!--                                </div>-->
+                                <!--                                <div class="carbon">-->
+                                <!--                                    <div class="icon-carbon eq-icon"></div>-->
+                                <!--                                    <span style="position:absolute; left: 43%; font-size: 15px; width: 60%; top:15%; font-weight: bold">Carbon dioxide</span>-->
+                                <!--                                    <span style="position:absolute; left: 43%; font-size: 40px; width: 30%; top:25%; font-weight: bold">58</span>-->
+                                <!--                                    <span style="position:absolute; left: 42%; font-size: 10px; width: 40%; top:75%;">metric tons</span>-->
+                                <!--                                </div>-->
+                                <!--                                <span class="place-eq">=</span>-->
+                                <!--                                <div class="cars">-->
+                                <!--                                    <div class="icon-car eq-icon"></div>-->
+                                <!--                                    <span style="position:absolute; left: 43%; font-size: 15px; width: 60%; top:15%; font-weight: bold">Passenger cars</span>-->
+                                <!--                                    <span style="position:absolute; left: 43%; font-size: 40px; width: 30%; top:25%; font-weight: bold">58</span>-->
+                                <!--                                    <span style="position:absolute; left: 42%; font-size: 10px; width: 70%; top:75%;">taken off the road for 1 yr</span>-->
+                                <!--                                </div>-->
+                                <!--                                <span class="place-car">=</span>-->
+                                <!--                                <div class="tree">-->
+                                <!--                                    <div class="icon-tree eq-icon"></div>-->
+                                <!--                                    <span style="position:absolute; left: 40%; font-size: 15px; width: 60%; top:15%; font-weight: bold">Tree seedlings</span>-->
+                                <!--                                    <span style="position:absolute; left: 43%; font-size: 40px; width: 30%; top:25%; font-weight: bold">58</span>-->
+                                <!--                                    <span style="position:absolute; left: 42%; font-size: 10px; width: 50%; top:75%;">grown for 10 yrs</span>-->
+                                <!--                                </div>-->
                             </div>
                         </div>
                     </div>
@@ -141,101 +151,116 @@
                 <div id="geocoder-roof" class="geocoder"></div>
                 <div class="panel" id="roof-panel" style="margin-bottom: 0; display: none">
                     <ul id="roof-info" style="display: block; padding-left: 0; height: 100%">
-<!--                        <li style="list-style: none; padding: 15px 30px 15px 80px; position: relative; height: 33%; width: 100%">-->
-<!--                            <div class="icon-sun panel-icon"></div>-->
-<!--                            <div class="panel-text">-->
-<!--                                1,294 hours of usable sunlight per year-->
-<!--                            </div>-->
-<!--                            <div class="panel-caption">-->
-<!--                                Based on day-to-day analysis of weather patterns-->
-<!--                            </div>-->
-<!--                        </li>-->
-<!--                        <div class="dividing-line"></div>-->
-<!--                        <li style="list-style: none; padding: 15px 30px 0px 80px; position: relative; height: 33%; width: 100%">-->
-<!--                            <div class="icon-area panel-icon"></div>-->
-<!--                            <div class="panel-text">-->
-<!--                                16,438 sq feet available for solar panels-->
-<!--                            </div>-->
-<!--                            <div class="panel-caption">-->
-<!--                                Based on 3D modeling of your roof and nearby trees-->
-<!--                            </div>-->
-<!--                        </li>-->
-<!--                        <div class="dividing-line"></div>-->
-<!--                        <li style="list-style: none; padding: 15px 30px 0px 80px; position: relative; height: 33%; width: 100%">-->
-<!--                            <div class="icon-money panel-icon"></div>-->
-<!--                            <div class="panel-text">-->
-<!--                                $9,000 savings-->
-<!--                            </div>-->
-<!--                            <div class="panel-caption">-->
-<!--                                Estimated net savings for your roof over 20 years-->
-<!--                            </div>-->
-<!--                        </li>-->
+                        <!--                        <li style="list-style: none; padding: 15px 30px 15px 80px; position: relative; height: 33%; width: 100%">-->
+                        <!--                            <div class="icon-sun panel-icon"></div>-->
+                        <!--                            <div class="panel-text">-->
+                        <!--                                1,294 hours of usable sunlight per year-->
+                        <!--                            </div>-->
+                        <!--                            <div class="panel-caption">-->
+                        <!--                                Based on day-to-day analysis of weather patterns-->
+                        <!--                            </div>-->
+                        <!--                        </li>-->
+                        <!--                        <div class="dividing-line"></div>-->
+                        <!--                        <li style="list-style: none; padding: 15px 30px 0px 80px; position: relative; height: 33%; width: 100%">-->
+                        <!--                            <div class="icon-area panel-icon"></div>-->
+                        <!--                            <div class="panel-text">-->
+                        <!--                                16,438 sq feet available for solar panels-->
+                        <!--                            </div>-->
+                        <!--                            <div class="panel-caption">-->
+                        <!--                                Based on 3D modeling of your roof and nearby trees-->
+                        <!--                            </div>-->
+                        <!--                        </li>-->
+                        <!--                        <div class="dividing-line"></div>-->
+                        <!--                        <li style="list-style: none; padding: 15px 30px 0px 80px; position: relative; height: 33%; width: 100%">-->
+                        <!--                            <div class="icon-money panel-icon"></div>-->
+                        <!--                            <div class="panel-text">-->
+                        <!--                                $9,000 savings-->
+                        <!--                            </div>-->
+                        <!--                            <div class="panel-caption">-->
+                        <!--                                Estimated net savings for your roof over 20 years-->
+                        <!--                            </div>-->
+                        <!--                        </li>-->
                     </ul>
                 </div>
                 <div class="roof-calculation">
-<!--                    <div class="card">-->
-<!--                      <div class="card-header" style="text-align: left; font-weight: bold; font-size: 15px">-->
-<!--                            YOUR AVERAGE MONTHLY ELECTRIC BILL-->
-<!--                      </div>-->
-<!--                      <div class="card-body" >-->
-<!--                          <blockquote class="blockquote mb-0" style="text-align: left; font-size: 2rem">-->
-<!--                              <p>We use your bill to estimate how much electricity you use based on typical utility rates in your area.</p>-->
-<!--                          </blockquote>-->
-<!--                          <select class="form-select form-select-lg mb-3" id="select-dollar">-->
-<!--                            <option selected value="" style="display: none">$25</option>-->
-<!--                            <option value="30">$25</option>-->
-<!--                        </select>-->
-<!--                      </div>-->
-<!--                    </div>-->
-<!--                    <br>-->
-<!--                    <div class="card">-->
-<!--                      <div class="card-header" style="text-align: left; font-weight: bold; font-size: 15px">-->
-<!--                        YOUR RECOMMENDED SOLAR INSTALLATION SIZE-->
-<!--                      </div>-->
-<!--                      <div class="card-body">-->
-<!--                        <blockquote class="blockquote mb-0" style="text-align: left; font-size: 2rem">-->
-<!--                          <p>This size will cover about 92% of your electricity usage. Solar installations are sized in kilowatts (kW).</p>-->
-<!--                        </blockquote>-->
-<!--                      </div>-->
-<!--                    </div>-->
+                    <!--                    <div class="card">-->
+                    <!--                      <div class="card-header" style="text-align: left; font-weight: bold; font-size: 15px">-->
+                    <!--                            YOUR AVERAGE MONTHLY ELECTRIC BILL-->
+                    <!--                      </div>-->
+                    <!--                      <div class="card-body" >-->
+                    <!--                          <blockquote class="blockquote mb-0" style="text-align: left; font-size: 2rem">-->
+                    <!--                              <p>We use your bill to estimate how much electricity you use based on typical utility rates in your area.</p>-->
+                    <!--                          </blockquote>-->
+                    <!--                          <select class="form-select form-select-lg mb-3" id="select-dollar">-->
+                    <!--                            <option selected value="" style="display: none">$25</option>-->
+                    <!--                            <option value="30">$25</option>-->
+                    <!--                        </select>-->
+                    <!--                      </div>-->
+                    <!--                    </div>-->
+                    <!--                    <br>-->
+                    <!--                    <div class="card">-->
+                    <!--                      <div class="card-header" style="text-align: left; font-weight: bold; font-size: 15px">-->
+                    <!--                        YOUR RECOMMENDED SOLAR INSTALLATION SIZE-->
+                    <!--                      </div>-->
+                    <!--                      <div class="card-body">-->
+                    <!--                        <blockquote class="blockquote mb-0" style="text-align: left; font-size: 2rem">-->
+                    <!--                          <p>This size will cover about 92% of your electricity usage. Solar installations are sized in kilowatts (kW).</p>-->
+                    <!--                        </blockquote>-->
+                    <!--                      </div>-->
+                    <!--                    </div>-->
                     <br>
-                    <div class="card" id = "impact" style="display: none">
-                      <div class="card-header" style="text-align: left; font-weight: bold; font-size: 15px">
-                        YOUR POTENTIAL ENVIRONMENTAL IMPACT
-                      </div>
-                      <div class="card-body">
-                          <blockquote class="blockquote mb-0" style="text-align: left; font-size: 1.5rem">
-                              <p>Estimated annual environmental impact of the recommended solar installation size.</p>
-                          </blockquote>
-                          <div class="equation" id="roof-equation">
-                              <div class="carbon" id="roof-carbon">
-                                  <div class="icon-carbon eq-icon"></div>
-                                  <span style="position:absolute; left: 43%; font-size: 15px; width: 60%; top:15%; font-weight: bold">Carbon dioxide</span>
-                                  <span style="position:absolute; left: 43%; font-size: 40px; width: 30%; top:25%; font-weight: bold">58</span>
-                                  <span style="position:absolute; left: 42%; font-size: 10px; width: 40%; top:75%;">metric tons</span>
-                              </div>
-                              <span class="place-eq">=</span>
-                              <div class="cars" id="roof-car">
-                                  <div class="icon-car eq-icon"></div>
-                                  <span style="position:absolute; left: 43%; font-size: 15px; width: 60%; top:15%; font-weight: bold">Passenger cars</span>
-                                  <span style="position:absolute; left: 43%; font-size: 40px; width: 30%; top:25%; font-weight: bold">58</span>
-                                  <span style="position:absolute; left: 42%; font-size: 10px; width: 70%; top:75%;">taken off the road for 1 yr</span>
-                              </div>
-                              <span class="place-car">=</span>
-                              <div class="tree" id="roof-tree">
-                                  <div class="icon-tree eq-icon"></div>
-                                  <span style="position:absolute; left: 40%; font-size: 15px; width: 60%; top:15%; font-weight: bold">Tree seedlings</span>
-                                  <span style="position:absolute; left: 43%; font-size: 40px; width: 30%; top:25%; font-weight: bold">58</span>
-                                  <span style="position:absolute; left: 42%; font-size: 10px; width: 50%; top:75%;">grown for 10 yrs</span>
-                              </div>
-                          </div>
-                      </div>
+                    <div class="card" id="impact" style="display: none">
+                        <div class="card-header" style="text-align: left; font-weight: bold; font-size: 15px">
+                            YOUR POTENTIAL ENVIRONMENTAL IMPACT
+                        </div>
+                        <div class="card-body">
+                            <blockquote class="blockquote mb-0" style="text-align: left; font-size: 1.5rem">
+                                <p>Estimated annual environmental impact of the recommended solar installation size.</p>
+                            </blockquote>
+                            <div class="equation" id="roof-equation">
+                                <div class="carbon" id="roof-carbon">
+                                    <div class="icon-carbon eq-icon"></div>
+                                    <span
+                                        style="position:absolute; left: 43%; font-size: 15px; width: 60%; top:15%; font-weight: bold">Carbon
+                                        dioxide</span>
+                                    <span
+                                        style="position:absolute; left: 43%; font-size: 40px; width: 30%; top:25%; font-weight: bold">58</span>
+                                    <span
+                                        style="position:absolute; left: 42%; font-size: 10px; width: 40%; top:75%;">metric
+                                        tons</span>
+                                </div>
+                                <span class="place-eq">=</span>
+                                <div class="cars" id="roof-car">
+                                    <div class="icon-car eq-icon"></div>
+                                    <span
+                                        style="position:absolute; left: 43%; font-size: 15px; width: 60%; top:15%; font-weight: bold">Passenger
+                                        cars</span>
+                                    <span
+                                        style="position:absolute; left: 43%; font-size: 40px; width: 30%; top:25%; font-weight: bold">58</span>
+                                    <span
+                                        style="position:absolute; left: 42%; font-size: 10px; width: 70%; top:75%;">taken
+                                        off the road for 1 yr</span>
+                                </div>
+                                <span class="place-car">=</span>
+                                <div class="tree" id="roof-tree">
+                                    <div class="icon-tree eq-icon"></div>
+                                    <span
+                                        style="position:absolute; left: 40%; font-size: 15px; width: 60%; top:15%; font-weight: bold">Tree
+                                        seedlings</span>
+                                    <span
+                                        style="position:absolute; left: 43%; font-size: 40px; width: 30%; top:25%; font-weight: bold">58</span>
+                                    <span
+                                        style="position:absolute; left: 42%; font-size: 10px; width: 50%; top:75%;">grown
+                                        for 10 yrs</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="right">
                 <div id="map-roof">
-                 </div>
+                </div>
             </div>
         </section>
         <section class="et-slide" id="tab-about">
@@ -250,7 +275,12 @@
                 </figure>
                 <h3 style="font-size: 30px; font-weight: bold">Why are we doing this?</h3>
                 <p align="center" style="position:absolute; width: 30%; left: 35%; text-align: left; font-size: 16px">
-                    Reliable and affordable source of power is the one of the most important issue in current society. As installation prices of solar panel has gotten less expensive, many of home owners are starting to consider it as possible option for saving their energy bill. Our project’s goal is to show them their roof potentials through easy and simple way. Furthermore, we also provide the potential of neighborhood when if all of their roof turn into solar roof. It helps local government to make decision of their policies promoting and subsidizing installation of solar roof.
+                    Reliable and affordable source of power is the one of the most important issue in current society.
+                    As installation prices of solar panel has gotten less expensive, many of home owners are starting to
+                    consider it as possible option for saving their energy bill. Our project’s goal is to show them
+                    their roof potentials through easy and simple way. Furthermore, we also provide the potential of
+                    neighborhood when if all of their roof turn into solar roof. It helps local government to make
+                    decision of their policies promoting and subsidizing installation of solar roof.
                 </p>
             </div>
             <div id="how-it-works" class="section-how">
@@ -259,7 +289,9 @@
                 </figure>
                 <h3 style="font-size: 30px; font-weight: bold">How it works?</h3>
                 <p align="center" style="position:absolute; width: 30%; left: 35%; text-align: left; font-size: 16px">
-                    Solar operation works in two ways, one is looking up your neighborhood potentials and the other is looking up your address. When you choose your neighborhood Solar Operation shows potential analysis. Also, when you enter your address, it creates personalized roof potentials.
+                    Solar operation works in two ways, one is looking up your neighborhood potentials and the other is
+                    looking up your address. When you choose your neighborhood Solar Operation shows potential analysis.
+                    Also, when you enter your address, it creates personalized roof potentials.
                 </p>
             </div>
             <div id="solar-operations-technology" class="section-technology">
@@ -267,21 +299,37 @@
                     <img src="./data/graphics/About_Tech.png" style="max-width: 5%">
                 </figure>
                 <h3 style="font-size: 30px; font-weight: bold">Solar Operations technology</h3>
-                <p align="center" style="position:absolute; width: 30%; left: 35%; text-align: left; font-size: 20px; font-weight: bold; margin-bottom: 1em">Solar Operations uses following data:</p>
+                <p align="center"
+                    style="position:absolute; width: 30%; left: 35%; text-align: left; font-size: 20px; font-weight: bold; margin-bottom: 1em">
+                    Solar Operations uses following data:</p>
                 <ul style="text-align: left; position:absolute; left: 35%; top: 35%; font-size: 18px; width: 32%">
                     <li>Lidar Data: Roofs and Shades</li>
                     <li>Weather Data: Solar Radiation</li>
                     <li>Convert Solar Radiation Power: The United States Environmental Protection Agency (<a
-                            href="https://www.epa.gov/" target="_blank" rel="noopener noreferrer">EPA</a>) <a href="https://www.epa.gov/green-power-markets/green-power-equivalency-calculator-calculations-and-references" target="_blank" rel="noopener noreferrer">provides a conservative best estimate</a> of 16 percent efficiency and 86 percent performance ratio</li>
-                    <li><a href="https://www.eia.gov/electricity/state/pennsylvania/" target="_blank" rel="noopener noreferrer">State Electricity Profile</a></li>
-                    <li><a href="https://www.epa.gov/greenvehicles/greenhouse-gas-emissions-typical-passenger-vehicle" target="_blank" rel="noopener noreferrer">Greenhouse Gas Emissions from a Typical Passenger Vehicle</a></li>
-                    <li><a href="https://www.eea.europa.eu/articles/forests-health-and-climate-change/key-facts/trees-help-tackle-climate-change" target="_blank" rel="noopener noreferrer">Average Absorbing CO2 rate of Trees</a></li>
-                    <li>Solar pricing data from NREL’s <a href="https://openpv.nrel.gov/" target="_blank" rel="noopener noreferrer">Open PV Project</a>,
-                        <a href="https://www.californiasolarstatistics.ca.gov/" target="_blank" rel="noopener noreferrer">California Solar Initiative</a>, and
-                        <a href="http://ny-sun.ny.gov/For-Installers/Solar-Installation-Data-and-Tools" target="_blank" rel="noopener noreferrer">NY-Sun Open NY PV data</a></li>
-                    <li>Solar incentives data from relevant <a href="http://www.cleanpower.com/products/powerbill/" target="_blank" rel="noopener noreferrer">Clean Power Research</a>, Federal, State and local authorities as well as relevant utility websites</li>
-                    <li>Solar Renewable Energy Credit (SREC) data from <a href="http://about.bnef.com/" target="_blank" rel="noopener noreferrer">Bloomberg New Energy Finance</a>,
-                        <a href="http://srectrade.com/" target="_blank" rel="noopener noreferrer">SRECTrade</a>, and relevant state authorities</li>
+                            href="https://www.epa.gov/" target="_blank" rel="noopener noreferrer">EPA</a>) <a
+                            href="https://www.epa.gov/green-power-markets/green-power-equivalency-calculator-calculations-and-references"
+                            target="_blank" rel="noopener noreferrer">provides a conservative best estimate</a> of 16
+                        percent efficiency and 86 percent performance ratio</li>
+                    <li><a href="https://www.eia.gov/electricity/state/pennsylvania/" target="_blank"
+                            rel="noopener noreferrer">State Electricity Profile</a></li>
+                    <li><a href="https://www.epa.gov/greenvehicles/greenhouse-gas-emissions-typical-passenger-vehicle"
+                            target="_blank" rel="noopener noreferrer">Greenhouse Gas Emissions from a Typical Passenger
+                            Vehicle</a></li>
+                    <li><a href="https://www.eea.europa.eu/articles/forests-health-and-climate-change/key-facts/trees-help-tackle-climate-change"
+                            target="_blank" rel="noopener noreferrer">Average Absorbing CO2 rate of Trees</a></li>
+                    <li>Solar pricing data from NREL’s <a href="https://openpv.nrel.gov/" target="_blank"
+                            rel="noopener noreferrer">Open PV Project</a>,
+                        <a href="https://www.californiasolarstatistics.ca.gov/" target="_blank"
+                            rel="noopener noreferrer">California Solar Initiative</a>, and
+                        <a href="http://ny-sun.ny.gov/For-Installers/Solar-Installation-Data-and-Tools" target="_blank"
+                            rel="noopener noreferrer">NY-Sun Open NY PV data</a></li>
+                    <li>Solar incentives data from relevant <a href="http://www.cleanpower.com/products/powerbill/"
+                            target="_blank" rel="noopener noreferrer">Clean Power Research</a>, Federal, State and local
+                        authorities as well as relevant utility websites</li>
+                    <li>Solar Renewable Energy Credit (SREC) data from <a href="http://about.bnef.com/" target="_blank"
+                            rel="noopener noreferrer">Bloomberg New Energy Finance</a>,
+                        <a href="http://srectrade.com/" target="_blank" rel="noopener noreferrer">SRECTrade</a>, and
+                        relevant state authorities</li>
                 </ul>
             </div>
 
@@ -302,14 +350,19 @@
         </section>
 
     </main>
-      <script src="https://www.jq22.com/jquery/jquery-1.10.2.js"></script>
-      <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js" integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ==" crossorigin=""></script>
-      <script src="./js/script.js"></script>
-      <script src="./js/neighbors_list.js" type="module"></script>
-      <script src="./js/map.js"></script>
-      <script src="js/neighbor-info.js" type="module"></script>
-      <script src="./js/roof-info.js" type="module"></script>
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+    <script src="https://www.jq22.com/jquery/jquery-1.10.2.js"></script>
+    <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js"
+        integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ=="
+        crossorigin=""></script>
+    <script src="./js/script.js"></script>
+    <script src="./js/neighbors_list.js" type="module"></script>
+    <script src="./js/map.js"></script>
+    <script src="js/neighbor-info.js" type="module"></script>
+    <script src="./js/roof-info.js" type="module"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous">
+    </script>
 
-  </body>
+</body>
+
 </html>
