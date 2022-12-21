@@ -67,7 +67,7 @@
     </aside>
 
     <!-- Main section -->
-    <section class="main-section">
+    <main class="main-section">
 
       <!-- Left (top) column -->
       <section class="column">
@@ -80,10 +80,10 @@
         </div>
 
         <!-- Toggle display panel -->
-        <div class="panel toggle-display-panel" id="toggle-display-panel">
+        <section class="panel toggle-display-panel" id="toggle-display-panel">
           <!-- Select by departure or arrival-->
           <section class="selector-kit">
-            <div class="selector-kit-title strong"><h1>Trips attached to geographies by</h1></div>
+            <div class="selector-kit-title strong">Trips attached to geographies by</div>
             <div class="cb-group cb-group-exclusive" id="toggle-display-tofrom">
               <label>
                 <input type="checkbox" class="cb-invisible" value="origin_geoid">
@@ -115,7 +115,7 @@
               </div>
             </div>
           </section>
-        </div>
+        </section>
 
         <!-- Legend panel -->
         <section class="panel map-legend-panel" id="map-legend-panel">
@@ -256,7 +256,7 @@
           Update map & dashboard
         </button>
       </section>
-    </section>
+    </main>
 
     <!-- Leaflet script -->
     <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
