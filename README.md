@@ -42,5 +42,10 @@ After input the name, there should be a button to hit, and the destination(s) wi
 ### Data Source：
 UN-Habitat urban data site——[Mathare Slum Data Points](https://github.com/miaomiao612](https://data.unhabitat.org/datasets/GUO-UN-Habitat::mathare-slum-data-points/explore?location=-0.690293%2C35.785444%2C9.59) "悬停显示文字")
 
+### Step to get it running:
+Fork the repo in your GitHub
+Clone the folder in your computer
+Type "npx http-server" in the teminal and open the link in your browser
+
 
 
