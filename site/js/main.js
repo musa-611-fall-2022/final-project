@@ -18,7 +18,7 @@ let mapBaseData;
 fetchMapBaseData()
 .then(resp => {
   mapBaseData = resp;
-})
+});
 
 addInitialBlockGroups(map, mapBaseData);
 
@@ -44,70 +44,70 @@ const categoricalFilterVars = [
 
 // Dictionary for continuous filter variables (used to form the slider)
 export const continuousVarsDict = {
-  trip_start_time: {
+  "trip_start_time": {
     displayName: 'Departure hour',
     min: 0,
     max: 24,
   },
-  trip_end_time: {
+  "trip_end_time": {
     displayName: 'Arrival hour',
     min: 0,
     max: 24,
   },
-  trip_duration_minutes: {
+  "trip_duration_minutes": {
     displayName: 'Duration (min)',
     min: 0,
     max: 182,
   },
-  trip_distance_miles: {
+  "trip_distance_miles": {
     displayName: 'Distance (mi)',
     min: 0,
     max: 31,
   },
-}
+};
 // Dictionary for categorical filter variables (used to make HTML)
 export const categoricalVarsDict = {
-  trip_purpose: {
+  "trip_purpose": {
     displayName: 'Purpose',
     factors: {
       3: 'Work',
       4: 'Eat',
       5: 'Shop',
       7: 'Recreation',
-    }
+    },
   },
-  primary_mode: {
+  "primary_mode": {
     displayName: 'Mode',
     factors: {
       1: 'Drive',
       3: 'Walk',
-      4: 'Bike', 
+      4: 'Bike',
       5: 'TNC',
       6: 'Transit',
-    }
+    },
   },
-  trip_taker_available_vehicles: {
+  "trip_taker_available_vehicles": {
     displayName: 'Trip takers that have',
     factors: {
       0: '0 car',
       1: '1 car',
       2: '2 cars',
       3: '3+ cars',
-    }
+    },
   },
-  home_work: {
+  "home_work": {
     displayName: 'Trips that',
     factors: {
       startFromHome: 'Starts from home',
       startFromWork: 'Starts from work',
       endAtHome: 'Ends at home',
       endAtWork: 'Ends at work',
-    }
-  }
-}
+    },
+  },
+};
 
 // Possible variables for the map display
-// There are three types of display variables, 
+// There are three types of display variables,
 // and for each one, different information needs to be recorded
 const mapDisplayVars = {
   meanType: [
@@ -148,7 +148,7 @@ const mapDisplayVars = {
       displayName: 'Count',
     }
   ],
-}
+};
 
 /* =============================
 Objects to store display params
@@ -159,7 +159,7 @@ export const toggleDisplayParams = {
   displayType: 'count', // either count, mean, or ratio
   displayVar: null, // if count, then null
   displayFactor: null, // only applies to ratios
-}
+};
 
 /* ===========================
 Objects to store filter params
@@ -190,14 +190,14 @@ const homeWorkFilterParams = {
   startFromHome: { filterSQL: 'origin_geoid = home_geoid', isApplied: false },
   endAtHome: { filterSQL: 'destination_geoid = home_geoid', isApplied: false },
   endAtWork: { filterSQL: 'destination_geoid = work_geoid', isApplied: false },
-}
+};
 
 // Final object storing all filter params
 export const filterParams = {
   continuousVars: continuousFilterParams,
   categoricalVars: categoricalFilterParams,
   homeWork: homeWorkFilterParams,
-}
+};
 
 /* ==========
 For Toggle Display section, add HTML elements and add recorders
@@ -275,21 +275,7 @@ for(const cbEl of displayVarOptionsEl) {
   if(cbEl.displayType == 'count') cbEl.checked = true;
 }
 
-// Record group-by element: by departure or by arrival
-const toggleDisplayToFromGroupEl = document.querySelector('#toggle-display-tofrom');
-const departOrArriveOptionsEl = toggleDisplayToFromGroupEl.getElementsByClassName("cb-invisible");
-for(const cbEl of departOrArriveOptionsEl) {
-  cbEl.addEventListener('click', ( ) => {
-    toggleDisplayParams.groupBy = cbEl.value;
-    console.log(toggleDisplayParams);
-    onConfirmButtonClick();
-  })
 
-  // by default, click on Departures
-  if(cbEl.value === 'origin_geoid') {
-    cbEl.click();
-  }
-}
 
 /* ================================================================
 For continuous filters, add sliders and Recorders, and Resetters
@@ -306,7 +292,7 @@ for(const filterVarName of continuousFilterVars) {
   addSliderFilterEl(
     filterPanelEl,
     filterVarName,
-  )
+  );
 }
 
 // Add recorders
@@ -346,7 +332,7 @@ Geoselector
 export const geoSelection = {
   selected: [],
   selectedFeatures: [],
-}
+};
 
 import { clearAllGeoFilters, clearSelected } from "./display-map.js";
 
@@ -355,14 +341,7 @@ const panelGeoResetButtonEl = document.querySelector('#panel-geo-select-reset');
 panelGeoResetButtonEl.addEventListener('click', ( ) => {
   clearAllGeoFilters(map);
   clearSelected(map);
-})
-
-// Unapply button: first click on reset button, then click on confirm button
-const geoUnapplyButtonEl = document.querySelector('#geo-unapply-button');
-geoUnapplyButtonEl.addEventListener('click', ( ) => {
-  panelGeoResetButtonEl.click();
-  onConfirmButtonClick();
-})
+});
 
 /* ==========
 Construct WHERE clause
@@ -466,10 +445,10 @@ function buildQueryForMapRatio(toggleDisplayParams, filterParams) {
 
 // Makes query to make the map (main)
 /**
- * 
+ *
  * @param {Object} toggleDisplayParams stored globally
  * @param {Object} filterParams stored globally
- * @returns 
+ * @returns
  */
 function buildQueryForMap(toggleDisplayParams, filterParams) {
   if(toggleDisplayParams.displayType === 'count') {
@@ -551,7 +530,7 @@ function buildQueryForDashboard(filterParams) {
       GROUP BY cat
     )
     ORDER BY var
-  `
+  `;
 }
 
 /* ==========
@@ -583,8 +562,8 @@ function removeMapWaitSign() {
 
 // Formats numbers before placing them in the legend
 /**
- * 
- * @param {Number} number 
+ *
+ * @param {Number} number
  * @returns {String}
  */
 function formatLegendNumber(number, key) {
@@ -603,7 +582,7 @@ function formatLegendNumber(number, key) {
 
 // Updates legend based on aquired quintiles
 /**
- * 
+ *
  * @param {Array} quintileArr
  * @param {String} key count, avg, sum or ratio
  */
@@ -633,12 +612,12 @@ async function onConfirmButtonClick() {
 
     // Update the map and add all tooltips, popups, and event listeners
     updateMap(
-      map, 
-      displayInfo.mapData, 
-      displayInfo.quintiles, 
+      map,
+      displayInfo.mapData,
+      displayInfo.quintiles,
       displayInfo.key,
     );
-    
+
     // Update the legend
     updateLegendText(displayInfo.quintiles, displayInfo.key);
     removeMapWaitSign();
@@ -646,7 +625,7 @@ async function onConfirmButtonClick() {
     console.log(err);
     setTimeout(( ) => {
       removeMapWaitSign();
-    }, 2500)
+    }, 2500);
   }
 
   try {
@@ -683,6 +662,28 @@ confirmButtonEl.addEventListener('click', onConfirmButtonClick);
 
 // Click on page load
 onConfirmButtonClick();
+
+// Record group-by element: by departure or by arrival
+const toggleDisplayToFromGroupEl = document.querySelector('#toggle-display-tofrom');
+const departOrArriveOptionsEl = toggleDisplayToFromGroupEl.getElementsByClassName("cb-invisible");
+for(const cbEl of departOrArriveOptionsEl) {
+  cbEl.addEventListener('click', ( ) => {
+    toggleDisplayParams.groupBy = cbEl.value;
+    onConfirmButtonClick();
+  });
+
+  // by default, click on Departures
+  if(cbEl.value === 'origin_geoid') {
+    cbEl.click();
+  }
+}
+
+// Unapply button: first click on reset button, then click on confirm button
+const geoUnapplyButtonEl = document.querySelector('#geo-unapply-button');
+geoUnapplyButtonEl.addEventListener('click', ( ) => {
+  panelGeoResetButtonEl.click();
+  onConfirmButtonClick();
+});
 
 export {
   onConfirmButtonClick,

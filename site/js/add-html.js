@@ -6,18 +6,18 @@ Add list of variables for display
 
 // Adds checkbox option of variable for display to parent el
 function addDisplayVarsEl(
-  parentEl, 
-  displayType, 
-  displayVar, 
-  displayFactor, 
-  displayName
+  parentEl,
+  displayType,
+  displayVar,
+  displayFactor,
+  displayName,
 ) {
   const el = htmlToElement(`
     <label>
       <input type="checkbox" class="cb-invisible" value="${displayVar}">
       <div class="cb-option"><button>${displayName}</button></div>
     </label>
-  `)
+  `);
 
   // Store some additional information
   el.firstChild.nextElementSibling.displayType = displayType;

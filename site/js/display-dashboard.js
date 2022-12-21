@@ -43,7 +43,7 @@ const dashboardVarsDict = {
     floor: 0,
     unit: 'years',
   },
-  primary_mode: {
+  "primary_mode": {
     displayName: 'mode',
     type: 'categorical',
     factors: {
@@ -53,10 +53,10 @@ const dashboardVarsDict = {
       4: "Biking",
       5: "TNC",
       6: "Transit",
-      7: "Other"
-    }
+      7: "Other",
+    },
   },
-  trip_start_time: {
+  "trip_start_time": {
     displayName: 'departure hour',
     type: 'categorical',
     factors: {
@@ -87,7 +87,7 @@ const dashboardVarsDict = {
       '24': '24-0',
     },
   },
-  purpose: {
+  "purpose": {
     displayName: 'purpose',
     type: 'categorical',
     factors: {
@@ -102,7 +102,7 @@ const dashboardVarsDict = {
       "9": "Other"
     },
   },
-  car_ownership: {
+  "car_ownership": {
     displayName: 'purpose',
     type: 'categorical',
     factors: {
@@ -112,14 +112,13 @@ const dashboardVarsDict = {
       "3": "3+ cars",
       "9": "Unknown",
     },
-  }
-
-}
+  },
+};
 
 // Finds corresponding category in given array and pushes it to newly initiated array
 // If cannot find it, `n_trips` is zero
 /**
- * 
+ *
  * @param {Array} newArr newly initiated array (half finished)
  * @param {Array} refArr reference array, filtered by unsorted
  * @param {String} catName bin or category name
@@ -136,13 +135,13 @@ function findMatchAndPush(newArr, refArr, catName) {
   // Cannot find it
   newArr.push({
     cat: catName,
-    n_trips: 0,
-  })
+    "n_trips": 0,
+  });
 }
 
 // Extracts and prepares data for a particular variable
 /**
- * 
+ *
  * @param {Array} allDataArr fetched through API
  * @param {String} varName
  * @param {String} displayName name of variable, e.g., distance, duration
@@ -150,7 +149,7 @@ function findMatchAndPush(newArr, refArr, catName) {
  */
 function prepareContinuousVarForVega(filtered, varName, displayName) {
   const thisBinWidth = dashboardVarsDict[varName].binWidth;
-  
+
   // Initiate an empty array
   const result = [];
 
@@ -175,9 +174,9 @@ function prepareContinuousVarForVega(filtered, varName, displayName) {
     }
     item[displayName] = item.cat;
     item.Trips = item.n_trips;
-  })
+  });
 
-  return(result)
+  return(result);
 }
 
 function prepareCategoricalVarForVega(filtered, varName, displayName) {
@@ -185,23 +184,23 @@ function prepareCategoricalVarForVega(filtered, varName, displayName) {
   const result = [];
   const keys = Object.keys(dashboardVarsDict[varName].factors);
   for(const key of keys) {
-    findMatchAndPush(result, filtered, key)
+    findMatchAndPush(result, filtered, key);
   }
   result.map(item => {
     item.cat = dashboardVarsDict[varName].factors[item.cat];
     item[displayName] = item.cat;
     item.Trips = item.n_trips;
-  })
+  });
   return result;
 }
 
 // Makes object to feed into Vega Lite
 /**
- * 
- * @param {Array} preparedData 
- * @param {String} displayName 
+ *
+ * @param {Array} preparedData
+ * @param {String} displayName
  * @param {String} xAxisUnit unit (miles, etc., to be displayed by the x axis)
- * @returns 
+ * @returns
  */
 function makeVegaObj(preparedData, displayName, xAxisUnit) {
   return {
@@ -271,8 +270,8 @@ function makeVegaObj(preparedData, displayName, xAxisUnit) {
 
 // Estimate mean of binned data
 /**
- * 
- * @param {Array} filtered 
+ *
+ * @param {Array} filtered
  * @param {String} varName `distance` `duration` etc
  * @returns Number
  */
@@ -300,26 +299,26 @@ function makeDashboard(dataArr) {
     }).map(item => {
       return {
         cat: Number(item.cat),
-        n_trips: Number(item.n_trips),
-      }
-    })
+        "n_trips": Number(item.n_trips),
+      };
+    });
     const estimatedMean = estimateMean(filtered, varName);
     // Update mean figure
     document.querySelector(`#${varName}-mean`).innerHTML = estimatedMean;
     document.querySelector(`#${varName}-unit`).innerHTML = dashboardVarsDict[varName].unit;
 
     const preparedData = prepareContinuousVarForVega(
-      filtered, 
-      varName, 
-      dashboardVarsDict[varName].displayName
+      filtered,
+      varName,
+      dashboardVarsDict[varName].displayName,
     );
     vegaEmbed(
-      `#${varName}-graph`, 
+      `#${varName}-graph`,
       makeVegaObj(
-        preparedData, 
-        dashboardVarsDict[varName].displayName, 
-        dashboardVarsDict[varName].unit
-      )
+        preparedData,
+        dashboardVarsDict[varName].displayName,
+        dashboardVarsDict[varName].unit,
+      ),
     );
   }
 
@@ -329,22 +328,22 @@ function makeDashboard(dataArr) {
     const filtered = dataArr.filter(item =>  item.var === varName).map(item => {
       return {
         cat: item.cat,
-        n_trips: Number(item.n_trips),
-      }
-    })
+        "n_trips": Number(item.n_trips),
+      };
+    });
     const preparedData = prepareCategoricalVarForVega(
       filtered,
       varName,
       dashboardVarsDict[varName].displayName,
-    )
+    );
     vegaEmbed(
       `#${varName}-graph`,
       makeVegaObj(
         preparedData,
         dashboardVarsDict[varName].displayName,
         '',
-      )
-    )
+      ),
+    );
   }
 }
 

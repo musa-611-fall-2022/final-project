@@ -85,7 +85,7 @@ const filterPanelsElsArr = [
 ];
 const dashboardPanelsElsArr = [
   document.querySelector('#dashboard-panel'),
-]
+];
 const allPanelsElsArr = displayPanelsElsArr.concat(filterPanelsElsArr).concat(dashboardPanelsElsArr);
 
 const panelTabsEls = document.querySelectorAll('.panel-tab');
@@ -108,7 +108,7 @@ for(const tabEl of panelTabsEls) {
       // If currently not selected:
       // First hide all
       allPanelsElsArr.forEach(el => { el.style.display = 'none' });
-      panelTabsEls.forEach(el => { el.classList.remove('panel-tab-selected'); })
+      panelTabsEls.forEach(el => { el.classList.remove('panel-tab-selected') });
 
       // Show this
       targetElsArr.forEach(el => { el.style.display = 'flex' });
@@ -116,7 +116,7 @@ for(const tabEl of panelTabsEls) {
       // Update state
       tabEl.classList.add('panel-tab-selected');
     }
-  })
+  });
 }
 
 // Listen for windows resize
@@ -127,7 +127,7 @@ visualViewport.addEventListener('resize', ( ) => {
   } else { // If resized to smaller
     allPanelsElsArr.forEach(el => { el.style.display = 'none '});
     displayPanelsElsArr.forEach(el => { el.style.display = 'flex' });
-    
+
     panelTabsEls.forEach(el => {
       if(el.id === 'panel-tab-display') {
         if(!el.classList.contains('panel-tab-selected')) {
@@ -135,11 +135,11 @@ visualViewport.addEventListener('resize', ( ) => {
         }
         return;
       }
-      el.classList.remove('panel-tab-selected'); 
+      el.classList.remove('panel-tab-selected');
       return;
-    })
+    });
   }
-})
+});
 
 /* ======= Dashboard dropdown =========== */
 
@@ -154,7 +154,7 @@ selectEl.addEventListener('change', ( ) => {
   });
   // Show this graph
   document.querySelector(`#dashboard-${thisId}`).style.display = 'flex';
-})
+});
 
 /* =========== Information window overlay ========== */
 
@@ -164,8 +164,8 @@ const showInfoButtonEl = document.querySelector('#show-info-button');
 
 showInfoButtonEl.addEventListener('click', ( ) => {
   infoOverlayEl.style.display = 'flex';
-})
+});
 
 infoBackEl.addEventListener('click', ( ) => {
   infoOverlayEl.style.display = 'none';
-})
+});

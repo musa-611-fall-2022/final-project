@@ -13,7 +13,8 @@
     "mapboxgl": "readonly",
     "maplibregl": "readonly",
     "ol": "readonly",
-    "Papa": "readonly"
+    "Papa": "readonly",
+    "vegaEmbed": "readonly"
   },
   "rules": {
     "camelcase": ["error"],

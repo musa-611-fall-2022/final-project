@@ -65,7 +65,7 @@ function turnOffFilterOnEmpty(filterObj) {
   if(filterObj.selectedCategories.length === 0) {
     filterObj.isApplied = false;
   }
-} 
+}
 
 // Adds recorder to categorical filters (factor selectors)
 // Updates `filterParams` on user clicking

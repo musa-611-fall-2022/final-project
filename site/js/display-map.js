@@ -3,8 +3,8 @@ This script contains functions dealing with the map
 =============================================================== */
 
 /**
- * 
- * @param {Number} val representing a value to be color coded 
+ *
+ * @param {Number} val representing a value to be color coded
  * @returns {String} hex of the output color
  */
 function getQuintileColor(val, quintiles) {
@@ -17,7 +17,7 @@ function getQuintileColor(val, quintiles) {
 
 // Sets quintile display styles
 /**
- * 
+ *
  * @param {Object.Feature} feature geo feature
  * @returns {Object} styling options
  */
@@ -28,17 +28,17 @@ function quintileStyle(feature, quintiles) {
     weight: 1,
     dashArray: '3',
     fillOpacity: 0.7,
-  }
+  };
 }
 
 // Initializes map with empty block group layer on screen, and returns map obj
 /**
- * 
+ *
  * @returns {Object} Map
  */
 function initMap() {
-  const map = L.map('map', { 
-    maxZoom: 22, preferCanvas: true, 
+  const map = L.map('map', {
+    maxZoom: 22, preferCanvas: true,
     zoomControl: false,
     tap: false, // Prevent firing two onclick events at once
   }).setView([39.98, -75.16], 11.5);
@@ -50,7 +50,7 @@ function initMap() {
 
   const attributionHTML = '© <a href="https://www.mapbox.com/about/maps/">Mapbox</a> © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>';
   const tileLayerUrl = `https://api.mapbox.com/styles/v1/${mapboxAccount}/${mapboxStyle}/tiles/256/{z}/{x}/{y}@2x?access_token=${mapboxToken}`;
-  
+
   // Add tile layer
   L.tileLayer(tileLayerUrl, {
       maxZoom: 21,
@@ -122,7 +122,7 @@ async function fetchMapBaseData() {
 
 // Add block groups in the first go, before fetching data from the database
 /**
- * 
+ *
  * @param {Object} map the leaflet map
  * @param {Object.FeatureCollection} mapBaseData block group feature collection
  */
@@ -137,11 +137,11 @@ async function addInitialBlockGroups(map, mapBaseData) {
 
 // Merges data gotten from API to map base data
 /**
- * 
+ *
  * @param {Object.FeatureCollection} mapBaseData map block group base shapes
  * @param {Array} updateData array of objects containing GEOID and count/avg/sum, queried from db
  * @param {String} key either count or avg or sum
- * @returns 
+ * @returns
  */
 function mergeAttributeToMapData(mapBaseData, updateData, key) {
   // Initiate new FeatureCollection
@@ -170,9 +170,9 @@ function mergeAttributeToMapData(mapBaseData, updateData, key) {
 
 // Computes quintile breakpoints
 /**
- * 
+ *
  * @param {Arr} dataArr simple array of all the numbers/values
- * @param {Number} ntiles 
+ * @param {Number} ntiles
  * @returns {Arr} Array of `ntiles + 1`, with the 0-index value being the min, and the ntile-index value bing the max
  */
 function computeQuintiles(dataArr, ntiles) {
@@ -211,7 +211,7 @@ function makeTooltipContent(feature, key) {
 }
 // Make popup content
 /**
- * 
+ *
  * @param {Object.Feature} feature the input feature object
  * @param {String} key display type: count, sum, or mean
  * @returns {text} HTML content of the tooltip
@@ -232,14 +232,14 @@ import { geoSelection, filterParams } from './main.js';
 
 // Adds an array of features to a map layer
 /**
- * 
- * @param {Layer} mapLayer 
- * @param {Arr} featuresArr 
+ *
+ * @param {Layer} mapLayer
+ * @param {Arr} featuresArr
  */
 function addFeaturesArrToLayer(mapLayer, featuresArr) {
   featuresArr.forEach(feature => {
     mapLayer.addData(feature);
-  })
+  });
 }
 
 // Clears currently selected layer and clear `geoSelection`
@@ -267,8 +267,8 @@ import { onConfirmButtonClick } from './main.js';
 // 2. Add currently selected to Destination filter
 // 3. Clear current geo-filters
 /**
- * 
- * @param {*} map 
+ *
+ * @param {*} map
  */
 function functionalizeGeoFilterButtons(map) {
   // add selected features as Origin filter
@@ -310,7 +310,7 @@ function functionalizeGeoFilterButtons(map) {
     clearSelected(map);
 
     // Directly apply filter
-    onConfirmButtonClick()
+    onConfirmButtonClick();
   });
 
   // clear all current filters
@@ -325,14 +325,14 @@ function functionalizeGeoFilterButtons(map) {
 
     // Close popup
     map.closePopup();
-  })
+  });
 }
 
 // layer unselected -> selected
 /**
- * 
- * @param {*} map 
- * @param {*} layer 
+ *
+ * @param {*} map
+ * @param {*} layer
  */
 function onLayerSelected(map, layer) {
   // Store the GEOID
@@ -350,9 +350,9 @@ function onLayerSelected(map, layer) {
 }
 // layer selected -> unselected
 /**
- * 
- * @param {*} map 
- * @param {*} layer 
+ *
+ * @param {*} map
+ * @param {*} layer
  */
 function onLayerUnselected(map, layer) {
   // Un-store the GEOID
@@ -391,7 +391,7 @@ function addGeoSelector(map, layer) {
 
 // Creates a data after API fetch, used to update map
 /**
- * 
+ *
  * @param {Object.FeatureCollection} mapBaseData geo object base
  * @param {Array} mapUpdateData object queried from db; array; each element is an object with two properties 1. GEOID, 2. count/avg/sum
  * @returns {Object} mapData: shape to be displayed on map; key: count/avg/sum; quintiles: Arr
@@ -400,7 +400,7 @@ function makeDisplayData(mapBaseData, mapUpdateData) {
   // First update mapUpdateData, add `42101` in front of the GEOID
   mapUpdateData.map(item => {
     item.geoid = '42101' + String(item.geoid);
-  })
+  });
 
   // Copy a version
   const updateData = mapUpdateData.slice();
@@ -416,16 +416,16 @@ function makeDisplayData(mapBaseData, mapUpdateData) {
     mapData: mapBaseDataUpdated,
     key: key,
     quintiles: quintiles,
-  }
+  };
 }
 
 // Updates map after API fetch
 /**
- * 
- * @param {Leaflet Map} map 
- * @param {Object.FeatureCollection} mapData 
- * @param {Arr} quintiles 
- * @param {String} key 
+ *
+ * @param {Leaflet Map} map
+ * @param {Object.FeatureCollection} mapData
+ * @param {Arr} quintiles
+ * @param {String} key
  */
 function updateMap(map, mapData, quintiles, key) {
   // Update the block group layer
@@ -435,13 +435,13 @@ function updateMap(map, mapData, quintiles, key) {
   map.blockGroupLayer.setStyle(feature => quintileStyle(feature, quintiles));
 
   // Add tooltip and popup
-  map.blockGroupLayer.bindTooltip(layer => makeTooltipContent(layer.feature, key))
-  map.blockGroupLayer.bindPopup(layer => makePopupContent(layer.feature, key))
+  map.blockGroupLayer.bindTooltip(layer => makeTooltipContent(layer.feature, key));
+  map.blockGroupLayer.bindPopup(layer => makePopupContent(layer.feature, key));
 
   // Add geo selector event listener
   map.blockGroupLayer.addEventListener('click', (e) => {
     addGeoSelector(map, e.layer);
-  })
+  });
 }
 
 export {
