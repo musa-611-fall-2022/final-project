@@ -1,7 +1,7 @@
 /* globals beforeAll, expect, describe, it, page */
 
 beforeAll(async () => {
-  await page.goto('http://localhost:8080/site/');
+  await page.goto('http://localhost:8081/site/');
 });
 
 describe('the index.html page', () => {
