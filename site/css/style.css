@@ -31,9 +31,9 @@ a {
 
 /* } */
 
-/* .et-hero-tabs h3, */
+/* .et-hero-tabs h2, */
 
-/* .et-slide h3 { */
+/* .et-slide h2 { */
 
 /*  font-size: 1rem; */
 
@@ -423,8 +423,8 @@ li {
     font-size: 3rem;
   }
 
-  .et-hero-tabs h3,
-  .et-slide h3 {
+  .et-hero-tabs h2,
+  .et-slide h2 {
     font-size: 1rem;
   }
 
