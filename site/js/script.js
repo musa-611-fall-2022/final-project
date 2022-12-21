@@ -39,7 +39,7 @@ class StickyNavigation {
 		}
 	}
 
-	findCurrentTabSelector(element) {
+	findCurrentTabSelector() {
 		let newCurrentId;
 		let newCurrentTab;
 		let self = this;
