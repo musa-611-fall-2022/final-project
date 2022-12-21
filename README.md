@@ -1,5 +1,5 @@
 # Volunteer Assistant in Mathare Slum!
-An app is designed for volunteers working in Mathare, click [here](https://miaomiao612.github.io/final-project/ "悬停显示文字") to tour our app!
+An app is designed for volunteers working in Mathare, click [here](https://miaomiao612.github.io/Mathare-Slum-Facilities-App/ "悬停显示文字") to tour our app!
 
 ### Team Member: 
 
