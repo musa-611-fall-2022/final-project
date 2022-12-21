@@ -25,34 +25,36 @@
 </head>
 
 <body style="overflow-x: hidden">
-    <section class="et-hero-tabs" style="padding: 0" id="homepage">
-        <div class="mycontainer">
-            <video id="v1" autoplay muted loop style="width: 100%">
-                <source src="./data/Map-main.mp4">
-            </video>
-            <div class="logo">
-                <img src="./data/graphics/mainlogo" alt="">
+    <header>
+        <section class="et-hero-tabs" style="padding: 0" id="homepage">
+            <div class="mycontainer">
+                <video id="v1" autoplay muted loop style="width: 100%">
+                    <source src="./data/Map-main.mp4">
+                </video>
+                <div class="logo">
+                    <img src="./data/graphics/mainlogo" alt="">
+                </div>
+                <a style="position:absolute; top: 60%; left: 40%; z-index: 10; background-color: black; border-color: black"
+                    href="#tab-city" type="button" class="et-hero-tab btn btn-primary btn-lg">My City Potential</a>
+                <a style="position:absolute; top: 60%; left: 60%; background-color: black; border-color: black"
+                    href="#tab-roof" type="button" class="btn btn-primary btn-lg">My Roof Potential</a>
             </div>
-            <a style="position:absolute; top: 60%; left: 40%; z-index: 10; background-color: black; border-color: black"
-                href="#tab-city" type="button" class="et-hero-tab btn btn-primary btn-lg">My City Potential</a>
-            <a style="position:absolute; top: 60%; left: 60%; background-color: black; border-color: black"
-                href="#tab-roof" type="button" class="btn btn-primary btn-lg">My Roof Potential</a>
-        </div>
 
-        <div class="et-hero-tabs-container">
-            <div class="title">
-                <!--              <a style="color: orange; text-decoration: none" href="#homepage" >Urban Solar Operations</a>-->
-                <img src="./data/graphics/Logo_S_wht.png" alt="" style="position:absolute;left: 8%">
+            <div class="et-hero-tabs-container">
+                <div class="title">
+                    <!--              <a style="color: orange; text-decoration: none" href="#homepage" >Urban Solar Operations</a>-->
+                    <img src="./data/graphics/Logo_S_wht.png" alt="" style="position:absolute;left: 8%">
+                </div>
+                <a class="et-hero-tab city" href="#tab-city"
+                    style="text-decoration: none; font-size: 18px; color: #BD5500; font-weight: bold;">City</a>
+                <a class="et-hero-tab" href="#tab-roof"
+                    style="text-decoration: none; font-size: 18px; color: #BD5500; font-weight: bold;">Roof</a>
+                <a class="et-hero-tab" href="#tab-about"
+                    style="text-decoration: none; font-size: 18px; color: #BD5500; font-weight: bold;">About</a>
+                <span class="et-hero-tab-slider"></span>
             </div>
-            <a class="et-hero-tab city" href="#tab-city"
-                style="text-decoration: none; font-size: 18px; color: #BD5500; font-weight: bold;">City</a>
-            <a class="et-hero-tab" href="#tab-roof"
-                style="text-decoration: none; font-size: 18px; color: #BD5500; font-weight: bold;">Roof</a>
-            <a class="et-hero-tab" href="#tab-about"
-                style="text-decoration: none; font-size: 18px; color: #BD5500; font-weight: bold;">About</a>
-            <span class="et-hero-tab-slider"></span>
-        </div>
-    </section>
+        </section>
+    </header>
 
     <!-- Main -->
     <main class="et-main">
