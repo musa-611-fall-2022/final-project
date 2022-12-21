@@ -1,9 +1,9 @@
 {
-  "sourceType": "module",
   "extends": ["eslint:recommended"],
   "ignorePatterns": ["site/data/*.js", "index.js"],
   "parserOptions": {
-    "ecmaVersion": "latest"
+    "ecmaVersion": "latest",
+    "sourceType": "module"
   },
   "env": {
     "browser": true
