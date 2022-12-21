@@ -79,7 +79,7 @@ export const categoricalVarsDict = {
   primary_mode: {
     displayName: 'Mode',
     factors: {
-      1: 'Own car',
+      1: 'Drive',
       3: 'Walk',
       4: 'Bike', 
       5: 'TNC',

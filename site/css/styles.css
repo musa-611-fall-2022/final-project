@@ -181,6 +181,9 @@ and when screen is smaller than 20rem, go for 100% */
   gap: 0.5rem;
   flex-direction: column;
   pointer-events: auto;
+}
+
+.right-column {
   overflow: auto;
 }
 
@@ -232,6 +235,7 @@ and when screen is smaller than 20rem, go for 100% */
   justify-content: space-between;
   border-width: 0;
   display: none;
+  height: 2rem;
 }
 
 .panel-tab {
@@ -244,13 +248,14 @@ and when screen is smaller than 20rem, go for 100% */
 }
 
 .panel-tab-selected {
-  background-color: var(--hero-reg);
+  background-color: var(--primary-reg);
   color: white;
-  border-color: var(--hero-reg);
+  font-weight: 800;
+  border-color: var(--primary-reg);
 }
 
 .panel-tab-selected:hover {
-  background-color: var(--hero-reg);
+  background-color: var(--primary-reg);
 }
 
 @media only screen and (max-width: 1200px) {
@@ -285,4 +290,44 @@ and when screen is smaller than 20rem, go for 100% */
   justify-content: center;
   color: var(--hero-reg);
   padding: 0 clamp(1rem, 30%, 40%);
+}
+
+/* --------- Information overlay ------------- */
+
+.information-overlay {
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  z-index: 20;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  color: var(--hero-reg);
+}
+
+.information-overlay-white {
+  height: 100vh;
+  width: 100vw;
+  background-color: black;
+  position: fixed;
+  z-index: 20;
+  display: flex;
+  opacity: 0.5;
+  align-items: center;
+  justify-content: center;
+  color: var(--hero-reg);
+}
+
+.information-window {
+  width: clamp(20%, 20rem, 100%);
+  background-color: white;
+  border-radius: 0.3rem;
+  box-shadow: var(--shadow-layer-2);
+  font-size: 0.85rem;
+  padding: 0.7rem;
+  z-index: 30;
+}
+
+.information-window a {
+  color: var(--hero-reg);
 }

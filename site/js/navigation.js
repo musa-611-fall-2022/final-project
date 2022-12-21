@@ -155,3 +155,17 @@ selectEl.addEventListener('change', ( ) => {
   // Show this graph
   document.querySelector(`#dashboard-${thisId}`).style.display = 'flex';
 })
+
+/* =========== Information window overlay ========== */
+
+const infoOverlayEl = document.querySelector('#information-overlay');
+const infoBackEl = document.querySelector('#information-overlay-white');
+const showInfoButtonEl = document.querySelector('#show-info-button');
+
+showInfoButtonEl.addEventListener('click', ( ) => {
+  infoOverlayEl.style.display = 'flex';
+})
+
+infoBackEl.addEventListener('click', ( ) => {
+  infoOverlayEl.style.display = 'none';
+})

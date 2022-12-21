@@ -37,7 +37,7 @@
 
       <div class="nav-right">
         <h2 class="nav-subtitle">All the trips in Philadelphia</h2>
-        <span class="material-symbols-outlined">info</span>
+        <span class="material-symbols-outlined" id="show-info-button">info</span>
       </div>
     </nav>
 
@@ -47,7 +47,23 @@
     <!-- Map overlay while loading -->
     <div class="map-loading-overlay" id="map-loading-overlay">
       Please wait while loading map.
-      Map takes longer to load after the server is inactive for 30 minutes.
+      May take longer to load if inactive for 30 minutes.
+    </div>
+
+    <!-- Information display overlay -->
+    <div class="information-overlay" id="information-overlay">
+      <div class="information-overlay-white" id="information-overlay-white"></div>
+      <div class="information-window" id="information-window">
+        <a title="Replica official website" href = "https://studio.replicahq.com/">Replica</a>'s data
+          may help us understand the question. Replica provides 
+          <span class="italic">modeled trip-level</span> data 
+          <span class="italic">in a typical weekday</span> using multivarious sources, such as
+          Census and ACS, travel surveys, in-auto GPS data, data from transit agencies, and so on.
+          <a title="Replica data sources" href="http://help.replicahq.com/en/articles/6625924-north-atlantic-fall-2021-release-notes">Here</a>
+          Replica talks more about data sources and its methodology. We subset only trips that start and end in Philadelphia. 
+          The modeled data for Philadelphia is <a title = "Replica definition of trustworthy result" href="http://help.replicahq.com/en/articles/4000393-replica-places-certainty-indicators-overview">
+          trustworthy</a>.
+      </div>
     </div>
 
     <!-- Main section -->
@@ -127,7 +143,7 @@
             Please wait while making dashboard...
           </div>
           <div class="dashboard-container" id="dashboard-container">
-            <div class="selector-kit-title">Choose a variable to view</div>
+            <div class="selector-kit-title">Choose a variable to view dashboard</div>
             <select class="dashboard-selector">
               <option value="distance">Distance</option>
               <option value="duration">Duration</option>
@@ -206,7 +222,7 @@
       </section>
 
       <!-- Right (bottom) column -->
-      <section class="column">
+      <section class="column right-column">
         <!-- Filters panel -->
         <div class="panel filter-panel" id="filter-panel">
           <h2 class="panel-title">Filter trips</h2>
