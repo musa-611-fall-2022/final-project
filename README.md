@@ -44,7 +44,9 @@ UN-Habitat urban data site——[Mathare Slum Data Points](https://github.com/mi
 
 ### Step to get it running:
 Fork the repo in your GitHub
+
 Clone the folder in your computer
+
 Type "npx http-server" in the teminal and open the link in your browser
 
 
