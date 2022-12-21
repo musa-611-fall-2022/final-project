@@ -5,8 +5,3 @@ beforeAll(async () => {
 });
 
 
-describe('the index.html page', () => {
-  it('should not have any obvious accessibility violations', async () => {
-    await expect(page).toPassAxeTests();
-  });
-});
