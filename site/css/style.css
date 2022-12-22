@@ -70,8 +70,6 @@ body {
   color: #473c30;
 }
 
-
-
 .info {
   position: absolute;
   width: 320px;
@@ -99,9 +97,9 @@ body {
   height: 60px;
   left: 14px;
   top: 602px;
-  background: rgb(255, 255, 255);
+  background: rgb(255 255 255);
   border: 3px solid #a4a4a4;
- 
+
   border-radius: 20px;
 }
 
