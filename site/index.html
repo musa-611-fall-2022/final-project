@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>My Workout Diary</title>
+
+    <!-- My CSS files-->
+    <link href="css/styles.css" rel="stylesheet" type="text/css"/>
+    
+    <!-- Using hosted version of Leaflet-->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+    integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
+    crossorigin=""/>
+
+    <!-- Make sure you put this AFTER Leaflet's CSS -->
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+    integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
+    crossorigin=""></script>
+  
+    <!-- My project JS modules-->
+    <script type="module" src="js/main.js"></script>
+
+  </head>
+
+  <body>
+    <div class="content-container">
+      <img src="./asset/logo1.png" alt="Logo" class="logo"/>
+
+
+
+      <ul class="list-container">
+  
+        <!-- <div id="info" class="notes">
+          <h1 id="records">My workout diary</h1>
+        </div> -->
+
+
+        <!-- Tracking form -->
+        <!-- <div id="info" class="switch">
+          <h2 id="records">Track my workout</h2>
+        </div>
+
+        <form class="track-list">
+          <div class="list_row">
+            <label class="list_label">Types</label>
+            <select class="list_input list_input--type">
+              <option value="Walking">Walking</option>
+              <option value="Running">Running</option>
+              <option value="Cycling">Cycling</option>
+              <option value="Dog_Walking">Dog Walking</option>
+            </select>
+          </div>
+          <div class="list_row">
+            <label class="list_label">Difficulty</label>
+              <select class="list_input list_input--difficulty">
+                <label class="list_label">Difficulty</label>
+                <option value="Easy">Easy</option>
+                <option value="Normal">Normal</option>
+                <option value="Challenging">Challenging</option>
+                <option value="Nightmare">Nightmare</option>            
+              </select>
+          </div>
+
+
+          <div class="list_row">
+            <label class="list_label">Distance</label>
+            <input class="list_input list_input--distance" placeholder="miles" />
+          </div>
+          <div class="list_row">
+            <label class="list_label">Time spent</label>
+            <input class="list_input list_input--time" placeholder="min" />
+          </div>
+
+          <button class="list_button">Start to track</button>
+
+        </form> -->
+
+        <!-- Input form -->
+
+
+        <form class="list hidden">
+          <!-- <h2 id="records">Input my workout</h2> -->
+          <div class="list_row">
+            <label class="list_label">Types</label>
+            <select class="list_input list_input--type">
+              <option value="Walking">Walking</option>
+              <option value="Running">Running</option>
+              <option value="Cycling">Cycling</option>
+              <option value="Dog_Walking">Dog Walking</option>
+            </select>
+          </div>
+          <div class="list_row">
+            <label class="list_label">Difficulty</label>
+              <select class="list_input list_input--difficulty">
+                <label class="list_label">Difficulty</label>
+                <option value="Easy">Easy</option>
+                <option value="Normal">Normal</option>
+                <option value="Challenging">Challenging</option>
+                <option value="Nightmare">Nightmare</option>            
+              </select>
+          </div>
+
+
+          <div class="list_row">
+            <label class="list_label">Distance</label>
+            <input class="list_input list_input--distance" placeholder="miles" />
+          </div>
+          <div class="list_row">
+            <label class="list_label">Time spent</label>
+            <input class="list_input list_input--duration" placeholder="min" />
+          </div>
+
+          <button class="list_button">Input Record</button>
+          <button class="list_button">Track Loc.</button>
+
+        </form>
+
+
+      </ul>
+      
+    </div>
+    
+    <div id="map" ></div>
+      
+  </body>
+</html>

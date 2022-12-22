@@ -1,0 +1,186 @@
+/* :root{
+  color1:#ffb545;
+  color2:#00c46a;
+} */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+html {
+  font-size: 62.5%;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 2.5rem;
+
+  display: flex;
+
+  flex-direction: row-reverse;
+  height: 100vh;
+  border-width: 10px;
+  font-weight: 400;
+  line-height: 1.6;
+  font-family:Arial, Helvetica, sans-serif;
+  color:#38485C;
+
+  background-color: #D8E6E7;
+
+}
+
+/* SIDEBAR related style */
+a:link,
+a:visited {
+  color: var(#B1CECF);
+}
+
+.logo{
+  height: 15rem;
+  align-self: center;
+}
+
+.content-container {
+  width: 35%; 
+  flex-basis: 50rem;
+  background-color: white; 
+  padding: 3rem 5rem 4rem 5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.list-container{
+  list-style: none;
+  height: 100%;
+  overflow-y: scroll;
+}
+
+.list_button {
+  background-color: #B1CECF;
+  color: #fff;
+  padding: 10px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 15px;
+  margin: 3px 2px;
+  cursor: pointer;
+  border-radius:26px 6px;
+  /* border: none; */
+  border: none;
+  border-color: #38485C;
+}
+
+/* LIST related style */
+
+.list{
+  background-color: #D8E6E7;
+  border-radius: 6px;
+  padding: 1.5rem 2.75rem;
+  margin-bottom: 1.75rem;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem 2.5rem;
+
+  /* Match height and activity boxes */
+  /* height: 9.25rem; */
+  transition: all 0.5s, transform 1ms;
+}
+
+.list.hidden {
+  transform: translateY(-30rem);
+  height: 0;
+  padding: 0 2.25rem;
+  margin-bottom: 0;
+  opacity: 0;
+}
+
+.list_row {
+  display: flex;
+  align-items: center;
+}
+
+.list_label {
+  flex: 0 0 50%;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.list_input {
+  width: 100%;
+  padding: 0.3rem 1.1rem;
+  font-family: inherit;
+  font-size: 1.4rem;
+  border: none;
+  border-radius: 3px;
+  background-color: var(--color-light--3);
+  transition: all 0.2s;
+}
+
+.list_input:focus {
+  outline: none;
+  background-color: #fff;
+}
+
+.h2{
+  width: 100%;
+}
+
+/* Workout list */
+.workout{
+  border-radius: 6px;
+  background-color: #D8E6E7;
+  padding: 10px;
+  border-color: #fff;
+  border-width: 3px;
+  margin:5px #fff;
+}
+
+.workout_logo{
+  height: 1.5rem;
+}
+
+.workout_type,.workout_difficulty, .workout_distance, .workout_duration,.workout_unit {
+  font-family:Arial, Helvetica, sans-serif;
+  color:#38485C;
+  font-size: 1.5rem;
+}
+
+
+/* MAP related styles*/
+
+/* .map-container {
+  width: 65%;
+} */
+
+#map { 
+  flex: 1;
+  height: 100%; 
+
+}
+
+
+/* POPUP related styles */
+
+.leaflet-popup .leaflet-popup-content-wrapper {
+  background-color: #D8E6E7;
+  color: #38485C;
+  border-radius: 6px;
+  padding-right: 0.6rem;
+  border: 3px #fff; 
+}
+
+.leaflet-popup .leaflet-popup-content {
+  font-size: 1.5rem;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.leaflet-popup .leaflet-popup-tip {
+  background-color: #D8E6E7;
+}
+
+
