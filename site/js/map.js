@@ -47,7 +47,7 @@ function showStopOnMap(stopToShow, map) {
       layer.bindTooltip(`STOP: ${feature.properties.stopname}`);
     },
   }).on('click', function (e) {
-    console.log(e.latlng.lat, e.latlng.lng)
+    console.log(e.latlng.lat, e.latlng.lng);
     map.removeLayer(map.stopLayers);
     let circle = L.circle([e.latlng.lat, e.latlng.lng], {
       color: "red",

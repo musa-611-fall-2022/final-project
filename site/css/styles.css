@@ -1,4 +1,4 @@
-@import "https://fonts.googleapis.com/css2?family=Droid+Sans";
+@import url("https://fonts.googleapis.com/css2?family=Droid+Sans");
 
 html {
   font-family: "Droid Sans", sans-serif;
@@ -43,21 +43,23 @@ h3 {
 
 .header {
   width: 100%;
-  padding:10px 0;
+  padding: 10px 0;
   text-align: center;
   background: #364477ff;
   color: white;
 }
 
-#map { height: 100%;
-  height: 1200px; 
+#map {
+  height: 100%;
+  height: 1200px;
   padding: 0px;
-z-index: 1;}
+  z-index: 1;
+}
 
 
 .map-container {
   width: 100%;
-  height:1000px;
+  height: 1000px;
   margin-bottom: 0p;
 }
 
@@ -101,27 +103,31 @@ z-index: 1;}
   padding-top: 0;
 }
 
- /* The Modal (background) */
- .modal {
-  display: none; 
-  position: fixed; 
-  z-index: 1; 
+/* The Modal (background) */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
   left: 0;
   top: 0;
-  width: 100%; 
-  height: 100%; 
-  overflow: auto; 
-  background-color: rgb(0,0,0); 
-  background-color: rgba(0,0,0,0.4); 
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
 }
-#myModal{ z-index:2; }
+
+#myModal {
+  z-index: 2;
+}
+
 /* Modal Content/Box */
 .modal-content {
   background-color: #fefefe;
-  margin: 15% auto; 
+  margin: 15% auto;
   padding: 20px;
   border: 1px solid #888;
-  width: 80%; 
+  width: 80%;
 }
 
 /* The Close Button */
@@ -137,4 +143,4 @@ z-index: 1;}
   color: black;
   text-decoration: none;
   cursor: pointer;
-} 
+}

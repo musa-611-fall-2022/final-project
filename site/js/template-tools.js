@@ -11,26 +11,25 @@ for more information: https://stackoverflow.com/a/35385518/123776
  * @return {Element}
  */
 function htmlToElement(html) {
-    const template = document.createElement('template');
-    const trimmedHtml = html.trim(); // Never return a text node of whitespace as the result
-    template.innerHTML = trimmedHtml;
-    return template.content.firstChild;
-  }
-  
-  /**
-   * @param {String} HTML representing any number of sibling elements
-   * @return {NodeList}
-   */
-  function htmlToElements(html) {
-    const template = document.createElement('template');
-    template.innerHTML = html;
-    return template.content.childNodes;
-  }
-  
-  window.htmlToElement = htmlToElement;
-  window.htmlToElements = htmlToElements;
-  
-  export {
-    htmlToElement,
-    htmlToElements,
-  };
+  const template = document.createElement('template');
+  const trimmedHtml = html.trim(); // Never return a text node of whitespace as the result
+  template.innerHTML = trimmedHtml;
+  return template.content.firstChild;
+}
+/**
+ * @param {String} HTML representing any number of sibling elements
+ * @return {NodeList}
+ */
+function htmlToElements(html) {
+  const template = document.createElement('template');
+  template.innerHTML = html;
+  return template.content.childNodes;
+}
+
+window.htmlToElement = htmlToElement;
+window.htmlToElements = htmlToElements;
+
+export {
+  htmlToElement,
+  htmlToElements,
+};
