@@ -1,6 +1,6 @@
 # Final Project: Runners' Map
 
-Yingxue Ou
+Yingxue OU
 
 ##  Background
 Cities have plenty of highways, but not all of them may be good for jogging. Typically, when choosing a route that is  suitable for running, runners must take into account the flow of traffic, the pavement's quality, the surrounding scenery, and other factors. A novice runner is likely to seek the assistance of some like-minded enthusiasts while seeking for a path to run on or when they are sick of running the same route and looking for a new trail. Similarly, those who enjoy jogging might want to share their favorite running routes with those who share their interests.
