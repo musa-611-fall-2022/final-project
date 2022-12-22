@@ -96,9 +96,12 @@
             </div>
 
             <div class="right">
-                <div id="map" aria-label="map">
-                   
-                  </div>
+                <div id="map">
+                   <div class="mapboxgl-touch-zoom-rotate mapboxgl-canvas-container mapboxgl-interactive">
+                        <canvas class="mapboxgl-canvas" aria-label="Interactive map of the city" aria-labelledby="map" role="region">
+                        </canvas>
+                    </div>
+                 </div>
             </div>
         </section>
         <section class="et-slide" id="tab-roof">
@@ -160,7 +163,7 @@
                 </div>
             </div>
             <div class="right">
-                <div id="map-roof" aria-labelledby="map-roof">
+                <div id="map-roof">
                 </div>
             </div>
         </section>
