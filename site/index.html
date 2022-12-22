@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Food-Near-My-Stop</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.2/dist/leaflet.css"
+        integrity="sha256-sA+zWATbFveLLNqWO2gtiw3HL/lh1giY/Inf1BJ0z14=" crossorigin="" />
+
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+
+    <section class="header">
+        <div>
+            <h1>Food-Near-My-Stop <svg id="questionMark" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                    fill="currentColor" class="bi bi-question-circle" viewBox="0 0 16 16">
+                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                    <path
+                        d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286zm1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z" />
+                </svg></h1>
+            <p>Hungry on the bus? Use this app to explore food in walking distance of the bus stop you intend to get
+                down at.</p>
+            <p>Click here for pop-up instructions!</p>
+        </div>
+    </section>
+    <div id="myModal" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span class="close" id="closeModal">&times;</span>
+            <p1>How to use this application:</p1>
+            <br>
+            <p1>First, select your bus stop. To find your stop, either type in the name of the stop in the area below
+                the map, or select the direction of your bus route to find your stop on the map.</p1>
+            <p1>Then, click on your stop's marker on the map to activate the walking radius around it.</p1>
+            <p1>Now you can view the restaurants within your walking radius. You can hover over these food place markers
+                to see their names and cuisines.</p1>
+            <p1>You can also search for restaurants using this app to see if the place you want to go to is near your
+                stop.</p1>
+        </div>
+
+    </div>
+    <div id="map" class="map"></div>
+    <div class="content-container">
+        <div class="map-container">
+        </div>
+        <div class="list-container">
+            <h3><b>Direction</b></h3>
+            <b><label><input type="checkbox" class="direction-checkbox" value="Southbound">Southbound</label></b>
+            <b><label><input type="checkbox" class="direction-checkbox" value="Eastbound">Eastbound</label></b>
+            <b><label><input type="checkbox" class="direction-checkbox" value="Northbound">Northbound</label></b>
+            <b><label><input type="checkbox" class="direction-checkbox" value="Westbound">Westbound</label></b>
+            <br>
+            <p1><b>...Or search by stop name</b></p1>
+            <input type="text" id="stop-name-filter" placeholder="Enter Stop Name...">
+            <h3><b>Stops in Philadelphia</b></h3>
+
+
+            <ul id='stop-list'></ul>
+        </div>
+    </div>
+
+    <br>
+
+    <div class="content-container1">
+        <div class="list-container1">
+            <h3><b>Amenity Type</b></h3>
+            <b><label><input type="checkbox" class="cuisine-checkbox" value="restaurant">Restaurant</label></b>
+            <b><label><input type="checkbox" class="cuisine-checkbox" value="bar">Bar</label></b>
+            <b><label><input type="checkbox" class="cuisine-checkbox" value="pub">Pub</label></b>
+            <br>
+            <h3><b>Philadelphia Restaurant List</b></h3>
+            <input type="text" id="cuisine-name-filter" placeholder="Enter Cuisine Name...">
+            <ul id='cuisine-list'></ul>
+        </div>
+    </div>
+
+</body>
+
+<script src="https://unpkg.com/leaflet@1.9.2/dist/leaflet.js"
+    integrity="sha256-o9N1jGDZrf5tS+Ft4gbIK7mYMipq9lqpVJ91xHSyKhg=" crossorigin=""></script>
+<script type="module" src="js/main.js"></script>
+
+
+</body>
+
+</html>
