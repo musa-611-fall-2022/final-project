@@ -10,18 +10,18 @@
 // * [inventory.js](inventory.html) for functions governing the loading/saving
 //   of tree inventory and notes
 
-import { initMap, showCountyLocation, updateSelectedCountyPositionOn, updateUserPositionOn } from './map.js';
+import { initMap, updateSelectedCountyPositionOn, updateUserPositionOn } from './map.js';
 import { initHouseInfoForm, showHouseDataInForm } from './house-info-form.js';
 import { initToast, showToast } from './toast.js';
-import { downloadInventory,loadNotes,saveNotes} from './inventory.js';
+import { downloadInventory, loadNotes, saveNotes } from './inventory.js';
 import url from '../data/url.js';
 import counties from '../data/PA.js';
 
-let countyFilter = document.querySelector('#county-name-input')
+let countyFilter = document.querySelector('#county-name-input');
 
 function getFilteredCounty() {
   let filteredCounty = counties;
-  
+
 
   // Filter based on county name
   const text = countyFilter.value;
@@ -37,10 +37,10 @@ function getFilteredCounty() {
         "type":"Feature",
         "name": "Pennsylvania_County_Boundaries",
         "properties": counties['features'][i]['properties'],
-        "geometry":counties['features'][i]['geometry']}
+        "geometry":counties['features'][i]['geometry'] };
     }
   }
-  
+
   /*filteredCounty = filteredCounty.filter(function (county) {
     const name = county['COUNTY_NAME'].toLowerCase();
     const hasText = name.includes(text);
@@ -124,14 +124,14 @@ function setupInteractionEvents() {
 let currentListData;
 
 // When click the "Load List" button, load the address
-$("#voterFileLoadButton").click(function() {
-  let listName = document.querySelector('#stop-name-input').value;
-  for(let i=0; i < 67 ; i++){
-  if(url.features[0].properties.COUNTY_NUMBER == listName) {
-  currentListData = url.features[i];}}
-  showCountyLocation(currentListData);
-  return currrentListData;
-} )  
+// $("#voterFileLoadButton").click(function() {
+//   let listName = document.querySelector('#stop-name-input').value;
+//   for(let i=0; i < 67 ; i++){
+//   if(url.features[0].properties.COUNTY_NUMBER == listName) {
+//   currentListData = url.features[i];}}
+//   showCountyLocation(currentListData);
+//   return currrentListData;
+// } );
 
 window.currentListData = currentListData;
 
@@ -139,7 +139,7 @@ window.currentListData = currentListData;
 countyFilter.addEventListener('input', () => {
   const filteredCounty = getFilteredCounty();
   console.log(filteredCounty);
-  updateSelectedCountyPositionOn(map,filteredCounty)
+  updateSelectedCountyPositionOn(map, filteredCounty);
 });
 
 // Initialize the app components and events
@@ -158,7 +158,7 @@ setupInteractionEvents();
 
 
 loadNotes(notes => {
-  app.notes = notes; 
+  app.notes = notes;
 });
 downloadInventory(onInventoryLoadSuccess);
 

@@ -3,7 +3,7 @@ import countyBoundary from '../data/PA.js';
 function onHouseClicked(evt) {
   console.log(evt);
   const house = evt.layer.feature;
-  
+
   const houseSelectedEvent = new CustomEvent('house-selected', { detail: { house } });
   window.dispatchEvent(houseSelectedEvent);
 }
@@ -25,7 +25,8 @@ function initMap() {
     const uc = L.geoJSON(countyBoundary, {
       style: { fill: null, color: '#49D3D7' },
     }).addTo(map);
-  
+    console.log(uc);
+
     /*map.fitBounds(uc.getBounds());*/
 
     map.houseLayer = L.geoJSON(null, {
@@ -34,41 +35,41 @@ function initMap() {
         fillColor: '#942929',
         fillOpacity: 0.9,
         stroke: true,
-    
+
       },*/
-                       
+
       pointToLayer: function (feature, latlng) {
         /*var geojsonMarkerOptions = {fillColor: '#942929',
         fillOpacity: 0.9,
         stroke: true};*/
-        var popup = L.popup().setContent("position: " + latlng+ "<br>"+"Name:"+feature.properties['RESNAME']);
-        var houseIcon = L.icon({
+        let popup = L.popup().setContent("position: " + latlng+ "<br>"+"Name:"+feature.properties['RESNAME']);
+        let houseIcon = L.icon({
           iconUrl: 'images/house-icon.png',
-               
-          iconSize:     [30,30], // size of the icon
-          iconAnchor:   [0,0], // point of the icon which will correspond to marker's location
-          popupAnchor:  [14,-10], // point from which the popup should open relative to the iconAnchor
-          
+
+          iconSize:     [30, 30], // size of the icon
+          iconAnchor:   [0, 0], // point of the icon which will correspond to marker's location
+          popupAnchor:  [14, -10], // point from which the popup should open relative to the iconAnchor
+
       });
-        var marker = L.marker(latlng, {icon: houseIcon});
+        let marker = L.marker(latlng, { icon: houseIcon });
         marker.bindPopup(popup);
-        return marker;               
-     }
-     
-      
+        return marker;
+     },
+
+
           })
-    .addTo(map)
- 
-    
+    .addTo(map);
+
+
     /*
     function onEachFeature(feature, layer) {
-  
+
       layer.bindPopup("Name: " + feature.properties['RESNAME'] + "<br>" + "City: " + feature.properties['City']);
   }   */
 
-  
+
     map.houseLayer.addEventListener('click', onHouseClicked);
-    
+
     map.positionLayer = L.geoJSON(null).addTo(map);
 
     map.selectedLayer = L.geoJSON(null).addTo(map);
@@ -79,11 +80,11 @@ function initMap() {
   }
 
   //show county location
-  function showCountyLocation(data) {
-    map.setView([data["features"][0]["geometry"]["coordinates"][1], data["features"][0]["geometry"]["coordinates"][0]], 16)
-    map.voterLayer.addData(data);
-    console.log(data)
-}
+//   function showCountyLocation(data) {
+//     map.setView([data["features"][0]["geometry"]["coordinates"][1], data["features"][0]["geometry"]["coordinates"][0]], 16);
+//     map.voterLayer.addData(data);
+//     console.log(data);
+// }
 
 
   function updateUserPositionOn(map, pos) {
@@ -96,20 +97,20 @@ function initMap() {
   }
 
 
-  function updateSelectedCountyPositionOn(map,selectedCountyBoundary){
+  function updateSelectedCountyPositionOn(map, selectedCountyBoundary){
     console.log(map.selectedLayer);
     /*map.selectedLayer.addData({
       'type':'Point',
       'corrdinates':[geometry[0][0],geometry[0][1]],
     });*/
     const selectedCounty = L.geoJSON(selectedCountyBoundary, {
-       style: { fill: null, color: '#000000' },
+       style: { fill: null, color: '#F2CB3A' },
      }).addTo(map);
      console.log(selectedCounty);
      map.fitBounds(selectedCounty.getBounds());
     // map.setView([40.95, -75.16],10);
   }
-  
+
   /*function updateselectedgalleryPositionOn(gallery) {
     baseMap.selectedLayer.addData({
       'type': 'Point',
@@ -124,6 +125,6 @@ function initMap() {
   export {
     initMap,
     updateUserPositionOn,
-    showCountyLocation,
+    //showCountyLocation,
     updateSelectedCountyPositionOn,
   };
