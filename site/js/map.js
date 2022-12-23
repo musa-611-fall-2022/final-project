@@ -116,6 +116,7 @@ function showFonMap(map, name)
         mapafter.classList.add("mapafter");
 
         //show comments
+        localStorage.setItem('comments', JSON.stringify(app.comments));
         const comments = document.getElementById('comment');
         const savedComments = document.getElementById('saved-comments');
         app.comments = JSON.parse(localStorage.getItem('comments'));
