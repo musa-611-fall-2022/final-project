@@ -1,0 +1,84 @@
+<!--
+ * @Author: miaomiao612 dddoctorr612@gmail.com
+ * @Date: 2022-11-10 05:49:08
+ * @LastEditors: miaomiao612 dddoctorr612@gmail.com
+ * @LastEditTime: 2022-12-13 05:48:44
+ * @FilePath: \voter-canvassing\site\index.html
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+-->
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Mathare</title>
+
+        <!--leaflet's css-->
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.2/dist/leaflet.css"
+        integrity="sha256-sA+zWATbFveLLNqWO2gtiw3HL/lh1giY/Inf1BJ0z14="
+        crossorigin=""/>
+        <link rel="stylesheet" href="css/leafletControl.css" />
+        <!-- Make sure you put this AFTER Leaflet's CSS -->
+        <script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js"
+        integrity="sha512-nMMmRyTVoLYqjP9hrbed9S+FzjZHW5gY1TWCHA5ckwXZBadntCNs8kEqAWdrb9O7rxbCaA4lKTIWjDXZxflOcA=="
+        crossorigin=""></script>
+        <!--my css-->
+        <link rel="stylesheet" type="text/css" href="css/style.css">
+
+    </head>
+
+    <body>
+
+        <!--map part-->
+        <div id="map" class="map"></div>
+        <div class="searchbar">
+            <input type="search" id="name" placeholder="Enter a name..." />
+            <button id="showlocation">Search</button>
+        </div>
+
+
+        <!--popup detail info-->
+        <div class="popup" id="popup">
+            <h2 id="popuptitle">Facility Information</h2>
+            <div id="detail">
+                <p id = "tp" class="detail"></p>
+                <p id = "nam" class="detail"></p>
+                <p id = "villy" class="detail"></p>
+                <p id = "saved-comments" class="detail"></p>
+            </div>
+            <textarea id="comment" class="comment" placeholder="Update Your Notes..." cols="20" rows="3"></textarea>
+            <button type="button" onclick="closeAndSave(app)">Save</button>
+            <button type="button" id = "direction">Direction</button>
+        </div>
+        <!--leaflet's js-->
+        <script src="https://unpkg.com/leaflet@1.9.2/dist/leaflet.js"
+        integrity="sha256-o9N1jGDZrf5tS+Ft4gbIK7mYMipq9lqpVJ91xHSyKhg="
+        crossorigin=""></script>
+        <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
+
+
+        <!--my js-->
+        <script type="module" src="js\main.js"></script>
+        <script>
+            let popup = document.getElementById("popup");
+            const comments = document.getElementById('comment');
+            const savedComments = document.getElementById('saved-comments');
+
+            function closeAndSave(app){
+                map.removeLayer(map.pLayer);
+                let popup = document.getElementById("popup");
+                let mapafter = document.getElementById("map");
+                popup.classList.remove("open-popup");
+                mapafter.classList.remove("mapafter");
+
+
+                const commentInput = comments.value;
+                const facID = app.currentFac.properties['FID'];
+                app.comments[facID] = commentInput;
+
+                localStorage.setItem('comments', JSON.stringify(app.comments));
+            };
+        </script>
+
+    </body>
+
+</html>
