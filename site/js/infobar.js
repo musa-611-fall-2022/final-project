@@ -1,6 +1,7 @@
 import { htmlToElement } from './template-tools.js';
 import { setLegend } from './legend.js';
 import { parcelColors } from './map.js';
+import { parcelList, Map, overlayDropdown } from './main.js';
 export { highlightFeature, changeFilter };
 
 
