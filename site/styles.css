@@ -4,6 +4,10 @@ body {
   overflow-y: hidden;
 }
 
+#intro {
+  background-color: antiquewhite;
+}
+
 #fish-map {
   position: relative;
   float: right;
@@ -40,4 +44,82 @@ body {
 
 #parcel-list {
   padding: 0;
+}
+
+.box {
+    position: relative;
+    margin-left: 20px;
+}
+
+.box:before {
+  position: absolute;
+  left: -25px;
+  content: "";
+  height: 20px;
+  width: 20px;
+  margin-bottom: 15px;
+}
+
+.box.CMX1::before {
+  background-color: #f16767;
+}
+
+.box.RM-1::before {
+  background-color: #fcb951;
+}
+
+.box.CA::before {
+  background-color: #f7a1a4;
+}
+
+.box.CMX3::before {
+  background-color: #ed2124;
+}
+
+.box.IRMX::before {
+  background-color: #d4a579;
+}
+
+.box.ICMX::before {
+  background-color: #dcbddc;
+}
+
+.box.I2::before {
+  background-color: #894b9e;
+}
+
+.box.RSA::before {
+  background-color: #f8ee68;
+}
+
+.box.SPENT::before {
+  background-color: #815824;
+}
+
+.box.SPPOA:before {
+  background-color: #008e46;
+}
+
+.box.less20::before {
+  background-color: #ffffff;
+}
+
+.box.l20to30::before {
+  background-color: #ccccff;
+}
+
+.box.l30to40::before {
+  background-color: #99ccff;
+}
+
+.box.l40to50::before {
+  background-color: #6699ff;
+}
+
+.box.l50to100::before {
+  background-color: #3366ff;
+}
+
+.box.l100plus:before {
+  background-color: #000066;
 }

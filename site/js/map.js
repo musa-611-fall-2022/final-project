@@ -26,9 +26,6 @@ return Map;
         if(p === "Cemetery / Golf") return "darkgreen";
         if(p === "Religous") return "yellow";
         if(p === "Hospital") return "pink";
-        if(p === "Restaurant / Nightclub / Entertainment") return "blue";
-        if(p === "Store") return "lightblue";
-        if(p === "Bank") return "green";
         if(p === "Vacant") return "darkbrown";
         return "grey";
     }
@@ -41,35 +38,9 @@ function parcelLayerFun (Map) {
         if(p === "Cemetery / Golf") return "darkgreen";
         if(p === "Religous") return "yellow";
         if(p === "Hospital") return "pink";
-        if(p === "Restaurant / Nightclub / Entertainment") return "blue";
-        if(p === "Store") return "lightblue";
-        if(p === "Bank") return "green";
         if(p === "Vacant") return "darkbrown";
         return "grey";
     }
-
-    /*[1] "Apartment 5+ Units / Condo"            
- [2] "Auto Lot / Auto Repair / Gas Station"  
- [3] "Bank"                                  
- [4] "Cemetery / Golf"                       
- [5] "Hospital"                              
- [6] "Hotel"                                 
- [7] "Industry"                              
- [8] "Laundry"                               
- [9] "Office"                                
-[10] "Other"                                 
-[11] "Park / Rec Center"                     
-[12] "Parking"                               
-[13] "Public"                                
-[14] "Religious"                             
-[15] "Restaurant / Nightclub / Entertainment"
-[16] "School"                                
-[17] "Shopping Center"                       
-[18] "Store"                                 
-[19] "Transportation"                        
-[20] "Utility"                               
-[21] "Vacant"     
-*/
 
     function initstyle(feature) {
         return {
@@ -81,7 +52,6 @@ function parcelLayerFun (Map) {
         };
     }
 
-
     Map.parcelLayer = L.geoJSON(null, {
         style: initstyle,
         onEachFeature: function(feature, layer) {
@@ -90,8 +60,13 @@ function parcelLayerFun (Map) {
             layer.bcType = feature.properties.BC_TYPE;
             layer.owner = feature.properties.OWNER1;
             layer.addy = feature.properties.ADDRESS;
+            layer.commerce = feature.properties['amenity'];
+            layer.shopname = feature.properties['name'];
             layer.addEventListener("click", highlightFeature);
+            if(isNaN(feature.properties['name']) == true){
+                layer.bindPopup(feature.properties['name']);
 
+            }
         },
     }).addTo(Map);
 }
