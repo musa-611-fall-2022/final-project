@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
@@ -12,20 +12,22 @@
   </head>
 
   <body>
+    <main>
     <h3><big>🏠</big> Historical Building Detection</a></h3>
-    <div id="map" class="map"></div>
-    <div id="load-overlay" class="load-overlay">Loading...</div>
-    <div id="toast" class="toast hidden"></div>
-    <div id="post-it">
+    </main>
+    <div role="map" id="map" class="map"></div>
+    <div role="load-overlay" id="load-overlay" class="load-overlay">Loading...</div>
+    <div role="toast" id="toast" class="toast hidden"></div>
+    <div role="post-it" id="post-it">
       <b>How to use:</b><br />
       1.The initial location of this map is your current location;<br />
       2.Explore the map and see if there are any historical places around;<br />
       3.Click on the points on the map to view the names, locations of the place;<br />
       4.Click on the link to view the building's archive.
       </div>
-
+    
     <!-- section of housr filter based on the county name -->
-    <div id="house-list" class= "house-list">
+    <div role="house-list" class= "house-list">
       <h1 id="title">✨County Zoom✨</h1>
       <input type="text" id="county-name-input"  placeholder="Enter county name...">
       <ul id="stop-list"></ul>
@@ -33,7 +35,7 @@
     </div>
 
     <!-- housing info section -->
-    <div id="house-info" class="house-info" >
+    <div role="house-info" class="house-info">
       <h1 id="title">✨Information✨</h1>
       <h2 id="house-name"></h2>
       <h2 id="house-city"></h2>
