@@ -1,3 +1,5 @@
+/* stylelint-disable selector-class-pattern */
+/* stylelint-disable color-hex-length */
 html,
 body {
   height: 100%;
@@ -48,10 +50,10 @@ body {
 
 .box {
   position: relative;
-   margin-left: 20px;
+  margin-left: 20px;
 }
 
-.box:before {
+.box::before {
   position: absolute;
   left: -25px;
   content: "";
@@ -96,7 +98,7 @@ body {
   background-color: #815824;
 }
 
-.box.SPPOA:before {
+.box.SPPOA::before {
   background-color: #008e46;
 }
 
@@ -120,6 +122,6 @@ body {
   background-color: #3366ff;
 }
 
-.box.l100plus:before {
+.box.l100plus::before {
   background-color: #000066;
 }

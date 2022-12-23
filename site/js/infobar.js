@@ -20,8 +20,6 @@ function showParcelDeets(parcel) {
 }
 
 
-let Map;
-
 
 
 
