@@ -6,7 +6,6 @@ body {
   padding: 0;
   background: #b5d0d0;
   color: #285585;
-  font-family: Arial;
 }
 
 h1 {
@@ -28,55 +27,53 @@ a:hover {
 
 h3 {
   white-space: nowrap;
-  margin: 0.4em 0 0 ;
-  font-size:30px; 
-   text-align:center;
-   font-family: "Comic Sans MS", cursive, sans-serif;
- }
-
-h3 a,
+  margin: 0.4em 0 0;
+  font-size: 30px;
+  text-align: center;
+  font-family: "Comic Sans MS", cursive, sans-serif;
+}
 
 h3 a:hover {
-  text-decoration:none;
+  text-decoration: none;
 }
 
 #map {
-  border-radius:.125em;
-  border:2px solid #1978cf;
+  border-radius: 0.125em;
+  border: 2px solid #1978cf;
   margin: 6px;
-  float:center;
-  width:60%;
-  height:100%;
+  float: center;
+  width: 60%;
+  height: 100%;
   font-family: "Comic Sans MS", cursive, sans-serif;
 }
 
 #post-it {
-	width:500px;
-	height:10em;
-	line-height: 120%;
-	padding:1em;
-	position:absolute;
-	left:63%;
-	top:11%;
-	background:#fbf5bf;
-	border:1px solid #c6bb58;
-	box-shadow: 2px 2px 6px #999;
-	color:#666;
+  width: 500px;
+  height: 10em;
+  line-height: 120%;
+  padding: 1em;
+  position: absolute;
+  left: 63%;
+  top: 11%;
+  background: #fbf5bf;
+  border: 1px solid #c6bb58;
+  box-shadow: 2px 2px 6px #999;
+  color: #666;
   font-family: "Comic Sans MS", cursive, sans-serif;
 }
 
 .house-info {
   padding: 1rem;
-  width:500px;
+  width: 500px;
   line-height: 120%;
-  position:absolute;
-  left:63%;
-  bottom:10px;
-  text-align:center;
-  background:rgb(192 233 249 / 40%);
-	border:5px dashed #fffbda;
+  position: absolute;
+  left: 63%;
+  bottom: 10px;
+  text-align: center;
+  background: rgb(192 233 249 / 40%);
+  border: 5px dashed #fffbda;
   box-shadow: 2px 2px 6px #999;
-  color:#666;
+  color: #666;
   font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 }
 
@@ -84,14 +81,14 @@ h3 a:hover {
   padding: 1rem;
   width: 500px;
   line-height: 120%;
-  position:absolute;
-  left:63%;
-  bottom:400px;
-  text-align:center;
-  background:rgb(192 233 249 / 40%);
-	border:5px dashed #fffbda;
+  position: absolute;
+  left: 63%;
+  bottom: 400px;
+  text-align: center;
+  background: rgb(192 233 249 / 40%);
+  border: 5px dashed #fffbda;
   box-shadow: 2px 2px 6px #999;
-  color:#666;
+  color: #666;
   font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 }
 
@@ -101,14 +98,14 @@ textarea {
   margin-bottom: 1rem;
   height: 4rem;
   box-sizing: border-box;
-  font-family:"Comic Sans MS", cursive, sans-serif;
+  font-family: "Comic Sans MS", cursive, sans-serif;
 }
 
 button {
   width: 100%;
   display: block;
   padding: 0.5rem;
-  float:left;
+  float: left;
   font-family: "Comic Sans MS", cursive, sans-serif;
 }
 
@@ -128,15 +125,15 @@ button {
 
 @keyframes pulse-overlay {
   0% {
-    background-color: rgba(255, 255, 255, 0.85);
+    background-color: rgba(255 255 255 / 85%);
   }
-  
+
   50% {
-    background-color: rgba(255, 255, 255, 0.25);
+    background-color: rgba(255 255 255 / 25%);
   }
-  
+
   100% {
-    background-color: rgba(255, 255, 255, 0.85);
+    background-color: rgba(255 255 255 / 85%);
   }
 }
 
