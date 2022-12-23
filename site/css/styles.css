@@ -4,44 +4,50 @@ body {
   height: 100vh;
   margin: 0;
   padding: 0;
-  background:#b5d0d0;
-  color:#285585;
-  font-family:Arial;
+  background: #b5d0d0;
+  color: #285585;
+  font-family: Arial;
 }
 
 h1 {
   font-size: 1.2rem;
   margin-top: 0;
-  text-align:center;
+  text-align: center;
   font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 }
+
 h2 {
   font-size: 1rem;
   margin-top: 0;
   font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 }
+
 a:hover {
-  color:#fff;
+  color: #fff;
 }
+
 h3 {
-  white-space:nowrap;
-  margin:0.4em 0 0 0 ;
+  white-space: nowrap;
+  margin: 0.4em 0 0 ;
   font-size:30px; 
    text-align:center;
    font-family: "Comic Sans MS", cursive, sans-serif;
  }
+
 h3 a,
+
 h3 a:hover {
   text-decoration:none;
 }
+
 #map {
   border-radius:.125em;
-border:2px solid #1978cf;
-margin: 6px;
-float:center;
-width:60%;
-height:100%;
-font-family: "Comic Sans MS", cursive, sans-serif;
+  border:2px solid #1978cf;
+  margin: 6px;
+  float:center;
+  width:60%;
+  height:100%;
+  font-family: "Comic Sans MS", cursive, sans-serif;
 }
 
 #post-it {
