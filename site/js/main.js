@@ -10,12 +10,45 @@
 // * [inventory.js](inventory.html) for functions governing the loading/saving
 //   of tree inventory and notes
 
-import { initMap, showCountyLocation, updateUserPositionOn } from './map.js';
+import { initMap, showCountyLocation, updateSelectedCountyPositionOn, updateUserPositionOn } from './map.js';
 import { initHouseInfoForm, showHouseDataInForm } from './house-info-form.js';
 import { initToast, showToast } from './toast.js';
 import { downloadInventory,loadNotes,saveNotes} from './inventory.js';
 import url from '../data/url.js';
+import counties from '../data/PA.js';
 
+let countyFilter = document.querySelector('#county-name-input')
+
+function getFilteredCounty() {
+  let filteredCounty = counties;
+  
+
+  // Filter based on county name
+  const text = countyFilter.value;
+  console.log(text);
+  console.log(filteredCounty);
+  for (let i = 0; i < counties['features'].length; i++) {
+    let name = counties['features'][i]['properties']['COUNTY_NAME'].toLowerCase();
+    let geo;
+    if (text === name) {
+       geo = counties['features'][i]['geometry'];
+       console.log(geo);
+       return {
+        "type":"Feature",
+        "name": "Pennsylvania_County_Boundaries",
+        "properties": counties['features'][i]['properties'],
+        "geometry":counties['features'][i]['geometry']}
+    }
+  }
+  
+  /*filteredCounty = filteredCounty.filter(function (county) {
+    const name = county['COUNTY_NAME'].toLowerCase();
+    const hasText = name.includes(text);
+    return hasText;
+  });
+
+  return filteredStops;*/
+}
 
 let app = {
   currentHouse: null,
@@ -101,6 +134,13 @@ $("#voterFileLoadButton").click(function() {
 } )  
 
 window.currentListData = currentListData;
+
+//reset the view of the map based on the county name
+countyFilter.addEventListener('input', () => {
+  const filteredCounty = getFilteredCounty();
+  console.log(filteredCounty);
+  updateSelectedCountyPositionOn(map,filteredCounty)
+});
 
 // Initialize the app components and events
 // ----------------------------------------

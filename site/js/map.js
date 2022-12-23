@@ -1,3 +1,4 @@
+import countyBoundary from '../data/PA.js';
 
 function onHouseClicked(evt) {
   console.log(evt);
@@ -19,8 +20,14 @@ function initMap() {
         maxZoom: 19,
         attribution: '© <a href="https://www.mapbox.com/about/maps/">Mapbox</a> © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> <strong><a href="https://www.mapbox.com/map-feedback/" target="_blank">Improve this map</a></strong>',
     }).addTo(map);
-    
-    
+
+    // show county boundaries
+    const uc = L.geoJSON(countyBoundary, {
+      style: { fill: null, color: '#49D3D7' },
+    }).addTo(map);
+  
+    /*map.fitBounds(uc.getBounds());*/
+
     map.houseLayer = L.geoJSON(null, {
       /*pointToLayer: (feature, latlng) => L.circleMarker(latlng),
       style: {
@@ -64,6 +71,8 @@ function initMap() {
     
     map.positionLayer = L.geoJSON(null).addTo(map);
 
+    map.selectedLayer = L.geoJSON(null).addTo(map);
+
    /* map.popupLayer = L.geoJSON(null,{onEachFeature: onEachFeature}).addTo(map);*/
 
     return map;
@@ -78,15 +87,43 @@ function initMap() {
 
 
   function updateUserPositionOn(map, pos) {
+    console.log(map.positionLayer);
     map.positionLayer.addData({
       'type': 'Point',
       'coordinates': [pos.coords.longitude, pos.coords.latitude],
     });
     map.setView([pos.coords.latitude, pos.coords.longitude], 17);
   }
+
+
+  function updateSelectedCountyPositionOn(map,selectedCountyBoundary){
+    console.log(map.selectedLayer);
+    /*map.selectedLayer.addData({
+      'type':'Point',
+      'corrdinates':[geometry[0][0],geometry[0][1]],
+    });*/
+    const selectedCounty = L.geoJSON(selectedCountyBoundary, {
+       style: { fill: null, color: '#000000' },
+     }).addTo(map);
+     console.log(selectedCounty);
+     map.fitBounds(selectedCounty.getBounds());
+    // map.setView([40.95, -75.16],10);
+  }
   
+  /*function updateselectedgalleryPositionOn(gallery) {
+    baseMap.selectedLayer.addData({
+      'type': 'Point',
+      'coordinates': [gallery.geometry[0],gallery.geometry[1]],
+    });
+    //let lnglat=gallery.geometry['coordinates'];
+    //let longitude=Number(lnglat.split(",")[0]);
+    //let latitude=Number(lnglat.split(",")[1]);
+    baseMap.setView([gallery.geometry[1],gallery.geometry[0]], 10);
+  }*/
+
   export {
     initMap,
     updateUserPositionOn,
-    showCountyLocation
+    showCountyLocation,
+    updateSelectedCountyPositionOn,
   };
