@@ -47,8 +47,8 @@ body {
 }
 
 .box {
-    position: relative;
-    margin-left: 20px;
+  position: relative;
+   margin-left: 20px;
 }
 
 .box:before {
