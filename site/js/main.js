@@ -1,5 +1,5 @@
 //http://data-phl.opendata.arcgis.com/datasets/5146960d4d014f2396cb82f31cd82dfe_0.geojson
-import {downloadRestaurants, downloadFarmersMarkets, downloadParks, downloadPicnics} from '../js/data.js'
+import {downloadRestaurants,downloadRestaurants1, downloadFarmersMarkets, downloadParks, downloadPicnics} from '../js/data.js'
 import {initMap} from '../js/map.js'
 
 //Phila outline? do we need that?
@@ -30,7 +30,7 @@ downloadParks(onParksLoad);
 downloadPicnics(onPicnicsLoad);
 
 function onRandomIndex(data) {
-  return data;
+  return data;//UGH
   }
 
 //const restaurantsData
@@ -99,4 +99,5 @@ window.restaurants = restaurantsData;
 window.farmersMarkets = farmersMarketsData;
 window.parks = parksData;
 window.picnics = picnicsData;
+window.try = downloadRestaurants1;
 // might add a window.phila = phila; for an outline map
