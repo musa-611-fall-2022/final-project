@@ -1,5 +1,5 @@
 //http://data-phl.opendata.arcgis.com/datasets/5146960d4d014f2396cb82f31cd82dfe_0.geojson
-import {downloadRestaurants,downloadRestaurants1, downloadFarmersMarkets, downloadParks, downloadPicnics} from '../js/data.js'
+import {downloadRestaurants_centerCity,downloadRestaurants_fishtown, downloadRestaurants_gradHospital,downloadRestaurants_southPhila,downloadRestaurants_NWPhila,downloadRestaurants_kensington,downloadRestaurants_upperNWPhila,downloadRestaurants_germantown,downloadRestaurants_roxborough,downloadRestaurants_mtAiry,downloadRestaurants_NPhila,downloadRestaurants_extraNPhila,downloadRestaurants_farNEPhila,downloadRestaurants_uniCity,downloadRestaurants_WParkside,downloadRestaurants_cobbsCreek,downloadRestaurants_kingsessing,downloadRestaurants_elmwoodPark,downloadRestaurants_eastwick, downloadFarmersMarkets, downloadParks, downloadPicnics} from '../js/data.js'
 import {initMap} from '../js/map.js'
 
 //Phila outline? do we need that?
@@ -24,8 +24,26 @@ function onPicnicsLoad(data) {
 }
 
 
-downloadRestaurants(onRestaurantsLoad);
+downloadRestaurants_centerCity(onRestaurantsLoad);
+downloadRestaurants_fishtown(onRestaurantsLoad);
 downloadFarmersMarkets(onFarmersMarketsLoad);
+downloadRestaurants_gradHospital(onRestaurantsLoad);
+downloadRestaurants_southPhila(onRestaurantsLoad);
+downloadRestaurants_NWPhila(onRestaurantsLoad);
+downloadRestaurants_kensington(onRestaurantsLoad);
+downloadRestaurants_upperNWPhila(onRestaurantsLoad);
+downloadRestaurants_germantown(onRestaurantsLoad);
+downloadRestaurants_roxborough(onRestaurantsLoad);
+downloadRestaurants_mtAiry(onRestaurantsLoad);
+downloadRestaurants_NPhila(onRestaurantsLoad);
+downloadRestaurants_extraNPhila(onRestaurantsLoad);
+downloadRestaurants_farNEPhila(onRestaurantsLoad);
+downloadRestaurants_uniCity(onRestaurantsLoad);
+downloadRestaurants_WParkside(onRestaurantsLoad);
+downloadRestaurants_cobbsCreek(onRestaurantsLoad);
+downloadRestaurants_kingsessing(onRestaurantsLoad);
+downloadRestaurants_elmwoodPark(onRestaurantsLoad);
+downloadRestaurants_eastwick(onRestaurantsLoad);
 downloadParks(onParksLoad);
 downloadPicnics(onPicnicsLoad);
 
@@ -34,7 +52,7 @@ function onRandomIndex(data) {
   }
 
 //const restaurantsData
-const restaurantsData = downloadRestaurants(onRandomIndex);
+const restaurantsData = downloadRestaurants_centerCity(onRandomIndex);
 const farmersMarketsData = downloadFarmersMarkets(onRandomIndex);
 const picnicsData = downloadPicnics(onRandomIndex);
 const parksData = downloadParks(onRandomIndex);
@@ -99,5 +117,4 @@ window.restaurants = restaurantsData;
 window.farmersMarkets = farmersMarketsData;
 window.parks = parksData;
 window.picnics = picnicsData;
-window.try = downloadRestaurants1;
 // might add a window.phila = phila; for an outline map
