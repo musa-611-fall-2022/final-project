@@ -51,7 +51,6 @@ async function downloadRestaurants_centerCity(onSuccess, onFailure) {
     console.log(typeof data);
     if (onSuccess) {
       let geoArray = makeGeoJSON(data);
-      console.log(geoArray);
       onSuccess(geoArray);
     } else {
       alert('Oh no, I failed to download the Farmers Markets data.');
@@ -67,7 +66,6 @@ async function downloadRestaurants_fishtown(onSuccess, onFailure) {
     console.log(typeof data);
     if (onSuccess) {
       let geoArray = makeGeoJSON(data);
-      console.log(geoArray);
       onSuccess(geoArray);
     } else {
       alert('Oh no, I failed to download the Farmers Markets data.');
@@ -83,7 +81,6 @@ async function downloadRestaurants_gradHospital(onSuccess, onFailure) {
     console.log(typeof data);
     if (onSuccess) {
       let geoArray = makeGeoJSON(data);
-      console.log(geoArray);
       onSuccess(geoArray);
     } else {
       alert('Oh no, I failed to download the Farmers Markets data.');
@@ -99,7 +96,6 @@ async function downloadRestaurants_southPhila(onSuccess, onFailure) {
     console.log(typeof data);
     if (onSuccess) {
       let geoArray = makeGeoJSON(data);
-      console.log(geoArray);
       onSuccess(geoArray);
     } else {
       alert('Oh no, I failed to download the Farmers Markets data.');
@@ -115,7 +111,6 @@ async function downloadRestaurants_NWPhila(onSuccess, onFailure) {
     console.log(typeof data);
     if (onSuccess) {
       let geoArray = makeGeoJSON(data);
-      console.log(geoArray);
       onSuccess(geoArray);
     } else {
       alert('Oh no, I failed to download the Farmers Markets data.');
@@ -131,7 +126,6 @@ async function downloadRestaurants_kensington(onSuccess, onFailure) {
     console.log(typeof data);
     if (onSuccess) {
       let geoArray = makeGeoJSON(data);
-      console.log(geoArray);
       onSuccess(geoArray);
     } else {
       alert('Oh no, I failed to download the Farmers Markets data.');
@@ -147,7 +141,6 @@ async function downloadRestaurants_upperNWPhila(onSuccess, onFailure) {
     console.log(typeof data);
     if (onSuccess) {
       let geoArray = makeGeoJSON(data);
-      console.log(geoArray);
       onSuccess(geoArray);
     } else {
       alert('Oh no, I failed to download the Farmers Markets data.');
@@ -163,7 +156,6 @@ async function downloadRestaurants_germantown(onSuccess, onFailure) {
     console.log(typeof data);
     if (onSuccess) {
       let geoArray = makeGeoJSON(data);
-      console.log(geoArray);
       onSuccess(geoArray);
     } else {
       alert('Oh no, I failed to download the Farmers Markets data.');
@@ -179,7 +171,6 @@ async function downloadRestaurants_roxborough(onSuccess, onFailure) {
     console.log(typeof data);
     if (onSuccess) {
       let geoArray = makeGeoJSON(data);
-      console.log(geoArray);
       onSuccess(geoArray);
     } else {
       alert('Oh no, I failed to download the Farmers Markets data.');
@@ -195,7 +186,6 @@ async function downloadRestaurants_mtAiry(onSuccess, onFailure) {
     console.log(typeof data);
     if (onSuccess) {
       let geoArray = makeGeoJSON(data);
-      console.log(geoArray);
       onSuccess(geoArray);
     } else {
       alert('Oh no, I failed to download the Farmers Markets data.');
@@ -211,7 +201,6 @@ async function downloadRestaurants_NPhila(onSuccess, onFailure) {
     console.log(typeof data);
     if (onSuccess) {
       let geoArray = makeGeoJSON(data);
-      console.log(geoArray);
       onSuccess(geoArray);
     } else {
       alert('Oh no, I failed to download the Farmers Markets data.');
@@ -227,7 +216,6 @@ async function downloadRestaurants_extraNPhila(onSuccess, onFailure) {
     console.log(typeof data);
     if (onSuccess) {
       let geoArray = makeGeoJSON(data);
-      console.log(geoArray);
       onSuccess(geoArray);
     } else {
       alert('Oh no, I failed to download the Farmers Markets data.');
@@ -243,7 +231,6 @@ async function downloadRestaurants_farNEPhila(onSuccess, onFailure) {
     console.log(typeof data);
     if (onSuccess) {
       let geoArray = makeGeoJSON(data);
-      console.log(geoArray);
       onSuccess(geoArray);
     } else {
       alert('Oh no, I failed to download the Farmers Markets data.');
@@ -259,7 +246,6 @@ async function downloadRestaurants_uniCity(onSuccess, onFailure) {
     console.log(typeof data);
     if (onSuccess) {
       let geoArray = makeGeoJSON(data);
-      console.log(geoArray);
       onSuccess(geoArray);
     } else {
       alert('Oh no, I failed to download the Farmers Markets data.');
@@ -275,7 +261,6 @@ async function downloadRestaurants_WParkside(onSuccess, onFailure) {
     console.log(typeof data);
     if (onSuccess) {
       let geoArray = makeGeoJSON(data);
-      console.log(geoArray);
       onSuccess(geoArray);
     } else {
       alert('Oh no, I failed to download the Farmers Markets data.');
@@ -291,7 +276,6 @@ async function downloadRestaurants_cobbsCreek(onSuccess, onFailure) {
     console.log(typeof data);
     if (onSuccess) {
       let geoArray = makeGeoJSON(data);
-      console.log(geoArray);
       onSuccess(geoArray);
     } else {
       alert('Oh no, I failed to download the Farmers Markets data.');
@@ -307,7 +291,6 @@ async function downloadRestaurants_kingsessing(onSuccess, onFailure) {
     console.log(typeof data);
     if (onSuccess) {
       let geoArray = makeGeoJSON(data);
-      console.log(geoArray);
       onSuccess(geoArray);
     } else {
       alert('Oh no, I failed to download the Farmers Markets data.');
@@ -323,7 +306,6 @@ async function downloadRestaurants_elmwoodPark(onSuccess, onFailure) {
     console.log(typeof data);
     if (onSuccess) {
       let geoArray = makeGeoJSON(data);
-      console.log(geoArray);
       onSuccess(geoArray);
     } else {
       alert('Oh no, I failed to download the Farmers Markets data.');
@@ -339,7 +321,6 @@ async function downloadRestaurants_eastwick(onSuccess, onFailure) {
     console.log(typeof data);
     if (onSuccess) {
       let geoArray = makeGeoJSON(data);
-      console.log(geoArray);
       onSuccess(geoArray);
     } else {
       alert('Oh no, I failed to download the Farmers Markets data.');
@@ -410,3 +391,4 @@ export {
     downloadPicnics,
   };
 
+//only 199 restaurants are displayed on the map, not sure why...

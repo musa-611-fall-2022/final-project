@@ -1,8 +1,7 @@
 //http://data-phl.opendata.arcgis.com/datasets/5146960d4d014f2396cb82f31cd82dfe_0.geojson
-import {downloadRestaurants_centerCity,downloadRestaurants_fishtown, downloadRestaurants_gradHospital,downloadRestaurants_southPhila,downloadRestaurants_NWPhila,downloadRestaurants_kensington,downloadRestaurants_upperNWPhila,downloadRestaurants_germantown,downloadRestaurants_roxborough,downloadRestaurants_mtAiry,downloadRestaurants_NPhila,downloadRestaurants_extraNPhila,downloadRestaurants_farNEPhila,downloadRestaurants_uniCity,downloadRestaurants_WParkside,downloadRestaurants_cobbsCreek,downloadRestaurants_kingsessing,downloadRestaurants_elmwoodPark,downloadRestaurants_eastwick, downloadFarmersMarkets, downloadParks, downloadPicnics} from '../js/data.js'
-import {initMap} from '../js/map.js'
+import {downloadRestaurants_centerCity,downloadRestaurants_fishtown, downloadRestaurants_gradHospital,downloadRestaurants_southPhila,downloadRestaurants_NWPhila,downloadRestaurants_kensington,downloadRestaurants_upperNWPhila,downloadRestaurants_germantown,downloadRestaurants_roxborough,downloadRestaurants_mtAiry,downloadRestaurants_NPhila,downloadRestaurants_extraNPhila,downloadRestaurants_farNEPhila,downloadRestaurants_uniCity,downloadRestaurants_WParkside,downloadRestaurants_cobbsCreek,downloadRestaurants_kingsessing,downloadRestaurants_elmwoodPark,downloadRestaurants_eastwick, downloadFarmersMarkets, downloadParks, downloadPicnics} from '../js/data.js';
+import { initMap } from '../js/map.js';
 
-//Phila outline? do we need that?
 // foursquare API key = "fsq3PT0XzmGKLOcdzjrfsMjlII+0TdyLrtcRTy3TWjBWL1I="
 
 const philaMap = initMap();
@@ -16,7 +15,7 @@ function onFarmersMarketsLoad(data) {
   }
 
 function onParksLoad(data) {
- philaMap.parksLayer.addData(data); 
+ philaMap.parksLayer.addData(data);
 }
 
 function onPicnicsLoad(data) {
@@ -44,22 +43,37 @@ downloadRestaurants_cobbsCreek(onRestaurantsLoad);
 downloadRestaurants_kingsessing(onRestaurantsLoad);
 downloadRestaurants_elmwoodPark(onRestaurantsLoad);
 downloadRestaurants_eastwick(onRestaurantsLoad);
-downloadParks(onParksLoad);
-downloadPicnics(onPicnicsLoad);
+//downloadParks(onParksLoad);
+//downloadPicnics(onPicnicsLoad);
 
-function onRandomIndex(data) {
-  return data;//UGH
+function goRandom() {
+  const number = Math.random();
+  const index = Math.floor(number*200)+130;
+  return index;
+}
+
+function onRandomIndex() {
+  const index = goRandom();
+  const theOne = philaMap.restaurantsLayer._layers[index].feature;
+  console.log(index);
+  console.log(theOne);
+  philaMap.restaurantsLayer.clearLayers();
+  philaMap.restaurantsLayer.addData(theOne);
   }
 
+const randomButton = document.querySelector('.random-button');
+
+randomButton.addEventListener('click', onRandomIndex);
+
+
 //const restaurantsData
-const restaurantsData = downloadRestaurants_centerCity(onRandomIndex);
-const farmersMarketsData = downloadFarmersMarkets(onRandomIndex);
-const picnicsData = downloadPicnics(onRandomIndex);
-const parksData = downloadParks(onRandomIndex);
+//const restaurantsData = downloadRestaurants_centerCity(onRandomIndex);
+//const farmersMarketsData = downloadFarmersMarkets(onRandomIndex);
+//const picnicsData = downloadPicnics(onRandomIndex);
+//const parksData = downloadParks(onRandomIndex);
 
 
 const dateCheckboxes = document.querySelectorAll('.date-checkbox');
-//const dataDisplayed = null;
 
 for (const checkbox of dateCheckboxes){
   checkbox.addEventListener('change', (evt) => {
@@ -93,28 +107,16 @@ for (const checkbox of dateCheckboxes){
             }
           }
       }
-      
-  })
-};
-
-function goRandom() {
-  const number = Math.random();
-  const farmersMarketIndex = Math.floor(number*42);
-  const picnicsIndex = Math.floor(number*261);
-  console.log(farmersMarketIndex);
-  console.log(picnicsIndex);
-};
-
-const randomButton = document.querySelector('.random-button');
-randomButton.addEventListener('click', goRandom);
+  });
+}
 
 
 
 // Expose variables to the global scope
 //window.picnics = picnicsFC;
 window.mapview = philaMap;
-window.restaurants = restaurantsData;
-window.farmersMarkets = farmersMarketsData;
-window.parks = parksData;
-window.picnics = picnicsData;
+//window.restaurants = restaurantsData;
+//window.farmersMarkets = farmersMarketsData;
+//window.parks = parksData;
+//window.picnics = picnicsData;
 // might add a window.phila = phila; for an outline map
