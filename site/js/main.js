@@ -1,4 +1,3 @@
-//http://data-phl.opendata.arcgis.com/datasets/5146960d4d014f2396cb82f31cd82dfe_0.geojson
 import { downloadRestaurants_centerCity,downloadRestaurants_fishtown, downloadRestaurants_gradHospital,downloadRestaurants_southPhila,downloadRestaurants_NWPhila,downloadRestaurants_kensington,downloadRestaurants_upperNWPhila,downloadRestaurants_germantown,downloadRestaurants_roxborough,downloadRestaurants_mtAiry,downloadRestaurants_NPhila,downloadRestaurants_extraNPhila,downloadRestaurants_farNEPhila,downloadRestaurants_uniCity,downloadRestaurants_WParkside,downloadRestaurants_cobbsCreek,downloadRestaurants_kingsessing,downloadRestaurants_elmwoodPark,downloadRestaurants_eastwick, downloadFarmersMarkets, downloadPicnics } from '../js/data.js';
 import { initMap } from '../js/map.js';
 import { showPickedInfo } from '../js/picked_list.js';
@@ -7,6 +6,7 @@ import { showPickedInfo } from '../js/picked_list.js';
 
 const philaMap = initMap();
 
+// add maplayers when the data loads
 function onRestaurantsLoad(data) {
   philaMap.restaurantsLayer.addData(data);
   }
@@ -41,19 +41,24 @@ function downloadAllRestaurants() {
   downloadRestaurants_eastwick(onRestaurantsLoad);
 }
 
+//wrap all the restaurants loading in one neat function
 downloadAllRestaurants();
 
+//picks a random index to choose a restaurant from
 function goRandom() {
   const number = Math.random();
   let index = Math.floor(number*2000);
-  if (index%2==0) {
+  console.log(index);
+  let theOne = philaMap.restaurantsLayer._layers[index];
+  //foursquare data goes by steps of 2 and is sometimes odd, sometimes even
+  if (theOne == undefined){
     index = index+1;
   }
-  console.log(index);
-  let theOne = philaMap.restaurantsLayer._layers[index].feature;
+  theOne = philaMap.restaurantsLayer._layers[index].feature;
   return theOne;
 }
 
+//display your random restaurant selection on the map
 function onRandomIndex() {
   let theOne = goRandom();
   console.log(theOne);
@@ -64,6 +69,7 @@ function onRandomIndex() {
 
 const randomButton = document.querySelector('.random-button');
 
+//display info and user instructions
 randomButton.addEventListener('click', () => {
   const theOne = onRandomIndex();
   randomButton.value = "Picked!";
@@ -76,6 +82,7 @@ randomButton.addEventListener('click', () => {
 
 const dateCheckboxes = document.querySelectorAll('.date-checkbox');
 
+//display parks markers on map when you want
 for (const checkbox of dateCheckboxes){
   checkbox.addEventListener('change', (evt) => {
       if (evt.target.checked){

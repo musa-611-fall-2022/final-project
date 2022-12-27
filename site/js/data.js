@@ -1,3 +1,4 @@
+// foursquare API data is json not geojson, conversion function
 function makeGeoJSON(data) {
   let geoArray = [];
   for (const element of data.results) {
@@ -20,6 +21,7 @@ function makeGeoJSON(data) {
   return geoArray;
 };
 
+//foursquare only lets me download 50 restaurants at a time, so I just created new locations for each neighborhood as a separate download
 const url_centerCity = 'https://api.foursquare.com/v3/places/search?query=restaurant&ll=39.96505871218218%2C-75.16367498832258&radius=1600&fields=name%2Cgeocodes%2Clocation%2Ccategories%2Crating%2Cprice%2Cmenu&limit=50';
 const url_fishtown = 'https://api.foursquare.com/v3/places/search?query=restaurant&ll=39.97327187487038%2C-75.1338278229921&radius=1600&fields=name%2Cgeocodes%2Clocation%2Ccategories%2Crating%2Cprice%2Cmenu&limit=50';
 const url_gradHospital = 'https://api.foursquare.com/v3/places/search?query=restaurant&ll=39.93792345069754%2C-75.16681852812717&radius=1600&fields=name%2Cgeocodes%2Clocation%2Ccategories%2Crating%2Cprice%2Cmenu&limit=50';
@@ -47,6 +49,7 @@ const options = {
   }
 };
 
+//downloading each and every location for restaurants in that neighborhood
 async function downloadRestaurants_centerCity(onSuccess, onFailure) {
   const resp = await fetch(url_centerCity, options);
   if (resp.status === 200) {
@@ -295,6 +298,7 @@ async function downloadRestaurants_eastwick(onSuccess, onFailure) {
 }}
 
 
+// farmers markets and picnic tables from open data philly
 async function downloadFarmersMarkets(onSuccess, onFailure) {
     const resp = await fetch('data/Farmers_Markets.geojson');
     if (resp.status === 200) {
