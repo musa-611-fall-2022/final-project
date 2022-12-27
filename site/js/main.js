@@ -1,6 +1,7 @@
 //http://data-phl.opendata.arcgis.com/datasets/5146960d4d014f2396cb82f31cd82dfe_0.geojson
-import {downloadRestaurants_centerCity,downloadRestaurants_fishtown, downloadRestaurants_gradHospital,downloadRestaurants_southPhila,downloadRestaurants_NWPhila,downloadRestaurants_kensington,downloadRestaurants_upperNWPhila,downloadRestaurants_germantown,downloadRestaurants_roxborough,downloadRestaurants_mtAiry,downloadRestaurants_NPhila,downloadRestaurants_extraNPhila,downloadRestaurants_farNEPhila,downloadRestaurants_uniCity,downloadRestaurants_WParkside,downloadRestaurants_cobbsCreek,downloadRestaurants_kingsessing,downloadRestaurants_elmwoodPark,downloadRestaurants_eastwick, downloadFarmersMarkets, downloadParks, downloadPicnics} from '../js/data.js';
+import { downloadRestaurants_centerCity,downloadRestaurants_fishtown, downloadRestaurants_gradHospital,downloadRestaurants_southPhila,downloadRestaurants_NWPhila,downloadRestaurants_kensington,downloadRestaurants_upperNWPhila,downloadRestaurants_germantown,downloadRestaurants_roxborough,downloadRestaurants_mtAiry,downloadRestaurants_NPhila,downloadRestaurants_extraNPhila,downloadRestaurants_farNEPhila,downloadRestaurants_uniCity,downloadRestaurants_WParkside,downloadRestaurants_cobbsCreek,downloadRestaurants_kingsessing,downloadRestaurants_elmwoodPark,downloadRestaurants_eastwick, downloadFarmersMarkets, downloadParks, downloadPicnics } from '../js/data.js';
 import { initMap } from '../js/map.js';
+import { showPickedInfo } from '../js/picked_list.js';
 
 // foursquare API key = "fsq3PT0XzmGKLOcdzjrfsMjlII+0TdyLrtcRTy3TWjBWL1I="
 
@@ -22,56 +23,60 @@ function onPicnicsLoad(data) {
   philaMap.picnicsLayer.addData(data);
 }
 
+function downloadAllRestaurants() {
+  downloadRestaurants_centerCity(onRestaurantsLoad);
+  downloadRestaurants_fishtown(onRestaurantsLoad);
+  downloadRestaurants_gradHospital(onRestaurantsLoad);
+  downloadRestaurants_southPhila(onRestaurantsLoad);
+  downloadRestaurants_NWPhila(onRestaurantsLoad);
+  downloadRestaurants_kensington(onRestaurantsLoad);
+  downloadRestaurants_upperNWPhila(onRestaurantsLoad);
+  downloadRestaurants_germantown(onRestaurantsLoad);
+  downloadRestaurants_roxborough(onRestaurantsLoad);
+  downloadRestaurants_mtAiry(onRestaurantsLoad);
+  downloadRestaurants_NPhila(onRestaurantsLoad);
+  downloadRestaurants_extraNPhila(onRestaurantsLoad);
+  downloadRestaurants_farNEPhila(onRestaurantsLoad);
+  downloadRestaurants_uniCity(onRestaurantsLoad);
+  downloadRestaurants_WParkside(onRestaurantsLoad);
+  downloadRestaurants_cobbsCreek(onRestaurantsLoad);
+  downloadRestaurants_kingsessing(onRestaurantsLoad);
+  downloadRestaurants_elmwoodPark(onRestaurantsLoad);
+  downloadRestaurants_eastwick(onRestaurantsLoad);
+}
 
-downloadRestaurants_centerCity(onRestaurantsLoad);
-downloadRestaurants_fishtown(onRestaurantsLoad);
-downloadFarmersMarkets(onFarmersMarketsLoad);
-downloadRestaurants_gradHospital(onRestaurantsLoad);
-downloadRestaurants_southPhila(onRestaurantsLoad);
-downloadRestaurants_NWPhila(onRestaurantsLoad);
-downloadRestaurants_kensington(onRestaurantsLoad);
-downloadRestaurants_upperNWPhila(onRestaurantsLoad);
-downloadRestaurants_germantown(onRestaurantsLoad);
-downloadRestaurants_roxborough(onRestaurantsLoad);
-downloadRestaurants_mtAiry(onRestaurantsLoad);
-downloadRestaurants_NPhila(onRestaurantsLoad);
-downloadRestaurants_extraNPhila(onRestaurantsLoad);
-downloadRestaurants_farNEPhila(onRestaurantsLoad);
-downloadRestaurants_uniCity(onRestaurantsLoad);
-downloadRestaurants_WParkside(onRestaurantsLoad);
-downloadRestaurants_cobbsCreek(onRestaurantsLoad);
-downloadRestaurants_kingsessing(onRestaurantsLoad);
-downloadRestaurants_elmwoodPark(onRestaurantsLoad);
-downloadRestaurants_eastwick(onRestaurantsLoad);
-//downloadParks(onParksLoad);
-//downloadPicnics(onPicnicsLoad);
+downloadAllRestaurants();
 
 function goRandom() {
   const number = Math.random();
-  const index = Math.floor(number*200)+130;
-  return index;
+  let index = Math.floor(number*2000);
+  if (index%2==0) {
+    index = index+1;
+  }
+  console.log(index);
+  let theOne = philaMap.restaurantsLayer._layers[index].feature;
+  return theOne;
 }
 
 function onRandomIndex() {
-  const index = goRandom();
-  const theOne = philaMap.restaurantsLayer._layers[index].feature;
-  console.log(index);
+  let theOne = goRandom();
   console.log(theOne);
   philaMap.restaurantsLayer.clearLayers();
   philaMap.restaurantsLayer.addData(theOne);
-  }
+  return theOne;
+}
 
 const randomButton = document.querySelector('.random-button');
 
-randomButton.addEventListener('click', onRandomIndex);
-
-
-//const restaurantsData
-//const restaurantsData = downloadRestaurants_centerCity(onRandomIndex);
-//const farmersMarketsData = downloadFarmersMarkets(onRandomIndex);
-//const picnicsData = downloadPicnics(onRandomIndex);
-//const parksData = downloadParks(onRandomIndex);
-
+randomButton.addEventListener('click', () => {
+  const theOne = onRandomIndex();
+  randomButton.value = "Picked!";
+  const messageArea = document.querySelector('#picked-message');
+  const infoArea = document.querySelector('#picked-info');
+  showPickedInfo(theOne, messageArea, infoArea);
+  console.log(messageArea);
+  console.log(infoArea);
+});
 
 const dateCheckboxes = document.querySelectorAll('.date-checkbox');
 
@@ -81,10 +86,6 @@ for (const checkbox of dateCheckboxes){
           console.log('you clicked on the checkbox ' + checkbox.value);
           const dataset = checkbox.value;
           const black = "#000000";
-          //here I clear all the layers, but need a way to not lol
-          //philaMap.farmersMarketsLayer.clearLayers();
-          //philaMap.parksLayer.clearLayers();
-          //philaMap.picnicsLayer.clearLayers();
           if (dataset == "picnicTables"){
             downloadPicnics(onPicnicsLoad);
           } else {
@@ -110,13 +111,5 @@ for (const checkbox of dateCheckboxes){
   });
 }
 
-
-
-// Expose variables to the global scope
-//window.picnics = picnicsFC;
+//exposing variables to the global scope
 window.mapview = philaMap;
-//window.restaurants = restaurantsData;
-//window.farmersMarkets = farmersMarketsData;
-//window.parks = parksData;
-//window.picnics = picnicsData;
-// might add a window.phila = phila; for an outline map
