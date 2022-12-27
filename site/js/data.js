@@ -307,17 +307,6 @@ async function downloadFarmersMarkets(onSuccess, onFailure) {
       }
   }
 
-async function downloadParks(onSuccess, onFailure) {
-    const resp = await fetch('data/PPR_Districts_2018.geojson');
-    if (resp.status === 200) {
-      const data = await resp.json();
-      if (onSuccess) { onSuccess(data) }
-    } else {
-      alert('Oh no, I failed to download the Parks data.');
-      if (onFailure) { onFailure() }
-    }
-  }
-
 async function downloadPicnics(onSuccess, onFailure) {
     const resp = await fetch('data/ppr_picnic_sites.geojson');
     if (resp.status === 200) {
@@ -353,7 +342,6 @@ export {
     downloadRestaurants_elmwoodPark,
     downloadRestaurants_eastwick,
     downloadFarmersMarkets,
-    downloadParks,
     downloadPicnics,
   };
 

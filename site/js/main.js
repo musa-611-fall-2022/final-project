@@ -1,5 +1,5 @@
 //http://data-phl.opendata.arcgis.com/datasets/5146960d4d014f2396cb82f31cd82dfe_0.geojson
-import { downloadRestaurants_centerCity,downloadRestaurants_fishtown, downloadRestaurants_gradHospital,downloadRestaurants_southPhila,downloadRestaurants_NWPhila,downloadRestaurants_kensington,downloadRestaurants_upperNWPhila,downloadRestaurants_germantown,downloadRestaurants_roxborough,downloadRestaurants_mtAiry,downloadRestaurants_NPhila,downloadRestaurants_extraNPhila,downloadRestaurants_farNEPhila,downloadRestaurants_uniCity,downloadRestaurants_WParkside,downloadRestaurants_cobbsCreek,downloadRestaurants_kingsessing,downloadRestaurants_elmwoodPark,downloadRestaurants_eastwick, downloadFarmersMarkets, downloadParks, downloadPicnics } from '../js/data.js';
+import { downloadRestaurants_centerCity,downloadRestaurants_fishtown, downloadRestaurants_gradHospital,downloadRestaurants_southPhila,downloadRestaurants_NWPhila,downloadRestaurants_kensington,downloadRestaurants_upperNWPhila,downloadRestaurants_germantown,downloadRestaurants_roxborough,downloadRestaurants_mtAiry,downloadRestaurants_NPhila,downloadRestaurants_extraNPhila,downloadRestaurants_farNEPhila,downloadRestaurants_uniCity,downloadRestaurants_WParkside,downloadRestaurants_cobbsCreek,downloadRestaurants_kingsessing,downloadRestaurants_elmwoodPark,downloadRestaurants_eastwick, downloadFarmersMarkets, downloadPicnics } from '../js/data.js';
 import { initMap } from '../js/map.js';
 import { showPickedInfo } from '../js/picked_list.js';
 
@@ -14,10 +14,6 @@ function onRestaurantsLoad(data) {
 function onFarmersMarketsLoad(data) {
   philaMap.farmersMarketsLayer.addData(data);
   }
-
-function onParksLoad(data) {
- philaMap.parksLayer.addData(data);
-}
 
 function onPicnicsLoad(data) {
   philaMap.picnicsLayer.addData(data);
@@ -89,11 +85,7 @@ for (const checkbox of dateCheckboxes){
           if (dataset == "picnicTables"){
             downloadPicnics(onPicnicsLoad);
           } else {
-            if (dataset == "parks") {
-              downloadParks(onParksLoad);
-            } else {
-              downloadFarmersMarkets(onFarmersMarketsLoad);
-            }
+            downloadFarmersMarkets(onFarmersMarketsLoad);
           }
       } else {
         const dataset = checkbox.value;
@@ -101,49 +93,11 @@ for (const checkbox of dateCheckboxes){
           if (dataset == "picnicTables"){
             philaMap.picnicsLayer.clearLayers();
           } else {
-            if (dataset == "parks") {
-              philaMap.parksLayer.clearLayers();
-            } else {
-              philaMap.farmersMarketsLayer.clearLayers();
-            }
+            philaMap.farmersMarketsLayer.clearLayers();
           }
       }
   });
 }
-
-const restaurantNameFilter = document.querySelector('#restaurant-name-filter');
-
-function shouldShowRestaurant(){
-  //const filteredRestaurants = philaMap.restaurantsLayer._layers;
-  //filter based on school name
-  const indexes = Array.from({ length:1500 }, (v, k)=>2*k+61);
-  let array = [];
-  const text = restaurantNameFilter.value;
-  for (let i of indexes){
-    const restaurant = philaMap.restaurantsLayer._layers[i];
-    const restaurantName = restaurant.properties['name'].toLowerCase();
-    const hasText = restaurantName.includes(text);
-    if (hasText){
-      array.push(restaurant);
-    } //this is the true/false filter
-  }
-  ////filter based on school type checkboxes   
-  //for (const checkbox of schoolCheckboxes){
-  //    if (checkbox.checked){
-  //        if (checkbox.value == "Transition/Overage School"){
-  //            filteredSchools = filteredSchools.filter(
-  //                school => (school['School Level']!="High" && school['School Level']!="Middle" && school['School Level']!="Elementary"));
-  //        } else {
-  //            filteredSchools = filteredSchools.filter(
-  //                school => (school['School Level']==checkbox.value)); //this excludes all the transition schools except Transition/Overage
-  //        }
-  //    }
-  //}
-  console.log(array);
-  return array;
-};
-
-restaurantNameFilter.addEventListener('input', shouldShowRestaurant);
 
 //exposing variables to the global scope
 window.mapview = philaMap;

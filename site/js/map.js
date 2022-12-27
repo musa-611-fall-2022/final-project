@@ -22,39 +22,36 @@ function initMap(){
   }).addTo(philaMap);
 
   philaMap.restaurantsLayer = L.geoJSON(null, {
-    pointToLayer: (feature, latlng) => L.circleMarker(latlng),
+    pointToLayer: (geoJsonPoint, latlng) => L.circleMarker(latlng),
     style: {
       fillColor: blueYonder,
       fillOpacity: 0.3,
       stroke: false,
     },
+  }).bindTooltip(layer => {
+    return layer.feature.properties['name'];
   }).addTo(philaMap);
 
   philaMap.farmersMarketsLayer = L.geoJSON(null, {
-    pointToLayer: (feature, latlng) => L.circleMarker(latlng),
+    pointToLayer: (geoJsonPoint, latlng) => L.circleMarker(latlng),
     style: {
       fillColor: mustardGreen,
       fillOpacity: 0.3,
       stroke: false,
     },
-  }).addTo(philaMap);
-
-  philaMap.parksLayer = L.geoJSON(null, {
-    pointToLayer: (feature, latlng) => L.polygon(latlng),
-    style: {
-      fillColor: pear,
-      fillOpacity: 0.3,
-      stroke: false,
-    },
+  }).bindTooltip(layer => {
+    return layer.feature.properties['NAME'];
   }).addTo(philaMap);
 
   philaMap.picnicsLayer = L.geoJSON(null, {
-    pointToLayer: (feature, latlng) => L.circleMarker(latlng),
+    pointToLayer: (geoJsonPoint, latlng) => L.circleMarker(latlng),
     style: {
       fillColor: mindaro,
       fillOpacity: 0.3,
       stroke: false,
     },
+  }).bindTooltip(layer => {
+    return layer.feature.properties['park_name'];
   }).addTo(philaMap);
 
   return philaMap
