@@ -111,5 +111,39 @@ for (const checkbox of dateCheckboxes){
   });
 }
 
+const restaurantNameFilter = document.querySelector('#restaurant-name-filter');
+
+function shouldShowRestaurant(){
+  //const filteredRestaurants = philaMap.restaurantsLayer._layers;
+  //filter based on school name
+  const indexes = Array.from({ length:1500 }, (v, k)=>2*k+61);
+  let array = [];
+  const text = restaurantNameFilter.value;
+  for (let i of indexes){
+    const restaurant = philaMap.restaurantsLayer._layers[i];
+    const restaurantName = restaurant.properties['name'].toLowerCase();
+    const hasText = restaurantName.includes(text);
+    if (hasText){
+      array.push(restaurant);
+    } //this is the true/false filter
+  }
+  ////filter based on school type checkboxes   
+  //for (const checkbox of schoolCheckboxes){
+  //    if (checkbox.checked){
+  //        if (checkbox.value == "Transition/Overage School"){
+  //            filteredSchools = filteredSchools.filter(
+  //                school => (school['School Level']!="High" && school['School Level']!="Middle" && school['School Level']!="Elementary"));
+  //        } else {
+  //            filteredSchools = filteredSchools.filter(
+  //                school => (school['School Level']==checkbox.value)); //this excludes all the transition schools except Transition/Overage
+  //        }
+  //    }
+  //}
+  console.log(array);
+  return array;
+};
+
+restaurantNameFilter.addEventListener('input', shouldShowRestaurant);
+
 //exposing variables to the global scope
 window.mapview = philaMap;
