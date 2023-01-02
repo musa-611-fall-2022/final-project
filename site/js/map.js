@@ -1,13 +1,13 @@
 //AAA accessible color palette
-const pear = '#bcd434';
+//const pear = '#bcd434';
 const mindaro = '#e4f481';
 const mustardGreen = '#6b752f';
 const blueYonder = '#5a7a9a';
-const blackShadows = '#bcb0aa';
-const blackOlive = '#3c3c34';
+//const blackShadows = '#bcb0aa';
+//const blackOlive = '#3c3c34';
 
 function initMap(){
-    let philaMap = L.map('phila-map').setView([40,-75.2],10);
+    let philaMap = L.map('phila-map').setView([40, -75.2], 10);
   const mapboxAccount = 'mapbox';
   const mapboxStyle = 'light-v10';
   //user must create their own mapbox token and insert here
@@ -51,8 +51,8 @@ function initMap(){
     return layer.feature.properties['park_name'];
   }).addTo(philaMap);
 
-  return philaMap
-  };
+  return philaMap;
+  }
 
 
 export {

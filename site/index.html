@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 
-<html>
-    <head>
+<html lang = "en">
+    <head role = "banner">
         <title>Final Project</title>
       <meta charset="utf-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1" /> 
@@ -15,31 +15,37 @@
     </head>
 
 
-    <body cz-shortcut-listen="true">
+    <body cz-shortcut-listen="true" role = "main">
 
-      <div>
-        <h1>PickMe!</h1>
-        <h2>Philadelphia's Best Date Spots</h2>
-      </div>
+      <header role="banner">
+        <div>
+          <h1>PickMe!</h1>
+          <h2>Philadelphia's Best Date Spots</h2>
+        </div>
+      </header>
       
       <div class = "content-container">
-        <div class = "map-container">
-          <div id="phila-map"></div>
+        <main role="main">
+          <div class = "map-container">
+            <div id="phila-map"></div>
+          </div>
+        </main>
+
+        <nav role="navigation">
+          <div class = "list-container">
+            <label><input type="checkbox" class="date-checkbox" value="farmersMarkets">Farmers Market</label>
+            <label><input type="checkbox" class="date-checkbox" value="picnicTables">Picnic Tables</label>
           </div>
 
-        <div class = "list-container">
-          <label><input type="checkbox" class="date-checkbox" value="farmersMarkets">Farmers Market</label>
-          <label><input type="checkbox" class="date-checkbox" value="picnicTables">Picnic Tables</label>
-        </div>
+          <div class = "random">
+            <input type="button" class="random-button" value="Go Random!">
+          </div>
 
-        <div class = "random">
-          <input type="button" class="random-button" value="Go Random!">
-        </div>
-
-        <div class = "picked">
-          <h2 class = "picked" id = "picked-message">To end the stress of decision making, go random!</h2>
-          <h3 class = "picked" id = "picked-info">Check out the restaurants in Philadelphia, and you can always see parks near your restaurant of choice</h3>
-        </div>
+          <div class = "picked">
+            <h2 class = "picked" id = "picked-message">To end the stress of decision making, go random!</h2>
+            <h3 class = "picked" id = "picked-info">Check out the restaurants in Philadelphia, and you can always see parks near your restaurant of choice</h3>
+          </div>
+        </nav>
   
       
 

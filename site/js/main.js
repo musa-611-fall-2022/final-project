@@ -1,4 +1,4 @@
-import { downloadRestaurants_centerCity,downloadRestaurants_fishtown, downloadRestaurants_gradHospital,downloadRestaurants_southPhila,downloadRestaurants_NWPhila,downloadRestaurants_kensington,downloadRestaurants_upperNWPhila,downloadRestaurants_germantown,downloadRestaurants_roxborough,downloadRestaurants_mtAiry,downloadRestaurants_NPhila,downloadRestaurants_extraNPhila,downloadRestaurants_farNEPhila,downloadRestaurants_uniCity,downloadRestaurants_WParkside,downloadRestaurants_cobbsCreek,downloadRestaurants_kingsessing,downloadRestaurants_elmwoodPark,downloadRestaurants_eastwick, downloadFarmersMarkets, downloadPicnics } from '../js/data.js';
+import { downloadRestaurantsCenterCity, downloadRestaurantsFishtown, downloadRestaurantsGradHospital, downloadRestaurantsSouthPhila, downloadRestaurantsNwPhila, downloadRestaurantsKensington, downloadRestaurantsUpperNwPhila, downloadRestaurantsGermantown, downloadRestaurantsRoxborough, downloadRestaurantsMtAiry, downloadRestaurantsNoPhila, downloadRestaurantsExtraNoPhila, downloadRestaurantsFarNePhila, downloadRestaurantsUniCity, downloadRestaurantsWestParkside, downloadRestaurantsCobbsCreek, downloadRestaurantsKingsessing, downloadRestaurantsElmwoodPark, downloadRestaurantsEastwick, downloadFarmersMarkets, downloadPicnics } from '../js/data.js';
 import { initMap } from '../js/map.js';
 import { showPickedInfo } from '../js/picked_list.js';
 
@@ -20,25 +20,25 @@ function onPicnicsLoad(data) {
 }
 
 function downloadAllRestaurants() {
-  downloadRestaurants_centerCity(onRestaurantsLoad);
-  downloadRestaurants_fishtown(onRestaurantsLoad);
-  downloadRestaurants_gradHospital(onRestaurantsLoad);
-  downloadRestaurants_southPhila(onRestaurantsLoad);
-  downloadRestaurants_NWPhila(onRestaurantsLoad);
-  downloadRestaurants_kensington(onRestaurantsLoad);
-  downloadRestaurants_upperNWPhila(onRestaurantsLoad);
-  downloadRestaurants_germantown(onRestaurantsLoad);
-  downloadRestaurants_roxborough(onRestaurantsLoad);
-  downloadRestaurants_mtAiry(onRestaurantsLoad);
-  downloadRestaurants_NPhila(onRestaurantsLoad);
-  downloadRestaurants_extraNPhila(onRestaurantsLoad);
-  downloadRestaurants_farNEPhila(onRestaurantsLoad);
-  downloadRestaurants_uniCity(onRestaurantsLoad);
-  downloadRestaurants_WParkside(onRestaurantsLoad);
-  downloadRestaurants_cobbsCreek(onRestaurantsLoad);
-  downloadRestaurants_kingsessing(onRestaurantsLoad);
-  downloadRestaurants_elmwoodPark(onRestaurantsLoad);
-  downloadRestaurants_eastwick(onRestaurantsLoad);
+  downloadRestaurantsCenterCity(onRestaurantsLoad);
+  downloadRestaurantsFishtown(onRestaurantsLoad);
+  downloadRestaurantsGradHospital(onRestaurantsLoad);
+  downloadRestaurantsSouthPhila(onRestaurantsLoad);
+  downloadRestaurantsNwPhila(onRestaurantsLoad);
+  downloadRestaurantsKensington(onRestaurantsLoad);
+  downloadRestaurantsUpperNwPhila(onRestaurantsLoad);
+  downloadRestaurantsGermantown(onRestaurantsLoad);
+  downloadRestaurantsRoxborough(onRestaurantsLoad);
+  downloadRestaurantsMtAiry(onRestaurantsLoad);
+  downloadRestaurantsNoPhila(onRestaurantsLoad);
+  downloadRestaurantsExtraNoPhila(onRestaurantsLoad);
+  downloadRestaurantsFarNePhila(onRestaurantsLoad);
+  downloadRestaurantsUniCity(onRestaurantsLoad);
+  downloadRestaurantsWestParkside(onRestaurantsLoad);
+  downloadRestaurantsCobbsCreek(onRestaurantsLoad);
+  downloadRestaurantsKingsessing(onRestaurantsLoad);
+  downloadRestaurantsElmwoodPark(onRestaurantsLoad);
+  downloadRestaurantsEastwick(onRestaurantsLoad);
 }
 
 //wrap all the restaurants loading in one neat function
@@ -88,7 +88,7 @@ for (const checkbox of dateCheckboxes){
       if (evt.target.checked){
           console.log('you clicked on the checkbox ' + checkbox.value);
           const dataset = checkbox.value;
-          const black = "#000000";
+          //const black = "#000000";
           if (dataset == "picnicTables"){
             downloadPicnics(onPicnicsLoad);
           } else {
@@ -96,7 +96,7 @@ for (const checkbox of dateCheckboxes){
           }
       } else {
         const dataset = checkbox.value;
-          console.log('you unclicked the checkbox ' + dataset)
+          console.log('you unclicked the checkbox ' + dataset);
           if (dataset == "picnicTables"){
             philaMap.picnicsLayer.clearLayers();
           } else {

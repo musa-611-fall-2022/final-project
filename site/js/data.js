@@ -19,39 +19,39 @@ function makeGeoJSON(data) {
     geoArray.push(geoElement);
   }
   return geoArray;
-};
+}
 
 //foursquare only lets me download 50 restaurants at a time, so I just created new locations for each neighborhood as a separate download
-const url_centerCity = 'https://api.foursquare.com/v3/places/search?query=restaurant&ll=39.96505871218218%2C-75.16367498832258&radius=1600&fields=name%2Cgeocodes%2Clocation%2Ccategories%2Crating%2Cprice%2Cmenu&limit=50';
-const url_fishtown = 'https://api.foursquare.com/v3/places/search?query=restaurant&ll=39.97327187487038%2C-75.1338278229921&radius=1600&fields=name%2Cgeocodes%2Clocation%2Ccategories%2Crating%2Cprice%2Cmenu&limit=50';
-const url_gradHospital = 'https://api.foursquare.com/v3/places/search?query=restaurant&ll=39.93792345069754%2C-75.16681852812717&radius=1600&fields=name%2Cgeocodes%2Clocation%2Ccategories%2Crating%2Cprice%2Cmenu&limit=50';
-const url_southPhila = 'https://api.foursquare.com/v3/places/search?query=restaurant&ll=39.92599849450591%2C-75.16959739092027&radius=1600&fields=name%2Cgeocodes%2Clocation%2Ccategories%2Crating%2Cprice%2Cmenu&limit=50';
-const url_NWPhila = 'https://api.foursquare.com/v3/places/search?query=restaurant&ll=39.985150205587175%2C-75.17246277071337&radius=1600&fields=name%2Cgeocodes%2Clocation%2Ccategories%2Crating%2Cprice%2Cmenu&limit=50';
-const url_kensington = 'https://api.foursquare.com/v3/places/search?query=restaurant&ll=39.99380084702684%2C-75.12093340551054&radius=1600&fields=name%2Cgeocodes%2Clocation%2Ccategories%2Crating%2Cprice%2Cmenu&limit=50';
-const url_upperNWPhila = 'https://api.foursquare.com/v3/places/search?query=restaurant&ll=40.00668564178268%2C-75.1652116022355&radius=1600&fields=name%2Cgeocodes%2Clocation%2Ccategories%2Crating%2Cprice%2Cmenu&limit=50';
-const url_germantown = 'https://api.foursquare.com/v3/places/search?query=restaurant&ll=40.03685077442615%2C-75.16779929005185&radius=1600&fields=name%2Cgeocodes%2Clocation%2Ccategories%2Crating%2Cprice%2Cmenu&limit=50';
-const url_roxborough = 'https://api.foursquare.com/v3/places/search?query=restaurant&ll=40.03552995287582%2C-75.2221407141313&radius=1600&fields=name%2Cgeocodes%2Clocation%2Ccategories%2Crating%2Cprice%2Cmenu&limit=50';
-const url_mtAiry = 'https://api.foursquare.com/v3/places/search?query=restaurant&ll=40.054899436428954%2C-75.1872069421086&radius=1600&fields=name%2Cgeocodes%2Clocation%2Ccategories%2Crating%2Cprice%2Cmenu&limit=50';
-const url_NPhila = 'https://api.foursquare.com/v3/places/search?query=restaurant&ll=40.00778679346621%2C-75.13660328639875&radius=1600&fields=name%2Cgeocodes%2Clocation%2Ccategories%2Crating%2Cprice%2Cmenu&limit=50';
-const url_extraNPhila = 'https://api.foursquare.com/v3/places/search?query=restaurant&ll=40.04147344786197%2C-75.12395237161246&radius=1600&fields=name%2Cgeocodes%2Clocation%2Ccategories%2Crating%2Cprice%2Cmenu&limit=50';
-const url_farNEPhila = 'https://api.foursquare.com/v3/places/search?query=restaurant&ll=40.05654999023252%2C-75.04373407741994&radius=3000&fields=name%2Cgeocodes%2Clocation%2Ccategories%2Crating%2Cprice%2Cmenu&limit=50';
-const url_uniCity = 'https://api.foursquare.com/v3/places/search?query=restaurant&ll=39.954522343474004%2C-75.19857970841439&radius=1600&fields=name%2Cgeocodes%2Clocation%2Ccategories%2Crating%2Cprice%2Cmenu&limit=50';
-const url_WParkside = 'https://api.foursquare.com/v3/places/search?query=restaurant&ll=39.976007997621934%2C-75.22819434642022&radius=1600&fields=name%2Cgeocodes%2Clocation%2Ccategories%2Crating%2Cprice%2Cmenu&limit=50';
-const url_cobbsCreek = 'https://api.foursquare.com/v3/places/search?query=restaurant&ll=39.95485294319508%2C-75.23811381256547&radius=1600&fields=name%2Cgeocodes%2Clocation%2Ccategories%2Crating%2Cprice%2Cmenu&limit=50';
-const url_kingsessing = 'https://api.foursquare.com/v3/places/search?query=restaurant&ll=39.93887213162346%2C-75.22201265015173&radius=1600&fields=name%2Cgeocodes%2Clocation%2Ccategories%2Crating%2Cprice%2Cmenu&limit=50';
-const url_elmwoodPark = 'https://api.foursquare.com/v3/places/search?query=restaurant&ll=39.92266708397425%2C-75.23221963722871&radius=1600&fields=name%2Cgeocodes%2Clocation%2Ccategories%2Crating%2Cprice%2Cmenu&limit=50';
-const url_eastwick = 'https://api.foursquare.com/v3/places/search?query=restaurant&ll=39.90507721682639%2C-75.24022308391964&radius=1600&fields=name%2Cgeocodes%2Clocation%2Ccategories%2Crating%2Cprice%2Cmenu&limit=50';
+const urlCenterCity = 'https://api.foursquare.com/v3/places/search?query=restaurant&ll=39.96505871218218%2C-75.16367498832258&radius=1600&fields=name%2Cgeocodes%2Clocation%2Ccategories%2Crating%2Cprice%2Cmenu&limit=50';
+const urlFishtown = 'https://api.foursquare.com/v3/places/search?query=restaurant&ll=39.97327187487038%2C-75.1338278229921&radius=1600&fields=name%2Cgeocodes%2Clocation%2Ccategories%2Crating%2Cprice%2Cmenu&limit=50';
+const urlGradHospital = 'https://api.foursquare.com/v3/places/search?query=restaurant&ll=39.93792345069754%2C-75.16681852812717&radius=1600&fields=name%2Cgeocodes%2Clocation%2Ccategories%2Crating%2Cprice%2Cmenu&limit=50';
+const urlSouthPhila = 'https://api.foursquare.com/v3/places/search?query=restaurant&ll=39.92599849450591%2C-75.16959739092027&radius=1600&fields=name%2Cgeocodes%2Clocation%2Ccategories%2Crating%2Cprice%2Cmenu&limit=50';
+const urlNwPhila = 'https://api.foursquare.com/v3/places/search?query=restaurant&ll=39.985150205587175%2C-75.17246277071337&radius=1600&fields=name%2Cgeocodes%2Clocation%2Ccategories%2Crating%2Cprice%2Cmenu&limit=50';
+const urlKensington = 'https://api.foursquare.com/v3/places/search?query=restaurant&ll=39.99380084702684%2C-75.12093340551054&radius=1600&fields=name%2Cgeocodes%2Clocation%2Ccategories%2Crating%2Cprice%2Cmenu&limit=50';
+const urlUpperNwPhila = 'https://api.foursquare.com/v3/places/search?query=restaurant&ll=40.00668564178268%2C-75.1652116022355&radius=1600&fields=name%2Cgeocodes%2Clocation%2Ccategories%2Crating%2Cprice%2Cmenu&limit=50';
+const urlGermantown = 'https://api.foursquare.com/v3/places/search?query=restaurant&ll=40.03685077442615%2C-75.16779929005185&radius=1600&fields=name%2Cgeocodes%2Clocation%2Ccategories%2Crating%2Cprice%2Cmenu&limit=50';
+const urlRoxborough = 'https://api.foursquare.com/v3/places/search?query=restaurant&ll=40.03552995287582%2C-75.2221407141313&radius=1600&fields=name%2Cgeocodes%2Clocation%2Ccategories%2Crating%2Cprice%2Cmenu&limit=50';
+const urlMtAiry = 'https://api.foursquare.com/v3/places/search?query=restaurant&ll=40.054899436428954%2C-75.1872069421086&radius=1600&fields=name%2Cgeocodes%2Clocation%2Ccategories%2Crating%2Cprice%2Cmenu&limit=50';
+const urlNoPhila = 'https://api.foursquare.com/v3/places/search?query=restaurant&ll=40.00778679346621%2C-75.13660328639875&radius=1600&fields=name%2Cgeocodes%2Clocation%2Ccategories%2Crating%2Cprice%2Cmenu&limit=50';
+const urlExtraNoPhila = 'https://api.foursquare.com/v3/places/search?query=restaurant&ll=40.04147344786197%2C-75.12395237161246&radius=1600&fields=name%2Cgeocodes%2Clocation%2Ccategories%2Crating%2Cprice%2Cmenu&limit=50';
+const urlFarNePhila = 'https://api.foursquare.com/v3/places/search?query=restaurant&ll=40.05654999023252%2C-75.04373407741994&radius=3000&fields=name%2Cgeocodes%2Clocation%2Ccategories%2Crating%2Cprice%2Cmenu&limit=50';
+const urlUniCity = 'https://api.foursquare.com/v3/places/search?query=restaurant&ll=39.954522343474004%2C-75.19857970841439&radius=1600&fields=name%2Cgeocodes%2Clocation%2Ccategories%2Crating%2Cprice%2Cmenu&limit=50';
+const urlWestParkside = 'https://api.foursquare.com/v3/places/search?query=restaurant&ll=39.976007997621934%2C-75.22819434642022&radius=1600&fields=name%2Cgeocodes%2Clocation%2Ccategories%2Crating%2Cprice%2Cmenu&limit=50';
+const urlCobbsCreek = 'https://api.foursquare.com/v3/places/search?query=restaurant&ll=39.95485294319508%2C-75.23811381256547&radius=1600&fields=name%2Cgeocodes%2Clocation%2Ccategories%2Crating%2Cprice%2Cmenu&limit=50';
+const urlKingsessing = 'https://api.foursquare.com/v3/places/search?query=restaurant&ll=39.93887213162346%2C-75.22201265015173&radius=1600&fields=name%2Cgeocodes%2Clocation%2Ccategories%2Crating%2Cprice%2Cmenu&limit=50';
+const urlElmwoodPark = 'https://api.foursquare.com/v3/places/search?query=restaurant&ll=39.92266708397425%2C-75.23221963722871&radius=1600&fields=name%2Cgeocodes%2Clocation%2Ccategories%2Crating%2Cprice%2Cmenu&limit=50';
+const urlEastwick = 'https://api.foursquare.com/v3/places/search?query=restaurant&ll=39.90507721682639%2C-75.24022308391964&radius=1600&fields=name%2Cgeocodes%2Clocation%2Ccategories%2Crating%2Cprice%2Cmenu&limit=50';
 const options = {
   method: 'GET',
   headers: {
     accept: 'application/json',
-    Authorization: 'fsq3PT0XzmGKLOcdzjrfsMjlII+0TdyLrtcRTy3TWjBWL1I='
-  }
+    Authorization: 'fsq3PT0XzmGKLOcdzjrfsMjlII+0TdyLrtcRTy3TWjBWL1I=',
+  },
 };
 
 //downloading each and every location for restaurants in that neighborhood
-async function downloadRestaurants_centerCity(onSuccess, onFailure) {
-  const resp = await fetch(url_centerCity, options);
+async function downloadRestaurantsCenterCity(onSuccess, onFailure) {
+  const resp = await fetch(urlCenterCity, options);
   if (resp.status === 200) {
     const data = await resp.json(); //this is still a promise
     if (onSuccess) {
@@ -63,8 +63,8 @@ async function downloadRestaurants_centerCity(onSuccess, onFailure) {
     }
 }}
 
-async function downloadRestaurants_fishtown(onSuccess, onFailure) {
-  const resp = await fetch(url_fishtown, options);
+async function downloadRestaurantsFishtown(onSuccess, onFailure) {
+  const resp = await fetch(urlFishtown, options);
   if (resp.status === 200) {
     const data = await resp.json(); //this is still a promise
     if (onSuccess) {
@@ -76,8 +76,8 @@ async function downloadRestaurants_fishtown(onSuccess, onFailure) {
     }
 }}
 
-async function downloadRestaurants_gradHospital(onSuccess, onFailure) {
-  const resp = await fetch(url_gradHospital, options);
+async function downloadRestaurantsGradHospital(onSuccess, onFailure) {
+  const resp = await fetch(urlGradHospital, options);
   if (resp.status === 200) {
     const data = await resp.json(); //this is still a promise
     if (onSuccess) {
@@ -89,8 +89,8 @@ async function downloadRestaurants_gradHospital(onSuccess, onFailure) {
     }
 }}
 
-async function downloadRestaurants_southPhila(onSuccess, onFailure) {
-  const resp = await fetch(url_southPhila, options);
+async function downloadRestaurantsSouthPhila(onSuccess, onFailure) {
+  const resp = await fetch(urlSouthPhila, options);
   if (resp.status === 200) {
     const data = await resp.json(); //this is still a promise
     if (onSuccess) {
@@ -102,8 +102,8 @@ async function downloadRestaurants_southPhila(onSuccess, onFailure) {
     }
 }}
 
-async function downloadRestaurants_NWPhila(onSuccess, onFailure) {
-  const resp = await fetch(url_NWPhila, options);
+async function downloadRestaurantsNwPhila(onSuccess, onFailure) {
+  const resp = await fetch(urlNwPhila, options);
   if (resp.status === 200) {
     const data = await resp.json(); //this is still a promise
     if (onSuccess) {
@@ -115,8 +115,8 @@ async function downloadRestaurants_NWPhila(onSuccess, onFailure) {
     }
 }}
 
-async function downloadRestaurants_kensington(onSuccess, onFailure) {
-  const resp = await fetch(url_kensington, options);
+async function downloadRestaurantsKensington(onSuccess, onFailure) {
+  const resp = await fetch(urlKensington, options);
   if (resp.status === 200) {
     const data = await resp.json(); //this is still a promise
     if (onSuccess) {
@@ -128,8 +128,8 @@ async function downloadRestaurants_kensington(onSuccess, onFailure) {
     }
 }}
 
-async function downloadRestaurants_upperNWPhila(onSuccess, onFailure) {
-  const resp = await fetch(url_upperNWPhila, options);
+async function downloadRestaurantsUpperNwPhila(onSuccess, onFailure) {
+  const resp = await fetch(urlUpperNwPhila, options);
   if (resp.status === 200) {
     const data = await resp.json(); //this is still a promise
     if (onSuccess) {
@@ -141,8 +141,8 @@ async function downloadRestaurants_upperNWPhila(onSuccess, onFailure) {
     }
 }}
 
-async function downloadRestaurants_germantown(onSuccess, onFailure) {
-  const resp = await fetch(url_germantown, options);
+async function downloadRestaurantsGermantown(onSuccess, onFailure) {
+  const resp = await fetch(urlGermantown, options);
   if (resp.status === 200) {
     const data = await resp.json(); //this is still a promise
     if (onSuccess) {
@@ -154,8 +154,8 @@ async function downloadRestaurants_germantown(onSuccess, onFailure) {
     }
 }}
 
-async function downloadRestaurants_roxborough(onSuccess, onFailure) {
-  const resp = await fetch(url_roxborough, options);
+async function downloadRestaurantsRoxborough(onSuccess, onFailure) {
+  const resp = await fetch(urlRoxborough, options);
   if (resp.status === 200) {
     const data = await resp.json(); //this is still a promise
     if (onSuccess) {
@@ -167,8 +167,8 @@ async function downloadRestaurants_roxborough(onSuccess, onFailure) {
     }
 }}
 
-async function downloadRestaurants_mtAiry(onSuccess, onFailure) {
-  const resp = await fetch(url_mtAiry, options);
+async function downloadRestaurantsMtAiry(onSuccess, onFailure) {
+  const resp = await fetch(urlMtAiry, options);
   if (resp.status === 200) {
     const data = await resp.json(); //this is still a promise
     if (onSuccess) {
@@ -180,8 +180,8 @@ async function downloadRestaurants_mtAiry(onSuccess, onFailure) {
     }
 }}
 
-async function downloadRestaurants_NPhila(onSuccess, onFailure) {
-  const resp = await fetch(url_NPhila, options);
+async function downloadRestaurantsNoPhila(onSuccess, onFailure) {
+  const resp = await fetch(urlNoPhila, options);
   if (resp.status === 200) {
     const data = await resp.json(); //this is still a promise
     if (onSuccess) {
@@ -193,8 +193,8 @@ async function downloadRestaurants_NPhila(onSuccess, onFailure) {
     }
 }}
 
-async function downloadRestaurants_extraNPhila(onSuccess, onFailure) {
-  const resp = await fetch(url_extraNPhila, options);
+async function downloadRestaurantsExtraNoPhila(onSuccess, onFailure) {
+  const resp = await fetch(urlExtraNoPhila, options);
   if (resp.status === 200) {
     const data = await resp.json(); //this is still a promise
     if (onSuccess) {
@@ -206,8 +206,8 @@ async function downloadRestaurants_extraNPhila(onSuccess, onFailure) {
     }
 }}
 
-async function downloadRestaurants_farNEPhila(onSuccess, onFailure) {
-  const resp = await fetch(url_farNEPhila, options);
+async function downloadRestaurantsFarNePhila(onSuccess, onFailure) {
+  const resp = await fetch(urlFarNePhila, options);
   if (resp.status === 200) {
     const data = await resp.json(); //this is still a promise
     if (onSuccess) {
@@ -219,8 +219,8 @@ async function downloadRestaurants_farNEPhila(onSuccess, onFailure) {
     }
 }}
 
-async function downloadRestaurants_uniCity(onSuccess, onFailure) {
-  const resp = await fetch(url_uniCity, options);
+async function downloadRestaurantsUniCity(onSuccess, onFailure) {
+  const resp = await fetch(urlUniCity, options);
   if (resp.status === 200) {
     const data = await resp.json(); //this is still a promise
     if (onSuccess) {
@@ -232,8 +232,8 @@ async function downloadRestaurants_uniCity(onSuccess, onFailure) {
     }
 }}
 
-async function downloadRestaurants_WParkside(onSuccess, onFailure) {
-  const resp = await fetch(url_WParkside, options);
+async function downloadRestaurantsWestParkside(onSuccess, onFailure) {
+  const resp = await fetch(urlWestParkside, options);
   if (resp.status === 200) {
     const data = await resp.json(); //this is still a promise
     if (onSuccess) {
@@ -245,8 +245,8 @@ async function downloadRestaurants_WParkside(onSuccess, onFailure) {
     }
 }}
 
-async function downloadRestaurants_cobbsCreek(onSuccess, onFailure) {
-  const resp = await fetch(url_cobbsCreek, options);
+async function downloadRestaurantsCobbsCreek(onSuccess, onFailure) {
+  const resp = await fetch(urlCobbsCreek, options);
   if (resp.status === 200) {
     const data = await resp.json(); //this is still a promise
     if (onSuccess) {
@@ -258,8 +258,8 @@ async function downloadRestaurants_cobbsCreek(onSuccess, onFailure) {
     }
 }}
 
-async function downloadRestaurants_kingsessing(onSuccess, onFailure) {
-  const resp = await fetch(url_kingsessing, options);
+async function downloadRestaurantsKingsessing(onSuccess, onFailure) {
+  const resp = await fetch(urlKingsessing, options);
   if (resp.status === 200) {
     const data = await resp.json(); //this is still a promise
     if (onSuccess) {
@@ -271,8 +271,8 @@ async function downloadRestaurants_kingsessing(onSuccess, onFailure) {
     }
 }}
 
-async function downloadRestaurants_elmwoodPark(onSuccess, onFailure) {
-  const resp = await fetch(url_elmwoodPark, options);
+async function downloadRestaurantsElmwoodPark(onSuccess, onFailure) {
+  const resp = await fetch(urlElmwoodPark, options);
   if (resp.status === 200) {
     const data = await resp.json(); //this is still a promise
     if (onSuccess) {
@@ -284,8 +284,8 @@ async function downloadRestaurants_elmwoodPark(onSuccess, onFailure) {
     }
 }}
 
-async function downloadRestaurants_eastwick(onSuccess, onFailure) {
-  const resp = await fetch(url_eastwick, options);
+async function downloadRestaurantsEastwick(onSuccess, onFailure) {
+  const resp = await fetch(urlEastwick, options);
   if (resp.status === 200) {
     const data = await resp.json(); //this is still a promise
     if (onSuccess) {
@@ -303,7 +303,7 @@ async function downloadFarmersMarkets(onSuccess, onFailure) {
     const resp = await fetch('data/Farmers_Markets.geojson');
     if (resp.status === 200) {
       const data = await resp.json();
-      if (onSuccess) { onSuccess(data)
+      if (onSuccess) { onSuccess(data);
         } else {
           alert('Oh no, I failed to download the Farmers Markets data.');
           if (onFailure) { onFailure() }
@@ -326,27 +326,25 @@ async function downloadPicnics(onSuccess, onFailure) {
 
 
 export {
-    downloadRestaurants_centerCity,
-    downloadRestaurants_fishtown,
-    downloadRestaurants_gradHospital,
-    downloadRestaurants_southPhila,
-    downloadRestaurants_NWPhila,
-    downloadRestaurants_kensington,
-    downloadRestaurants_upperNWPhila,
-    downloadRestaurants_germantown,
-    downloadRestaurants_roxborough,
-    downloadRestaurants_mtAiry,
-    downloadRestaurants_NPhila,
-    downloadRestaurants_extraNPhila,
-    downloadRestaurants_farNEPhila,
-    downloadRestaurants_uniCity,
-    downloadRestaurants_WParkside,
-    downloadRestaurants_cobbsCreek,
-    downloadRestaurants_kingsessing,
-    downloadRestaurants_elmwoodPark,
-    downloadRestaurants_eastwick,
+    downloadRestaurantsCenterCity,
+    downloadRestaurantsFishtown,
+    downloadRestaurantsGradHospital,
+    downloadRestaurantsSouthPhila,
+    downloadRestaurantsNwPhila,
+    downloadRestaurantsKensington,
+    downloadRestaurantsUpperNwPhila,
+    downloadRestaurantsGermantown,
+    downloadRestaurantsRoxborough,
+    downloadRestaurantsMtAiry,
+    downloadRestaurantsNoPhila,
+    downloadRestaurantsExtraNoPhila,
+    downloadRestaurantsFarNePhila,
+    downloadRestaurantsUniCity,
+    downloadRestaurantsWestParkside,
+    downloadRestaurantsCobbsCreek,
+    downloadRestaurantsKingsessing,
+    downloadRestaurantsElmwoodPark,
+    downloadRestaurantsEastwick,
     downloadFarmersMarkets,
     downloadPicnics,
   };
-
-//only 199 restaurants are displayed on the map, not sure why...
