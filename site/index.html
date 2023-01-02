@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+
+<html lang = "en">
+    <head role = "application">
+        <title>Final Project</title>
+      <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" /> 
+
+      <!-- Leaflet's default styles -->
+      <link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css" integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ==" crossorigin="">
+  
+      <!-- link in my CSS files-->
+      <link rel="stylesheet" href="css/styles.css">
+
+    </head>
+
+
+    <body cz-shortcut-listen="true">
+
+      <header role="banner">
+        <div>
+          <h1>PickMe!</h1>
+          <h2>Philadelphia's Best Date Spots</h2>
+        </div>
+      </header>
+      
+      <div class = "content-container">
+        <main role="main">
+          <div class = "map-container">
+            <div id="phila-map"></div>
+          </div>
+        </main>
+
+        <nav role="navigation">
+          <div class = "list-container">
+            <label><input type="checkbox" class="date-checkbox" value="farmersMarkets">Farmers Market</label>
+            <label><input type="checkbox" class="date-checkbox" value="picnicTables">Picnic Tables</label>
+          </div>
+
+          <div class = "random">
+            <input type="button" class="random-button" value="Go Random!">
+          </div>
+
+          <div class = "picked">
+            <h2 class = "picked" id = "picked-message">To end the stress of decision making, go random!</h2>
+            <h3 class = "picked" id = "picked-info">Check out the restaurants in Philadelphia, and you can always see parks near your restaurant of choice</h3>
+          </div>
+        </nav>
+  
+      
+
+
+      <!-- Leaflet Javascript -->
+      <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js" integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ==" crossorigin=""></script>
+    
+      <!-- include my JavaScript files aka my project JS module-->
+      <script type="module" src="js/main.js"></script>
+
+    </body>
+
+</html>
