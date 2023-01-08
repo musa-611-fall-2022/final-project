@@ -1,0 +1,45 @@
+body {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  z-index: 1;
+}
+
+h1 {
+  background-color: #217e79;
+  color: whitesmoke;
+  margin: 0 px;
+}
+
+.map {
+  height: 100%;
+  z-index: 1;
+}
+
+.content-container {
+  display: flex;
+  flex-direction: row-reverse;
+  overflow: hidden;
+  height: 100%;
+  padding-top: 0;
+  margin: 0 px;
+}
+
+.map-container {
+  width: 75%;
+}
+
+.user-tools-container {
+  background-color: #217e79;
+  color: whitesmoke;
+  width: 25%;
+  overflow-y: scroll;
+  padding: 1rem;
+  padding-top: 0;
+}
+
+.popup-image {
+  width: 100%;
+}
