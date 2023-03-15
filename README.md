@@ -20,7 +20,7 @@ There are tons of NGOs doing projects in Mathare slum (Nairobi, Kenya). Voluntte
 * Loading desitination for volunteer works/ other purpose
 
    So, this app should have a search bar floating above the map that allows volunteers to input the type of facilities (schools, playgrounds, NGO working offices,      clinics, hospitals, goceries, restrooms) or the name of a specific facility.
-After input the name, there should be a button to hit, and the destination(s) will show on the map as markers.
+After input the name, there should be a button to hit, and the destination(s) will show on the map as markers. (The planned roads may be a little longer than we expect, that's because the road network data from leaflet doesn't cover narrow paths, therefore, not all the paths are included when doing road planning. In the future, we will promote this function by searching more precise road data or vectoring the paths in ArcGIS Pro)
 
    <img src="https://github.com/miaomiao612/Mathare-Slum-Facilities-App/blob/main/%E5%8A%A8%E7%94%BB2.gif" width="320" alt="2">
 
