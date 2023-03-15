@@ -15,14 +15,14 @@ There are tons of NGOs doing projects in Mathare slum (Nairobi, Kenya). Voluntte
    There should be a map with whole page size, centered at Mathare Slum.
    The position of the user(volunteer) should be shown when open this app.
    
-   <img src="https://github.com/miaomiao612/final-project/blob/main/%E5%8A%A8%E7%94%BB1.gif" width="320" alt="1">
+   <img src="https://github.com/miaomiao612/Mathare-Slum-Facilities-App/blob/main/%E5%8A%A8%E7%94%BB1.gif" width="320" alt="1">
 
 * Loading desitination for volunteer works/ other purpose
 
    So, this app should have a search bar floating above the map that allows volunteers to input the type of facilities (schools, playgrounds, NGO working offices,      clinics, hospitals, goceries, restrooms) or the name of a specific facility.
 After input the name, there should be a button to hit, and the destination(s) will show on the map as markers.
 
-   <img src="https://github.com/miaomiao612/final-project/blob/main/%E5%8A%A8%E7%94%BB2.gif" width="320" alt="2">
+   <img src="https://github.com/miaomiao612/Mathare-Slum-Facilities-App/blob/main/%E5%8A%A8%E7%94%BB2.gif" width="320" alt="2">
 
 * Facility details and comments
 
