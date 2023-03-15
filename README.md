@@ -37,7 +37,7 @@ After input the name, there should be a button to hit, and the destination(s) wi
 
    There should be also a large button at the bottom of the panel named "direction", after hit this button, there should be a line shown on the map which is the shortest way from the user's position and the destination.
 
-   <img src="https://github.com/miaomiao612/final-project/blob/main/%E5%8A%A8%E7%94%BB4.gif" width="320" alt="4">
+   <img src="https://github.com/miaomiao612/Mathare-Slum-Facilities-App/blob/main/%E5%8A%A8%E7%94%BB4.gif" width="320" alt="4">
 
 ### Data Source：
 UN-Habitat urban data site——[Mathare Slum Data Points](https://github.com/miaomiao612](https://data.unhabitat.org/datasets/GUO-UN-Habitat::mathare-slum-data-points/explore?location=-0.690293%2C35.785444%2C9.59) "悬停显示文字")
