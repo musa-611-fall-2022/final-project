@@ -46,5 +46,8 @@ Clone the folder in your computer
 
 Type "npx http-server" in the teminal and open the link in your browser
 
+### Author:
+Yifei Sun, Yuhao Jia
+
 
 
