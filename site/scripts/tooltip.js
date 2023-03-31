@@ -31,7 +31,7 @@ function setContents(selection) {
         .classed("year");
 
     if (selection[0].Units != "N/A") {
-
+      
       //add the svg for the proportion bar
       const miniBar = d3.select("#tooltipContent").append('svg')
         .attr("class", "bar");
@@ -44,7 +44,7 @@ function setContents(selection) {
 
       //scale bar proportion to the width of the tooltip
       let xScale = d3.scaleLinear()
-        .domain([0, d3.max(selection, d => {if (parseInt(d)) {
+        .domain([0, d3.max(selection, d => {if (parseInt(d.Units)) {
             return d.Units;
           } else {return 0}})])
         .range([0, tooltipWidth]);
@@ -63,7 +63,9 @@ function setContents(selection) {
             .attr("width", d => (xScale(d[0][1]) - xScale(d[0][0])))
             .attr("height", 10)
             .attr("fill", d => colorScale(d.key));
-
+      
+      
+          
       //remove the bar if there is nothing in it
       if (selection[0].Units == "Unconfirmed"){
         miniBar.remove();
