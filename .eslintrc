@@ -11,12 +11,18 @@
   "globals": {
     "L": "readonly",
     "mapboxgl": "readonly",
+    "MapboxGeocoder": "readonly",
     "maplibregl": "readonly",
     "ol": "readonly",
-    "Papa": "readonly"
+    "Papa": "readonly",
+    "neighbors": true,
+    "geocoder_roof": true,
+    "clicked_address": true,
+    "solar": true,
+    "$": true
   },
   "rules": {
-    "camelcase": ["error"],
+//    "camelcase": ["error", {"allow": ["aa_bb"]}],
     "comma-dangle": ["error", "always-multiline"],
     "comma-spacing": ["error", { "before": false, "after": true }],
     "no-trailing-spaces": ["error"],
