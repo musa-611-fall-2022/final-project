@@ -1,6 +1,12 @@
 /* eslint-disable no-undef */
 
 import { margin, unitTypes, width, height } from "./main.js";
+import { handleBarMouseover, handleBarMouseleave } from "./keyTooltips.js";
+
+//colors to match the unit affordability designations
+let colorScale = d3.scaleOrdinal()
+    .domain(["low_income", "moderate_income", "middle_income", "remaining_affordable", "market", "condo", "remaining_market"])
+    .range(["#0E5116", "#14B127", "#A8DF0C", "#E0EFB3", "#EA5240", "#99221A", "#EFA9A9"]);
 
 function loadBar(data, selectedMap){
 
@@ -12,7 +18,8 @@ function loadBar(data, selectedMap){
     //add the g for the proportion bar group to the base svg
     const bar = d3.select("svg").append('g')
         .attr("id", "barGroup")
-        .attr("class", "bar-group");
+        .attr("class", "bar-group")
+        .style("pointer-events", "all");
 
     //create the keys for the bar stack
     let stackGen = d3.stack()
@@ -33,11 +40,6 @@ function loadBar(data, selectedMap){
         .domain([0, domainEnd()])
         .range([0, width]);
 
-    //colors to match the unit affordability designations
-    let colorScale = d3.scaleOrdinal()
-        .domain(["low_income", "moderate_income", "middle_income", "remaining_affordable", "market", "condo", "remaining_market"])
-        .range(["#065F11", "#159524", "#5CB867", "#B6DEBC", "#DC4230", "#99221A", "#EDABA3"]);
-
     bar.selectAll("rect")
             .data(stackedSeries).join("rect")
         .attr("y", height - barHeight)
@@ -45,7 +47,13 @@ function loadBar(data, selectedMap){
         .attr('height', barHeight)
         .attr("width", d => ((xScale(d[0][1]) - xScale(d[0][0]))))
         .attr("fill", d => colorScale(d.key))
-        .attr("id", d => d.key);
+        .attr("id", d => {console.log(d); 
+            return d.key;})
+        .on("mouseover", function (d) {
+            
+            handleBarMouseover(d);})
+        .on("mouseout", function (d) {
+            handleBarMouseleave(d);})
 
     //create the keys and stack for the bar labels, so they can be placed accurately below the bar chart
     const macroTypes = ["affordable", "market"];
@@ -85,12 +93,13 @@ function loadBar(data, selectedMap){
 
     //Labels for the remaining units
 
+    //Tooltips for each 
 }
-
 
 
 export {
     loadBar,
+    colorScale,
 };
 
 

@@ -21,7 +21,7 @@ body {
 .control {
   font-family: "Open Sans", sans-serif;
   font-style: normal;
-  font-weight: 600;
+  font-weight: 400;
   font-size: 11px;
   line-height: 15px;
   display: flex;
@@ -30,19 +30,17 @@ body {
   pointer-events: all;
   padding: 8px;
   height: 8%;
-  filter: drop-shadow(0 0 0.25rem rgba(0 0 0 24%));
+  border: none;
+  outline: 2px solid;
 }
 
 .selected {
-  border: none;
-  color: black;
   background-color: white;
+
 }
 
 .deselected {
-  border: none;
-  color: black;
-  background-color: "#CCCCCC";
+  background-color: "#777777";
 }
 
 .key {
@@ -76,14 +74,14 @@ body {
   line-height: 16px;
 }
 
-#key-aff { background-color: #5cb867; }
-#key-lowinc { background-color: #065f11; }
-#key-modinc { background-color: #159524; }
-#key-medinc { background-color: #5cb867; }
-#key-mr { background-color: #dc4230; }
+#key-aff { background-color: #A8DF0C; }
+#key-lowinc { background-color: #0E5116; }
+#key-modinc { background-color: #14B127; }
+#key-medinc { background-color: #A8DF0C; }
+#key-mr { background-color: #EA5240; }
 #key-condo { background-color: #99221a; }
-#key-other { background-color: #395054; }
-#key-unconfirmed { background: linear-gradient(0.25turn, #b6debc 33%, #edaba3 66%); }
+#key-other { background-color: #483C35; }
+#key-unconfirmed { background: linear-gradient(0.25turn, #E0EFB3 33%, #EFA9A9 66%); }
 
 .tooltip-container {
   box-sizing: border-box;
@@ -93,6 +91,22 @@ body {
   top: 0;
   left: 0;
   padding: 8px 12px;
+  color: #333;
+  background-color: white;
+  width: 220px;
+  pointer-events: none;
+  z-index: 1;
+  filter: drop-shadow(0 0 0.25rem rgba(0 0 0 24%));
+}
+
+.tooltip-container-bar {
+  box-sizing: border-box;
+  position: absolute;
+  display: none;
+  overflow: visible;
+  top: 0;
+  left: 0;
+  padding: 0px 12px;
   color: #333;
   background-color: white;
   width: 220px;
@@ -240,4 +254,21 @@ td {
   font-size: 12px;
   line-height: 16px;
   color: #666;
+}
+ 
+.units-tooltip-count {
+  margin: 0 0 0 0;
+  padding: 0 0 0 0;
+  line-height: 12px;
+}
+
+.units-tooltip-count {
+  font-size: 16px;
+  margin: 0 0 12px 0;
+  padding: 0 0 0 0;
+  line-height: 16px;
+  font-weight: 600;
+  color: black;
+  display: flex;
+  justify-content: space-between;
 }

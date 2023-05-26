@@ -55,11 +55,11 @@ function loadPathsLoop(data, svg, selectedMap){
 
     gradient.append("stop")
     .attr("offset", "25%")
-    .attr("stop-color", "#B6DEBC");
+    .attr("stop-color", "#E0EFB3");
 
     gradient.append("stop")
     .attr("offset", "75%")
-    .attr("stop-color", "#EDABA3");
+    .attr("stop-color", "#EFA9A9");
 
     //here's the group
     let pathGroup = svg.append("g")
@@ -72,7 +72,7 @@ function loadPathsLoop(data, svg, selectedMap){
     //colors for everything
     let colorScaleB = d3.scaleOrdinal()
     .domain(["low_income", "moderate_income", "middle_income", "market", "condo", "unconfirmed", "other"])
-    .range(["#065F11", "#159524", "#5CB867", "#DC4230", "#99221A", "url(#unconfirmedGradient)", "#395054"]);
+    .range(["#0E5116", "#14B127", "#A8DF0C", "#EA5240", "#99221A", "url(#unconfirmedGradient)", "#483C35"]);
 
     //Looping through every item instead of doing all data joins at once for the sake of ordering buildings correctly
     for (let build of data) {
@@ -89,8 +89,8 @@ function loadPathsLoop(data, svg, selectedMap){
                 .data(building)
             .join("path")
                 .attr("d", d => d.path)
-                .attr("stroke", d => {if (selectedMap == "Current Progress") { //see if map is the current progress map
-                    return (d.construction == 0 ? "#000000" : "#ffffff");} else {return "#000000"}} ) //change outline if under construction
+                .attr("stroke", d => {
+                    return (d.construction == 0 ? "#000000" : "#ffffff")} ) //change outline if under construction
                 .attr("stroke-width", "3px")
                 .attr("class", `building`)
                 .attr("id", `${build.id}-path`)
@@ -137,7 +137,7 @@ function loadPathsLoop(data, svg, selectedMap){
                 .attr("x", d => setLabelPos(d.labelPos, outline, "x", d.labelMar))
                 .attr("y", d => setLabelPos(d.labelPos, outline, "y", d.labelMar))
                 .attr("class", "b-label");
-
+            /*           
             //add hammer to show construction
             if (build.construction == "1" && selectedMap == "Current Progress") {
                 buildGroup.append("image")
@@ -146,7 +146,7 @@ function loadPathsLoop(data, svg, selectedMap){
                 .attr("height", 25)
                 .attr("x", setLabelPos("TL", outline, "x", 25))
                 .attr("y", setLabelPos("TL", outline, "y", 10));
-            }
+            }*/
 
         } else if (build.Units === "N/A" || build.Units === "Unconfirmed"){ // UNCONFIRMED & OTHER BUILDINGS
 
@@ -159,8 +159,8 @@ function loadPathsLoop(data, svg, selectedMap){
                 .data(building)
             .join("path")
                 .attr("d", d => d.path)
-                .attr("stroke", d => {if (selectedMap == "Current Progress") {
-                    return (d.construction == 0 ? "#000000" : "#ffffff");} else {return "#000000"}} )
+                .attr("stroke", d => {
+                    return (d.construction == 0 ? "#000000" : "#ffffff")} ) //change outline if under construction
                 .attr("stroke-width", "3px")
                 .attr("class", "building")
                 .attr("id", `${build.id}-path`)
@@ -208,16 +208,16 @@ function loadPathsLoop(data, svg, selectedMap){
                 .attr("x", d => setLabelPos(d.labelPos, outline, "x", d.labelMar))
                 .attr("y", d => setLabelPos(d.labelPos, outline, "y", d.labelMar))
                 .attr("class", "b-label");
-
+            /*
             //add hammer if under construction
             if (build.construction == "1" && selectedMap == "Current Progress") {
                 buildGroup.append("image")
                 .attr("href", "./images/Assets_720x540/Hammer.svg")
                 .attr("width", 25)
                 .attr("height", 25)
-                .attr("x", setLabelPos("TL", outline, "x", 25))
-                .attr("y", setLabelPos("TL", outline, "y", 10));
-            }
+                .attr("x", setLabelPos("TL", outline, "x", 0))
+                .attr("y", setLabelPos("TL", outline, "y", 0));
+            }*/
 
         }
     }

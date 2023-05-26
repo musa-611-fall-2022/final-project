@@ -29,6 +29,7 @@ let svg = body.append("svg")
         .attr("height", height + margin.top + margin.bottom)
         .attr("id", "svg")
         .attr("class", "background")
+        .style('pointer-events', 'all')
       .append("g");
 
 // filter based on

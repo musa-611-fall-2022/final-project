@@ -52,7 +52,7 @@ function setContents(selection) {
       //colors to match the unit affordability designations
       let colorScale = d3.scaleOrdinal()
         .domain(["low_income", "moderate_income",	"middle_income", "market", "condo", "remaining"])
-        .range(["#065F11", "#159524", "#5CB867", "#DC4230", "#99221A", "#CCCCCC"]);
+        .range(["#0E5116", "#14B127", "#A8DF0C", "#EA5240", "#99221A", "#CCCCCC"]);
 
       //add the stacked bar
       miniBar.selectAll("rect")
@@ -98,21 +98,24 @@ function setContents(selection) {
         let unitCount = z[0][1] - z[0][0];
         if (unitCount > 0) {
 
-        let unitType = z.key;
-        let unitColor = colorScale(z.key);
+          let unitType = z.key;
+          let unitColor = colorScale(z.key);
 
-        let unitRow = unitTable.append("tr");
+          //replace underscores with spaces
+          unitType = unitType.replace(/_/g, " ");
 
-        unitRow.selectAll("td")
-          .data(z).join("td")
-            .text(`${unitCount} ${unitType}`);
+          let unitRow = unitTable.append("tr");
 
-        //row color
-        unitRow.append("td")
-          .style("background-color", unitColor)
-          .style("color", unitColor)
-          .text("__")
-          .classed("row-color");
+          unitRow.selectAll("td")
+            .data(z).join("td")
+              .text(`${unitCount} ${unitType}`);
+
+          //row color
+          unitRow.append("td")
+            .style("background-color", unitColor)
+            .style("color", unitColor)
+            .text("__")
+            .classed("row-color");
 
         }
       }
@@ -157,19 +160,12 @@ d3.selectAll("#unitTable").remove();
 }
 
 function setBStyle(selection) {
-  d3.selectAll(".building")
-    .classed("not-selected", true);
   d3.select(selection)
-    .classed("not-selected", false)
-    .classed("selected", true)
-    .attr("stroke-width", "6px");
+    .attr("stroke-width", "5px");
 }
 
 function resetBStyle(selection) {
-  d3.selectAll(".building")
-    .classed("not-selected", false);
   d3.select(selection)
-    .classed("selected", false)
     .attr("stroke-width", "3px");
 }
 
@@ -192,6 +188,8 @@ function tooltipEvents(selectionGroup) {
           .on("mouseleave", handleMouseleave);
       });
 }
+
+
 
 export {
     tooltipEvents,
