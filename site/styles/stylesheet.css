@@ -75,13 +75,13 @@ body {
 }
 
 #key-aff { background-color: #A8DF0C; }
-#key-lowinc { background-color: #0E5116; }
-#key-modinc { background-color: #14B127; }
-#key-medinc { background-color: #A8DF0C; }
+#key-lowinc { background-color: #065F11; }
+#key-modinc { background-color: #5CB867; }
+#key-medinc { background-color: #DFCB0C; }
 #key-mr { background-color: #EA5240; }
 #key-condo { background-color: #99221a; }
 #key-other { background-color: #483C35; }
-#key-unconfirmed { background: linear-gradient(0.25turn, #E0EFB3 33%, #EFA9A9 66%); }
+#key-unconfirmed { background: linear-gradient(0.25turn, #87CC8F 25%, #DFCB0C 50%, #EFA9A9 66%); }
 
 .tooltip-container {
   box-sizing: border-box;

@@ -6,7 +6,7 @@ import { handleBarMouseover, handleBarMouseleave } from "./keyTooltips.js";
 //colors to match the unit affordability designations
 let colorScale = d3.scaleOrdinal()
     .domain(["low_income", "moderate_income", "middle_income", "remaining_affordable", "market", "condo", "remaining_market"])
-    .range(["#0E5116", "#14B127", "#A8DF0C", "#E0EFB3", "#EA5240", "#99221A", "#EFA9A9"]);
+    .range(["#065F11", "#5CB867", "#DFCB0C", "#B6DEBC", "#EA5240", "#99221A", "#EFA9A9"]);
 
 function loadBar(data, selectedMap){
 
@@ -50,7 +50,6 @@ function loadBar(data, selectedMap){
         .attr("id", d => {console.log(d); 
             return d.key;})
         .on("mouseover", function (d) {
-            
             handleBarMouseover(d);})
         .on("mouseout", function (d) {
             handleBarMouseleave(d);})

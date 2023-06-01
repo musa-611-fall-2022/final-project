@@ -55,8 +55,12 @@ function loadPathsLoop(data, svg, selectedMap){
 
     gradient.append("stop")
     .attr("offset", "25%")
-    .attr("stop-color", "#E0EFB3");
+    .attr("stop-color", "#B6DEBC");
 
+    gradient.append("stop")
+    .attr("offset", "50%")
+    .attr("stop-color", "#DFCB0C");
+    
     gradient.append("stop")
     .attr("offset", "75%")
     .attr("stop-color", "#EFA9A9");
@@ -72,7 +76,7 @@ function loadPathsLoop(data, svg, selectedMap){
     //colors for everything
     let colorScaleB = d3.scaleOrdinal()
     .domain(["low_income", "moderate_income", "middle_income", "market", "condo", "unconfirmed", "other"])
-    .range(["#0E5116", "#14B127", "#A8DF0C", "#EA5240", "#99221A", "url(#unconfirmedGradient)", "#483C35"]);
+    .range(["#065F11", "#5CB867", "#DFCB0C", "#EA5240", "#99221A", "url(#unconfirmedGradient)", "#483C35"]);
 
     //Looping through every item instead of doing all data joins at once for the sake of ordering buildings correctly
     for (let build of data) {
