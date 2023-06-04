@@ -54,17 +54,14 @@ function loadPathsLoop(data, svg, selectedMap){
             .attr("id", "unconfirmedGradient");
 
     gradient.append("stop")
-    .attr("offset", "25%")
-    .attr("stop-color", "#B6DEBC");
-
-    gradient.append("stop")
-    .attr("offset", "50%")
-    .attr("stop-color", "#DFCB0C");
+    .attr("offset", "33%")
+    .attr("stop-color", "#D6DDAA");
     
     gradient.append("stop")
-    .attr("offset", "75%")
-    .attr("stop-color", "#EFA9A9");
+    .attr("offset", "66%")
+    .attr("stop-color", "#E3BDBD");
 
+        
     //here's the group
     let pathGroup = svg.append("g")
     .attr("class", "building-svg");

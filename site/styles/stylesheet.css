@@ -81,7 +81,7 @@ body {
 #key-mr { background-color: #EA5240; }
 #key-condo { background-color: #99221a; }
 #key-other { background-color: #483C35; }
-#key-unconfirmed { background: linear-gradient(0.25turn, #87CC8F 25%, #DFCB0C 50%, #EFA9A9 66%); }
+#key-unconfirmed { background: linear-gradient(0.25turn, #D6DDAA 33%, #E3BDBD 66%); }
 
 .tooltip-container {
   box-sizing: border-box;

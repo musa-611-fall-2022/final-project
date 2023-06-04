@@ -16,7 +16,7 @@ const controlAppr = document.getElementById('approved');
 const controlCurrent = document.getElementById("current");
 
 const unitTypes = ["low_income", "moderate_income", "middle_income", "remaining_affordable", "market", "condo", "remaining_market"];
-const colors = ["#065F11", "#159524", "#5CB867", "#B6DEBC", "#DC4230", "#99221A", "#DC4230"];
+const colors = ["#065F11", "#159524", "#5CB867", "#aaaaaa", "#DC4230", "#99221A", "#aaaaaa"];
 
 
 //Adding SVG to play with

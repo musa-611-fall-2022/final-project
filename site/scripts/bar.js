@@ -6,7 +6,7 @@ import { handleBarMouseover, handleBarMouseleave } from "./keyTooltips.js";
 //colors to match the unit affordability designations
 let colorScale = d3.scaleOrdinal()
     .domain(["low_income", "moderate_income", "middle_income", "remaining_affordable", "market", "condo", "remaining_market"])
-    .range(["#065F11", "#5CB867", "#DFCB0C", "#B6DEBC", "#EA5240", "#99221A", "#EFA9A9"]);
+    .range(["#065F11", "#5CB867", "#DFCB0C", "#D6DDAA", "#EA5240", "#99221A", "#E3BDBD"]);
 
 function loadBar(data, selectedMap){
 
@@ -43,9 +43,9 @@ function loadBar(data, selectedMap){
     bar.selectAll("rect")
             .data(stackedSeries).join("rect")
         .attr("y", height - barHeight)
-        .attr("x", d => xScale(d[0][0]) + margin.left)
+        .attr("x", d => (xScale(d[0][0]) + margin.left))
         .attr('height', barHeight)
-        .attr("width", d => ((xScale(d[0][1]) - xScale(d[0][0]))))
+        .attr("width", d => {return d.key == "middle_income" || d.key == "remaining_affordable" || d.key == "condo" ? ((xScale(d[0][1]) - xScale(d[0][0])) - 3) : ((xScale(d[0][1]) - xScale(d[0][0])))})
         .attr("fill", d => colorScale(d.key))
         .attr("id", d => {console.log(d); 
             return d.key;})
@@ -54,6 +54,7 @@ function loadBar(data, selectedMap){
         .on("mouseout", function (d) {
             handleBarMouseleave(d);})
 
+            
     //create the keys and stack for the bar labels, so they can be placed accurately below the bar chart
     const macroTypes = ["affordable", "market"];
 
