@@ -45,7 +45,7 @@ function loadBar(data, selectedMap){
         .attr("y", height - barHeight)
         .attr("x", d => (xScale(d[0][0]) + margin.left))
         .attr('height', barHeight)
-        .attr("width", d => {return d.key == "middle_income" || d.key == "remaining_affordable" || d.key == "condo" ? ((xScale(d[0][1]) - xScale(d[0][0])) - 3) : ((xScale(d[0][1]) - xScale(d[0][0])))})
+        .attr("width", d => {return d.key == "middle_income" || d.key == "remaining_affordable" || d.key == "condo" ? ((xScale(d[0][1]) - xScale(d[0][0])) - 5) : ((xScale(d[0][1]) - xScale(d[0][0])))})
         .attr("fill", d => colorScale(d.key))
         .attr("id", d => {console.log(d); 
             return d.key;})
