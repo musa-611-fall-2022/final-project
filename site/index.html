@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>AYPP Interactive Map</title>
+
+    <link rel="stylesheet" href="styles/stylesheet.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Condensed">    
+
+    </head>
+
+  <body>
+      <nav>
+        <div id="container" class="container">
+
+            <div class="title-container">
+              <h1 id="title" class="title">Atlantic Yards/Pacific Park Plans</h1>
+              <button id="approved" class="control selected">Approved Plans</button>
+              <button id="current" class="control deselected">Current Progress</button>
+            </div>
+
+          <div class="key">
+            <h2 class="key-label">Affordable</h2>
+            <h2 class="key-label">Market-Rate</h2>
+            <h2 class="key-label">Condo</h2>
+            <h2 class="key-label">Unconfirmed</h2>
+            <h2 class="key-label">Other</h2>
+          </div>
+
+          <div class="key">
+            <div class="key-small">
+              <span id="key-lowinc" class="key-rect-aff"></span>
+              <span id="key-modinc" class="key-rect-aff"></span>
+              <span id="key-medinc" class="key-rect-aff"></span>
+            </div>
+            <span id="key-mr" class="key-rect"></span>
+            <span id="key-condo" class="key-rect"></span>
+            <span id="key-unconfirmed" class="key-rect"></span>
+            <span id="key-other" class="key-rect"></span>
+          </div>
+          
+          <div class = "key">
+            <div class="key-small">
+              <p class="key-p">Low Incomes</p>
+              <p class="key-p">Mod</p>
+              <p class="key-p">Mid</p>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <main>
+      <div id="tooltipContainer" class = "tooltip-container">
+          <div class="tooltip-header clearfix">
+                <h2 class = "tooltip-title">Sample</h2>
+                <p class="year">20??</p>             
+            </div>
+            <div id = "tooltipContent" class = "tooltip-content">
+                <table id="unitTable" class="unit-table">
+                </table> 
+                <table id="otherTable" class="other-table">
+                </table>
+            </div>
+      </div>
+      <div id="tooltipBarContainer" class = "tooltip-container-bar">
+        <p class="units-tooltip-label" id="label">Total Units:</p>       
+        <p class="units-tooltip-count" id="count">???</p>
+      </div>
+      </main>
+
+
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://unpkg.com/papaparse@5.3.2/papaparse.min.js"></script>
+    <script type="module" src="scripts/main.js"></script>
+  </body>
+</html>

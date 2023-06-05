@@ -1,0 +1,274 @@
+body {
+  font-family: Helvetica, sans-serif;
+  height: 540px;
+  width: 720px;
+  margin: 0;
+  pointer-events: none;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  margin: 20px;
+  pointer-events: none;
+}
+
+.title-container {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.control {
+  font-family: "Open Sans", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 11px;
+  line-height: 15px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  pointer-events: all;
+  padding: 8px;
+  height: 8%;
+  border: none;
+  outline: 2px solid;
+}
+
+.selected {
+  background-color: white;
+
+}
+
+.deselected {
+  background-color: "#777777";
+}
+
+.key {
+  display: grid;
+  grid-template-columns: 16.67% 16.67% 16.67% 16.67% 16.67% 16.67%;
+}
+
+.key-labels {
+  grid-column-start: 1;
+}
+
+.key-rect {
+  display: inline-block;
+  width: 100px;
+  height: 10px;
+}
+
+.key-small {
+  display: grid;
+  grid-template-columns: 30% 30% 30%;
+}
+
+.key-rect-aff {
+  display: inline-block;
+  width: 34px;
+  height: 10px;
+}
+
+.key-p {
+  margin-top: 5px;
+  line-height: 16px;
+}
+
+#key-aff { background-color: #A8DF0C; }
+#key-lowinc { background-color: #065F11; }
+#key-modinc { background-color: #5CB867; }
+#key-medinc { background-color: #F2DC12; }
+#key-mr { background-color: #EA5240; }
+#key-condo { background-color: #99221a; }
+#key-other { background-color: #483C35; }
+#key-unconfirmed { background: linear-gradient(0.25turn, #D6DDAA 33%, #E3BDBD 66%); }
+
+.tooltip-container {
+  box-sizing: border-box;
+  position: absolute;
+  display: none;
+  overflow: visible;
+  top: 0;
+  left: 0;
+  padding: 8px 12px;
+  color: #333;
+  background-color: white;
+  width: 220px;
+  pointer-events: none;
+  z-index: 1;
+  filter: drop-shadow(0 0 0.25rem rgba(0 0 0 24%));
+}
+
+.tooltip-container-bar {
+  box-sizing: border-box;
+  position: absolute;
+  display: none;
+  overflow: visible;
+  top: 0;
+  left: 0;
+  padding: 0px 12px;
+  color: #333;
+  background-color: white;
+  width: 220px;
+  pointer-events: none;
+  z-index: 1;
+  filter: drop-shadow(0 0 0.25rem rgba(0 0 0 24%));
+}
+
+.hidden {
+  visibility: hidden;
+  z-index: -2;
+}
+
+.clearfix {
+  clear: both;
+}
+
+.tooltip-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+}
+
+.year {
+  font-family: "Open Sans", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+  color: #666;
+}
+
+p {
+  font-family: "Open Sans", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+  color: #666;
+}
+
+.aypp-building {
+  stroke-width: 2px;
+  stroke: #000;
+}
+
+.bar {
+  height: 10px;
+  margin-bottom: 10px;
+}
+
+.tooltip-table {
+  width: 100%;
+}
+
+.table-header {
+  text-align: left;
+}
+
+th {
+  border-bottom: 1pt solid #666;
+}
+
+.background {
+  background-image: url("../images/Blank\ Map_720.png");
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+
+h1 {
+  font-family: Roboto, sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 28px;
+  line-height: 35px;
+
+  margin-top: 0;
+  margin-right: 5%;
+  margin-bottom: 0.3em;
+}
+
+h2 {
+  font-family: "Open Sans", sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 22px;
+
+  margin-top: 0;
+  margin-bottom: 0.2em;
+}
+
+h3 {
+  font-family: "Open Sans", sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 22px;
+
+  margin-top: 0;
+  margin-bottom: 0.2em;
+}
+
+.box-header {
+  font-family: "Open Sans", sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 22px;
+}
+
+td {
+  font-family: "Open Sans", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+  color: #666;
+}
+
+.bar-label {
+  font-family: "Roboto Condensed", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+}
+
+.building {
+  fill-opacity: 0;
+  pointer-events: all;
+}
+
+.detail {
+  fill-opacity: 0;
+}
+
+.b-label {
+  font-family: "Roboto Condensed", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+  color: #666;
+}
+ 
+.units-tooltip-count {
+  margin: 0 0 0 0;
+  padding: 0 0 0 0;
+  line-height: 12px;
+}
+
+.units-tooltip-count {
+  font-size: 16px;
+  margin: 0 0 12px 0;
+  padding: 0 0 0 0;
+  line-height: 16px;
+  font-weight: 600;
+  color: black;
+  display: flex;
+  justify-content: space-between;
+}
