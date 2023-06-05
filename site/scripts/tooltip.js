@@ -52,7 +52,7 @@ function setContents(selection) {
       //colors to match the unit affordability designations
       let colorScale = d3.scaleOrdinal()
         .domain(["low_income", "moderate_income",	"middle_income", "market", "condo", "remaining"])
-        .range(["#065F11", "#5CB867", "#DFCB0C", "#EA5240", "#99221A", "#aaaaaa"]);
+        .range(["#065F11", "#5CB867", "#F2DC12", "#EA5240", "#99221A", "#aaaaaa"]);
 
       //add the stacked bar
       miniBar.selectAll("rect")

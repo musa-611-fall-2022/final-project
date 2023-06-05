@@ -6,7 +6,7 @@ import { handleBarMouseover, handleBarMouseleave } from "./keyTooltips.js";
 //colors to match the unit affordability designations
 let colorScale = d3.scaleOrdinal()
     .domain(["low_income", "moderate_income", "middle_income", "remaining_affordable", "market", "condo", "remaining_market"])
-    .range(["#065F11", "#5CB867", "#DFCB0C", "#D6DDAA", "#EA5240", "#99221A", "#E3BDBD"]);
+    .range(["#065F11", "#5CB867", "#F2DC12", "#D6DDAA", "#EA5240", "#99221A", "#E3BDBD"]);
 
 function loadBar(data, selectedMap){
 
