@@ -27,3 +27,5 @@ overlayDropdown.addEventListener('click', () => {
 window.overlayDropdown = overlayDropdown;
 window.Map = Map;
 window.parcelList = parcelList;
+
+export{ Map, overlayDropdown, parcelList };
